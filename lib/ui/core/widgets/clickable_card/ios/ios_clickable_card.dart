@@ -1,8 +1,7 @@
-
 import 'package:flutter/cupertino.dart';
-import 'package:story_teller/domain/factories/nice_clickable_card.dart';
+import 'package:story_teller/domain/widgets/ai_clickable_card.dart';
 
-class IosClickableCard extends StatelessWidget implements NiceClickableCard {
+class IosClickableCard extends StatelessWidget implements AiClickableCard {
   const IosClickableCard({super.key});
 
   @override
@@ -23,7 +22,9 @@ class IosClickableCard extends StatelessWidget implements NiceClickableCard {
           child: const Text(
             "Mindfulness",
             style: TextStyle(
-                color: Color(0xfffcfcfc), fontSize: 20, fontWeight: FontWeight.w600),
+                color: Color(0xfffcfcfc),
+                fontSize: 20,
+                fontWeight: FontWeight.w600),
           ),
         ),
       ),

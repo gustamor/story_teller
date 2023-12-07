@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:story_teller/domain/factories/nice_clickable_card.dart';
+import 'package:story_teller/domain/widgets/ai_clickable_card.dart';
 
-class AndroidClickableCard extends StatelessWidget
-    implements NiceClickableCard {
+class AndroidClickableCard extends StatelessWidget implements AiClickableCard {
   const AndroidClickableCard({super.key});
 
   @override
@@ -13,7 +12,7 @@ class AndroidClickableCard extends StatelessWidget
         child: Container(
           height: 200,
           width: 200,
-          color: Colors.white,
+          color: Colors.red,
         ),
       ),
     );
