@@ -6,12 +6,17 @@ import 'package:story_teller/ui/core/factories/ios_factory_impl.dart';
 
 WidgetFactory uiFactory() {
   late WidgetFactory factory;
-  if (Platform.isIOS) {
-    factory = IOSFactory();
-  } else if (Platform.isAndroid) {
-    factory = AndroidFactory();
-  } else {
+  try {
+    if (Platform.isIOS) {
+      factory = IOSFactory();
+    } else if (Platform.isAndroid) {
+      factory = AndroidFactory();
+    } else {
+      factory = AndroidFactory();
+    }
+  } catch (e){
     factory = AndroidFactory();
   }
+
   return factory;
 }

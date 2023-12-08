@@ -1,31 +1,33 @@
-// ignore: unnecessary_import
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:story_teller/domain/widgets/ai_clickable_card.dart';
-import 'package:story_teller/ui/core/styles/text_styles.dart';
 
-class IosClickableCard extends StatelessWidget implements AiClickableCard {
+import '../../../styles/text_styles.dart';
+
+class AndroidAiClickableCard extends StatelessWidget
+    implements AiClickableCard {
   final double? height;
   final double? width;
+  final Color? bgColor;
+  final Color? androidBackgroundColor;
   final String? decorImage;
-  final BoxFit? fit;
-  final double? borderRadius;
   final String? caption;
   final String? description;
-  final String? textStyle;
 
-  const IosClickableCard({
-    super.key,
-    this.height,
-    this.width,
-    this.decorImage,
-    this.borderRadius,
-    this.fit,
-    this.caption,
-    this.description,
-    this.textStyle,
-  });
+  final BoxFit? fit;
+  final double? borderRadius;
+
+  const AndroidAiClickableCard(
+      {super.key,
+      this.height,
+      this.width,
+      this.bgColor,
+      this.androidBackgroundColor,
+      this.caption,
+      this.decorImage = "",
+      this.fit,
+      this.borderRadius = 16.0,
+      this.description});
 
   @override
   Widget build(BuildContext context) {

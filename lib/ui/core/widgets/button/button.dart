@@ -1,8 +1,14 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:story_teller/ui/core/factories/ui_factory.dart';
 
 class NiceButton extends StatelessWidget {
+  final Color? backgroundColor;
+  final double? padding;
+  final double? androidPadding;
+  final Color? androidBackgroundColor;
+  final double? iosPadding;
+  final Color? iosBackgroundColor;
+
   NiceButton({
     super.key,
     this.androidPadding,
@@ -14,13 +20,6 @@ class NiceButton extends StatelessWidget {
     ),
     this.padding = 0.0,
   });
-
-  final Color? backgroundColor;
-  final double? padding;
-  final double? androidPadding;
-  final Color? androidBackgroundColor;
-  final double? iosPadding;
-  final Color? iosBackgroundColor;
 
   final ui = uiFactory();
 
