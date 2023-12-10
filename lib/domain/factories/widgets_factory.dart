@@ -3,7 +3,17 @@ import 'package:flutter/material.dart';
 
 abstract class WidgetFactory {
   Widget createButton(
-      {double? padding,
+      {double? height,
+      double? width,
+      double? iosHeight,
+      double? iosWidth,
+      double? androidHeight,
+      double? androidWidth,
+      String? text,
+      TextStyle? textStyle,
+      TextStyle? androidTextStyle,
+      TextStyle? iosTextStyle,
+      double? padding,
       Color? bgColor,
       Color? iosBackgroundColor,
       Color? androidBackgroundColor,
@@ -41,8 +51,25 @@ abstract class WidgetFactory {
     Function? rightTapFunction,
   });
 
-  Widget navigationBottomBar({
-    String? id
+  Widget navigationBottomBar({String? id});
+  
+  
+  Widget textFormField({
+    Key? key,
+    Function? onChangedFunction,
+    TextInputType? keyboardType,
+    String? hintText,
+    double? contentPadding,
+    double? borderRadius,
+    double? borderSide,
+    Widget? prefixIcon,
+    Widget? suffixIcon,
+    bool? obscureText,
+    String? obscuringCharacter,
+    bool? filled,
+    Color? fillColor,
+    Color? androidFillColor,
+    Color? iosFillColor,
+    
 });
-
 }

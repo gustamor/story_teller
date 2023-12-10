@@ -2,21 +2,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:story_teller/domain/widgets/ai_button.dart';
 
 class IosAiButton extends StatelessWidget implements AiButton {
-  final Color? androidBackgroundColor;
-  final double? androidPadding;
   final Color? backgroundColor;
-  final Color? iosBackgroundColor;
-  final double? iosPadding;
+
   final double? padding;
+  final double? height;
+  final double? width;
+  final String? text;
+  final TextStyle? textStyle;
 
   const IosAiButton({
     super.key,
-    this.androidBackgroundColor,
-    this.androidPadding,
+    this.text,
     this.backgroundColor,
-    this.iosBackgroundColor,
-    this.iosPadding,
     this.padding,
+    this.height,
+    this.width,
+    this.textStyle,
   });
 
   @override
@@ -24,8 +25,11 @@ class IosAiButton extends StatelessWidget implements AiButton {
     return Padding(
       padding: EdgeInsets.all(padding!),
       child: CupertinoButton(
-        color: iosBackgroundColor ?? backgroundColor,
-        child: const Text("Cupertino Button"),
+        color: backgroundColor,
+        child: Text(
+          text!,
+          style: textStyle!,
+        ),
         onPressed: () => {},
       ),
     );

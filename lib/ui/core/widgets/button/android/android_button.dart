@@ -1,21 +1,27 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:story_teller/ui/themes/styles/text_styles.dart';
 
 class AndroidAiButton extends StatelessWidget {
+  final double? height;
+  final double? width;
+  final String? text;
+  final TextStyle? textStyle;
   final double? padding;
-  final Color? androidBackgroundColor;
-  final double? androidPadding;
   final Color? backgroundColor;
-  final Color? iosBackgroundColor;
-  final double? iosPadding;
+
 
   const AndroidAiButton({
     super.key,
     this.padding,
-    this.androidBackgroundColor,
-    this.androidPadding,
     this.backgroundColor,
-    this.iosBackgroundColor,
-    this.iosPadding,
+    this.height,
+    this.width,
+    this.text,
+    this.textStyle,
+
   });
 
   @override
@@ -24,12 +30,16 @@ class AndroidAiButton extends StatelessWidget {
       padding: EdgeInsets.all(padding!),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: androidBackgroundColor ?? backgroundColor,
-          // background color
-          foregroundColor: Colors.white, // text color
+          fixedSize: Size(width!.w, height!.h),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(height! * 0.5),
+          ),
         ),
         onPressed: () => {},
-        child: const Text("Material Button"),
+        child: Text(
+          text!,
+          style: textStyle!,
+        ),
       ),
     );
   }

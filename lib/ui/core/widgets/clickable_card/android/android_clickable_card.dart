@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:story_teller/domain/widgets/ai_clickable_card.dart';
+import 'package:story_teller/ui/themes/styles/text_styles.dart';
 
-import '../../../styles/text_styles.dart';
 
 class AndroidAiClickableCard extends StatelessWidget
     implements AiClickableCard {
