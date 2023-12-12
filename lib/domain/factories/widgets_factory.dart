@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 abstract class WidgetFactory {
   Widget createButton(
-      {double? height,
+      {
+      VoidCallback? clickFunction,
+      double? height,
       double? width,
       double? iosHeight,
       double? iosWidth,
@@ -21,6 +23,7 @@ abstract class WidgetFactory {
       double? androidPadding});
 
   Widget createClickableCard({
+    VoidCallback clickFunction,
     double? height,
     double? width,
     String? caption,

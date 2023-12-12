@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:story_teller/data/services/logger_impl.dart';
 import 'package:story_teller/domain/factories/widgets_factory.dart';
 import 'package:story_teller/ui/core/widgets/app_bar/android/navigation_app_bar.dart';
 import 'package:story_teller/ui/core/widgets/button/android/android_button.dart';
@@ -10,6 +11,7 @@ import '../widgets/text_form_field/android/text_form_field.dart';
 class AndroidFactory implements WidgetFactory {
   @override
   Widget createButton({
+    VoidCallback? clickFunction,
     double? height,
     double? width,
     double? iosHeight,
@@ -27,7 +29,11 @@ class AndroidFactory implements WidgetFactory {
     double? iosPadding,
     Color? iosBackgroundColor,
   }) {
+    final log = LogImpl();
+
+    log.d("2 android factory impl");
     return AndroidAiButton(
+      clickFunction: clickFunction,
       text: text,
       textStyle: androidTextStyle ?? textStyle,
       height: androidHeight ?? height,
@@ -39,6 +45,7 @@ class AndroidFactory implements WidgetFactory {
 
   @override
   Widget createClickableCard({
+    VoidCallback? clickFunction,
     double? height,
     double? width,
     String? caption,

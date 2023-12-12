@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:story_teller/domain/widgets/ai_navigation_bar.dart';
 
 class IosNavigationAppBar extends StatelessWidget implements AiNavigationBar {
@@ -20,9 +21,21 @@ class IosNavigationAppBar extends StatelessWidget implements AiNavigationBar {
 
   @override
   Widget build(BuildContext context) {
-    return const CupertinoNavigationBar(
-      leading: Icon(Icons.arrow_back_ios),
-        middle: Text('Cupertino App'),
+    return Container(
+      height: 35.h,
+      width: double.infinity,
+      child: const Row(
+        children: [
+          Icon(CupertinoIcons.back),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              "Asistentes",
+              style: TextStyle(fontSize: 21),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

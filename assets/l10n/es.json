@@ -1,8 +1,15 @@
 {
   "appName":"AI Story Teller",
-  "story": "Historia",
+  "story": "Cuento",
+  "history": "Creados",
+  "settings": "Configuración",
   "script": "Guión",
   "story_description": "Genera para mí una historia de ficción",
-  "script_description": "Genera un guión cinematográfico"
-
+  "script_description": "Genera un guión cinematográfico",
+  "create_account": "Crea una cuenta",
+  "login": "Log in",
+  "email": "Email",
+  "password": "Contraseña",
+  "or": "o",
+  "enter_to_story_teller": "Entra a Story Teller"
 }

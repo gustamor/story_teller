@@ -51,8 +51,6 @@ class NiceTextFormField extends StatelessWidget {
        obscuringCharacter: obscuringCharacter,
        filled: filled,
        fillColor: fillColor,
-
-
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 
 class IosAiBottomBar extends StatelessWidget {
@@ -6,14 +7,14 @@ class IosAiBottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoTabBar(
-      items: const <BottomNavigationBarItem>[
+      items:  <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(CupertinoIcons.star_fill),
-          label: 'Historia',
+          icon: const Icon(CupertinoIcons.star_fill),
+          label: tr('history'),
         ),
         BottomNavigationBarItem(
-          icon: Icon(CupertinoIcons.star_circle_fill),
-          label: 'Recents',
+          icon: const Icon(CupertinoIcons.settings),
+          label: tr('settings'),
         ),
 
       ],

@@ -7,8 +7,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
 import 'package:story_teller/ui/screen/auth_screen/auth_name.dart';
-
+import 'package:story_teller/ui/screen/auth_screen/auth_screen.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -45,6 +46,7 @@ class AiApp extends StatelessWidget {
 
   static final ValueNotifier<ThemeMode> themeNotifier =
       ValueNotifier(ThemeMode.dark);
+
   @override
   Widget build(BuildContext context) {
     const FlexScheme usedScheme = FlexScheme.redWine;
@@ -58,26 +60,30 @@ class AiApp extends StatelessWidget {
           return ScreenUtilInit(
             minTextAdapt: true,
             child: MaterialApp(
-              debugShowCheckedModeBanner: false,
-              localizationsDelegates: context.localizationDelegates,
-              supportedLocales: context.supportedLocales,
-              locale: context.locale,
-              title: 'AI Story Teller',
-              theme: FlexThemeData.light(
-                scheme: usedScheme,
-                appBarElevation: 0.5,
-                visualDensity: VisualDensity.adaptivePlatformDensity,
-                fontFamily: GoogleFonts.roboto().fontFamily,
-              ),
-              darkTheme: FlexThemeData.dark(
-                scheme: usedScheme,
-                appBarElevation: 2,
-                visualDensity: VisualDensity.adaptivePlatformDensity,
-                fontFamily: GoogleFonts.roboto().fontFamily,
-              ),
-              themeMode: currentMode,
-              home: const AuthName(),
-            ),
+                debugShowCheckedModeBanner: false,
+                localizationsDelegates: context.localizationDelegates,
+                supportedLocales: context.supportedLocales,
+                locale: context.locale,
+                title: 'AI Story Teller',
+                theme: FlexThemeData.light(
+                  scheme: usedScheme,
+                  appBarElevation: 0.5,
+                  visualDensity: VisualDensity.adaptivePlatformDensity,
+                  fontFamily: GoogleFonts.roboto().fontFamily,
+                ),
+                darkTheme: FlexThemeData.dark(
+                  scheme: usedScheme,
+                  appBarElevation: 2,
+                  visualDensity: VisualDensity.adaptivePlatformDensity,
+                  fontFamily: GoogleFonts.roboto().fontFamily,
+                ),
+                themeMode: currentMode,
+                initialRoute: AuthScreen.route,
+                routes: {
+                  AuthScreen.route: (context) => const AuthScreen(),
+                  AuthName.route: (context) => const AuthName(),
+                  AssistantsScreen.route: (context) => AssistantsScreen()
+                }),
           );
         });
   }

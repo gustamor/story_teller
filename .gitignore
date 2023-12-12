@@ -42,3 +42,11 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 secrets.*
+google-services.json
+firebase_options.dart
+
+
+google-services.json
+firebase_options.dart
+
+

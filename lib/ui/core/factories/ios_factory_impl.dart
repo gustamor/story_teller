@@ -12,6 +12,7 @@ import 'package:story_teller/ui/core/widgets/text_form_field/ios/text_form_field
 class IOSFactory implements WidgetFactory {
   @override
   Widget createButton({
+    VoidCallback? clickFunction,
     double? height,
     double? width,
     double? iosHeight,
@@ -30,6 +31,7 @@ class IOSFactory implements WidgetFactory {
     Color? iosBackgroundColor,
   }) {
     return IosAiButton(
+      clickFunction: clickFunction,
       text: text,
       textStyle: iosTextStyle ?? textStyle,
       height: iosHeight ?? height,
@@ -41,6 +43,7 @@ class IOSFactory implements WidgetFactory {
 
   @override
   Widget createClickableCard({
+    VoidCallback? clickFunction,
     double? height,
     double? width,
     String? caption,
@@ -111,8 +114,7 @@ class IOSFactory implements WidgetFactory {
       Color? fillColor,
       Color? androidFillColor,
       Color? iosFillColor}) {
-   
-    return  IosTextFormField(
+    return IosTextFormField(
       onChangedFunction: onChangedFunction,
       keyboardType: keyboardType,
       hintText: hintText,

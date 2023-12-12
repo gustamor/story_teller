@@ -22,9 +22,14 @@ class AndroidNavigationAppBar extends StatelessWidget implements AiNavigationBar
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      leading: const Icon(Icons.arrow_back_outlined),
-      title: const Text("Material App"),
+    return Container(
+      color: Colors.blue,
+      height: 40.h,
+      width: double.infinity,
+      child:  Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: const Text("> Asistentes", style: TextStyle(fontSize: 21),),
+      ),
     );
   }
 }

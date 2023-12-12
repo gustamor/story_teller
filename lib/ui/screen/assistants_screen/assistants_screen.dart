@@ -11,9 +11,8 @@ import '../../core/widgets/bottom_bar/navigation_bottom_bar.dart';
 class AssistantsScreen extends StatelessWidget {
   AssistantsScreen({super.key});
 
-  static const String tag = "/assistants";
+  static const String route = "/assistants_screen";
   final ui = uiFactory();
-
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,6 @@ class AssistantsScreen extends StatelessWidget {
         appBar: null ,
         body: SingleChildScrollView(
           child: Column(
-
             children: [
               NiceAppBar(),
               Row(

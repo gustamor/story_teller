@@ -1,5 +1,5 @@
 // ignore: unnecessary_import
-import 'package:flutter/cupertino.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class AndroidAiBottomBar extends StatelessWidget {
@@ -7,19 +7,18 @@ class AndroidAiBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  BottomNavigationBar(
+    return BottomNavigationBar(
       onTap: null,
       currentIndex: 1,
       // ignore: prefer_const_literals_to_create_immutables
       items: [
-       const BottomNavigationBarItem(
-          icon: Icon(Icons.star),
-          label: 'Hisotoria',
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.book),
+          label: tr("history"),
         ),
-
-       const  BottomNavigationBarItem(
-          icon: Icon(Icons.school),
-          label: 'Recientes',
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.settings),
+          label: tr('settings'),
         ),
       ],
     );

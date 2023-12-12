@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:story_teller/domain/widgets/ai_text_form_field.dart';
@@ -36,9 +37,10 @@ class IosTextFormField extends StatelessWidget implements AITextFormField {
     double width = MediaQuery.of(context).size.width;
     TextEditingController controller = TextEditingController();
 
-    return TextFormField(
+    return CupertinoTextField(
       onChanged: (query) => onChangedFunction,
       controller: controller,
+      maxLines: 1,
       scrollPhysics: const ScrollPhysics(),
       enableSuggestions: true,
       showCursor: true,
@@ -47,30 +49,21 @@ class IosTextFormField extends StatelessWidget implements AITextFormField {
       autofocus: false,
       autocorrect: true,
       obscureText: obscureText ?? false,
-      obscuringCharacter: obscuringCharacter ?? "",
-      decoration: InputDecoration(
-        contentPadding: EdgeInsets.all(
-          12.r,
+      obscuringCharacter: obscuringCharacter ?? "•",
+      prefix: prefixIcon,
+      suffix: suffixIcon,
+        placeholder: hintText!,
+      style: const TextStyle(color: CupertinoColors.placeholderText),
+      placeholderStyle: const TextStyle(color:CupertinoColors.placeholderText),
+
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(
+          (borderRadius ?? 30).r,
         ),
-        constraints: BoxConstraints(
-          maxHeight: 120,
-          maxWidth: width,
-        ),
-        filled: filled!,
-        fillColor: fillColor,
-        hintText: hintText,
-        //  hintStyle:,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(
-            (borderRadius ?? 30).r,
-          ),
-          borderSide: BorderSide(
-            width: (borderSide ?? 3).w,
-          ),
-        ),
-        prefixIcon: prefixIcon,
-        suffixIcon: suffixIcon,
+          border: Border.all(color: Colors.red),
+
       ),
+
     );
   }
 }

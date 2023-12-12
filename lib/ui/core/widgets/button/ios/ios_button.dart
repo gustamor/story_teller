@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:story_teller/domain/widgets/ai_button.dart';
 
 class IosAiButton extends StatelessWidget implements AiButton {
+  final VoidCallback? clickFunction;
   final Color? backgroundColor;
-
   final double? padding;
   final double? height;
   final double? width;
@@ -18,6 +19,7 @@ class IosAiButton extends StatelessWidget implements AiButton {
     this.height,
     this.width,
     this.textStyle,
+    this.clickFunction,
   });
 
   @override
@@ -25,12 +27,17 @@ class IosAiButton extends StatelessWidget implements AiButton {
     return Padding(
       padding: EdgeInsets.all(padding!),
       child: CupertinoButton(
-        color: backgroundColor,
+        borderRadius: BorderRadius.all(
+          Radius.circular(
+            30.r,
+          ),
+        ),
+        color: CupertinoColors.activeBlue,
+        onPressed: clickFunction!,
         child: Text(
           text!,
           style: textStyle!,
         ),
-        onPressed: () => {},
       ),
     );
   }
