@@ -2,33 +2,58 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
+import 'package:story_teller/constants.dart';
 import 'package:story_teller/domain/widgets/ai_navigation_bar.dart';
 
-class AndroidNavigationAppBar extends StatelessWidget implements AiNavigationBar {
+class AndroidNavigationAppBar extends StatelessWidget
+    implements AiNavigationBar {
   final String? title;
   final String? leftIcon;
   final String? rightIcon;
-  final Function? leftTapFunction;
-  final Function? rightTapFunction;
+  final VoidCallback? leftTapFunction;
+  final VoidCallback? rightTapFunction;
 
-  const AndroidNavigationAppBar(
-      {super.key,
-      this.title,
-      this.leftIcon,
-      this.rightIcon,
-      this.leftTapFunction,
-      this.rightTapFunction,
-      });
+  const AndroidNavigationAppBar({
+    super.key,
+    this.title,
+    this.leftIcon,
+    this.rightIcon,
+    this.leftTapFunction,
+    this.rightTapFunction,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.blue,
+      color: Colors.red,
       height: 40.h,
       width: double.infinity,
-      child:  Padding(
+      child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: const Text("> Asistentes", style: TextStyle(fontSize: 21),),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            InkWell(
+              onTap: leftTapFunction!,
+              child: Row(
+                children: [
+                  SvgPicture.asset(
+                    leftIcon!,
+                    width: 16.w,
+                    height: 16.h,
+                  ),
+                  Gap(6.w),
+                  Text(
+                    title!,
+                    style: const TextStyle(fontSize: 21),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

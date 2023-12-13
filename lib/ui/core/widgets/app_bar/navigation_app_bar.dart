@@ -5,8 +5,8 @@ class NiceAppBar extends StatelessWidget {
   final String? title;
   final String? leftIcon;
   final String? rightIcon;
-  final Function? leftTapFunction;
-  final Function? rightTapFunction;
+  final VoidCallback? leftTapFunction;
+  final VoidCallback? rightTapFunction;
 
   NiceAppBar({
     super.key,
@@ -22,11 +22,11 @@ class NiceAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ui.navigationAppBar(
-      title: title,
-      leftIcon: leftIcon,
-      rightIcon: rightIcon,
-      leftTapFunction: leftTapFunction,
-      rightTapFunction: rightTapFunction,
+      title: title ?? "",
+      leftIcon: leftIcon ?? "",
+      rightIcon: rightIcon ?? "",
+      leftTapFunction: leftTapFunction ?? () => {},
+      rightTapFunction: rightTapFunction ?? () => {},
     );
   }
 }

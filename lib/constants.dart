@@ -1,0 +1,1 @@
+const kIconBackArrow = "assets/images/icons/backarrow.svg";

@@ -81,8 +81,8 @@ class AndroidFactory implements WidgetFactory {
     String? title,
     String? leftIcon,
     String? rightIcon,
-    Function? leftTapFunction,
-    Function? rightTapFunction,
+    VoidCallback? leftTapFunction,
+    VoidCallback? rightTapFunction,
   }) {
     return AndroidNavigationAppBar(
         title: title ?? "",

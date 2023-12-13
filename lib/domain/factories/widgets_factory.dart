@@ -50,8 +50,8 @@ abstract class WidgetFactory {
     String? title,
     String? leftIcon,
     String? rightIcon,
-    Function? leftTapFunction,
-    Function? rightTapFunction,
+    VoidCallback? leftTapFunction,
+    VoidCallback? rightTapFunction,
   });
 
   Widget navigationBottomBar({String? id});
