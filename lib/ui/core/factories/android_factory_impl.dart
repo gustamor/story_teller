@@ -12,13 +12,14 @@ class AndroidFactory implements WidgetFactory {
   @override
   Widget createButton({
     VoidCallback? clickFunction,
+    bool? isFixedSize,
     double? height,
     double? width,
     double? iosHeight,
     double? iosWidth,
     double? androidHeight,
     double? androidWidth,
-    String? text,
+    required String text,
     TextStyle? textStyle,
     TextStyle? androidTextStyle,
     TextStyle? iosTextStyle,
@@ -29,24 +30,23 @@ class AndroidFactory implements WidgetFactory {
     double? iosPadding,
     Color? iosBackgroundColor,
   }) {
-    final log = LogImpl();
 
-    log.d("2 android factory impl");
     return AndroidAiButton(
       clickFunction: clickFunction,
+      backgroundColor: androidBackgroundColor ?? bgColor,
+      isFixedSize: isFixedSize ?? true,
       text: text,
       textStyle: androidTextStyle ?? textStyle,
       height: androidHeight ?? height,
       width: androidWidth ?? width,
       padding: androidPadding ?? padding,
-      backgroundColor: androidBackgroundColor ?? bgColor,
     );
   }
 
   @override
   Widget createClickableCard({
     VoidCallback? clickFunction,
-    double? height,
+        double? height,
     double? width,
     String? caption,
     String? description,
@@ -68,6 +68,7 @@ class AndroidFactory implements WidgetFactory {
     Widget? child,
   }) {
     return AndroidAiClickableCard(
+        clickFunction: clickFunction,
         caption: caption,
         description: description,
         decorImage: decorImage,
@@ -100,7 +101,8 @@ class AndroidFactory implements WidgetFactory {
   @override
   Widget textFormField(
       {Key? key,
-      Function? onChangedFunction,
+      VoidCallback? onChangedFunction,
+      int? maxLines,
       TextInputType? keyboardType,
       String? hintText,
       double? contentPadding,
@@ -116,6 +118,7 @@ class AndroidFactory implements WidgetFactory {
       Color? iosFillColor}) {
     return AndroidTextFormField(
       onChangedFunction: onChangedFunction,
+      maxLines: maxLines,
       keyboardType: keyboardType,
       hintText: hintText,
       contentPadding: contentPadding,

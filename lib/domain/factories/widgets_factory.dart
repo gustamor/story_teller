@@ -4,14 +4,15 @@ import 'package:flutter/material.dart';
 abstract class WidgetFactory {
   Widget createButton(
       {
-      VoidCallback? clickFunction,
+      VoidCallback clickFunction,
+      bool? isFixedSize,
       double? height,
       double? width,
       double? iosHeight,
       double? iosWidth,
       double? androidHeight,
       double? androidWidth,
-      String? text,
+      required String text,
       TextStyle? textStyle,
       TextStyle? androidTextStyle,
       TextStyle? iosTextStyle,
@@ -20,7 +21,8 @@ abstract class WidgetFactory {
       Color? iosBackgroundColor,
       Color? androidBackgroundColor,
       double? iosPadding,
-      double? androidPadding});
+      double? androidPadding
+      });
 
   Widget createClickableCard({
     VoidCallback clickFunction,
@@ -55,11 +57,11 @@ abstract class WidgetFactory {
   });
 
   Widget navigationBottomBar({String? id});
-  
-  
+
   Widget textFormField({
     Key? key,
-    Function? onChangedFunction,
+    VoidCallback? onChangedFunction,
+    int? maxLines,
     TextInputType? keyboardType,
     String? hintText,
     double? contentPadding,
@@ -73,6 +75,5 @@ abstract class WidgetFactory {
     Color? fillColor,
     Color? androidFillColor,
     Color? iosFillColor,
-    
-});
+  });
 }

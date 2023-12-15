@@ -1,8 +1,11 @@
+import 'dart:ffi';
+
 import 'package:flutter/widgets.dart';
 import 'package:story_teller/ui/core/factories/ui_factory.dart';
 
 class NiceTextFormField extends StatelessWidget {
-  final Function? onChangedFunction;
+  final VoidCallback? onChangedFunction;
+  final int? maxLines;
   final TextInputType? keyboardType;
   final String? hintText;
   final double? contentPadding;
@@ -32,7 +35,8 @@ class NiceTextFormField extends StatelessWidget {
       this.filled,
       this.fillColor,
       this.androidFillColor,
-      this.iosFillColor});
+      this.iosFillColor,
+        this.maxLines});
 
   final ui = uiFactory();
 
@@ -40,6 +44,7 @@ class NiceTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return ui.textFormField(
        onChangedFunction : onChangedFunction,
+       maxLines: maxLines,
        keyboardType: keyboardType,
        hintText: hintText,
        contentPadding: contentPadding,

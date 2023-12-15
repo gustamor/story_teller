@@ -28,7 +28,7 @@ class AndroidNavigationAppBar extends StatelessWidget
   Widget build(BuildContext context) {
     return Container(
       color: Colors.red,
-      height: 40.h,
+      height: 35.h,
       width: double.infinity,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -39,15 +39,16 @@ class AndroidNavigationAppBar extends StatelessWidget
               onTap: leftTapFunction!,
               child: Row(
                 children: [
-                  SvgPicture.asset(
+                  (leftIcon != null) ? SvgPicture.asset(
                     leftIcon!,
-                    width: 16.w,
-                    height: 16.h,
-                  ),
-                  Gap(6.w),
+                    width: 14.w,
+                    height: 14.h,
+                  ):const SizedBox(),
+                  (leftIcon != null) ? Gap(6.w) : const SizedBox(),
                   Text(
+
                     title!,
-                    style: const TextStyle(fontSize: 21),
+                    style: const TextStyle(fontSize: 19),
                   ),
                 ],
               ),

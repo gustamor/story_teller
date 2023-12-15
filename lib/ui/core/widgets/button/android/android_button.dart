@@ -7,9 +7,10 @@ import 'package:story_teller/ui/themes/styles/text_styles.dart';
 
 class AndroidAiButton extends StatelessWidget {
   final VoidCallback? clickFunction;
+  final bool? isFixedSize;
   final double? height;
   final double? width;
-  final String? text;
+  final String text;
   final TextStyle? textStyle;
   final double? padding;
   final Color? backgroundColor;
@@ -20,28 +21,29 @@ class AndroidAiButton extends StatelessWidget {
     this.backgroundColor,
     this.height,
     this.width,
-    this.text,
+    required this.text,
     this.textStyle,
     this.clickFunction,
+    this.isFixedSize,
   });
 
   @override
   Widget build(BuildContext context) {
     final log = LogImpl();
 
-    log.d("3 android button $clickFunction");
     return Padding(
       padding: EdgeInsets.all(padding!),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          fixedSize: Size(width!.w, height!.h),
+          backgroundColor: backgroundColor ?? Theme.of(context).buttonTheme.colorScheme!.primary,
+          fixedSize: (isFixedSize!) ?  Size(width!.w, height!.h) : null,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(height! * 0.5),
           ),
         ),
         onPressed: clickFunction!,
         child: Text(
-          text!,
+          text,
           style: textStyle!,
         ),
       ),

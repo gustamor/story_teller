@@ -2,13 +2,15 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:story_teller/data/providers/themes_provider_impl.dart';
 import 'package:story_teller/ui/core/widgets/button/button.dart';
 import 'package:story_teller/ui/core/widgets/text_form_field/text_form_field.dart';
 import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
 import 'package:story_teller/ui/themes/styles/text_styles.dart';
 
-class AuthName extends StatelessWidget {
+class AuthName extends ConsumerWidget {
   const AuthName({super.key});
 
   static const route = "/auth_name";
@@ -18,8 +20,13 @@ class AuthName extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     FlutterNativeSplash.remove();
+  
+    
+
+    final themeModeState = ref.watch(themesProvider);
+
 
     return SafeArea(
       child: Material(
@@ -46,7 +53,18 @@ class AuthName extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                    GestureDetector(child:
+                    IconButton(
+                        icon: Icon(
+                          themeModeState == ThemeMode.light
+                              ? Icons.dark_mode
+                              : Icons.light_mode,
+                        ),
+                        onPressed: () => ref.read(themesProvider.notifier).changeTheme(
+                            themeModeState == ThemeMode.light ? true : false)),
+
+                    ),
+                 const  Text(
                       "Dinos el nombre por el que quieres te llamemos",
                       style: AndroidStyle.cardDescription,
                     ),

@@ -4,7 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:story_teller/domain/widgets/ai_text_form_field.dart';
 
 class IosTextFormField extends StatelessWidget implements AITextFormField {
-  final Function? onChangedFunction;
+  final VoidCallback? onChangedFunction;
+  final int? maxLines;
   final TextInputType? keyboardType;
   final String? hintText;
   final double? contentPadding;
@@ -20,6 +21,7 @@ class IosTextFormField extends StatelessWidget implements AITextFormField {
   const IosTextFormField(
       {super.key,
       this.onChangedFunction,
+      this.maxLines,
       this.keyboardType,
       this.hintText,
       this.contentPadding,
@@ -40,7 +42,7 @@ class IosTextFormField extends StatelessWidget implements AITextFormField {
     return CupertinoTextField(
       onChanged: (query) => onChangedFunction,
       controller: controller,
-      maxLines: 1,
+      maxLines: maxLines ?? 1,
       scrollPhysics: const ScrollPhysics(),
       enableSuggestions: true,
       showCursor: true,
@@ -52,18 +54,15 @@ class IosTextFormField extends StatelessWidget implements AITextFormField {
       obscuringCharacter: obscuringCharacter ?? "•",
       prefix: prefixIcon,
       suffix: suffixIcon,
-        placeholder: hintText!,
+      placeholder: hintText!,
       style: const TextStyle(color: CupertinoColors.placeholderText),
-      placeholderStyle: const TextStyle(color:CupertinoColors.placeholderText),
-
+      placeholderStyle: const TextStyle(color: CupertinoColors.placeholderText),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
           (borderRadius ?? 30).r,
         ),
-          border: Border.all(color: Colors.red),
-
+        border: Border.all(color: Colors.red),
       ),
-
     );
   }
 }

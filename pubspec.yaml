@@ -38,6 +38,8 @@ dependencies:
   get_it: ^7.6.4
   flutter_riverpod: ^2.4.9
   riverpod_annotation: ^2.3.3
+  auto_size_text_field: ^2.2.2
+  expandable: ^5.0.1
 
 dev_dependencies:
   flutter_test:

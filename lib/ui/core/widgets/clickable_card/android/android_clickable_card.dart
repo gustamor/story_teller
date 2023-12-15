@@ -13,7 +13,7 @@ class AndroidAiClickableCard extends StatelessWidget
   final String? decorImage;
   final String? caption;
   final String? description;
-
+  final VoidCallback? clickFunction;
   final BoxFit? fit;
   final double? borderRadius;
 
@@ -27,16 +27,15 @@ class AndroidAiClickableCard extends StatelessWidget
       this.decorImage = "",
       this.fit,
       this.borderRadius = 16.0,
-      this.description});
+      this.description,
+        this.clickFunction});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
+    return InkWell(
+      onTap: clickFunction!,
       child: Card(
         elevation: 1,
-        shadowColor: const Color(0x00000000),
-        color: const Color(0xFF000000),
         child: Padding(
           padding: const EdgeInsets.only(left:8.0, top: 0.0),
           child: Column(
@@ -52,7 +51,6 @@ class AndroidAiClickableCard extends StatelessWidget
                     Container(
                       height: height,
                       width: 76.w,
-                      color: const Color(0xFF000000),
                       child: Center(
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(160.r),

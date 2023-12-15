@@ -4,22 +4,24 @@ import 'package:story_teller/domain/widgets/ai_button.dart';
 
 class IosAiButton extends StatelessWidget implements AiButton {
   final VoidCallback? clickFunction;
+  final bool? isFixedSize;
   final Color? backgroundColor;
   final double? padding;
   final double? height;
   final double? width;
-  final String? text;
+  final String text;
   final TextStyle? textStyle;
 
   const IosAiButton({
     super.key,
-    this.text,
+    required this.text,
     this.backgroundColor,
     this.padding,
     this.height,
     this.width,
     this.textStyle,
     this.clickFunction,
+    this.isFixedSize,
   });
 
   @override

@@ -14,6 +14,7 @@ class IosClickableCard extends StatelessWidget implements AiClickableCard {
   final String? caption;
   final String? description;
   final String? textStyle;
+  final VoidCallback? clickFunction;
 
   const IosClickableCard({
     super.key,
@@ -25,12 +26,13 @@ class IosClickableCard extends StatelessWidget implements AiClickableCard {
     this.caption,
     this.description,
     this.textStyle,
+    this.clickFunction,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: clickFunction,
       child: Card(
         elevation: 1,
         shadowColor: const Color(0x00000000),

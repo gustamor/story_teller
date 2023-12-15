@@ -23,6 +23,7 @@ class NiceClickableCard extends StatelessWidget {
   final String? decorImage;
   final double? borderRadius;
   final BoxFit? fit;
+  final VoidCallback? clickFunction;
   final Widget? child;
 
   NiceClickableCard({
@@ -47,6 +48,7 @@ class NiceClickableCard extends StatelessWidget {
     this.borderRadius = 16.0,
     this.fit = BoxFit.fill,
     this.child,
+    this.clickFunction,
   });
 
   final ui = uiFactory();
@@ -64,6 +66,8 @@ class NiceClickableCard extends StatelessWidget {
         androidBackgroundColor: androidBackgroundColor,
         iosBackgroundColor: iosBackgroundColor,
         androidElevation: androidElevation,
-        borderRadius: borderRadius);
+        borderRadius: borderRadius,
+        clickFunction: clickFunction ?? () {},
+    );
   }
 }

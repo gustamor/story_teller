@@ -13,6 +13,7 @@ class IOSFactory implements WidgetFactory {
   @override
   Widget createButton({
     VoidCallback? clickFunction,
+    bool? isFixedSize,
     double? height,
     double? width,
     double? iosHeight,
@@ -24,7 +25,7 @@ class IOSFactory implements WidgetFactory {
     TextStyle? iosTextStyle,
     double? padding = 8.0,
     Color? bgColor,
-    String? text,
+    required String text,
     Color? androidBackgroundColor,
     double? androidPadding,
     double? iosPadding,
@@ -32,12 +33,13 @@ class IOSFactory implements WidgetFactory {
   }) {
     return IosAiButton(
       clickFunction: clickFunction,
+      backgroundColor: iosBackgroundColor ?? bgColor,
+      isFixedSize: isFixedSize,
       text: text,
       textStyle: iosTextStyle ?? textStyle,
       height: iosHeight ?? height,
       width: iosWidth ?? width,
       padding: iosPadding ?? padding,
-      backgroundColor: iosBackgroundColor ?? bgColor,
     );
   }
 
@@ -100,7 +102,8 @@ class IOSFactory implements WidgetFactory {
   @override
   Widget textFormField(
       {Key? key,
-      Function? onChangedFunction,
+      VoidCallback? onChangedFunction,
+      int? maxLines,
       TextInputType? keyboardType,
       String? hintText,
       double? contentPadding,
@@ -116,6 +119,7 @@ class IOSFactory implements WidgetFactory {
       Color? iosFillColor}) {
     return IosTextFormField(
       onChangedFunction: onChangedFunction,
+      maxLines: maxLines,
       keyboardType: keyboardType,
       hintText: hintText,
       contentPadding: contentPadding,

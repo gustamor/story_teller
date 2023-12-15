@@ -1,9 +1,12 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:story_teller/domain/widgets/ai_text_form_field.dart';
 
 class AndroidTextFormField extends StatelessWidget implements AITextFormField {
-  final Function? onChangedFunction;
+  final VoidCallback? onChangedFunction;
+  final int? maxLines;
   final TextInputType? keyboardType;
   final String? hintText;
   final double? contentPadding;
@@ -29,7 +32,8 @@ class AndroidTextFormField extends StatelessWidget implements AITextFormField {
       this.obscureText,
       this.obscuringCharacter,
       this.filled,
-      this.fillColor});
+      this.fillColor,
+        this.maxLines});
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +50,7 @@ class AndroidTextFormField extends StatelessWidget implements AITextFormField {
       keyboardAppearance: Brightness.dark,
       autofocus: false,
       autocorrect: true,
+      maxLines: maxLines ?? 1,
       obscureText: obscureText ?? false,
       obscuringCharacter: obscuringCharacter ?? "*",
       decoration: InputDecoration(

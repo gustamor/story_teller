@@ -13,20 +13,24 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:story_teller/data/services/firebase_service_impl.dart';
 import 'package:story_teller/firebase_options.dart';
 import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
+import 'package:story_teller/ui/screen/history/generated_content_screen.dart';
 import 'package:story_teller/ui/screen/login/auth_screen/auth_name.dart';
 import 'package:story_teller/ui/screen/login/auth_screen/auth_screen.dart';
 import 'package:story_teller/ui/screen/tale_generator/tale.dart';
+import 'package:story_teller/ui/screen/tale_generator/tale_generator.dart';
 
-import 'data/providers/themes_provicer_impl.dart';
+import 'data/providers/themes_provider_impl.dart';
+
 GetIt locator = GetIt.instance;
 
 void setupSingletons() async {
-  locator.registerLazySingleton<FirebaseServiceImpl>(() => FirebaseServiceImpl());
+  locator
+      .registerLazySingleton<FirebaseServiceImpl>(() => FirebaseServiceImpl());
 }
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   SystemChrome.setEnabledSystemUIMode(
     SystemUiMode.manual,
     overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top],
@@ -44,7 +48,9 @@ void main() async {
       ],
       path: 'assets/l10n',
       fallbackLocale: const Locale('es'),
-      child: const ProviderScope (child:  AiApp(),),
+      child: const ProviderScope(
+        child: AiApp(),
+      ),
     ),
   );
 }
@@ -73,7 +79,7 @@ class AiApp extends ConsumerWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    
+
     return ValueListenableBuilder<ThemeMode>(
         valueListenable: themeNotifier,
         builder: (_, ThemeMode cm, __) {
@@ -97,13 +103,16 @@ class AiApp extends ConsumerWidget {
                   visualDensity: VisualDensity.adaptivePlatformDensity,
                   fontFamily: GoogleFonts.roboto().fontFamily,
                 ),
-                themeMode: currentMode,
-                initialRoute: TaleScreen.route,
+                themeMode:currentMode,
+                initialRoute: GeneratedContentScreen.route,
                 routes: {
-                  AuthScreen.route: (context) =>  AuthScreen(),
+                  AuthScreen.route: (context) => AuthScreen(),
                   AuthName.route: (context) => const AuthName(),
                   AssistantsScreen.route: (context) => AssistantsScreen(),
                   TaleScreen.route: (context) => const TaleScreen(),
+                  TaleGeneratorScreen.route: (context) =>
+                      const TaleGeneratorScreen(),
+                  GeneratedContentScreen.route: (context) => const GeneratedContentScreen(),
 
                 }),
           );
