@@ -15,6 +15,3 @@ class ThemesProviderImpl extends StateNotifier<ThemeMode> implements ThemesProvi
   }
 }
 
-abstract class ThemesProvider {
-  void changeTheme(bool isOn);
-}
