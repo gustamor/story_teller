@@ -24,49 +24,43 @@ class AssistantsScreen extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        appBar: null,
+        appBar:   NiceAppBar(
+                title: tr('assitants'),
+              ),
         body: SingleChildScrollView(
           child: Column(
             children: [
-              NiceAppBar(
-                title: tr('assitants'),
-              ),
+            
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    color: Colors.greenAccent,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        left: kLeftPaddingHomeNameText,
-                        top: kTopPaddingHomeWhatCanText,
-                      ),
-                      child: Text(
-                        "Hola User",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 28.sp,
-                        ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: kLeftPaddingHomeNameText,
+                      top: kTopPaddingHomeWhatCanText,
+                    ),
+                    child: Text(
+                      "Hola User",
+                      style: TextStyle(
+                      
+                        fontSize: 28.sp,
                       ),
                     ),
                   ),
                   Container(height: 50.h, width: 50.w, color: Colors.amber)
                 ],
               ),
-              Container(
-                color: Colors.pink,
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      left: kLeftPaddingHomeNameText, top: 8.h, right: 92.w),
-                  child: Text(
-                    "¿Qué puedo hacer hoy por tí?",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 28.sp,
-                    ),
-                    maxLines: 2,
-                    textAlign: TextAlign.center,
+              Padding(
+                padding: EdgeInsets.only(
+                    left: kLeftPaddingHomeNameText, top: 8.h, right: 92.w),
+                child: Text(
+                  "¿Qué puedo hacer hoy por tí?",
+                  style: TextStyle(
+                    
+                    fontSize: 28.sp,
                   ),
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
                 ),
               ),
               Padding(

@@ -1,6 +1,6 @@
 const kIconBackArrow = "assets/images/icons/backarrow.svg";
 const kIconShare = "assets/images/icons/share.svg";
-const kIconWave = "wave.svg";
+const kIconWave = "assets/images/icons/wave.svg";
 const kIconStarUnfilled = "assets/images/icons/star_unfilled.svg";
 const kIconStarFilled = "assets/images/icons/star_filled.svg";
 const kIconClose = "assets/images/icons/close.svg";

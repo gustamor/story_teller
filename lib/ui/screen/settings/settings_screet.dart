@@ -25,8 +25,8 @@ class SettingsScreen extends StatelessWidget {
                   left: 16.w,
                 ),
                 child: SwitchListTile(
-                    title: Text("Mode"),
-                    subtitle: Text("Selecciona el aspecto de la pantalla"),
+                    title: const Text("Mode"),
+                    subtitle: const Text("Selecciona el aspecto de la pantalla"),
                     contentPadding: const EdgeInsets.all(8),
                     value: true,
                     onChanged: (value) {}),

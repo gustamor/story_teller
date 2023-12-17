@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,22 +27,19 @@ class TaleScreen extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        appBar: null,
-        body: Container(
-          color: Colors.blue,
+        appBar: NiceAppBar(
+          leftIcon: kIconBackArrow,
+          title: tr('assistants'),
+          leftTapFunction: () => navigateTo(context, AssistantsScreen.route),
+        ),
+        body: SizedBox(
           height: double.infinity,
           width: double.infinity,
           child: SingleChildScrollView(
-            physics: const ScrollPhysics(),
+            clipBehavior: Clip.antiAliasWithSaveLayer,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                NiceAppBar(
-                  leftIcon: kIconBackArrow,
-                  title: tr('assistants'),
-                  leftTapFunction: () =>
-                      navigateTo(context, AssistantsScreen.route),
-                ),
                 SizedBox(
                   height: 3.h,
                 ),
@@ -127,19 +125,21 @@ class TaleScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding:  EdgeInsets.all(24.r),
+                            padding: EdgeInsets.all(24.r),
                             child: SvgPicture.asset(
                               kIconShare,
                               width: 24.w,
                               height: 24.h,
+                               color: Theme.of(context).cardColor.onColor,
                             ),
                           ),
                           Padding(
-                            padding:  EdgeInsets.all(24.r),
+                            padding: EdgeInsets.all(24.r),
                             child: SvgPicture.asset(
                               kIconWave,
                               width: 32.w,
                               height: 32.h,
+                              color: Theme.of(context).primaryColor,
                             ),
                           ),
                         ],

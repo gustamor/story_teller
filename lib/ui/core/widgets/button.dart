@@ -1,9 +1,11 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/cupertino.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
 import 'package:story_teller/domain/widgets/ai_button.dart';
 import 'package:story_teller/ui/core/factories/ui_factory.dart';
 
-class NiceButton extends StatelessWidget implements AiButton {
+class NiceButton extends StatelessWidget implements AiButton { 
   final VoidCallback clickFunction;
   final bool? isFixedSize;
   final Color? backgroundColor;

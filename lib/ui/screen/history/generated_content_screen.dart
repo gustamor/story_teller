@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -67,6 +69,8 @@ class GeneratedContentScreen extends StatelessWidget {
 const loremIpsum =
 "Veridion era un planeta especial, lleno de maravillas únicas que ningún ojo había presenciado. Sus cielos eran un lienzo interminable de colores nunca antes vistos: tonalidades de azules que cambiaban con cada respiración del planeta, y luces que danzaban en la atmósfera como destellos de sueños. Sin embargo, la soledad de Veridion también lo envolvía como un manto, creando un aura de misterio y encanto.";
 class Card1 extends StatelessWidget {
+  const Card1({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ExpandableNotifier(
@@ -131,6 +135,7 @@ class Card1 extends StatelessWidget {
   }
 }
 
+// ignore: use_key_in_widget_constructors
 class Card2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -237,7 +242,7 @@ class Card2 extends StatelessWidget {
                       style: TextStyle(color: Theme.of(context).primaryColor)),
                   Text(
                     "Gustavo Moreno",
-                    style: Theme.of(context).textTheme.caption,
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ],
               ),
@@ -317,7 +322,7 @@ class Card2 extends StatelessWidget {
                           controller.expanded ? "CERRAR" : "EXPANDE",
                           style: Theme.of(context)
                               .textTheme
-                              .button!
+                              .labelLarge!
                               .copyWith(color: Colors.deepPurple),
                         ),
                         onPressed: () {
