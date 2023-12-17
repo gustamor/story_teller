@@ -36,7 +36,6 @@ class IosTextFormField extends StatelessWidget implements AITextFormField {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     TextEditingController controller = TextEditingController();
 
     return CupertinoTextField(

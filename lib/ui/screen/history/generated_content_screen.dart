@@ -2,8 +2,8 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:story_teller/constants.dart';
-import 'package:story_teller/ui/core/widgets/app_bar/navigation_app_bar.dart';
-import 'package:story_teller/ui/core/widgets/bottom_bar/navigation_bottom_bar.dart';
+import 'package:story_teller/ui/core/widgets/navigation_app_bar.dart';
+import 'package:story_teller/ui/core/widgets/navigation_bottom_bar.dart';
 import 'package:story_teller/ui/screen/login/auth_screen/auth_name.dart';
 
 class GeneratedContentScreen extends StatelessWidget {

@@ -11,6 +11,7 @@ class IosNavigationAppBar extends StatelessWidget implements AiNavigationBar {
   final VoidCallback? leftTapFunction;
   final VoidCallback? rightTapFunction;
 
+
   const IosNavigationAppBar({
     super.key,
     this.title,

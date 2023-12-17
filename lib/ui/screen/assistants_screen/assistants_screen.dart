@@ -4,12 +4,11 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:story_teller/constants.dart';
 import 'package:story_teller/ui/core/factories/ui_factory.dart';
-import 'package:story_teller/ui/core/widgets/app_bar/navigation_app_bar.dart';
-import 'package:story_teller/ui/core/widgets/clickable_card/clickable_card.dart';
-import 'package:story_teller/ui/screen/tale_generator/tale.dart';
+import 'package:story_teller/ui/core/widgets/navigation_app_bar.dart';
+import 'package:story_teller/ui/core/widgets/clickable_card.dart';
 import 'package:story_teller/ui/screen/tale_generator/tale_generator.dart';
 
-import '../../core/widgets/bottom_bar/navigation_bottom_bar.dart';
+import '../../core/widgets/navigation_bottom_bar.dart';
 
 class AssistantsScreen extends StatelessWidget {
   AssistantsScreen({super.key});

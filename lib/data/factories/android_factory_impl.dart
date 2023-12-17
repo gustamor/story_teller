@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:story_teller/data/services/logger_impl.dart';
+import 'package:story_teller/data/factories/widgets/button/android/android_button.dart';
+import 'package:story_teller/data/factories/widgets/clickable_card/android/android_clickable_card.dart';
+import 'package:story_teller/data/factories/widgets/text_form_field/android/text_form_field.dart';
 import 'package:story_teller/domain/factories/widgets_factory.dart';
-import 'package:story_teller/ui/core/widgets/app_bar/android/navigation_app_bar.dart';
-import 'package:story_teller/ui/core/widgets/button/android/android_button.dart';
-import 'package:story_teller/ui/core/widgets/clickable_card/android/android_clickable_card.dart';
+import 'package:story_teller/data/factories/widgets/app_bar/android/navigation_app_bar.dart';
 
-import '../widgets/bottom_bar/android/navigation_bottom_bar.dart';
-import '../widgets/text_form_field/android/text_form_field.dart';
+
+import 'widgets/bottom_bar/android/navigation_bottom_bar.dart';
 
 class AndroidFactory implements WidgetFactory {
   @override
@@ -34,7 +34,7 @@ class AndroidFactory implements WidgetFactory {
     return AndroidAiButton(
       clickFunction: clickFunction,
       backgroundColor: androidBackgroundColor ?? bgColor,
-      isFixedSize: isFixedSize ?? true,
+      isFixedSize: isFixedSize ?? false,
       text: text,
       textStyle: androidTextStyle ?? textStyle,
       height: androidHeight ?? height,
@@ -84,13 +84,16 @@ class AndroidFactory implements WidgetFactory {
     String? rightIcon,
     VoidCallback? leftTapFunction,
     VoidCallback? rightTapFunction,
+
   }) {
     return AndroidNavigationAppBar(
         title: title ?? "",
         leftIcon: leftIcon ?? "",
         rightIcon: rightIcon ?? "",
         leftTapFunction: leftTapFunction ?? () => {},
-        rightTapFunction: rightTapFunction ?? () => {});
+        rightTapFunction: rightTapFunction ?? () => {},
+        )      
+        ;
   }
 
   @override

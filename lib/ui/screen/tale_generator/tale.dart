@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/constants.dart';
-import 'package:story_teller/ui/core/widgets/app_bar/navigation_app_bar.dart';
+import 'package:story_teller/ui/core/widgets/navigation_app_bar.dart';
 import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
 import 'package:story_teller/ui/themes/styles/text_styles.dart';
 
@@ -51,7 +51,7 @@ class TaleScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         height: 250.h,
                         child: Image.network(
@@ -86,7 +86,7 @@ class TaleScreen extends StatelessWidget {
                               padding: EdgeInsets.only(top: 16.h),
                               child: Column(
                                 children: [
-                                  Text(
+                                  const Text(
                                     "El planeta solitario sin ojos que lo vean",
                                     style: AndroidStyle.cardCaption,
                                   ),
@@ -107,7 +107,7 @@ class TaleScreen extends StatelessWidget {
                       Gap(16.h),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 12.w),
-                        child: Text(
+                        child: const Text(
                           "escribe un guión de cine de película de ciencia ficción sobre el crépusculo de los tiempos",
                           style: AndroidStyle.cardDescription,
                         ),

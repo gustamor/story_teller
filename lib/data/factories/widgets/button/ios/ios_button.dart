@@ -37,7 +37,7 @@ class IosAiButton extends StatelessWidget implements AiButton {
         color: CupertinoColors.activeBlue,
         onPressed: clickFunction!,
         child: Text(
-          text!,
+          text,
           style: textStyle!,
         ),
       ),

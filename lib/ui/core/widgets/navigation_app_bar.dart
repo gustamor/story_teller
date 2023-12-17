@@ -14,7 +14,7 @@ class NiceAppBar extends StatelessWidget {
     this.leftIcon,
     this.rightIcon,
     this.leftTapFunction,
-    this.rightTapFunction,
+    this.rightTapFunction, 
   });
 
   final ui = uiFactory();
@@ -26,7 +26,7 @@ class NiceAppBar extends StatelessWidget {
       leftIcon: leftIcon ?? "",
       rightIcon: rightIcon ?? "",
       leftTapFunction: leftTapFunction ?? () => {},
-      rightTapFunction: rightTapFunction ?? () => {},
+      rightTapFunction: rightTapFunction ?? () => {}
     );
   }
 }

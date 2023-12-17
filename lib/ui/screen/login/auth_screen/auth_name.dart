@@ -5,8 +5,8 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:story_teller/data/providers/themes_provider_impl.dart';
-import 'package:story_teller/ui/core/widgets/button/button.dart';
-import 'package:story_teller/ui/core/widgets/text_form_field/text_form_field.dart';
+import 'package:story_teller/ui/core/widgets/button.dart';
+import 'package:story_teller/ui/core/widgets/text_form_field.dart';
 import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
 import 'package:story_teller/ui/themes/styles/text_styles.dart';
 

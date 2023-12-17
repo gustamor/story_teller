@@ -5,14 +5,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:story_teller/data/services/firebase_service_impl.dart';
 import 'package:story_teller/firebase_options.dart';
 import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
+import 'package:story_teller/ui/screen/feedback/rate_us_screen.dart';
 import 'package:story_teller/ui/screen/history/generated_content_screen.dart';
 import 'package:story_teller/ui/screen/login/auth_screen/auth_name.dart';
 import 'package:story_teller/ui/screen/login/auth_screen/auth_screen.dart';
@@ -20,13 +18,14 @@ import 'package:story_teller/ui/screen/tale_generator/tale.dart';
 import 'package:story_teller/ui/screen/tale_generator/tale_generator.dart';
 
 import 'data/providers/themes_provider_impl.dart';
-
+/* 
 GetIt locator = GetIt.instance;
 
-void setupSingletons() async {
+void setupSingletons() async {/*  */
   locator
       .registerLazySingleton<FirebaseServiceImpl>(() => FirebaseServiceImpl());
-}
+      
+} */
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -35,11 +34,11 @@ void main() async {
     SystemUiMode.manual,
     overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top],
   );
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+ // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   HttpOverrides.global = MyHttpOverrides();
   await EasyLocalization.ensureInitialized();
 
-  setupSingletons();
+  //setupSingletons();
 
   runApp(
     EasyLocalization(
@@ -103,12 +102,14 @@ class AiApp extends ConsumerWidget {
                   visualDensity: VisualDensity.adaptivePlatformDensity,
                   fontFamily: GoogleFonts.roboto().fontFamily,
                 ),
-                themeMode:currentMode,
-                initialRoute: GeneratedContentScreen.route,
+                themeMode:ThemeMode.dark,
+                initialRoute: RateUsScreen.route,
                 routes: {
                   AuthScreen.route: (context) => AuthScreen(),
                   AuthName.route: (context) => const AuthName(),
                   AssistantsScreen.route: (context) => AssistantsScreen(),
+                                    RateUsScreen.route: (context) => const RateUsScreen(),
+
                   TaleScreen.route: (context) => const TaleScreen(),
                   TaleGeneratorScreen.route: (context) =>
                       const TaleGeneratorScreen(),

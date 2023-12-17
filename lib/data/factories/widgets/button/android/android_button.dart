@@ -29,7 +29,6 @@ class AndroidAiButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final log = LogImpl();
 
     return Padding(
       padding: EdgeInsets.all(padding!),
@@ -38,15 +37,16 @@ class AndroidAiButton extends StatelessWidget {
           backgroundColor: backgroundColor ?? Theme.of(context).buttonTheme.colorScheme!.primary,
           fixedSize: (isFixedSize!) ?  Size(width!.w, height!.h) : null,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(height! * 0.5),
+            borderRadius: BorderRadius.circular( (isFixedSize!) ?  height! * 0.5 : 12),
           ),
         ),
         onPressed: clickFunction!,
         child: Text(
           text,
-          style: textStyle!,
+          style: textStyle ?? AndroidStyle.cardCaption,
         ),
       ),
     );
+    
   }
 }

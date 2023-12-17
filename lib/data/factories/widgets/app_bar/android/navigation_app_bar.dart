@@ -14,6 +14,7 @@ class AndroidNavigationAppBar extends StatelessWidget
   final String? rightIcon;
   final VoidCallback? leftTapFunction;
   final VoidCallback? rightTapFunction;
+  final bool? backgroundOpacity;
 
   const AndroidNavigationAppBar({
     super.key,
@@ -22,12 +23,13 @@ class AndroidNavigationAppBar extends StatelessWidget
     this.rightIcon,
     this.leftTapFunction,
     this.rightTapFunction,
+     this.backgroundOpacity,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.red,
+      color: Theme.of(context).primaryColor,
       height: 35.h,
       width: double.infinity,
       child: Padding(
@@ -39,14 +41,15 @@ class AndroidNavigationAppBar extends StatelessWidget
               onTap: leftTapFunction!,
               child: Row(
                 children: [
-                  (leftIcon != null) ? SvgPicture.asset(
-                    leftIcon!,
-                    width: 14.w,
-                    height: 14.h,
-                  ):const SizedBox(),
+                  (leftIcon != null)
+                      ? SvgPicture.asset(
+                          leftIcon!,
+                          width: 14.w,
+                          height: 14.h,
+                        )
+                      : const SizedBox(),
                   (leftIcon != null) ? Gap(6.w) : const SizedBox(),
                   Text(
-
                     title!,
                     style: const TextStyle(fontSize: 19),
                   ),

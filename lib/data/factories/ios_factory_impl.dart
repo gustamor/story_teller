@@ -1,13 +1,14 @@
 // ignore_for_file: unused_import
 
 import 'package:flutter/cupertino.dart';
+import 'package:story_teller/data/factories/widgets/button/ios/ios_button.dart';
+import 'package:story_teller/data/factories/widgets/clickable_card/ios/ios_clickable_card.dart';
+import 'package:story_teller/data/factories/widgets/text_form_field/ios/text_form_field.dart';
 import 'package:story_teller/domain/factories/widgets_factory.dart';
-import 'package:story_teller/ui/core/widgets/app_bar/ios/navigation_app_bar.dart';
-import 'package:story_teller/ui/core/widgets/bottom_bar/ios/navigation_bottom_bar.dart';
-import 'package:story_teller/ui/core/widgets/button/ios/ios_button.dart';
-import 'package:story_teller/ui/core/widgets/clickable_card/ios/ios_clickable_card.dart';
+import 'package:story_teller/data/factories/widgets/app_bar/ios/navigation_app_bar.dart';
+import 'package:story_teller/data/factories/widgets/bottom_bar/ios/navigation_bottom_bar.dart';
+
 import 'package:story_teller/domain/widgets/ai_navigation_bar.dart';
-import 'package:story_teller/ui/core/widgets/text_form_field/ios/text_form_field.dart';
 
 class IOSFactory implements WidgetFactory {
   @override
@@ -87,11 +88,12 @@ class IOSFactory implements WidgetFactory {
     VoidCallback? rightTapFunction,
   }) {
     return IosNavigationAppBar(
-        title: title ?? "",
-        leftIcon: leftIcon ?? "",
-        rightIcon: rightIcon ?? "",
-        leftTapFunction: leftTapFunction ?? () => {},
-        rightTapFunction: rightTapFunction ?? () => {});
+      title: title ?? "",
+      leftIcon: leftIcon ?? "",
+      rightIcon: rightIcon ?? "",
+      leftTapFunction: leftTapFunction ?? () => {},
+      rightTapFunction: rightTapFunction ?? () => {},
+    );
   }
 
   @override

@@ -1,13 +1,12 @@
-import 'package:auto_size_text_field/auto_size_text_field.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/constants.dart';
-import 'package:story_teller/ui/core/widgets/app_bar/navigation_app_bar.dart';
-import 'package:story_teller/ui/core/widgets/button/button.dart';
-import 'package:story_teller/ui/core/widgets/text_form_field/text_form_field.dart';
+import 'package:story_teller/ui/core/widgets/navigation_app_bar.dart';
+import 'package:story_teller/ui/core/widgets/button.dart';
+import 'package:story_teller/ui/core/widgets/text_form_field.dart';
 import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
 import 'package:story_teller/ui/screen/tale_generator/tale.dart';
 import 'package:story_teller/ui/themes/styles/text_styles.dart';
@@ -20,7 +19,6 @@ class TaleGeneratorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FlutterNativeSplash.remove();
-    var textEditingController = TextEditingController();
 
     return SafeArea(
         child: Scaffold(
