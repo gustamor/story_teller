@@ -14,6 +14,7 @@ import 'package:story_teller/ui/screen/feedback/rate_us_screen.dart';
 import 'package:story_teller/ui/screen/history/generated_content_screen.dart';
 import 'package:story_teller/ui/screen/login/auth_screen/auth_name.dart';
 import 'package:story_teller/ui/screen/login/auth_screen/auth_screen.dart';
+import 'package:story_teller/ui/screen/settings/settings_screet.dart';
 import 'package:story_teller/ui/screen/tale_generator/tale.dart';
 import 'package:story_teller/ui/screen/tale_generator/tale_generator.dart';
 
@@ -103,7 +104,7 @@ class AiApp extends ConsumerWidget {
                   fontFamily: GoogleFonts.roboto().fontFamily,
                 ),
                 themeMode:ThemeMode.dark,
-                initialRoute: RateUsScreen.route,
+                initialRoute: SettingsScreen.route,
                 routes: {
                   AuthScreen.route: (context) => AuthScreen(),
                   AuthName.route: (context) => const AuthName(),
@@ -114,6 +115,7 @@ class AiApp extends ConsumerWidget {
                   TaleGeneratorScreen.route: (context) =>
                       const TaleGeneratorScreen(),
                   GeneratedContentScreen.route: (context) => const GeneratedContentScreen(),
+                   SettingsScreen.route: (context) => const SettingsScreen(),
 
                 }),
           );

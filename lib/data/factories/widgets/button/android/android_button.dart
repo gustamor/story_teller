@@ -37,7 +37,7 @@ class AndroidAiButton extends StatelessWidget {
           backgroundColor: backgroundColor ?? Theme.of(context).buttonTheme.colorScheme!.primary,
           fixedSize: (isFixedSize!) ?  Size(width!.w, height!.h) : null,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular( (isFixedSize!) ?  height! * 0.5 : 12),
+            borderRadius: BorderRadius.circular( (isFixedSize!) ?  height! * 0.5 : 24),
           ),
         ),
         onPressed: clickFunction!,

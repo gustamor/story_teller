@@ -45,7 +45,7 @@ class TaleGeneratorScreen extends StatelessWidget {
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                            child: Text(
+                        /*  */    child: Text(
                               tr("write_prompt"),
                               style: TextStyle(fontSize: 11.sp),
                             ),
