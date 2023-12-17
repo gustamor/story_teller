@@ -1,7 +1,6 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:story_teller/constants.dart';
 import 'package:story_teller/ui/core/widgets/app_bar/navigation_app_bar.dart';
 import 'package:story_teller/ui/core/widgets/bottom_bar/navigation_bottom_bar.dart';
@@ -19,7 +18,7 @@ class GeneratedContentScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: null,
-        body: Container(
+        body:  SizedBox(
           height: double.infinity,
           child: Column(
             children: [
@@ -80,7 +79,7 @@ class Card1 extends StatelessWidget {
             SizedBox(
               height: 0,
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.orange,
                   shape: BoxShape.rectangle,
                 ),
@@ -95,16 +94,16 @@ class Card1 extends StatelessWidget {
                   tapBodyToCollapse: true,
                 ),
                 header: Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: Text("Título de la historia",
                         style:
                             TextStyle(color: Theme.of(context).primaryColor))),
-                collapsed: SizedBox(),
+                collapsed: const SizedBox(),
                 expanded: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     for (var _ in Iterable.generate(1))
-                      Padding(
+                      const Padding(
                           padding: EdgeInsets.only(bottom: 10),
                           child: Text(
                             loremIpsum,
@@ -115,7 +114,7 @@ class Card1 extends StatelessWidget {
                 ),
                 builder: (_, collapsed, expanded) {
                   return Padding(
-                    padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                    padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
                     child: Expandable(
                       collapsed: collapsed,
                       expanded: expanded,
@@ -177,7 +176,7 @@ class Card2 extends StatelessWidget {
             shape: BoxShape.rectangle,
           ),
           child: Image.network(
-            kImageFace,
+            kImageBookPage,
             fit: BoxFit.cover,
           ),
         ),
@@ -193,7 +192,7 @@ class Card2 extends StatelessWidget {
             shape: BoxShape.rectangle,
           ),
           child: Image.network(
-            kImageCyberpunkCity,
+            kImageFace,
             fit: BoxFit.cover,
           ),
         ),
@@ -205,7 +204,7 @@ class Card2 extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -230,7 +229,7 @@ class Card2 extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -267,7 +266,7 @@ class Card2 extends StatelessWidget {
     }
 
     buildExpanded3() {
-      return Padding(
+      return const Padding(
         padding: EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -303,7 +302,7 @@ class Card2 extends StatelessWidget {
                 collapsed: buildCollapsed3(),
                 expanded: buildExpanded3(),
               ),
-              Divider(
+             const  Divider(
                 height: 1,
               ),
               Row(
