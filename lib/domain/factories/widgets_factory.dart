@@ -8,6 +8,7 @@ abstract class WidgetFactory {
       bool? isFixedSize,
       double? height,
       double? width,
+      double? borderSide,
       double? iosHeight,
       double? iosWidth,
       double? androidHeight,

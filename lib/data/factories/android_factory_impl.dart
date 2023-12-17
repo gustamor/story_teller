@@ -15,6 +15,8 @@ class AndroidFactory implements WidgetFactory {
     bool? isFixedSize,
     double? height,
     double? width,
+          double? borderSide,
+
     double? iosHeight,
     double? iosWidth,
     double? androidHeight,
@@ -40,6 +42,7 @@ class AndroidFactory implements WidgetFactory {
       height: androidHeight ?? height,
       width: androidWidth ?? width,
       padding: androidPadding ?? padding,
+      borderSide: borderSide,
     );
   }
 

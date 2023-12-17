@@ -9,6 +9,8 @@ class IosAiButton extends StatelessWidget implements AiButton {
   final double? padding;
   final double? height;
   final double? width;
+  final double? borderSide;
+
   final String text;
   final TextStyle? textStyle;
 
@@ -22,6 +24,7 @@ class IosAiButton extends StatelessWidget implements AiButton {
     this.textStyle,
     this.clickFunction,
     this.isFixedSize,
+    this.borderSide,
   });
 
   @override
@@ -29,6 +32,7 @@ class IosAiButton extends StatelessWidget implements AiButton {
     return Padding(
       padding: EdgeInsets.all(padding!),
       child: CupertinoButton(
+        
         borderRadius: BorderRadius.all(
           Radius.circular(
             30.r,

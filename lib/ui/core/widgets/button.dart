@@ -10,6 +10,7 @@ class NiceButton extends StatelessWidget implements AiButton {
   final double? padding;
   final double? height;
   final double? width;
+  final double? borderSide;
   final String text;
   final TextStyle? textStyle;
   final double? androidPadding;
@@ -30,21 +31,21 @@ class NiceButton extends StatelessWidget implements AiButton {
     this.height,
     this.width,
     required this.clickFunction,
-    this.isFixedSize,
+    this.isFixedSize, 
+    this.borderSide,
   });
 
   final ui = uiFactory();
 
   @override
   Widget build(BuildContext context) {
-    final log = LogImpl();
-    log.d("1 button factory impl $clickFunction");
 
     return ui.createButton(
       clickFunction: clickFunction,
       isFixedSize: isFixedSize,
       height: height,
       width: width,
+      borderSide: borderSide,
       padding: padding,
       text: text,
       textStyle: textStyle,

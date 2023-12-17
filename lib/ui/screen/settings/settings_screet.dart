@@ -40,15 +40,19 @@ class SettingsScreen extends StatelessWidget {
                         backgroundColor:
                             Theme.of(context).scaffoldBackgroundColor,
                         clickFunction: () {}),
+                    Gap(8.w),
                     NiceButton(
                         text: "Night",
                         backgroundColor:
                             Theme.of(context).scaffoldBackgroundColor,
+                        borderSide: 1,
                         clickFunction: () {}),
+                    Gap(8.w),
                     NiceButton(
                         text: "System",
                         backgroundColor:
                             Theme.of(context).scaffoldBackgroundColor,
+                        borderSide: 1,
                         clickFunction: () {}),
                   ],
                 ),
@@ -64,7 +68,7 @@ class SettingsScreen extends StatelessWidget {
               Gap(
                 kSettingsElementSeparator.h,
               ),
-              Container( 
+              Container(
                 margin: EdgeInsets.only(
                   left: 8.w,
                 ),
