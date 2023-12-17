@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/constants.dart';
 import 'package:story_teller/ui/core/widgets/button.dart';
+import 'package:story_teller/ui/themes/styles/text_styles.dart';
 
 class RateUsScreen extends StatelessWidget {
   static const route = "/rate_us";
@@ -15,19 +16,19 @@ class RateUsScreen extends StatelessWidget {
       child: Scaffold(
         appBar: null,
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.symmetric(horizontal: 24.r),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Align(
-                alignment: Alignment.topLeft,
+                alignment: Alignment.centerRight,
                 child: InkWell(
                   onTap: () => Navigator.pop(context),
                   child: SvgPicture.asset(
-                    kIconBackArrow,
-                    color: Theme.of(context).primaryColor,
+                    kIconClose,
+                    color: Colors.white,
                     height: 16.h,
-                    width: 16.w,
+                    width:16.w,
                   ),
                 ),
               ),
@@ -40,30 +41,42 @@ class RateUsScreen extends StatelessWidget {
                     ),
                     Image.network(
                       kImageCyberpunkCity,
-                      height: 300.h,
+                      height: 250.h,
                       fit: BoxFit.cover,
                     ),
-                    Gap(
-                      12.h,
-                    ),
+                    const Text("RATE US", style: AndroidStyle.cardCaption),
                     const Text(
-                        "Valóranos, valóranos, y blablabla and blablabla"),
+                      "Valóranos, valóranos, y blablabla and blablabla,Valóranos, valóranos, y blablabla and blablablaValóranos, valóranos, y blablabla and blablablaValóranos, valóranos, y blablabla and blablabla",
+                      style: AndroidStyle.cardDescription,
+                    ),
+                    Gap(12.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: List.generate(
-                        5,
-                        (index) => Padding(
-                          padding: EdgeInsets.all(
-                            3.r,
+                      children: List.generate(5, (index) {
+
+                        return Expanded(
+                          child: SvgPicture.asset(
+                            kIconStarFilled,
+                            color: (index < 4) ? Colors.yellow: Colors.grey,
+                            height: 42.h,
+                            width: 42.w,
                           ),
-                          child: const Icon(
-                            Icons.star,
-                          ),
-                        ),
-                      ),
+                        );
+                      }),
                     ),
-                    NiceButton(text: "Rate us", clickFunction: () => {}),
-                    Gap(32.h)
+                    Row(
+                      children: [
+                        Expanded(
+                            child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 42.w,
+                          ),
+                          child: NiceButton(
+                              text: "Share", clickFunction: () => {}),
+                        )),
+                      ],
+                    ),
+                    Gap(30.h)
                   ],
                 ),
               )
