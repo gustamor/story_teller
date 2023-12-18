@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,15 +23,35 @@ class AssistantsScreen extends StatelessWidget {
     final double kTopPaddingHomeWhatCanText = 32.w;
     FlutterNativeSplash.remove();
 
+    final materialItems = [
+      BottomNavigationBarItem(
+        icon: const Icon(Icons.book),
+        label: tr("history"),
+      ),
+      BottomNavigationBarItem(
+        icon: const Icon(Icons.settings),
+        label: tr('settings'),
+      ),
+    ];
+    final cupertinoItems = <BottomNavigationBarItem>[
+      BottomNavigationBarItem(
+        icon: const Icon(CupertinoIcons.star_fill),
+        label: tr('history'),
+      ),
+      BottomNavigationBarItem(
+        icon: const Icon(CupertinoIcons.settings),
+        label: tr('settings'),
+      ),
+    ];
+
     return SafeArea(
       child: Scaffold(
-        appBar:   NiceAppBar(
-                title: tr('assitants'),
-              ),
+        appBar: NiceAppBar(
+          title: tr('assitants'),
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
-            
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -42,7 +63,6 @@ class AssistantsScreen extends StatelessWidget {
                     child: Text(
                       "Hola User",
                       style: TextStyle(
-                      
                         fontSize: 28.sp,
                       ),
                     ),
@@ -56,7 +76,6 @@ class AssistantsScreen extends StatelessWidget {
                 child: Text(
                   "¿Qué puedo hacer hoy por tí?",
                   style: TextStyle(
-                    
                     fontSize: 28.sp,
                   ),
                   maxLines: 2,
@@ -70,14 +89,13 @@ class AssistantsScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     NiceClickableCard(
-                      clickFunction: () =>
-                          Navigator.pushNamed(context, TaleGeneratorScreen.route),
+                      clickFunction: () => Navigator.pushNamed(
+                          context, TaleGeneratorScreen.route),
                       height: 104.h,
                       width: 112.w,
                       caption: tr("story"),
                       description: tr("story_description"),
-                      decorImage:
-                      kImageCyberpunkCity,
+                      decorImage: kImageCyberpunkCity,
                       fit: BoxFit.cover,
                       borderRadius: 32.0,
                     ),
@@ -96,7 +114,12 @@ class AssistantsScreen extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: NiceBottomBar(),
+        bottomNavigationBar: NiceBottomBar(
+          index: 1,
+          onTapFunction: () {},
+          materialItems: materialItems,
+          cupertinoItems: cupertinoItems,
+        ),
       ),
     );
   }

@@ -24,19 +24,18 @@ class TaleGeneratorScreen extends StatelessWidget {
 
     return SafeArea(
         child: Scaffold(
-            appBar: null,
+            appBar: NiceAppBar(
+              leftTapFunction: () => Navigator.pushReplacementNamed(
+                  context, AssistantsScreen.route),
+              leftIcon: kIconClose,
+              title: tr(""),
+            ),
             body: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  NiceAppBar(
-                    leftTapFunction: () => Navigator.pushReplacementNamed(
-                        context, AssistantsScreen.route),
-                    leftIcon: kIconBackArrow,
-                    title: tr("assistants"),
-                  ),
                   Gap(64.h),
                   Padding(
                     padding: EdgeInsets.all(6.r),
@@ -46,8 +45,9 @@ class TaleGeneratorScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                        /*  */    child: Text(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 6.0),
+                            /*  */ child: Text(
                               tr("write_prompt"),
                               style: TextStyle(fontSize: 11.sp),
                             ),
@@ -65,13 +65,15 @@ class TaleGeneratorScreen extends StatelessWidget {
                             height: 24.h,
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 6.0),
                             child: Text(
                               tr("choose_content_genre"),
                               style: TextStyle(fontSize: 11.sp),
                             ),
                           ),
-                       Gap( 24.h,
+                          Gap(
+                            24.h,
                           ),
                           Wrap(
                             spacing: 3.w,
@@ -108,10 +110,11 @@ class TaleGeneratorScreen extends StatelessWidget {
                   ),
                   NiceButton(
                     clickFunction: () => {},
-                    height: 48.h,
-                    width: 200.w,
+                    height: 60.h,
+                    width: 220.w,
                     text: 'Generate',
-                    backgroundColor: const Color(0xff2b72a9),
+                    iosPadding: 30,
+                    iosBackgroundColor: const Color(0xff2b72a9),
                     textStyle: TextStyle(fontSize: 21.sp),
                   )
                 ],

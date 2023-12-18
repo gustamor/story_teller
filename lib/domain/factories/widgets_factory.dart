@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 
 abstract class WidgetFactory {
   Widget createButton(
-      {
-      VoidCallback clickFunction,
+      {VoidCallback clickFunction,
       bool? isFixedSize,
       double? height,
       double? width,
@@ -22,8 +21,7 @@ abstract class WidgetFactory {
       Color? iosBackgroundColor,
       Color? androidBackgroundColor,
       double? iosPadding,
-      double? androidPadding
-      });
+      double? androidPadding});
 
   Widget createClickableCard({
     VoidCallback clickFunction,
@@ -57,7 +55,12 @@ abstract class WidgetFactory {
     VoidCallback? rightTapFunction,
   });
 
-  Widget navigationBottomBar({String? id});
+  Widget navigationBottomBar({
+    required List<BottomNavigationBarItem> materialItems,
+    required List<BottomNavigationBarItem> cupertinoItems,
+    required int index,
+    required VoidCallback onTapFunction,
+  });
 
   Widget textFormField({
     Key? key,

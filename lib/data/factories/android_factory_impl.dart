@@ -5,7 +5,6 @@ import 'package:story_teller/data/factories/widgets/text_form_field/android/text
 import 'package:story_teller/domain/factories/widgets_factory.dart';
 import 'package:story_teller/data/factories/widgets/app_bar/android/navigation_app_bar.dart';
 
-
 import 'widgets/bottom_bar/android/navigation_bottom_bar.dart';
 
 class AndroidFactory implements WidgetFactory {
@@ -15,8 +14,7 @@ class AndroidFactory implements WidgetFactory {
     bool? isFixedSize,
     double? height,
     double? width,
-          double? borderSide,
-
+    double? borderSide,
     double? iosHeight,
     double? iosWidth,
     double? androidHeight,
@@ -32,7 +30,6 @@ class AndroidFactory implements WidgetFactory {
     double? iosPadding,
     Color? iosBackgroundColor,
   }) {
-
     return AndroidAiButton(
       clickFunction: clickFunction,
       backgroundColor: androidBackgroundColor ?? bgColor,
@@ -49,7 +46,7 @@ class AndroidFactory implements WidgetFactory {
   @override
   Widget createClickableCard({
     VoidCallback? clickFunction,
-        double? height,
+    double? height,
     double? width,
     String? caption,
     String? description,
@@ -87,21 +84,29 @@ class AndroidFactory implements WidgetFactory {
     String? rightIcon,
     VoidCallback? leftTapFunction,
     VoidCallback? rightTapFunction,
-
   }) {
     return AndroidNavigationAppBar(
-        title: title ?? "",
-        leftIcon: leftIcon ?? "",
-        rightIcon: rightIcon ?? "",
-        leftTapFunction: leftTapFunction ?? () => {},
-        rightTapFunction: rightTapFunction ?? () => {},
-        )      
-        ;
+      title: title ?? "",
+      leftIcon: leftIcon ?? "",
+      rightIcon: rightIcon ?? "",
+      leftTapFunction: leftTapFunction ?? () => {},
+      rightTapFunction: rightTapFunction ?? () => {},
+    );
   }
 
   @override
-  Widget navigationBottomBar({String? id}) {
-    return const AndroidAiBottomBar();
+  Widget navigationBottomBar({
+    required List<BottomNavigationBarItem> materialItems,
+    required List<BottomNavigationBarItem> cupertinoItems,
+    required int index,
+    required VoidCallback onTapFunction,
+  }) {
+    return AndroidAiBottomBar(
+      materialItems: materialItems,
+      cupertinoItems: cupertinoItems,
+      index: index,
+      onTapFunction: onTapFunction,
+    );
   }
 
   @override

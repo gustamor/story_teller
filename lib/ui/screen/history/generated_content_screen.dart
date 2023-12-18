@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:expandable/expandable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:story_teller/constants.dart';
@@ -17,17 +19,39 @@ class GeneratedContentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     FlutterNativeSplash.remove();
 
+    final materialItems = [
+      BottomNavigationBarItem(
+        icon: const Icon(Icons.book),
+        label: tr("history"),
+      ),
+      BottomNavigationBarItem(
+        icon: const Icon(Icons.settings),
+        label: tr('settings'),
+      ),
+    ];
+     final cupertinoItems = <BottomNavigationBarItem>[
+      BottomNavigationBarItem(
+        icon: const Icon(CupertinoIcons.star_fill),
+        label: tr('history'),
+      ),
+      BottomNavigationBarItem(
+        icon: const Icon(CupertinoIcons.settings),
+        label: tr('settings'),
+      ),
+    ];
+
     return SafeArea(
       child: Scaffold(
         appBar: null,
-        body:  SizedBox(
+        body: SizedBox(
           height: double.infinity,
           child: Column(
             children: [
               NiceAppBar(
                 title: "Generated",
                 leftIcon: kIconBackArrow,
-                leftTapFunction: () => Navigator.pushNamed(context, AuthName.route),
+                leftTapFunction: () =>
+                    Navigator.pushNamed(context, AuthName.route),
               ),
               Expanded(
                 child: ExpandableNotifier(
@@ -60,14 +84,20 @@ class GeneratedContentScreen extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: NiceBottomBar(),
+        bottomNavigationBar: NiceBottomBar(
+          index: 1,
+          onTapFunction: () {},
+          materialItems: materialItems,
+          cupertinoItems: cupertinoItems,
+        ),
       ),
     );
   }
 }
 
 const loremIpsum =
-"Veridion era un planeta especial, lleno de maravillas únicas que ningún ojo había presenciado. Sus cielos eran un lienzo interminable de colores nunca antes vistos: tonalidades de azules que cambiaban con cada respiración del planeta, y luces que danzaban en la atmósfera como destellos de sueños. Sin embargo, la soledad de Veridion también lo envolvía como un manto, creando un aura de misterio y encanto.";
+    "Veridion era un planeta especial, lleno de maravillas únicas que ningún ojo había presenciado. Sus cielos eran un lienzo interminable de colores nunca antes vistos: tonalidades de azules que cambiaban con cada respiración del planeta, y luces que danzaban en la atmósfera como destellos de sueños. Sin embargo, la soledad de Veridion también lo envolvía como un manto, creando un aura de misterio y encanto.";
+
 class Card1 extends StatelessWidget {
   const Card1({super.key});
 
@@ -118,7 +148,8 @@ class Card1 extends StatelessWidget {
                 ),
                 builder: (_, collapsed, expanded) {
                   return Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                    padding:
+                        const EdgeInsets.only(left: 10, right: 10, bottom: 10),
                     child: Expandable(
                       collapsed: collapsed,
                       expanded: expanded,
@@ -155,6 +186,7 @@ class Card2 extends StatelessWidget {
         ),
       );
     }
+
     buildImg2(Color color, double height) {
       return SizedBox(
         height: height,
@@ -171,6 +203,7 @@ class Card2 extends StatelessWidget {
         ),
       );
     }
+
     buildImg3(Color color, double height) {
       return SizedBox(
         height: height,
@@ -187,6 +220,7 @@ class Card2 extends StatelessWidget {
         ),
       );
     }
+
     buildImg4(Color color, double height) {
       return SizedBox(
         height: height,
@@ -291,7 +325,6 @@ class Card2 extends StatelessWidget {
       child: ScrollOnExpand(
         child: Card(
           clipBehavior: Clip.antiAlias,
-
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -307,7 +340,7 @@ class Card2 extends StatelessWidget {
                 collapsed: buildCollapsed3(),
                 expanded: buildExpanded3(),
               ),
-             const  Divider(
+              const Divider(
                 height: 1,
               ),
               Row(

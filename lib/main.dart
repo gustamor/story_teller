@@ -35,7 +35,7 @@ void main() async {
     SystemUiMode.manual,
     overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top],
   );
- // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   HttpOverrides.global = MyHttpOverrides();
   await EasyLocalization.ensureInitialized();
 
@@ -103,20 +103,19 @@ class AiApp extends ConsumerWidget {
                   visualDensity: VisualDensity.adaptivePlatformDensity,
                   fontFamily: GoogleFonts.roboto().fontFamily,
                 ),
-                themeMode:ThemeMode.dark,
-                initialRoute: TaleScreen.route,
+                themeMode: ThemeMode.dark,
+                initialRoute: AssistantsScreen.route,
                 routes: {
                   AuthScreen.route: (context) => AuthScreen(),
                   AuthName.route: (context) => const AuthName(),
                   AssistantsScreen.route: (context) => AssistantsScreen(),
-                                    RateUsScreen.route: (context) => const RateUsScreen(),
-
+                  RateUsScreen.route: (context) => const RateUsScreen(),
                   TaleScreen.route: (context) => const TaleScreen(),
                   TaleGeneratorScreen.route: (context) =>
                       const TaleGeneratorScreen(),
-                  GeneratedContentScreen.route: (context) => const GeneratedContentScreen(),
-                   SettingsScreen.route: (context) => const SettingsScreen(),
-
+                  GeneratedContentScreen.route: (context) =>
+                      const GeneratedContentScreen(),
+                  SettingsScreen.route: (context) => const SettingsScreen(),
                 }),
           );
         });

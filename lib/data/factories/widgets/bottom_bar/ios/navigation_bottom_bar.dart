@@ -2,22 +2,23 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 
 class IosAiBottomBar extends StatelessWidget {
-  const IosAiBottomBar({super.key});
+  final List<BottomNavigationBarItem> materialItems;
+  final List<BottomNavigationBarItem> cupertinoItems;
+  final int index;
+  final VoidCallback onTapFunction;
+
+  const IosAiBottomBar({
+    super.key,
+    required this.materialItems,
+    required this.index,
+    required this.onTapFunction,
+    required this.cupertinoItems,
+  });
 
   @override
   Widget build(BuildContext context) {
     return CupertinoTabBar(
-      items:  <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: const Icon(CupertinoIcons.star_fill),
-          label: tr('history'),
-        ),
-        BottomNavigationBarItem(
-          icon: const Icon(CupertinoIcons.settings),
-          label: tr('settings'),
-        ),
-
-      ],
+      items: cupertinoItems
     );
   }
 }

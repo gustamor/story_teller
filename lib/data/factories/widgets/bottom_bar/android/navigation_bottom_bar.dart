@@ -3,7 +3,18 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class AndroidAiBottomBar extends StatelessWidget {
-  const AndroidAiBottomBar({super.key});
+  final List<BottomNavigationBarItem> materialItems;
+  final List<BottomNavigationBarItem> cupertinoItems;
+  final int index;
+  final VoidCallback onTapFunction;
+
+  const AndroidAiBottomBar({
+    super.key,
+    required this.materialItems,
+    required this.index,
+    required this.onTapFunction,
+    required this.cupertinoItems,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,16 +22,7 @@ class AndroidAiBottomBar extends StatelessWidget {
       onTap: null,
       currentIndex: 1,
       // ignore: prefer_const_literals_to_create_immutables
-      items: [
-        BottomNavigationBarItem(
-          icon: const Icon(Icons.book),
-          label: tr("history"),
-        ),
-        BottomNavigationBarItem(
-          icon: const Icon(Icons.settings),
-          label: tr('settings'),
-        ),
-      ],
+      items: materialItems,
     );
   }
 }

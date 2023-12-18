@@ -17,8 +17,7 @@ class IOSFactory implements WidgetFactory {
     bool? isFixedSize,
     double? height,
     double? width,
-          double? borderSide,
-
+    double? borderSide,
     double? iosHeight,
     double? iosWidth,
     double? androidHeight,
@@ -100,8 +99,18 @@ class IOSFactory implements WidgetFactory {
   }
 
   @override
-  Widget navigationBottomBar({String? id}) {
-    return const IosAiBottomBar();
+  Widget navigationBottomBar({
+    required List<BottomNavigationBarItem> materialItems,
+    required List<BottomNavigationBarItem> cupertinoItems,
+    required int index,
+    required VoidCallback onTapFunction,
+  }) {
+    return IosAiBottomBar(
+      materialItems: materialItems,
+      index: index,
+      onTapFunction: onTapFunction,
+      cupertinoItems: cupertinoItems,
+    );
   }
 
   @override

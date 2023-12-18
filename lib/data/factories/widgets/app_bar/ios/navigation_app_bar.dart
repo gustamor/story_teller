@@ -23,9 +23,7 @@ class IosNavigationAppBar extends StatelessWidget implements AiNavigationBar {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
-      height: 40.h,
+    return SizedBox(
       width: double.infinity,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -40,6 +38,7 @@ class IosNavigationAppBar extends StatelessWidget implements AiNavigationBar {
                     leftIcon!,
                     width: 16.w,
                     height: 16.h,
+                    color: Theme.of(context).primaryColor,
                   ),
                   Gap(6.w),
                   Text(
