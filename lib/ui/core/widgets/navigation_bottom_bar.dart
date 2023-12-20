@@ -5,7 +5,7 @@ class NiceBottomBar extends StatelessWidget {
   final List<BottomNavigationBarItem> materialItems;
   final List<BottomNavigationBarItem> cupertinoItems;
   final int index;
-  final VoidCallback onTapFunction;
+  final void Function(int) onTapFunction;
 
   NiceBottomBar({
     super.key,
@@ -25,4 +25,5 @@ class NiceBottomBar extends StatelessWidget {
       onTapFunction: onTapFunction,
     );
   }
+  
 }

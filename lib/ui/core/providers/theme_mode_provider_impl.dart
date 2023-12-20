@@ -26,13 +26,13 @@ class ThemeModeProviderImpl extends StateNotifier<ThemeMode>
 
   @override
   void switchTheme(bool isOn) {
-      state = isOn ? ThemeMode.dark : ThemeMode.light;
-      prefs.whenData(
+    state = isOn ? ThemeMode.dark : ThemeMode.light;
+    prefs.whenData(
       (pref) => pref.setString(
         'themeMode',
         state.toString(),
       ),
-    );  
+    );
   }
 
   @override

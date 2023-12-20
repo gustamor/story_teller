@@ -1,61 +1,85 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/constants.dart';
+import 'package:story_teller/ui/core/providers/theme_mode_provider_impl.dart';
 import 'package:story_teller/ui/core/widgets/button.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends ConsumerWidget {
   static const String route = "/settings";
   const SettingsScreen({super.key});
-  @override
-  Widget build(BuildContext context) {
-    final Size screenSize = MediaQuery.of(context).size;
 
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final Size screenSize = MediaQuery.of(context).size;
+    final themeMode = ref.watch(themeModeProvider);
     return SafeArea(
       child: Scaffold(
         appBar: null,
         body: PreferredSize(
           preferredSize: Size(screenSize.width, 16.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 margin: EdgeInsets.only(
                   left: 16.w,
                 ),
-                child: SwitchListTile(
-                    title: const Text("Mode"),
-                    subtitle: const Text("Selecciona el aspecto de la pantalla"),
-                    contentPadding: const EdgeInsets.all(8),
-                    value: true,
-                    onChanged: (value) {}),
+                child: const ListTile(
+                    title:  Text("Mode"),
+                    subtitle:
+                         Text("Selecciona el aspecto de la pantalla"),
+                    contentPadding:  EdgeInsets.all(8),
+                )
               ),
-              Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    NiceButton(
-                        text: "Light",
-                        backgroundColor:
-                            Theme.of(context).scaffoldBackgroundColor,
-                        clickFunction: () {}),
-                    Gap(8.w),
-                    NiceButton(
-                        text: "Night",
-                        backgroundColor:
-                            Theme.of(context).scaffoldBackgroundColor,
-                        borderSide: 1,
-                        clickFunction: () {}),
-                    Gap(8.w),
-                    NiceButton(
-                        text: "System",
-                        backgroundColor:
-                            Theme.of(context).scaffoldBackgroundColor,
-                        borderSide: 1,
-                        clickFunction: () {}),
-                  ],
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  NiceButton(
+                      text: "Light",
+                      textStyle: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      borderSide: (themeMode == ThemeMode.light) ? 1 : null,
+                      backgroundColor:
+                          Theme.of(context).scaffoldBackgroundColor,
+                      clickFunction: () {
+                        ref
+                            .read(themeModeProvider.notifier)
+                            .changeTheme(ThemeMode.light);
+                      }),
+                  Gap(8.w),
+                  NiceButton(
+                      text: "Night",
+                      textStyle: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      borderSide: (themeMode == ThemeMode.dark) ? 1 : null,
+                      backgroundColor:
+                          Theme.of(context).scaffoldBackgroundColor,
+                      clickFunction: () {
+                        ref
+                            .read(themeModeProvider.notifier)
+                            .changeTheme(ThemeMode.dark);
+                      }),
+                  Gap(8.w),
+                  NiceButton(
+                      text: "System",
+                      textStyle: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      borderSide: (themeMode == ThemeMode.system) ? 1 : null,
+                      backgroundColor:
+                          Theme.of(context).scaffoldBackgroundColor,
+                      clickFunction: () {
+                        ref
+                            .read(themeModeProvider.notifier)
+                            .changeTheme(ThemeMode.system);
+                      }),
+                ],
               ),
               Gap(kSettingsElementSeparator.h),
               Padding(

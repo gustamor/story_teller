@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:story_teller/data/providers/themes_provider_impl.dart';
+import 'package:story_teller/ui/core/providers/theme_mode_provider_impl.dart';
 import 'package:story_teller/ui/core/widgets/button.dart';
 import 'package:story_teller/ui/core/widgets/text_form_field.dart';
 import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
@@ -25,7 +25,7 @@ class AuthName extends ConsumerWidget {
   
     
 
-    final themeModeState = ref.watch(themesProvider);
+    final themeModeState = ref.watch(themeModeProvider);
 
 
     return SafeArea(
@@ -60,7 +60,7 @@ class AuthName extends ConsumerWidget {
                               ? Icons.dark_mode
                               : Icons.light_mode,
                         ),
-                        onPressed: () => ref.read(themesProvider.notifier).changeTheme(
+                        onPressed: () => ref.read(themeModeProvider.notifier).switchTheme(
                             themeModeState == ThemeMode.light ? true : false)),
 
                     ),

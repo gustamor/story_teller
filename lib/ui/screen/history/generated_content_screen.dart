@@ -3,36 +3,63 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:story_teller/constants.dart';
+import 'package:story_teller/ui/core/providers/bottom_bar_index.dart';
 import 'package:story_teller/ui/core/widgets/navigation_app_bar.dart';
 import 'package:story_teller/ui/core/widgets/navigation_bottom_bar.dart';
+import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
 import 'package:story_teller/ui/screen/login/auth_screen/auth_name.dart';
+import 'package:story_teller/ui/screen/settings/settings_screen.dart';
 
-class GeneratedContentScreen extends StatelessWidget {
+class GeneratedContentScreen extends ConsumerWidget {
   static const String route = "/generated_content";
 
-  const GeneratedContentScreen({super.key});
+  GeneratedContentScreen({super.key});
+
+  List<String> routes = [
+    GeneratedContentScreen.route,
+    AssistantsScreen.route,
+    SettingsScreen.route
+  ];
+
+  void onItemTapped(int index, BuildContext context, WidgetRef ref) {
+    debugPrint("index of menu is : $index");
+
+    var navIndex = index;
+    ref.read(indexProvider.notifier).value = index;
+    Navigator.pushNamed(context, routes[index]);
+  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     FlutterNativeSplash.remove();
 
     final materialItems = [
       BottomNavigationBarItem(
-        icon: const Icon(Icons.book),
+        icon: const Icon(Icons.star),
         label: tr("history"),
+      ),
+      BottomNavigationBarItem(
+        icon: const Icon(Icons.book),
+        label: tr('assistans'),
       ),
       BottomNavigationBarItem(
         icon: const Icon(Icons.settings),
         label: tr('settings'),
       ),
     ];
-     final cupertinoItems = <BottomNavigationBarItem>[
+    final cupertinoItems = <BottomNavigationBarItem>[
       BottomNavigationBarItem(
         icon: const Icon(CupertinoIcons.star_fill),
         label: tr('history'),
+      ),
+      BottomNavigationBarItem(
+        icon: const Icon(CupertinoIcons.book),
+        label: tr('assistans'),
       ),
       BottomNavigationBarItem(
         icon: const Icon(CupertinoIcons.settings),
@@ -42,17 +69,15 @@ class GeneratedContentScreen extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        appBar: null,
+        appBar: NiceAppBar(
+          title: "Generated",
+          leftIcon: kIconBackArrow,
+          leftTapFunction: () => Navigator.pushNamed(context, AuthName.route),
+        ),
         body: SizedBox(
           height: double.infinity,
           child: Column(
             children: [
-              NiceAppBar(
-                title: "Generated",
-                leftIcon: kIconBackArrow,
-                leftTapFunction: () =>
-                    Navigator.pushNamed(context, AuthName.route),
-              ),
               Expanded(
                 child: ExpandableNotifier(
                   child: ExpandableTheme(
@@ -85,8 +110,8 @@ class GeneratedContentScreen extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: NiceBottomBar(
-          index: 1,
-          onTapFunction: () {},
+          index: ref.watch(indexProvider),
+          onTapFunction: (index) => onItemTapped(index, context, ref),
           materialItems: materialItems,
           cupertinoItems: cupertinoItems,
         ),

@@ -48,7 +48,7 @@ class AndroidAiClickableCard extends StatelessWidget
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Container(
+                    SizedBox(
                       height: height,
                       width: 76.w,
                       child: Center(

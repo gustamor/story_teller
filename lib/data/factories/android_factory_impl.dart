@@ -99,7 +99,7 @@ class AndroidFactory implements WidgetFactory {
     required List<BottomNavigationBarItem> materialItems,
     required List<BottomNavigationBarItem> cupertinoItems,
     required int index,
-    required VoidCallback onTapFunction,
+    required void Function(int) onTapFunction,
   }) {
     return AndroidAiBottomBar(
       materialItems: materialItems,

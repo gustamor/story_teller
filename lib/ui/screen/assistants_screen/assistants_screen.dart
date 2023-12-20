@@ -1,48 +1,44 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:story_teller/constants.dart';
 import 'package:story_teller/ui/core/factories/ui_factory.dart';
+import 'package:story_teller/ui/core/providers/bottom_bar_index.dart';
 import 'package:story_teller/ui/core/widgets/navigation_app_bar.dart';
 import 'package:story_teller/ui/core/widgets/clickable_card.dart';
+import 'package:story_teller/ui/screen/history/generated_content_screen.dart';
+import 'package:story_teller/ui/screen/settings/settings_screen.dart';
 import 'package:story_teller/ui/screen/tale_generator/tale_generator.dart';
 
 import '../../core/widgets/navigation_bottom_bar.dart';
 
-class AssistantsScreen extends StatelessWidget {
+class AssistantsScreen extends ConsumerWidget {
+  static const String route = "/assistants_screen";
   AssistantsScreen({super.key});
 
-  static const String route = "/assistants_screen";
   final ui = uiFactory();
 
+  final List<String> bottomItemRoutes = [
+    GeneratedContentScreen.route,
+    AssistantsScreen.route,
+    SettingsScreen.route
+  ];
+
+  void onItemTapped(int index, BuildContext context, WidgetRef ref) {
+    debugPrint("index of menu is : $index");
+    ref.read(indexProvider.notifier).value = index;
+    Navigator.pushNamed(context, bottomItemRoutes[index]);
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final double kLeftPaddingHomeNameText = 4.w;
     final double kTopPaddingHomeWhatCanText = 32.w;
     FlutterNativeSplash.remove();
-
-    final materialItems = [
-      BottomNavigationBarItem(
-        icon: const Icon(Icons.book),
-        label: tr("history"),
-      ),
-      BottomNavigationBarItem(
-        icon: const Icon(Icons.settings),
-        label: tr('settings'),
-      ),
-    ];
-    final cupertinoItems = <BottomNavigationBarItem>[
-      BottomNavigationBarItem(
-        icon: const Icon(CupertinoIcons.star_fill),
-        label: tr('history'),
-      ),
-      BottomNavigationBarItem(
-        icon: const Icon(CupertinoIcons.settings),
-        label: tr('settings'),
-      ),
-    ];
 
     return SafeArea(
       child: Scaffold(
@@ -115,10 +111,10 @@ class AssistantsScreen extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: NiceBottomBar(
-          index: 1,
-          onTapFunction: () {},
-          materialItems: materialItems,
-          cupertinoItems: cupertinoItems,
+          index: ref.watch(indexProvider),
+          onTapFunction: (index) => onItemTapped(index, context, ref),
+          materialItems: BottomItems.materialItems,
+          cupertinoItems: BottomItems.cupertinoItems,
         ),
       ),
     );

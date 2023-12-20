@@ -1,10 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
 import 'package:story_teller/domain/services/firebase_service.dart';
 
 
-@riverpod
+
 class FirebaseServiceImpl implements FirebaseService {
   @override
   FirebaseAuth get firebaseAuth => FirebaseAuth.instance;

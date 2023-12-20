@@ -17,6 +17,5 @@ WidgetFactory uiFactory() {
   } catch (e){
     factory = AndroidFactory();
   }
-
   return factory;
 }

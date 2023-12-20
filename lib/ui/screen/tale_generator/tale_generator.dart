@@ -28,7 +28,7 @@ class TaleGeneratorScreen extends StatelessWidget {
               leftTapFunction: () => Navigator.pushReplacementNamed(
                   context, AssistantsScreen.route),
               leftIcon: kIconClose,
-              title: tr(""),
+              title: tr("generate_story"),
             ),
             body: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
@@ -101,21 +101,36 @@ class TaleGeneratorScreen extends StatelessWidget {
                                 textStyle: AndroidStyle.cardCaption,
                                 height: 30.h,
                                 isFixedSize: false,
-                              )
+                              ),
+                              Gap(120.w),
                             ],
-                          )
+                          ),
                         ],
                       ),
                     ),
                   ),
-                  NiceButton(
-                    clickFunction: () => {},
-                    height: 60.h,
-                    width: 220.w,
-                    text: 'Generate',
-                    iosPadding: 30,
-                    iosBackgroundColor: const Color(0xff2b72a9),
-                    textStyle: TextStyle(fontSize: 21.sp),
+                  Expanded(
+                    child: NiceButton(
+                      clickFunction: () => {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Center(
+                              child: Text(
+                                "Generate",
+                              ),
+                            ),
+                          ),
+                        )
+                      },
+                      isFixedSize: false,
+                      height: 90.h,
+                      width: 120.w,
+                      text: 'Generate',
+                      iosPadding: 30,
+                      iosBackgroundColor: const Color(0xff2b72a9),
+                      androidBackgroundColor: Color(0xffFF8A00),
+                      textStyle: TextStyle(fontSize: 21.sp),
+                    ),
                   )
                 ],
               ),

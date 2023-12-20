@@ -27,11 +27,12 @@ class AuthScreen extends StatelessWidget {
 
   login(FirebaseServiceImpl auth) async {
     try {
-      final userId =
-          await auth.signIn("pepito@kakita.com", "12345678");
+      final userId = await auth.signIn("pepito@kakita.com", "12345678");
 
       log.i(userId);
-        } catch (e) {}
+    } catch (e) {
+      log.d(e);
+    }
   }
 
   signup(FirebaseServiceImpl auth) async {
@@ -39,8 +40,7 @@ class AuthScreen extends StatelessWidget {
       final userId =
           await auth.signUp("gustavo.sdasdasdasasda@gmail.com", "12345678");
       log.i("user created $userId");
-
-        } catch (e) {
+    } catch (e) {
       log.e(e);
     }
   }

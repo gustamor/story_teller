@@ -11,6 +11,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  equatable: any
+  json_annotation: any
+  freezed_annotation: any
   cupertino_icons: ^1.0.6
   flutter_screenutil: ^5.9.0
   dio: ^5.4.0
@@ -35,25 +38,30 @@ dependencies:
   flex_color_scheme: ^7.3.1
   gap: ^3.0.1
   auto_size_text: ^3.0.0
-  get_it: ^7.6.4
   flutter_riverpod: ^2.4.9
   riverpod_annotation: ^2.3.3
   auto_size_text_field: ^2.2.2
   expandable: ^5.0.1
-  syncfusion_flutter_sliders: ^23.2.7
+  syncfusion_flutter_sliders: ^24.1.41
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1
+  path_provider: ^2.0.11
+  shared_preferences: ^2.2.2
   
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  json_serializable: any
   flutter_lints: ^3.0.1
-  build_runner: ^2.4.7
   custom_lint:
   riverpod_generator: ^2.3.9
-  riverpod_lint: ^2.3.7
+  analyzer: ^5.13.0
+  isar_generator: ^3.1.0+1
+  build_runner: ^2.4.7
 
 analyzer:
   plugins:
-    - custom_lint
+    - flutter_lints
 
 flutter:
   generate: true

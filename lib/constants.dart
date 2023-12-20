@@ -1,3 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
 const kIconBackArrow = "assets/images/icons/backarrow.svg";
 const kIconShare = "assets/images/icons/share.svg";
 const kIconWave = "assets/images/icons/wave.svg";
@@ -13,5 +17,37 @@ const kImageBookPage =
 const kImageFace =
     "https://i.postimg.cc/Dy0G84LM/gustavomore-extremely-detailed-close-up-documentary-photograp-194f4935-1958-4588-80ad-2074a57102fb-1.png";
 
-
 const double kSettingsElementSeparator = 16;
+const double kSettingsRowLeftPadding = 23;
+
+class BottomItems {
+  static final materialItems = [
+    BottomNavigationBarItem(
+      icon: const Icon(Icons.star),
+      label: tr("history"),
+    ),
+    BottomNavigationBarItem(
+      icon: const Icon(Icons.book),
+      label: tr('assistans'),
+    ),
+    BottomNavigationBarItem(
+      icon: const Icon(Icons.settings),
+      label: tr('settings'),
+    ),
+  ];
+
+  static final cupertinoItems = <BottomNavigationBarItem>[
+    BottomNavigationBarItem(
+      icon: const Icon(CupertinoIcons.star_fill),
+      label: tr('history'),
+    ),
+    BottomNavigationBarItem(
+      icon: const Icon(CupertinoIcons.book),
+      label: tr('assistans'),
+    ),
+    BottomNavigationBarItem(
+      icon: const Icon(CupertinoIcons.settings),
+      label: tr('settings'),
+    ),
+  ];
+}

@@ -8,28 +8,32 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:isar/isar.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:story_teller/data/providers/logger_riverpod.dart';
 import 'package:story_teller/firebase_options.dart';
+import 'package:story_teller/ui/core/providers/theme_mode_provider_impl.dart';
 import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
 import 'package:story_teller/ui/screen/feedback/rate_us_screen.dart';
 import 'package:story_teller/ui/screen/history/generated_content_screen.dart';
 import 'package:story_teller/ui/screen/login/auth_screen/auth_name.dart';
 import 'package:story_teller/ui/screen/login/auth_screen/auth_screen.dart';
-import 'package:story_teller/ui/screen/settings/settings_screet.dart';
+import 'package:story_teller/ui/screen/settings/settings_screen.dart';
 import 'package:story_teller/ui/screen/tale_generator/tale.dart';
 import 'package:story_teller/ui/screen/tale_generator/tale_generator.dart';
 
-import 'data/providers/themes_provider_impl.dart';
-/* 
-GetIt locator = GetIt.instance;
-
-void setupSingletons() async {/*  */
-  locator
-      .registerLazySingleton<FirebaseServiceImpl>(() => FirebaseServiceImpl());
-      
-} */
+void initIsarDB() async {
+  final dir = await getApplicationDocumentsDirectory();
+  final isar = await Isar.open(
+    [],
+    directory: dir.path,
+  );
+}
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  initIsarDB();
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   SystemChrome.setEnabledSystemUIMode(
     SystemUiMode.manual,
@@ -48,8 +52,11 @@ void main() async {
       ],
       path: 'assets/l10n',
       fallbackLocale: const Locale('es'),
-      child: const ProviderScope(
-        child: AiApp(),
+      child: ProviderScope(
+        observers: [
+          LoggerRiverpod(),
+        ],
+        child: const AiApp(),
       ),
     ),
   );
@@ -73,7 +80,7 @@ class AiApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     const FlexScheme usedScheme = FlexScheme.redWine;
-    final currentMode = ref.watch(themesProvider);
+    final currentMode = ref.watch(themeModeProvider);
 
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -103,8 +110,8 @@ class AiApp extends ConsumerWidget {
                   visualDensity: VisualDensity.adaptivePlatformDensity,
                   fontFamily: GoogleFonts.roboto().fontFamily,
                 ),
-                themeMode: ThemeMode.dark,
-                initialRoute: AssistantsScreen.route,
+                themeMode: currentMode,
+                initialRoute: AuthScreen.route,
                 routes: {
                   AuthScreen.route: (context) => AuthScreen(),
                   AuthName.route: (context) => const AuthName(),
@@ -114,7 +121,7 @@ class AiApp extends ConsumerWidget {
                   TaleGeneratorScreen.route: (context) =>
                       const TaleGeneratorScreen(),
                   GeneratedContentScreen.route: (context) =>
-                      const GeneratedContentScreen(),
+                      GeneratedContentScreen(),
                   SettingsScreen.route: (context) => const SettingsScreen(),
                 }),
           );
