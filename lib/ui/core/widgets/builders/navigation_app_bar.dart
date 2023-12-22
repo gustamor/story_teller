@@ -18,7 +18,7 @@ class NiceAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.rightTapFunction, 
   });
  @override
-  Size get preferredSize =>  Size.fromHeight(48.h); // Altura preferida para el app bar
+  Size get preferredSize =>  Size.fromHeight(40.h); // Altura preferida para el app bar
 
   final ui = selectSpecificPlatformWidgetFactory();
 

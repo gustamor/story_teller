@@ -1,4 +1,7 @@
+// ignore_for_file: unused_import
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:story_teller/domain/services/auth_services.dart';
 
 /// A custom exception for handling specific authentication errors.
@@ -33,6 +36,7 @@ class AuthenticationServiceImpl implements AuthenticationService {
         email: email,
         password: password,
       );
+
       return result.user;
     } on FirebaseAuthException catch (e) {
       throw AuthException(_getFirebaseAuthErrorMessage(e));
@@ -67,13 +71,13 @@ class AuthenticationServiceImpl implements AuthenticationService {
   Future<User?> getCurrentUser() async {
     return _auth.currentUser;
   }
- /// Comprueba si el usuario está actualmente autenticado.
-  /// 
+
+  /// Comprueba si el usuario está actualmente autenticado.
+  ///
   /// Retorna `true` si hay un usuario autenticado, de lo contrario `false`.
   Future<bool> isUserLogged() async {
     return await getCurrentUser() != null;
   }
-
 
   /// Signs out the currently authenticated user.
   ///
@@ -101,8 +105,52 @@ class AuthenticationServiceImpl implements AuthenticationService {
         return 'No user found for that email.';
       case 'wrong-password':
         return 'Wrong password provided for that user.';
+      case 'invalid-email':
+        return 'email is no valid.';
+      case 'email-already-in-use':
+        return 'email is already taken';
       default:
         return 'An unknown error occurred.';
+    }
+  }
+
+  @override
+  Future<bool> checkIfEmailExists(String email) async {
+    try {
+      final methods = await _auth.fetchSignInMethodsForEmail(email);
+      if (methods.isNotEmpty) {
+        return true;
+      } else {
+        return false;
+      }
+    } on FirebaseAuthException catch (e) {
+      throw AuthException(_getFirebaseAuthErrorMessage(e));
+    } catch (e) {
+      throw AuthException('An unknown error occurred.');
+    }
+  }
+
+  @override
+  Future<bool> checkIfUserIsVerified() async {
+    final isVerified =
+        await getCurrentUser().then((value) => value!.emailVerified);
+    return isVerified;
+  }
+
+  @override
+  Future<void> sendEmailVerification() async {
+    await getCurrentUser().then((value) => value!.sendEmailVerification());
+  }
+
+  @override
+  Future<bool> sendPasswordResetEmail(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+      return true;
+    } on FirebaseAuthException catch (e) {
+      throw AuthException(_getFirebaseAuthErrorMessage(e));
+    } catch (e) {
+      throw AuthException('An unknown error occurred.');
     }
   }
 }

@@ -12,7 +12,6 @@ import 'package:story_teller/ui/core/widgets/builders/navigation_app_bar.dart';
 import 'package:story_teller/ui/core/widgets/builders/navigation_bottom_bar.dart';
 
 import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
-import 'package:story_teller/ui/screen/login/auth_screen/auth_name.dart';
 import 'package:story_teller/ui/screen/settings/settings_screen.dart';
 
 class GeneratedContentScreen extends ConsumerWidget {
@@ -44,7 +43,7 @@ class GeneratedContentScreen extends ConsumerWidget {
       ),
       BottomNavigationBarItem(
         icon: const Icon(Icons.book),
-        label: tr('assistans'),
+        label: tr('assitants'),
       ),
       BottomNavigationBarItem(
         icon: const Icon(Icons.settings),
@@ -69,9 +68,9 @@ class GeneratedContentScreen extends ConsumerWidget {
     return SafeArea(
       child: Scaffold(
         appBar: NiceAppBar(
-          title: "Generated",
-          leftIcon: kIconBackArrow,
-          leftTapFunction: () => Navigator.pushNamed(context, AuthName.route),
+          title: tr('library'),
+         // leftIcon: kIconBackArrow,
+         // leftTapFunction: () => Navigator.pushNamed(context, AuthName.route,),
         ),
         body: SizedBox(
           height: double.infinity,

@@ -1,11 +1,15 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/constants.dart';
+import 'package:story_teller/ui/core/providers/bottom_bar_index.dart';
 import 'package:story_teller/ui/core/providers/theme_mode_provider_impl.dart';
 import 'package:story_teller/ui/core/widgets/builders/button.dart';
+import 'package:story_teller/ui/core/widgets/builders/navigation_app_bar.dart';
+import 'package:story_teller/ui/core/widgets/builders/navigation_bottom_bar.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class SettingsScreen extends ConsumerWidget {
@@ -14,29 +18,36 @@ class SettingsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-        TextEditingController controller = TextEditingController();
+    TextEditingController controller = TextEditingController();
+  
+    void onItemTapped(int index, BuildContext context, WidgetRef ref) {
+      debugPrint("index of menu is : $index");
+      ref.read(indexProvider.notifier).value = index;
+      Navigator.pushNamed(context, kBottomItemRoutes[index]);
+    }
 
     final Size screenSize = MediaQuery.of(context).size;
     final themeMode = ref.watch(themeModeProvider);
     return SafeArea(
       child: Scaffold(
-        appBar: null,
+        appBar: NiceAppBar(
+          title: tr('settings'),
+         
+        ),
         body: PreferredSize(
           preferredSize: Size(screenSize.width, 16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                margin: EdgeInsets.only(
-                  left: 16.w,
-                ),
-                child: const ListTile(
-                    title:  Text("Mode"),
-                    subtitle:
-                         Text("Selecciona el aspecto de la pantalla"),
-                    contentPadding:  EdgeInsets.all(8),
-                )
-              ),
+                  margin: EdgeInsets.only(
+                    left: 16.w,
+                  ),
+                  child: const ListTile(
+                    title: Text("Mode"),
+                    subtitle: Text("Selecciona el aspecto de la pantalla"),
+                    contentPadding: EdgeInsets.all(8),
+                  )),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -191,6 +202,12 @@ class SettingsScreen extends ConsumerWidget {
               ),
             ],
           ),
+        ),
+        bottomNavigationBar: NiceBottomBar(
+          index: ref.watch(indexProvider),
+          onTapFunction: (index) => onItemTapped(index, context, ref),
+          materialItems: BottomItems.materialItems,
+          cupertinoItems: BottomItems.cupertinoItems,
         ),
       ),
     );

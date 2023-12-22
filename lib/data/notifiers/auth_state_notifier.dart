@@ -35,6 +35,12 @@ class AuthenticationStateNotifier extends StateNotifier<User?> {
     try {
       final user =
           await _authentication.createUserWithEmailAndPassword(email, password);
+      if (!(user?.emailVerified ?? false)) {
+        state = null; // Manejar si el email no está verificado
+
+      } else {
+        state = user; // Actualiza el estado del usuario
+      }
       state = user;
     } catch (e) {
       state = null;
@@ -54,5 +60,25 @@ class AuthenticationStateNotifier extends StateNotifier<User?> {
     } catch (e) {
       // Manejar el error de cierre de sesión
     }
+  }
+
+  Future<bool> isUserLogged() async {
+    return await _authentication.isUserLogged();
+  }
+
+  Future<bool> checkIfEmailExists(String email) async {
+    return await _authentication.checkIfEmailExists(email);
+  }
+
+  Future<bool> checkIfUserIsVerified() async {
+    return await _authentication.checkIfUserIsVerified();
+  }
+
+  Future<void> sendEmailVerification() async {
+    await _authentication.sendEmailVerification();
+  }
+
+  Future<bool> sendPasswordResetEmail(String email) async {
+    return await _authentication.sendPasswordResetEmail(email);
   }
 }

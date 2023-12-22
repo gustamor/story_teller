@@ -20,4 +20,14 @@ abstract class AuthenticationService {
   ///
   /// Returns `true` on successful sign-out, or throws an [AuthException] on failure.
   Future<bool> signOut();
+
+  Future<User?> getCurrentUser();
+
+  Future<bool> checkIfEmailExists(String email);
+
+  Future<bool> checkIfUserIsVerified();
+
+  Future<void> sendEmailVerification();
+
+  Future<bool> sendPasswordResetEmail(String email);
 }

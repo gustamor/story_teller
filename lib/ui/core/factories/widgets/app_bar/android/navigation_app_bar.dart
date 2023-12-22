@@ -23,41 +23,55 @@ class AndroidNavigationAppBar extends StatelessWidget
     this.rightIcon,
     this.leftTapFunction,
     this.rightTapFunction,
-     this.backgroundOpacity,
+    this.backgroundOpacity,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).primaryColor,
-      height: 35.h,
+      color: Theme.of(context).appBarTheme.backgroundColor,
+      //  height: 35.h,
       width: double.infinity,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            InkWell(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            flex: 1,
+            child: InkWell(
               onTap: leftTapFunction!,
-              child: Row(
-                children: [
-                  (leftIcon != null)
-                      ? SvgPicture.asset(
-                          leftIcon!,
-                          width: 14.w,
-                          height: 14.h,
-                        )
-                      : const SizedBox(),
-                  (leftIcon != null) ? Gap(6.w) : const SizedBox(),
-                  Text(
-                    title!,
-                    style: const TextStyle(fontSize: 19),
-                  ),
-                ],
+              child: (leftIcon != null)
+                  ? SvgPicture.asset(
+                      leftIcon!,
+                      width: 16.w,
+                      height: 16.h,
+                      color: Theme.of(context).appBarTheme.foregroundColor,
+                    )
+                  : const SizedBox(),
+            ),
+          ),
+          Expanded(
+            flex: 7,
+            child: Align(
+              alignment: Alignment.center,
+              child: Text(
+                title!,
+                style:  TextStyle(fontSize: 15.sp),
               ),
             ),
-          ],
-        ),
+          ),
+          (rightIcon != null)
+              ? Expanded(flex: 1, child: SvgPicture.asset(
+                        rightIcon!,
+                        width: 16.w,
+                        height: 16.h,
+                        color: Theme.of(context).appBarTheme.foregroundColor,
+                      ))
+              : const Expanded(
+                  flex: 1,
+                  child: SizedBox(),
+                ),
+        ],
       ),
     );
   }

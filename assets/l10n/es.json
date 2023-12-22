@@ -9,6 +9,7 @@
   "create_account": "Crea una cuenta",
   "login": "Log in",
   "email": "Email",
+  "name": "Nombre",
   "password": "Contraseña",
   "or": "o",
   "enter_to_story_teller": "Entra a Story Teller",
@@ -17,5 +18,6 @@
   "choose_content_genre":"O genera un cuento al azar de estos géneros:",
   "write_prompt": "Escribe un prompt:",
   "generate_story": "Crea una historia",
-  "enter_text": "No puedes dejar este campo vacio"
+  "enter_text": "No puedes dejar este campo vacio",
+  "library": "Biblioteca"
 }

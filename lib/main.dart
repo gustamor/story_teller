@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +22,10 @@ import 'package:story_teller/ui/core/providers/theme_mode_provider_impl.dart';
 import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
 import 'package:story_teller/ui/screen/feedback/rate_us_screen.dart';
 import 'package:story_teller/ui/screen/history/generated_content_screen.dart';
-import 'package:story_teller/ui/screen/login/auth_screen/auth_name.dart';
-import 'package:story_teller/ui/screen/login/auth_screen/auth_screen.dart';
+import 'package:story_teller/ui/screen/login/auth_screens/auth_check_if_verified.dart';
+import 'package:story_teller/ui/screen/login/auth_screens/auth_forgotten_password.dart';
+import 'package:story_teller/ui/screen/login/auth_screens/auth_name.dart';
+import 'package:story_teller/ui/screen/login/auth_screens/auth_screen.dart';
 import 'package:story_teller/ui/screen/settings/settings_screen.dart';
 import 'package:story_teller/ui/screen/tale_generator/tale.dart';
 import 'package:story_teller/ui/screen/tale_generator/tale_generator.dart';
@@ -40,6 +43,12 @@ void main() async {
   initIsarDB();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FirebaseAppCheck.instance.activate(
+    webProvider: ReCaptchaV3Provider('recaptcha-v3-site-key'),
+    androidProvider: AndroidProvider.debug,
+    appleProvider: AppleProvider.appAttest,
+  );
+
   SystemChrome.setEnabledSystemUIMode(
     SystemUiMode.manual,
     overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top],
@@ -79,9 +88,8 @@ class MyHttpOverrides extends HttpOverrides {
 /// Implements a [TellLogger] instance
 final TellLogger log = LogImpl();
 
-
 class AiApp extends ConsumerWidget {
-  late String initialRoute;
+  String initialRoute = AuthScreen.route;
 
   AiApp({super.key});
 
@@ -99,7 +107,7 @@ class AiApp extends ConsumerWidget {
     final logged = ref.watch(authStateChangesProvider);
     logged.when(
       data: (user) {
-        if (user != null) {
+        if (user != null && user.emailVerified) {
           initialRoute = AssistantsScreen.route;
           log.d(
             "user is logged",
@@ -164,6 +172,10 @@ class AiApp extends ConsumerWidget {
                   GeneratedContentScreen.route: (context) =>
                       GeneratedContentScreen(),
                   SettingsScreen.route: (context) => const SettingsScreen(),
+                  CheckIfUserIsVerified.route: (context) =>
+                      const CheckIfUserIsVerified(),
+                  PasswordForgottenScreen.route: (context) =>
+                      PasswordForgottenScreen(),
                 }),
           );
         });

@@ -4,7 +4,9 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:story_teller/constants.dart';
 import 'package:story_teller/data/providers/auth_providers.dart';
+import 'package:story_teller/data/providers/registration_form_provider.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
 import 'package:story_teller/domain/services/auth_services.dart';
 import 'package:story_teller/domain/services/tell_logger.dart';
@@ -12,7 +14,9 @@ import 'package:story_teller/ui/core/widgets/builders/button.dart';
 import 'package:story_teller/ui/core/widgets/builders/text_form_field.dart';
 
 import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
-import 'package:story_teller/ui/screen/login/auth_screen/auth_name.dart';
+import 'package:story_teller/ui/screen/login/auth_screens/auth_forgotten_password.dart';
+import 'package:story_teller/ui/screen/login/auth_screens/auth_forgotten_password.dart';
+import 'package:story_teller/ui/screen/login/auth_screens/auth_name.dart';
 import 'package:story_teller/ui/themes/styles/text_styles.dart';
 
 /// Produces the authentication screen
@@ -42,6 +46,8 @@ class AuthScreen extends ConsumerWidget {
     return regex.hasMatch(password);
   }
 
+  late bool isLogged;
+
   login(AuthenticationService auth) async {
     try {
       final userId = await auth.signInWithEmailAndPassword(
@@ -56,22 +62,8 @@ class AuthScreen extends ConsumerWidget {
   /// A GlobalKey for the form state
   final GlobalKey<FormState> _authFormkey = GlobalKey<FormState>();
 
-  String password = "";
-  String email = "";
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    void signin() async {
-      final auth = ref.watch(authenticationProvider);
-      try {
-        final userId = await auth.signInWithEmailAndPassword(
-            "gustavo.sdasdasdasasda@gmail.com", "12345678");
-        log.i("user created $userId");
-      } catch (e) {
-        log.e(e);
-      }
-    }
-
     FlutterNativeSplash.remove();
     double height = MediaQuery.of(context).size.height;
     final emailController = TextEditingController();
@@ -79,8 +71,10 @@ class AuthScreen extends ConsumerWidget {
     final focusPasswordNode = FocusNode();
     final focusEmailNode = FocusNode();
 
-    final auth = ref.watch(firebaseAuthProvider);
-    
+
+    // passwordController.value.copyWith(text: credential.email);
+    // emailController.value.copyWith(text: credential.password);
+
     /// Starts a safe area
     return SafeArea(
       top: true,
@@ -164,16 +158,60 @@ class AuthScreen extends ConsumerWidget {
                         suffixIcon: const Icon(Icons.remove_red_eye),
                       ),
                     ),
+                    InkWell(
+                      onTap: () => Navigator.pushNamed(
+                        context,
+                        PasswordForgottenScreen.route,
+                      ),
+                      child: Padding(
+                        padding:  EdgeInsets.only(
+                        right: 36.w, top: 6.h
+                      ),
+                        child: Align(
+                          alignment: Alignment.bottomRight,
+                          child: const Text(
+                            "I forgot my password",
+                          ),
+                        ),
+                      ),
+                    ),
                     NiceButton(
-                      clickFunction: () {
+                      clickFunction: () async {
                         if (_authFormkey.currentState!.validate()) {
-                          password = passwordController.value.text;
-                          email = emailController.value.text;
-                          log.d("successful");
-                          return;
+                          log.d("create account email and password are valid");
+                          await ref
+                              .read(authenticationStateProvider.notifier)
+                              .checkIfEmailExists(emailController.value.text);
+                          await ref
+                              .read(
+                                authenticationStateProvider.notifier,
+                              )
+                              .signUp(
+                                emailController.value.text,
+                                passwordController.value.text,
+                              );
+                          ref.read(registrationFormProvider.notifier).update(
+                            (state) {
+                              state.email = emailController.value.text;
+                              state.password = passwordController.value.text;
+                              return state;
+                            },
+                          );
+
+                          final isVerified = await ref
+                              .read(authenticationStateProvider.notifier)
+                              .checkIfUserIsVerified();
+                          if (!isVerified) {
+                            snackMessage(context,
+                                "Created. Please, check your email inbox for the verification link and try again");
+                            await ref
+                                .read(authenticationStateProvider.notifier)
+                                .sendEmailVerification();
+                          } else {
+                            Navigator.pushNamed(context, AuthName.route);
+                          }
                         } else {
-                          log.d("Create account with $email and $password");
-                          navigateTo(context, AuthName.route);
+                          // log.d("Create account with $email and $password");
                         }
                       }, //
                       text: "Create account",
@@ -187,30 +225,30 @@ class AuthScreen extends ConsumerWidget {
                       style: AndroidStyle.cardDescription,
                     ),
                     NiceButton(
-                      clickFunction: () {
+                      clickFunction: () async {
                         if (_authFormkey.currentState!.validate()) {
                           log.d("successful");
-                          password = passwordController.value.text;
-                          email = emailController.value.text;
-                          ref
-                              .read(authenticationStateProvider.notifier)
-                              .signIn(email, password);
 
-                          if (ref.read(authenticationStateProvider) != null) {
-                            log.d("authResult not null");
-                            passwordController.clear();
-                            emailController.clear();
-                            navigateTo(context, AssistantsScreen.route);
-                          } else {
-                            log.d("authResult is null");
-                          }
+                          await ref
+                              .read(
+                                authenticationStateProvider.notifier,
+                              )
+                              .signIn(
+                                emailController.value.text,
+                                passwordController.value.text,
+                              );
 
-                          //success:
-                          // navigateTo(context, AssistantsScreen.route);
-                          //failed:
-                          // nouser: navigateTo(context, AuthName.route);
-                          return;
+                          isLogged = await ref
+                              .read(
+                                authenticationStateProvider.notifier,
+                              )
+                              .isUserLogged();
+                          snackMessage(context, "Logged");
+                          if (isLogged)
+                            Navigator.pushReplacementNamed(
+                                context, AssistantsScreen.route);
                         } else {
+                          //     snackMessage(context, "Enter a valid name");
                           log.d("UnSuccessfull");
                         }
                         //  passwordController.clear();
