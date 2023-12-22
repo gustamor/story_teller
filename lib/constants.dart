@@ -8,6 +8,8 @@ const kIconWave = "assets/images/icons/wave.svg";
 const kIconStarUnfilled = "assets/images/icons/star_unfilled.svg";
 const kIconStarFilled = "assets/images/icons/star_filled.svg";
 const kIconClose = "assets/images/icons/close.svg";
+
+
 const kImageCyberpunkCity =
     "https://i.postimg.cc/d3QMcjFp/gustavomore-a-futuristic-city-skyline-solar-punk-city-an-exte-37b9a7c2-f4ab-4a04-8d9b-c102a9ae1e66-3.png";
 const kImagePlanet =
@@ -17,9 +19,14 @@ const kImageBookPage =
 const kImageFace =
     "https://i.postimg.cc/Dy0G84LM/gustavomore-extremely-detailed-close-up-documentary-photograp-194f4935-1958-4588-80ad-2074a57102fb-1.png";
 
+
+/// Defines sizes [kSettingsElementSeparator]
 const double kSettingsElementSeparator = 16;
+
+/// Defines sizes [kSettingsRowLeftPadding]
 const double kSettingsRowLeftPadding = 23;
 
+/// Defines the content of the bottom items for Material Bottom Navigation Bar
 class BottomItems {
   static final materialItems = [
     BottomNavigationBarItem(
@@ -36,6 +43,7 @@ class BottomItems {
     ),
   ];
 
+/// Defines the content of the bottom items for Cupetino Bottom Navigation Bar
   static final cupertinoItems = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
       icon: const Icon(CupertinoIcons.star_fill),

@@ -3,14 +3,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:story_teller/constants.dart';
 import 'package:story_teller/ui/core/providers/bottom_bar_index.dart';
-import 'package:story_teller/ui/core/widgets/navigation_app_bar.dart';
-import 'package:story_teller/ui/core/widgets/navigation_bottom_bar.dart';
+import 'package:story_teller/ui/core/widgets/builders/navigation_app_bar.dart';
+import 'package:story_teller/ui/core/widgets/builders/navigation_bottom_bar.dart';
+
 import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
 import 'package:story_teller/ui/screen/login/auth_screen/auth_name.dart';
 import 'package:story_teller/ui/screen/settings/settings_screen.dart';
@@ -29,7 +29,6 @@ class GeneratedContentScreen extends ConsumerWidget {
   void onItemTapped(int index, BuildContext context, WidgetRef ref) {
     debugPrint("index of menu is : $index");
 
-    var navIndex = index;
     ref.read(indexProvider.notifier).value = index;
     Navigator.pushNamed(context, routes[index]);
   }

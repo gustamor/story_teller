@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/constants.dart';
 import 'package:story_teller/ui/core/providers/theme_mode_provider_impl.dart';
-import 'package:story_teller/ui/core/widgets/button.dart';
+import 'package:story_teller/ui/core/widgets/builders/button.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class SettingsScreen extends ConsumerWidget {
@@ -14,6 +14,8 @@ class SettingsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+        TextEditingController controller = TextEditingController();
+
     final Size screenSize = MediaQuery.of(context).size;
     final themeMode = ref.watch(themeModeProvider);
     return SafeArea(

@@ -1,10 +1,10 @@
 import 'dart:io' show Platform;
 
 import 'package:story_teller/domain/factories/widgets_factory.dart';
-import 'package:story_teller/data/factories/android_factory_impl.dart';
-import 'package:story_teller/data/factories/ios_factory_impl.dart';
+import 'package:story_teller/ui/core/factories/android_factory_impl.dart';
+import 'package:story_teller/ui/core/factories/ios_factory_impl.dart';
 
-WidgetFactory uiFactory() {
+WidgetFactory selectSpecificPlatformWidgetFactory() {
   late WidgetFactory factory;
   try {
     if (Platform.isIOS) {

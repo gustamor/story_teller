@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:story_teller/ui/core/factories/ui_factory.dart';
+import 'package:story_teller/ui/core/factories/specific_platform_factory.dart';
 
 class NiceAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
@@ -20,7 +20,7 @@ class NiceAppBar extends StatelessWidget implements PreferredSizeWidget {
  @override
   Size get preferredSize =>  Size.fromHeight(48.h); // Altura preferida para el app bar
 
-  final ui = uiFactory();
+  final ui = selectSpecificPlatformWidgetFactory();
 
   @override
   Widget build(BuildContext context) {

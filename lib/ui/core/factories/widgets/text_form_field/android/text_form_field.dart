@@ -1,4 +1,6 @@
+// ignore_for_file: unused_import
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:story_teller/domain/widgets/ai_text_form_field.dart';
@@ -16,31 +18,47 @@ class AndroidTextFormField extends StatelessWidget implements AITextFormField {
   final bool? obscureText;
   final String? obscuringCharacter;
   final bool? filled;
+  final String? Function(String?)? validator;
+  final TextEditingController? controller;
   final Color? fillColor;
+  final FocusNode? focusNode;
+  final void Function(String)? onFieldSubmitFunction;
+  final void Function(PointerDownEvent)? onTapOutSide;
 
-  const AndroidTextFormField(
-      {super.key,
-      this.onChangedFunction,
-      this.keyboardType,
-      this.hintText,
-      this.contentPadding,
-      this.borderRadius,
-      this.borderSide,
-      this.prefixIcon,
-      this.suffixIcon,
-      this.obscureText,
-      this.obscuringCharacter,
-      this.filled,
-      this.fillColor,
-        this.maxLines});
+  const AndroidTextFormField({
+    super.key,
+    this.onChangedFunction,
+    this.keyboardType,
+    this.hintText,
+    this.contentPadding,
+    this.borderRadius,
+    this.borderSide,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.obscureText,
+    this.obscuringCharacter,
+    this.filled,
+    this.fillColor,
+    this.maxLines,
+    this.validator,
+    required this.controller,
+    this.focusNode,
+    this.onFieldSubmitFunction,
+    this.onTapOutSide,
+  });
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    TextEditingController controller = TextEditingController();
+    // TextEditingController controller = TextEditingController();
 
-    return  TextFormField(
+    return TextFormField(
       onChanged: (query) => onChangedFunction,
+      onFieldSubmitted: onFieldSubmitFunction ?? (value) {},
+      onTapOutside: onTapOutSide,
+      validator: validator,
+      focusNode: focusNode,
+      autovalidateMode: AutovalidateMode.disabled,
       controller: controller,
       scrollPhysics: const ScrollPhysics(),
       enableSuggestions: true,
@@ -68,7 +86,7 @@ class AndroidTextFormField extends StatelessWidget implements AITextFormField {
           borderRadius: BorderRadius.circular(
             (borderRadius ?? 30).r,
           ),
-          borderSide:  BorderSide(
+          borderSide: BorderSide(
             width: (borderSide ?? 3).w,
           ),
         ),

@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -10,7 +12,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:story_teller/data/providers/logger_riverpod.dart';
+import 'package:story_teller/data/providers/auth_providers.dart';
+import 'package:story_teller/data/services/riverpod_logger_impl.dart';
+import 'package:story_teller/data/services/logger_impl.dart';
+import 'package:story_teller/domain/services/tell_logger.dart';
 import 'package:story_teller/firebase_options.dart';
 import 'package:story_teller/ui/core/providers/theme_mode_provider_impl.dart';
 import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
@@ -56,7 +61,7 @@ void main() async {
         observers: [
           LoggerRiverpod(),
         ],
-        child: const AiApp(),
+        child: AiApp(),
       ),
     ),
   );
@@ -71,21 +76,57 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
+/// Implements a [TellLogger] instance
+final TellLogger log = LogImpl();
+
+
 class AiApp extends ConsumerWidget {
-  const AiApp({super.key});
+  late String initialRoute;
+
+  AiApp({super.key});
 
   static final ValueNotifier<ThemeMode> themeNotifier =
       ValueNotifier(ThemeMode.dark);
+
+  setDeviceOrientation() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+  }
+
+  authChecker(WidgetRef ref) {
+    final logged = ref.watch(authStateChangesProvider);
+    logged.when(
+      data: (user) {
+        if (user != null) {
+          initialRoute = AssistantsScreen.route;
+          log.d(
+            "user is logged",
+          );
+        } else {
+          initialRoute = AuthScreen.route;
+          log.d(
+            "user is not logged",
+          );
+        }
+      },
+      error: (_, __) => log.d(
+        "auth error",
+      ),
+      loading: () => log.d(
+        "loading",
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     const FlexScheme usedScheme = FlexScheme.redWine;
     final currentMode = ref.watch(themeModeProvider);
 
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
+    authChecker(ref);
+    setDeviceOrientation();
 
     return ValueListenableBuilder<ThemeMode>(
         valueListenable: themeNotifier,
@@ -111,7 +152,7 @@ class AiApp extends ConsumerWidget {
                   fontFamily: GoogleFonts.roboto().fontFamily,
                 ),
                 themeMode: currentMode,
-                initialRoute: AuthScreen.route,
+                initialRoute: initialRoute,
                 routes: {
                   AuthScreen.route: (context) => AuthScreen(),
                   AuthName.route: (context) => const AuthName(),

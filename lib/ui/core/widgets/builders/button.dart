@@ -3,7 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
 import 'package:story_teller/domain/widgets/ai_button.dart';
-import 'package:story_teller/ui/core/factories/ui_factory.dart';
+import 'package:story_teller/ui/core/factories/specific_platform_factory.dart';
 
 class NiceButton extends StatelessWidget implements AiButton { 
   final VoidCallback clickFunction;
@@ -37,7 +37,7 @@ class NiceButton extends StatelessWidget implements AiButton {
     this.borderSide,
   });
 
-  final ui = uiFactory();
+  final ui = selectSpecificPlatformWidgetFactory();
 
   @override
   Widget build(BuildContext context) {

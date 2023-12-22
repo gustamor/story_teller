@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:story_teller/data/factories/widgets/button/android/android_button.dart';
-import 'package:story_teller/data/factories/widgets/clickable_card/android/android_clickable_card.dart';
-import 'package:story_teller/data/factories/widgets/text_form_field/android/text_form_field.dart';
+import 'package:story_teller/ui/core/factories/widgets/button/android/android_button.dart';
+import 'package:story_teller/ui/core/factories/widgets/clickable_card/android/android_clickable_card.dart';
+import 'package:story_teller/ui/core/factories/widgets/text_form_field/android/text_form_field.dart';
 import 'package:story_teller/domain/factories/widgets_factory.dart';
-import 'package:story_teller/data/factories/widgets/app_bar/android/navigation_app_bar.dart';
+import 'package:story_teller/ui/core/factories/widgets/app_bar/android/navigation_app_bar.dart';
 
 import 'widgets/bottom_bar/android/navigation_bottom_bar.dart';
 
@@ -110,26 +110,37 @@ class AndroidFactory implements WidgetFactory {
   }
 
   @override
-  Widget textFormField(
-      {Key? key,
-      VoidCallback? onChangedFunction,
-      int? maxLines,
-      TextInputType? keyboardType,
-      String? hintText,
-      double? contentPadding,
-      double? borderRadius,
-      double? borderSide,
-      Widget? prefixIcon,
-      Widget? suffixIcon,
-      bool? obscureText,
-      String? obscuringCharacter,
-      bool? filled,
-      Color? fillColor,
-      Color? androidFillColor,
-      Color? iosFillColor}) {
+  Widget textFormField({
+    Key? key,
+    VoidCallback? onChangedFunction,
+    int? maxLines,
+    TextInputType? keyboardType,
+    String? hintText,
+    double? contentPadding,
+    double? borderRadius,
+    double? borderSide,
+    Widget? prefixIcon,
+    Widget? suffixIcon,
+    bool? obscureText,
+    String? obscuringCharacter,
+    String? Function(String?)? validator,
+    TextEditingController? controller,
+    FocusNode? focusNode,
+    bool? filled,
+    Color? fillColor,
+    Color? androidFillColor,
+    Color? iosFillColor,
+    void Function(String)? onFieldSubmitFunction,
+    void Function(PointerDownEvent)? onTapOutSide,
+  }) {
     return AndroidTextFormField(
       onChangedFunction: onChangedFunction,
+      onFieldSubmitFunction: onFieldSubmitFunction,
+      onTapOutSide: onTapOutSide,
+      focusNode: focusNode,
       maxLines: maxLines,
+      validator: validator,
+      controller: controller,
       keyboardType: keyboardType,
       hintText: hintText,
       contentPadding: contentPadding,

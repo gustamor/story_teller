@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import
+// ignore_for_file: unused_import, prefer_const_constructors
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -6,9 +6,10 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/constants.dart';
-import 'package:story_teller/ui/core/widgets/navigation_app_bar.dart';
-import 'package:story_teller/ui/core/widgets/button.dart';
-import 'package:story_teller/ui/core/widgets/text_form_field.dart';
+import 'package:story_teller/ui/core/widgets/builders/button.dart';
+import 'package:story_teller/ui/core/widgets/builders/navigation_app_bar.dart';
+import 'package:story_teller/ui/core/widgets/builders/text_form_field.dart';
+
 import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
 import 'package:story_teller/ui/screen/tale_generator/tale.dart';
 import 'package:story_teller/ui/themes/styles/text_styles.dart';
@@ -21,7 +22,7 @@ class TaleGeneratorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FlutterNativeSplash.remove();
-
+    final TextEditingController controller = TextEditingController();
     return SafeArea(
         child: Scaffold(
             appBar: NiceAppBar(
@@ -53,6 +54,7 @@ class TaleGeneratorScreen extends StatelessWidget {
                             ),
                           ),
                           NiceTextFormField(
+                            controller: controller,
                             maxLines: 4,
                             borderSide: 2,
                             borderRadius: 10,
@@ -109,28 +111,26 @@ class TaleGeneratorScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Expanded(
-                    child: NiceButton(
-                      clickFunction: () => {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Center(
-                              child: Text(
-                                "Generate",
-                              ),
+                  NiceButton(
+                    clickFunction: () => {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Center(
+                            child: Text(
+                              "Generate",
                             ),
                           ),
-                        )
-                      },
-                      isFixedSize: false,
-                      height: 90.h,
-                      width: 120.w,
-                      text: 'Generate',
-                      iosPadding: 30,
-                      iosBackgroundColor: const Color(0xff2b72a9),
-                      androidBackgroundColor: Color(0xffFF8A00),
-                      textStyle: TextStyle(fontSize: 21.sp),
-                    ),
+                        ),
+                      )
+                    },
+                    isFixedSize: false,
+                    height: 90.h,
+                    width: 120.w,
+                    text: 'Generate',
+                    iosPadding: 30,
+                    iosBackgroundColor: const Color(0xff2b72a9),
+                    androidBackgroundColor: Color(0xffFF8A00),
+                    textStyle: TextStyle(fontSize: 21.sp),
                   )
                 ],
               ),

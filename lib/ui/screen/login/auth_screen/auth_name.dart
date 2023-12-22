@@ -5,8 +5,9 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:story_teller/ui/core/providers/theme_mode_provider_impl.dart';
-import 'package:story_teller/ui/core/widgets/button.dart';
-import 'package:story_teller/ui/core/widgets/text_form_field.dart';
+import 'package:story_teller/ui/core/widgets/builders/button.dart';
+import 'package:story_teller/ui/core/widgets/builders/text_form_field.dart';
+
 import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
 import 'package:story_teller/ui/themes/styles/text_styles.dart';
 
@@ -22,11 +23,10 @@ class AuthName extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     FlutterNativeSplash.remove();
-  
-    
 
     final themeModeState = ref.watch(themeModeProvider);
 
+        final TextEditingController nameController = TextEditingController();
 
     return SafeArea(
       child: Material(
@@ -53,18 +53,20 @@ class AuthName extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    GestureDetector(child:
-                    IconButton(
-                        icon: Icon(
-                          themeModeState == ThemeMode.light
-                              ? Icons.dark_mode
-                              : Icons.light_mode,
-                        ),
-                        onPressed: () => ref.read(themeModeProvider.notifier).switchTheme(
-                            themeModeState == ThemeMode.light ? true : false)),
-
+                    GestureDetector(
+                      child: IconButton(
+                          icon: Icon(
+                            themeModeState == ThemeMode.light
+                                ? Icons.dark_mode
+                                : Icons.light_mode,
+                          ),
+                          onPressed: () => ref
+                              .read(themeModeProvider.notifier)
+                              .switchTheme(themeModeState == ThemeMode.light
+                                  ? true
+                                  : false)),
                     ),
-                 const  Text(
+                    const Text(
                       "Dinos el nombre por el que quieres te llamemos",
                       style: AndroidStyle.cardDescription,
                     ),
@@ -76,6 +78,7 @@ class AuthName extends ConsumerWidget {
                         horizontal: 48.w,
                       ),
                       child: NiceTextFormField(
+                        controller: nameController,
                         hintText: "Nombre",
                         filled: true,
                         borderRadius: 30,

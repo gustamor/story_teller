@@ -17,29 +17,40 @@ class IosTextFormField extends StatelessWidget implements AITextFormField {
   final String? obscuringCharacter;
   final bool? filled;
   final Color? fillColor;
+  final String? Function(String?)? validator;
+  final TextEditingController? controller;
+  final FocusNode? focusNode;
+  final void Function(String)? onFieldSubmitFunction;
+  final void Function(PointerDownEvent)? onTapOutSide;
 
-  const IosTextFormField(
-      {super.key,
-      this.onChangedFunction,
-      this.maxLines,
-      this.keyboardType,
-      this.hintText,
-      this.contentPadding,
-      this.borderRadius,
-      this.borderSide,
-      this.prefixIcon,
-      this.suffixIcon,
-      this.obscureText,
-      this.obscuringCharacter,
-      this.filled,
-      this.fillColor});
-
+  const IosTextFormField({
+    super.key,
+    this.onChangedFunction,
+    this.maxLines,
+    this.keyboardType,
+    this.hintText,
+    this.contentPadding,
+    this.borderRadius,
+    this.borderSide,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.obscureText,
+    this.obscuringCharacter,
+    this.filled,
+    this.fillColor,
+    this.validator,
+    this.controller,
+    this.focusNode,
+    this.onFieldSubmitFunction,
+    this.onTapOutSide,
+  });
   @override
   Widget build(BuildContext context) {
-    TextEditingController controller = TextEditingController();
-
     return CupertinoTextField(
       onChanged: (query) => onChangedFunction,
+      onSubmitted: onFieldSubmitFunction ?? (value) {},
+      onTapOutside: onTapOutSide ,
+      focusNode: focusNode!,
       controller: controller,
       maxLines: maxLines ?? 1,
       scrollPhysics: const ScrollPhysics(),

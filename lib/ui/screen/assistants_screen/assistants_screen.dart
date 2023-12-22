@@ -1,26 +1,30 @@
+// ignore_for_file: unused_import
+
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:story_teller/constants.dart';
-import 'package:story_teller/ui/core/factories/ui_factory.dart';
+import 'package:story_teller/data/notifiers/auth_state_notifier.dart';
+import 'package:story_teller/data/providers/auth_providers.dart';
+import 'package:story_teller/ui/core/factories/specific_platform_factory.dart';
 import 'package:story_teller/ui/core/providers/bottom_bar_index.dart';
-import 'package:story_teller/ui/core/widgets/navigation_app_bar.dart';
-import 'package:story_teller/ui/core/widgets/clickable_card.dart';
+import 'package:story_teller/ui/core/widgets/builders/clickable_card.dart';
+import 'package:story_teller/ui/core/widgets/builders/navigation_app_bar.dart';
+import 'package:story_teller/ui/core/widgets/builders/navigation_bottom_bar.dart';
+
 import 'package:story_teller/ui/screen/history/generated_content_screen.dart';
 import 'package:story_teller/ui/screen/settings/settings_screen.dart';
 import 'package:story_teller/ui/screen/tale_generator/tale_generator.dart';
 
-import '../../core/widgets/navigation_bottom_bar.dart';
 
 class AssistantsScreen extends ConsumerWidget {
   static const String route = "/assistants_screen";
   AssistantsScreen({super.key});
 
-  final ui = uiFactory();
+  final ui = selectSpecificPlatformWidgetFactory();
 
   final List<String> bottomItemRoutes = [
     GeneratedContentScreen.route,
@@ -63,7 +67,11 @@ class AssistantsScreen extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  Container(height: 50.h, width: 50.w, color: Colors.amber)
+                  InkWell(child: Container(height: 50.h, width: 50.w, color: Colors.amber), onTap: () {
+                     ref
+                              .read(authenticationStateProvider.notifier)
+                              .signOut();
+                  },)
                 ],
               ),
               Padding(

@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:story_teller/ui/core/factories/ui_factory.dart';
+import 'package:story_teller/ui/core/factories/specific_platform_factory.dart';
 
 class NiceBottomBar extends StatelessWidget {
   final List<BottomNavigationBarItem> materialItems;
@@ -15,7 +15,7 @@ class NiceBottomBar extends StatelessWidget {
     required this.cupertinoItems,
   });
 
-  final ui = uiFactory();
+  final ui = selectSpecificPlatformWidgetFactory();
   @override
   Widget build(BuildContext context) {
     return ui.navigationBottomBar(

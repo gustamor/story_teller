@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/constants.dart';
-import 'package:story_teller/ui/core/widgets/button.dart';
+import 'package:story_teller/ui/core/widgets/builders/button.dart';
 import 'package:story_teller/ui/themes/styles/text_styles.dart';
 
 class RateUsScreen extends StatelessWidget {

@@ -1,12 +1,12 @@
 // ignore_for_file: unused_import
 
 import 'package:flutter/cupertino.dart';
-import 'package:story_teller/data/factories/widgets/button/ios/ios_button.dart';
-import 'package:story_teller/data/factories/widgets/clickable_card/ios/ios_clickable_card.dart';
-import 'package:story_teller/data/factories/widgets/text_form_field/ios/text_form_field.dart';
+import 'package:story_teller/ui/core/factories/widgets/button/ios/ios_button.dart';
+import 'package:story_teller/ui/core/factories/widgets/clickable_card/ios/ios_clickable_card.dart';
+import 'package:story_teller/ui/core/factories/widgets/text_form_field/ios/text_form_field.dart';
 import 'package:story_teller/domain/factories/widgets_factory.dart';
-import 'package:story_teller/data/factories/widgets/app_bar/ios/navigation_app_bar.dart';
-import 'package:story_teller/data/factories/widgets/bottom_bar/ios/navigation_bottom_bar.dart';
+import 'package:story_teller/ui/core/factories/widgets/app_bar/ios/navigation_app_bar.dart';
+import 'package:story_teller/ui/core/factories/widgets/bottom_bar/ios/navigation_bottom_bar.dart';
 
 import 'package:story_teller/domain/widgets/ai_navigation_bar.dart';
 
@@ -114,27 +114,39 @@ class IOSFactory implements WidgetFactory {
   }
 
   @override
-  Widget textFormField(
-      {Key? key,
-      VoidCallback? onChangedFunction,
-      int? maxLines,
-      TextInputType? keyboardType,
-      String? hintText,
-      double? contentPadding,
-      double? borderRadius,
-      double? borderSide,
-      Widget? prefixIcon,
-      Widget? suffixIcon,
-      bool? obscureText,
-      String? obscuringCharacter,
-      bool? filled,
-      Color? fillColor,
-      Color? androidFillColor,
-      Color? iosFillColor}) {
+  Widget textFormField({
+    Key? key,
+    VoidCallback? onChangedFunction,
+    int? maxLines,
+    TextInputType? keyboardType,
+    String? hintText,
+    double? contentPadding,
+    double? borderRadius,
+    double? borderSide,
+    Widget? prefixIcon,
+    Widget? suffixIcon,
+    bool? obscureText,
+    String? obscuringCharacter,
+    bool? filled,
+    Color? fillColor,
+    String? Function(String?)? validator,
+    TextEditingController? controller,
+    FocusNode? focusNode,
+    Color? androidFillColor,
+    Color? iosFillColor,
+    void Function(String)? onFieldSubmitFunction,
+           void Function(PointerDownEvent)? onTapOutSide,
+
+  }) {
     return IosTextFormField(
       onChangedFunction: onChangedFunction,
+      onFieldSubmitFunction: onFieldSubmitFunction,
+      onTapOutSide: onTapOutSide,
+      focusNode: focusNode,
       maxLines: maxLines,
       keyboardType: keyboardType,
+      validator: validator,
+      controller: controller,
       hintText: hintText,
       contentPadding: contentPadding,
       borderRadius: borderRadius,

@@ -1,7 +1,7 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
-import 'package:story_teller/ui/core/factories/ui_factory.dart';
+import 'package:story_teller/ui/core/factories/specific_platform_factory.dart';
 
 class NiceClickableCard extends StatelessWidget {
   final double? height;
@@ -51,7 +51,7 @@ class NiceClickableCard extends StatelessWidget {
     this.clickFunction,
   });
 
-  final ui = uiFactory();
+  final ui = selectSpecificPlatformWidgetFactory();
 
   @override
   Widget build(BuildContext context) {

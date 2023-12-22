@@ -79,5 +79,10 @@ abstract class WidgetFactory {
     Color? fillColor,
     Color? androidFillColor,
     Color? iosFillColor,
+    String? Function(String?)? validator,
+    TextEditingController? controller,
+    FocusNode? focusNode,
+    void Function(String)? onFieldSubmitFunction,
+    void Function(PointerDownEvent)? onTapOutSide,
   });
 }
