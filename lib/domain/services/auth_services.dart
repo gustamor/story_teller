@@ -20,4 +20,6 @@ abstract class AuthenticationService {
   ///
   /// Returns `true` on successful sign-out, or throws an [AuthException] on failure.
   Future<bool> signOut();
+
+  Future<User?> getCurrentUser();
 }

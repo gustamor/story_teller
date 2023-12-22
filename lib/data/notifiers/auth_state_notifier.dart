@@ -55,4 +55,8 @@ class AuthenticationStateNotifier extends StateNotifier<User?> {
       // Manejar el error de cierre de sesión
     }
   }
+
+  Future<bool> isUserLogged() async {
+    return await _authentication.isUserLogged();
+  }
 }

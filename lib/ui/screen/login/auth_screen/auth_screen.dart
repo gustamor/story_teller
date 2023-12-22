@@ -4,6 +4,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:story_teller/constants.dart';
 import 'package:story_teller/data/providers/auth_providers.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
 import 'package:story_teller/domain/services/auth_services.dart';
@@ -80,7 +81,7 @@ class AuthScreen extends ConsumerWidget {
     final focusEmailNode = FocusNode();
 
     final auth = ref.watch(firebaseAuthProvider);
-    
+
     /// Starts a safe area
     return SafeArea(
       top: true,
@@ -187,22 +188,29 @@ class AuthScreen extends ConsumerWidget {
                       style: AndroidStyle.cardDescription,
                     ),
                     NiceButton(
-                      clickFunction: () {
+                      clickFunction: () async {
                         if (_authFormkey.currentState!.validate()) {
+                          snackMessage(context, "Logging");
+                          await Future.delayed(const Duration(seconds: 2));
                           log.d("successful");
                           password = passwordController.value.text;
                           email = emailController.value.text;
-                          ref
+                          await ref
                               .read(authenticationStateProvider.notifier)
                               .signIn(email, password);
+                          final isLogged = await ref
+                              .read(authenticationStateProvider.notifier)
+                              .isUserLogged();
 
-                          if (ref.read(authenticationStateProvider) != null) {
-                            log.d("authResult not null");
+                          if (isLogged) {
+                            
+                            log.d("islogged is true");
                             passwordController.clear();
                             emailController.clear();
                             navigateTo(context, AssistantsScreen.route);
                           } else {
-                            log.d("authResult is null");
+                            snackMessage(context, "Not Logged");
+                            log.d("islogged is false");
                           }
 
                           //success:
