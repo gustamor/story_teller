@@ -2,20 +2,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:story_teller/data/services/auth_services_impl.dart';
 
-/// Notificador de estado para la autenticación.
+/// State notifier for authentication.
 ///
-/// Proporciona métodos para iniciar sesión, registrarse y cerrar sesión. Utiliza
-/// [AuthenticationServiceImpl] para interactuar con Firebase Auth.
+/// Provides methods for signing in, signing up, and signing out. Uses
+/// [AuthenticationServiceImpl] to interact with Firebase Auth.
 class AuthenticationStateNotifier extends StateNotifier<User?> {
   final AuthenticationServiceImpl _authentication;
 
-  /// Constructor que inicializa el notificador de estado con [AuthenticationServiceImpl].
+  /// Initializes the state notifier with [AuthenticationServiceImpl].
   AuthenticationStateNotifier(this._authentication) : super(null);
 
-  /// Inicia sesión con correo electrónico y contraseña.
+  /// Signs in with email and password.
   ///
-  /// Utiliza [_authentication.signInWithEmailAndPassword] para autenticar al usuario.
-  /// En caso de error, establece el estado a null.
+  /// Uses [_authentication.signInWithEmailAndPassword] to authenticate the user.
+  /// On error, sets the state to null.
   Future<void> signIn(String email, String password) async {
     try {
       final user =
@@ -23,34 +23,32 @@ class AuthenticationStateNotifier extends StateNotifier<User?> {
       state = user;
     } catch (e) {
       state = null;
-      // Manejar el error de inicio de sesión
+      // Handle the sign-in error
     }
   }
 
-  /// Registra un nuevo usuario con correo electrónico y contraseña.
+  /// Registers a new user with email and password.
   ///
-  /// Utiliza [_authentication.createUserWithEmailAndPassword] para crear un nuevo usuario.
-  /// En caso de error, establece el estado a null.
+  /// Uses [_authentication.createUserWithEmailAndPassword] to create a new user.
+  /// On error, sets the state to null.
   Future<void> signUp(String email, String password) async {
     try {
       final user =
           await _authentication.createUserWithEmailAndPassword(email, password);
       if (!(user?.emailVerified ?? false)) {
-        state = null; // Manejar si el email no está verificado
-
+        state = null; // Handle if the email is not verified
       } else {
-        state = user; // Actualiza el estado del usuario
+        state = user; // Update user state
       }
-      state = user;
     } catch (e) {
       state = null;
-      // Manejar el error de registro
+      // Handle the sign-up error
     }
   }
 
-  /// Cierra la sesión del usuario actualmente autenticado.
+  /// Signs out the currently authenticated user.
   ///
-  /// Utiliza [_authentication.signOut] para cerrar la sesión del usuario.
+  /// Uses [_authentication.signOut] to sign out the user.
   Future<void> signOut() async {
     try {
       final success = await _authentication.signOut();
@@ -58,26 +56,39 @@ class AuthenticationStateNotifier extends StateNotifier<User?> {
         state = null;
       }
     } catch (e) {
-      // Manejar el error de cierre de sesión
+      // Handle the sign-out error
     }
   }
 
+  /// Checks if a user is currently logged in.
+  ///
+  /// Returns `true` if a user is logged in, otherwise `false`.
   Future<bool> isUserLogged() async {
     return await _authentication.isUserLogged();
   }
 
+  /// Checks if an email exists in the system.
+  ///
+  /// Returns `true` if the email exists, otherwise `false`.
   Future<bool> checkIfEmailExists(String email) async {
     return await _authentication.checkIfEmailExists(email);
   }
 
+  /// Checks if the current user's email is verified.
+  ///
+  /// Returns `true` if the email is verified, otherwise `false`.
   Future<bool> checkIfUserIsVerified() async {
     return await _authentication.checkIfUserIsVerified();
   }
 
+  /// Sends an email verification to the current user.
   Future<void> sendEmailVerification() async {
     await _authentication.sendEmailVerification();
   }
 
+  /// Sends a password reset email to the specified email.
+  ///
+  /// Returns `true` on successful email dispatch, or `false` on failure.
   Future<bool> sendPasswordResetEmail(String email) async {
     return await _authentication.sendPasswordResetEmail(email);
   }

@@ -69,6 +69,7 @@ class PasswordForgottenScreen extends ConsumerWidget {
                               // log.e("Enter email");
                               return "Please enter valid email";
                             }
+                            return null;
                             //return null;
                           },
                           hintText: "Enter Email",

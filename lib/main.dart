@@ -164,7 +164,7 @@ class AiApp extends ConsumerWidget {
                 routes: {
                   AuthScreen.route: (context) => AuthScreen(),
                   AuthName.route: (context) => const AuthName(),
-                  AssistantsScreen.route: (context) => AssistantsScreen(),
+                  AssistantsScreen.route: (context) => const AssistantsScreen(),
                   RateUsScreen.route: (context) => const RateUsScreen(),
                   TaleScreen.route: (context) => const TaleScreen(),
                   TaleGeneratorScreen.route: (context) =>

@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +44,7 @@ class BottomItems {
     ),
     BottomNavigationBarItem(
       icon: const Icon(Icons.book),
-      label: tr('assitants'),
+      label: tr('assistants'),
     ),
     BottomNavigationBarItem(
       icon: const Icon(Icons.app_settings_alt_outlined),
@@ -58,7 +60,7 @@ class BottomItems {
     ),
     BottomNavigationBarItem(
       icon: const Icon(CupertinoIcons.book),
-      label: tr('assitants'),
+      label: tr('assistants'),
     ),
     BottomNavigationBarItem(
       icon: const Icon(CupertinoIcons.settings),

@@ -13,11 +13,14 @@
   "password": "Contraseña",
   "or": "o",
   "enter_to_story_teller": "Entra a Story Teller",
-  "assitants": "Asistentes",
+  "assistants": "Asistentes",
   "generate_prompt_story_label":  "Escribe un prompt para generar tu historia",
   "choose_content_genre":"O genera un cuento al azar de estos géneros:",
   "write_prompt": "Escribe un prompt:",
   "generate_story": "Crea una historia",
   "enter_text": "No puedes dejar este campo vacio",
-  "library": "Biblioteca"
+  "library": "Biblioteca",
+  "close_session": "Cerrar Sesión",
+  "user_settings": "Ajustes",
+  "persona": "Persona"
 }

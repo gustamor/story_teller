@@ -69,7 +69,7 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: NiceAppBar(
-          title: tr('assitants'),
+          title: tr('assistants'),
           rightIcon: kIconUser,
           rightTapFunction: () {
             showContextMenu(context, contextMenu: contextMenu!);

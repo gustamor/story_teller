@@ -25,9 +25,8 @@ class AuthName extends ConsumerWidget {
     FlutterNativeSplash.remove();
 
     /// A GlobalKey for the form state
-    final GlobalKey<FormState> _nameFormkey = GlobalKey<FormState>();
+    final GlobalKey<FormState> nameFormkey = GlobalKey<FormState>();
     final nameController = TextEditingController();
-    final credentials = ref.watch(registrationFormProvider);
 
     return SafeArea(
       child: Material(
@@ -51,7 +50,7 @@ class AuthName extends ConsumerWidget {
                   height: 128.h,
                 ),
                 Form(
-                  key: _nameFormkey,
+                  key: nameFormkey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,

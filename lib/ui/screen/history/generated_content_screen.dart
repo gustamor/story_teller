@@ -19,7 +19,7 @@ class GeneratedContentScreen extends ConsumerWidget {
 
   GeneratedContentScreen({super.key});
 
-  List<String> routes = [
+ final List<String> routes = [
     GeneratedContentScreen.route,
     AssistantsScreen.route,
     SettingsScreen.route
@@ -43,7 +43,7 @@ class GeneratedContentScreen extends ConsumerWidget {
       ),
       BottomNavigationBarItem(
         icon: const Icon(Icons.book),
-        label: tr('assitants'),
+        label: tr('assistants'),
       ),
       BottomNavigationBarItem(
         icon: const Icon(Icons.settings),

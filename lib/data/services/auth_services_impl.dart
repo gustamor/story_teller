@@ -64,17 +64,17 @@ class AuthenticationServiceImpl implements AuthenticationService {
     }
   }
 
-  /// Obtiene el usuario actual.
+  /// Retrieves the current authenticated user.
   ///
-  /// Retorna un [User] si hay un usuario actualmente autenticado, de lo contrario null.
+  /// Returns a [User] if a user is currently authenticated, otherwise null.
   @override
   Future<User?> getCurrentUser() async {
     return _auth.currentUser;
   }
 
-  /// Comprueba si el usuario está actualmente autenticado.
+  /// Checks if a user is currently authenticated.
   ///
-  /// Retorna `true` si hay un usuario autenticado, de lo contrario `false`.
+  /// Returns `true` if a user is authenticated, otherwise `false`.
   Future<bool> isUserLogged() async {
     return await getCurrentUser() != null;
   }
@@ -106,23 +106,20 @@ class AuthenticationServiceImpl implements AuthenticationService {
       case 'wrong-password':
         return 'Wrong password provided for that user.';
       case 'invalid-email':
-        return 'email is no valid.';
-      case 'email-already-in-use':
-        return 'email is already taken';
+        return 'The email is not valid.';
       default:
         return 'An unknown error occurred.';
     }
   }
 
+  /// Checks if the provided email exists in the system.
+  ///
+  /// Returns `true` if the email exists, otherwise `false`.
   @override
   Future<bool> checkIfEmailExists(String email) async {
     try {
       final methods = await _auth.fetchSignInMethodsForEmail(email);
-      if (methods.isNotEmpty) {
-        return true;
-      } else {
-        return false;
-      }
+      return methods.isNotEmpty;
     } on FirebaseAuthException catch (e) {
       throw AuthException(_getFirebaseAuthErrorMessage(e));
     } catch (e) {
@@ -130,18 +127,27 @@ class AuthenticationServiceImpl implements AuthenticationService {
     }
   }
 
+  /// Checks if the current user's email is verified.
+  ///
+  /// Returns `true` if the email is verified, otherwise `false`.
   @override
   Future<bool> checkIfUserIsVerified() async {
-    final isVerified =
-        await getCurrentUser().then((value) => value!.emailVerified);
-    return isVerified;
+    final user = await getCurrentUser();
+    return user?.emailVerified ?? false;
   }
 
+  /// Sends an email verification to the current user.
   @override
   Future<void> sendEmailVerification() async {
-    await getCurrentUser().then((value) => value!.sendEmailVerification());
+    final user = await getCurrentUser();
+    if (user != null && !user.emailVerified) {
+      await user.sendEmailVerification();
+    }
   }
 
+  /// Sends a password reset email to the specified email.
+  ///
+  /// Returns `true` on successful email dispatch, or throws an [AuthException] on failure.
   @override
   Future<bool> sendPasswordResetEmail(String email) async {
     try {

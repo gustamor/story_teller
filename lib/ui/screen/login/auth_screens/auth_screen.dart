@@ -1,3 +1,5 @@
+// ignore_for_file: duplicate_import
+
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -12,7 +14,6 @@ import 'package:story_teller/domain/services/auth_services.dart';
 import 'package:story_teller/domain/services/tell_logger.dart';
 import 'package:story_teller/ui/core/widgets/builders/button.dart';
 import 'package:story_teller/ui/core/widgets/builders/text_form_field.dart';
-
 import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
 import 'package:story_teller/ui/screen/login/auth_screens/auth_forgotten_password.dart';
 import 'package:story_teller/ui/screen/login/auth_screens/auth_forgotten_password.dart';
@@ -40,9 +41,9 @@ class AuthScreen extends ConsumerWidget {
 
   /// Validates a [String? password] with a regular expression. Produces a bool
   bool validatePassword(String password) {
-    return true;
+    
     RegExp regex =
-        RegExp(r'^(?=.*\d).{8,}$'); // A menos ocho carácteres y un número
+        RegExp(r'^(?=.*\d).{8,}$'); // Al menos ocho carácteres y un número
     return regex.hasMatch(password);
   }
 
@@ -167,9 +168,9 @@ class AuthScreen extends ConsumerWidget {
                         padding:  EdgeInsets.only(
                         right: 36.w, top: 6.h
                       ),
-                        child: Align(
+                        child: const Align(
                           alignment: Alignment.bottomRight,
-                          child: const Text(
+                          child: Text(
                             "I forgot my password",
                           ),
                         ),
@@ -244,9 +245,10 @@ class AuthScreen extends ConsumerWidget {
                               )
                               .isUserLogged();
                           snackMessage(context, "Logged");
-                          if (isLogged)
+                          if (isLogged) {
                             Navigator.pushReplacementNamed(
                                 context, AssistantsScreen.route);
+                          }
                         } else {
                           //     snackMessage(context, "Enter a valid name");
                           log.d("UnSuccessfull");
