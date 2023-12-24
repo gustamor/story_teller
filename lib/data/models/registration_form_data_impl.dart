@@ -1,8 +1,8 @@
 import 'package:story_teller/data/models/interfaces/registration_form_data.dart';
 
-class RegistrationFormDataImpl implements RegistrationFormData {
+ class RegistrationFormDataImpl implements RegistrationFormData {
   @override
-  bool acceptedTerms = false;
+  bool acceptedTerms = true;
 
   @override
   late String email;
@@ -12,4 +12,5 @@ class RegistrationFormDataImpl implements RegistrationFormData {
 
   @override
   late String userName;
-}
+
+} 

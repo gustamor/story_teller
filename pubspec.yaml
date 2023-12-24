@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
   equatable: any
   json_annotation: any
-  freezed_annotation: any
+
   cupertino_icons: ^1.0.6
   flutter_screenutil: ^5.9.0
   dio: ^5.4.0
@@ -50,7 +50,7 @@ dependencies:
   email_validator: ^2.1.17
   firebase_app_check: ^0.2.1+8
   flutter_context_menu: ^0.1.3
-  
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
