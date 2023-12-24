@@ -1,8 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_context_menu/flutter_context_menu.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:story_teller/data/providers/auth_providers.dart';
 import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
 import 'package:story_teller/ui/screen/history/generated_content_screen.dart';
+import 'package:story_teller/ui/screen/login/auth_screens/auth_screen.dart';
 import 'package:story_teller/ui/screen/settings/settings_screen.dart';
 
 const kIconBackArrow = "assets/images/icons/backarrow.svg";
@@ -11,6 +16,7 @@ const kIconWave = "assets/images/icons/wave.svg";
 const kIconStarUnfilled = "assets/images/icons/star_unfilled.svg";
 const kIconStarFilled = "assets/images/icons/star_filled.svg";
 const kIconClose = "assets/images/icons/close.svg";
+const kIconUser = "assets/images/icons/user.svg";
 
 const kImageCyberpunkCity =
     "https://i.postimg.cc/d3QMcjFp/gustavomore-a-futuristic-city-skyline-solar-punk-city-an-exte-37b9a7c2-f4ab-4a04-8d9b-c102a9ae1e66-3.png";
@@ -31,15 +37,15 @@ const double kSettingsRowLeftPadding = 23;
 class BottomItems {
   static final materialItems = [
     BottomNavigationBarItem(
-      icon: const Icon(Icons.star),
-      label: tr("history"),
+      icon: const Icon(Icons.library_books_outlined),
+      label: tr('history'),
     ),
     BottomNavigationBarItem(
       icon: const Icon(Icons.book),
       label: tr('assitants'),
     ),
     BottomNavigationBarItem(
-      icon: const Icon(Icons.settings),
+      icon: const Icon(Icons.app_settings_alt_outlined),
       label: tr('settings'),
     ),
   ];
@@ -47,7 +53,7 @@ class BottomItems {
   /// Defines the content of the bottom items for Cupetino Bottom Navigation Bar
   static final cupertinoItems = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
-      icon: const Icon(CupertinoIcons.star_fill),
+      icon: const Icon(CupertinoIcons.collections_solid),
       label: tr('history'),
     ),
     BottomNavigationBarItem(
@@ -59,15 +65,13 @@ class BottomItems {
       label: tr('settings'),
     ),
   ];
-
-
-  
 }
+
 final List<String> kBottomItemRoutes = [
-    GeneratedContentScreen.route,
-    AssistantsScreen.route,
-    SettingsScreen.route
-  ];
+  GeneratedContentScreen.route,
+  AssistantsScreen.route,
+  SettingsScreen.route
+];
 
 snackMessage(BuildContext context, String message) {
   ScaffoldMessenger.of(context).showSnackBar(

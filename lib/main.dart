@@ -89,7 +89,7 @@ class MyHttpOverrides extends HttpOverrides {
 final TellLogger log = LogImpl();
 
 class AiApp extends ConsumerWidget {
-  String initialRoute = AuthScreen.route;
+  late String initialRoute;
 
   AiApp({super.key});
 

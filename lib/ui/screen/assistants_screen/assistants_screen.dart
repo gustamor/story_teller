@@ -3,12 +3,14 @@
 import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_context_menu/flutter_context_menu.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:story_teller/constants.dart';
 import 'package:story_teller/data/notifiers/auth_state_notifier.dart';
 import 'package:story_teller/data/providers/auth_providers.dart';
+import 'package:story_teller/data/providers/menus_providers.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
 import 'package:story_teller/domain/services/tell_logger.dart';
 import 'package:story_teller/ui/core/factories/specific_platform_factory.dart';
@@ -21,12 +23,17 @@ import 'package:story_teller/ui/screen/history/generated_content_screen.dart';
 import 'package:story_teller/ui/screen/settings/settings_screen.dart';
 import 'package:story_teller/ui/screen/tale_generator/tale_generator.dart';
 
-class AssistantsScreen extends ConsumerWidget {
+class AssistantsScreen extends ConsumerStatefulWidget {
   static const String route = "/assistants_screen";
-  AssistantsScreen({super.key});
+  const AssistantsScreen({super.key});
 
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _AssistantsScreensState();
+}
+
+class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
   final ui = selectSpecificPlatformWidgetFactory();
-
 
   void onItemTapped(int index, BuildContext context, WidgetRef ref) {
     debugPrint("index of menu is : $index");
@@ -36,39 +43,37 @@ class AssistantsScreen extends ConsumerWidget {
 
   /// Implements a [TellLogger] instance
   final TellLogger log = LogImpl();
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      double height = MediaQuery.of(context).size.height;
+      double width = MediaQuery.of(context).size.width;
+      ref.read(buildContextProvider.notifier).update(
+            (state) => context,
+          );
+      ref.read(screenSizeProvider.notifier).update(
+            (state) => state = Size(width, height),
+          );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final double kLeftPaddingHomeNameText = 4.w;
     final double kTopPaddingHomeWhatCanText = 32.w;
     FlutterNativeSplash.remove();
-    authChecker() {
-      final logged = ref.watch(authStateChangesProvider);
-      logged.when(
-        data: (user) {
-          if (user != null) {
-            log.d(
-              "AS user is logged",
-            );
-          } else {
-            log.d(
-              "AS user is not logged",
-            );
-          }
-        },
-        error: (_, __) => log.d(
-          "AS auth error",
-        ),
-        loading: () => log.d(
-          "AS loading",
-        ),
-      );
-    }
 
-    authChecker();
+    final contextMenu = ref.watch(contextMenuProvider);
     return SafeArea(
       child: Scaffold(
         appBar: NiceAppBar(
           title: tr('assitants'),
+          rightIcon: kIconUser,
+          rightTapFunction: () {
+            showContextMenu(context, contextMenu: contextMenu!);
+          },
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -88,13 +93,6 @@ class AssistantsScreen extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  InkWell(
-                    child: Container(
-                        height: 50.h, width: 50.w, color: Colors.amber),
-                    onTap: () {
-                      ref.read(authenticationStateProvider.notifier).signOut();
-                    },
-                  )
                 ],
               ),
               Padding(

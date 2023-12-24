@@ -25,7 +25,7 @@ class AndroidNavigationAppBar extends StatelessWidget
     this.rightTapFunction,
     this.backgroundOpacity,
   });
-
+ 
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -61,12 +61,15 @@ class AndroidNavigationAppBar extends StatelessWidget
             ),
           ),
           (rightIcon != null)
-              ? Expanded(flex: 1, child: SvgPicture.asset(
-                        rightIcon!,
-                        width: 16.w,
-                        height: 16.h,
-                        color: Theme.of(context).appBarTheme.foregroundColor,
-                      ))
+              ? Expanded(flex: 1, child: InkWell(
+                onTap: rightTapFunction,
+                child: SvgPicture.asset(
+                          rightIcon!,
+                          width: 16.w,
+                          height: 16.h,
+                          color: Theme.of(context).appBarTheme.foregroundColor,
+                        ),
+              ))
               : const Expanded(
                   flex: 1,
                   child: SizedBox(),

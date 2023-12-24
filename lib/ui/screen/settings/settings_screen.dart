@@ -32,7 +32,6 @@ class SettingsScreen extends ConsumerWidget {
       child: Scaffold(
         appBar: NiceAppBar(
           title: tr('settings'),
-         
         ),
         body: PreferredSize(
           preferredSize: Size(screenSize.width, 16.0),
