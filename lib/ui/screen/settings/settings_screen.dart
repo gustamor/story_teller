@@ -6,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/constants.dart';
 import 'package:story_teller/ui/core/providers/bottom_bar_index.dart';
-import 'package:story_teller/ui/core/providers/theme_mode_provider_impl.dart';
+import 'package:story_teller/ui/core/providers/theme_mode_provider.dart';
 import 'package:story_teller/ui/core/widgets/builders/button.dart';
 import 'package:story_teller/ui/core/widgets/builders/navigation_app_bar.dart';
 import 'package:story_teller/ui/core/widgets/builders/navigation_bottom_bar.dart';

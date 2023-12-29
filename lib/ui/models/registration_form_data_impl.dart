@@ -1,4 +1,4 @@
-import 'package:story_teller/data/models/interfaces/registration_form_data.dart';
+import 'package:story_teller/ui/models/interfaces/registration_form_data.dart';
 
  class RegistrationFormDataImpl implements RegistrationFormData {
   @override

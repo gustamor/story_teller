@@ -7,11 +7,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/constants.dart';
-import 'package:story_teller/data/providers/auth_providers.dart';
-import 'package:story_teller/data/providers/registration_form_provider.dart';
+import 'package:story_teller/domain/providers/auth_providers.dart';
+import 'package:story_teller/ui/core/providers/registration_form_provider.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
-import 'package:story_teller/domain/services/auth_services.dart';
-import 'package:story_teller/domain/services/tell_logger.dart';
+import 'package:story_teller/domain/services/abstract_auth_services.dart';
+import 'package:story_teller/domain/services/abstract_tell_logger.dart';
 import 'package:story_teller/ui/core/widgets/builders/button.dart';
 import 'package:story_teller/ui/core/widgets/builders/text_form_field.dart';
 import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
@@ -71,10 +71,6 @@ class AuthScreen extends ConsumerWidget {
     final passwordController = TextEditingController();
     final focusPasswordNode = FocusNode();
     final focusEmailNode = FocusNode();
-
-
-    // passwordController.value.copyWith(text: credential.email);
-    // emailController.value.copyWith(text: credential.password);
 
     /// Starts a safe area
     return SafeArea(

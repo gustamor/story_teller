@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_context_menu/flutter_context_menu.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:story_teller/data/providers/auth_providers.dart';
+import 'package:story_teller/domain/providers/auth_providers.dart';
 import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
 import 'package:story_teller/ui/screen/history/generated_content_screen.dart';
 import 'package:story_teller/ui/screen/login/auth_screens/auth_screen.dart';

@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:story_teller/data/providers/auth_providers.dart';
+import 'package:story_teller/domain/providers/auth_providers.dart';
 
-final verificationProvider = FutureProvider<bool>((ref) async {
-  return await ref
-      .read(authenticationStateProvider.notifier)
-      .checkIfUserIsVerified();
-});
+
 
 class CheckIfUserIsVerified extends ConsumerWidget {
   static const String route = '/check_if_user_if_verified';

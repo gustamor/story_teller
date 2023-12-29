@@ -1,13 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:story_teller/data/notifiers/auth_state_notifier.dart';
+import 'package:story_teller/domain/notifiers/auth_state_notifier.dart';
 import 'package:story_teller/data/services/auth_services_impl.dart';
-/// Provider for the instance of [FirebaseAuth].
-///
-/// This provider is used to access the FirebaseAuth instance in the application.
-final firebaseAuthProvider = Provider<FirebaseAuth>((ref) {
-  return FirebaseAuth.instance;
-});
+import 'package:story_teller/di/firebase_auth_provider.dart';
+
 
 /// Provider for listening to changes in the authentication state.
 ///

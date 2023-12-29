@@ -1,7 +1,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
-import 'package:story_teller/domain/services/tell_logger.dart';
+import 'package:story_teller/domain/services/abstract_tell_logger.dart';
 
 class LogImpl implements TellLogger {
   @override

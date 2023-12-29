@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/constants.dart';
-import 'package:story_teller/data/providers/auth_providers.dart';
+import 'package:story_teller/domain/providers/auth_providers.dart';
 import 'package:story_teller/ui/core/widgets/builders/button.dart';
 import 'package:story_teller/ui/core/widgets/builders/navigation_app_bar.dart';
 import 'package:story_teller/ui/core/widgets/builders/text_form_field.dart';

@@ -1,6 +1,6 @@
 import 'dart:io' show Platform;
 
-import 'package:story_teller/domain/factories/widgets_factory.dart';
+import 'package:story_teller/domain/factories/abstract_widgets_factory.dart';
 import 'package:story_teller/ui/core/factories/android_factory_impl.dart';
 import 'package:story_teller/ui/core/factories/ios_factory_impl.dart';
 

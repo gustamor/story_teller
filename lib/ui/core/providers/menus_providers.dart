@@ -7,7 +7,7 @@ import 'package:flutter_context_menu/flutter_context_menu.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:story_teller/constants.dart';
-import 'package:story_teller/data/providers/auth_providers.dart';
+import 'package:story_teller/domain/providers/auth_providers.dart';
 import 'package:story_teller/ui/screen/login/auth_screens/auth_screen.dart';
 import 'package:story_teller/ui/screen/settings/settings_screen.dart';
 

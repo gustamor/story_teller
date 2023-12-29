@@ -7,7 +7,7 @@ final sharedPrefs = FutureProvider<SharedPreferences>(
     (_) async => await SharedPreferences.getInstance());
 
 final themeModeProvider =
-    StateNotifierProvider<ThemeModeProviderImpl, ThemeMode>((ref) {
+    StateNotifierProvider<ThemeModeProvider, ThemeMode>((ref) {
   final prefs = ref.watch(sharedPrefs);
   var storedMode = ThemeMode.dark.toString();
   prefs.whenData((value) {
@@ -15,14 +15,14 @@ final themeModeProvider =
   });
 
   var mode = ThemeMode.values.firstWhere((e) => e.toString() == storedMode);
-  return ThemeModeProviderImpl(mode, prefs);
+  return ThemeModeProvider(mode, prefs);
 });
 
-class ThemeModeProviderImpl extends StateNotifier<ThemeMode>
+class ThemeModeProvider extends StateNotifier<ThemeMode>
     implements ThemesProvider {
   final AsyncValue<SharedPreferences> prefs;
 
-  ThemeModeProviderImpl(super.state, this.prefs);
+  ThemeModeProvider(super.state, this.prefs);
 
   @override
   void switchTheme(bool isOn) {
