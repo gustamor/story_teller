@@ -26,6 +26,7 @@ import 'package:story_teller/ui/screen/login/auth_screens/auth_name.dart';
 import 'package:story_teller/ui/themes/styles/text_styles.dart';
 
 /// Produces the authentication screen
+// ignore: must_be_immutable
 class AuthScreen extends ConsumerWidget {
   AuthScreen({super.key});
   static const route = "/auth_screen";
@@ -53,20 +54,9 @@ class AuthScreen extends ConsumerWidget {
 
   late bool isLogged;
 
-  login(AuthenticationService auth) async {
-    try {
-      final userId = await auth.signInWithEmailAndPassword(
-          "pepito@kakita.com", "12345678");
-
-      log.i(userId);
-    } catch (e) {
-      log.d(e);
-    }
-  }
-
   /// A GlobalKey for the form state
   final GlobalKey<FormState> _authFormkey = GlobalKey<FormState>();
- 
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     FlutterNativeSplash.remove();
@@ -81,13 +71,10 @@ class AuthScreen extends ConsumerWidget {
       top: true,
       bottom: true,
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            ref
-                .read(imageProcessOrchestratorProvider.notifier)
-                .processAndStoreImage("Una nave espacial futurista, 'Orion', viajando a través del espacio oscuro con estrellas y nebulosas coloridas en el fondo. En la cabina, una mujer astronauta, de mediana edad, con cabello corto y traje espacial, contempla pensativa el universo a través de una gran ventana.");
-          },
-        ),
+        floatingActionButton: FloatingActionButton(onPressed: () {
+          ref.read(imageProcessOrchestratorProvider.notifier).processAndStoreImage(
+              "Una nave espacial futurista, 'Orion', viajando a través del espacio oscuro con estrellas y nebulosas coloridas en el fondo. En la cabina, una mujer astronauta, de mediana edad, con cabello corto y traje espacial, contempla pensativa el universo a través de una gran ventana.");
+        }),
         body: Material(
           child: SingleChildScrollView(
             child: LayoutBuilder(builder: (context, constraints) {
@@ -184,7 +171,6 @@ class AuthScreen extends ConsumerWidget {
                     NiceButton(
                       clickFunction: () async {
                         if (_authFormkey.currentState!.validate()) {
-                          log.d("create account email and password are valid");
                           await ref
                               .read(authenticationStateProvider.notifier)
                               .checkIfEmailExists(emailController.value.text);
@@ -207,13 +193,18 @@ class AuthScreen extends ConsumerWidget {
                               .read(authenticationStateProvider.notifier)
                               .checkIfUserIsVerified();
                           if (!isVerified) {
-                            snackMessage(context,
-                                "Created. Please, check your email inbox for the verification link and try again");
+                            if (context.mounted) {
+                              snackMessage(context,
+                                  "Created. Please, check your email inbox for the verification link and try again");
+                            }
+
                             await ref
                                 .read(authenticationStateProvider.notifier)
                                 .sendEmailVerification();
                           } else {
-                            Navigator.pushNamed(context, AuthName.route);
+                            if (context.mounted) {
+                              Navigator.pushNamed(context, AuthName.route);
+                            }
                           }
                         } else {
                           // log.d("Create account with $email and $password");
@@ -248,10 +239,15 @@ class AuthScreen extends ConsumerWidget {
                                 authenticationStateProvider.notifier,
                               )
                               .isUserLogged();
-                          snackMessage(context, "Logged");
+                          if (context.mounted) {
+                            snackMessage(context, "Logged");
+                          }
+
                           if (isLogged) {
-                            Navigator.pushReplacementNamed(
-                                context, AssistantsScreen.route);
+                            if (context.mounted) {
+                              Navigator.pushReplacementNamed(
+                                  context, AssistantsScreen.route);
+                            }
                           }
                         } else {
                           //     snackMessage(context, "Enter a valid name");
