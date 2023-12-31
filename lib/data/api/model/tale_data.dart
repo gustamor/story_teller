@@ -16,7 +16,7 @@ class TaleData implements AbstractTaleData {
   @override
   factory TaleData.fromMap(Map<String, dynamic> map) {
     if (!map.containsKey('storyId') || !map.containsKey('title') || !map.containsKey('text')) {
-      throw FormatException("Missing required key(s) in map.");
+      throw const FormatException("Missing required key(s) in map.");
     }
     return TaleData(
       storyId: map['storyId'] as String,

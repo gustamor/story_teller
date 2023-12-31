@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:story_teller/domain/providers/auth_providers.dart';
-
-
+import 'package:story_teller/ui/core/providers/user_verification_provider.dart';
 
 class CheckIfUserIsVerified extends ConsumerWidget {
   static const String route = '/check_if_user_if_verified';
@@ -10,7 +8,7 @@ class CheckIfUserIsVerified extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    AsyncValue<bool> isVerified = ref.watch(verificationProvider);
+    AsyncValue<bool> isVerified = ref.watch(userVerificationProvider);
 
     return SafeArea(
       child: Scaffold(

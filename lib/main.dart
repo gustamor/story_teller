@@ -2,12 +2,14 @@
 
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -41,7 +43,8 @@ void initIsarDB() async {
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   initIsarDB();
-
+  await dotenv.load(fileName: ".env");
+  configureDio();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseAppCheck.instance.activate(
     webProvider: ReCaptchaV3Provider('recaptcha-v3-site-key'),
@@ -85,9 +88,17 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
+void configureDio() {
+  // Set default configs
+  final dio = Dio();
+  dio.options.connectTimeout = const Duration(seconds: 10);
+  dio.options.receiveTimeout = const Duration(seconds: 10);
+}
+
 /// Implements a [TellLogger] instance
 final TellLogger log = LogImpl();
 
+// ignore: must_be_immutable
 class AiApp extends ConsumerWidget {
   late String initialRoute;
 
@@ -160,7 +171,7 @@ class AiApp extends ConsumerWidget {
                   fontFamily: GoogleFonts.roboto().fontFamily,
                 ),
                 themeMode: currentMode,
-                initialRoute: initialRoute,
+                initialRoute: AuthScreen.route,
                 routes: {
                   AuthScreen.route: (context) => AuthScreen(),
                   AuthName.route: (context) => const AuthName(),

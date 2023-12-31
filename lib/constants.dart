@@ -19,6 +19,9 @@ const kIconStarUnfilled = "assets/images/icons/star_unfilled.svg";
 const kIconStarFilled = "assets/images/icons/star_filled.svg";
 const kIconClose = "assets/images/icons/close.svg";
 const kIconUser = "assets/images/icons/user.svg";
+const kDallePrompt =
+    "Aventura y la atmósfera de misterio y peligro se intensifica por el entorno oscuro y los altos árboles que rodean la escena";
+
 
 const kImageCyberpunkCity =
     "https://i.postimg.cc/d3QMcjFp/gustavomore-a-futuristic-city-skyline-solar-punk-city-an-exte-37b9a7c2-f4ab-4a04-8d9b-c102a9ae1e66-3.png";

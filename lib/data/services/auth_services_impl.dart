@@ -159,4 +159,5 @@ class AuthenticationServiceImpl implements AuthenticationService {
       throw AuthException('An unknown error occurred.');
     }
   }
+
 }

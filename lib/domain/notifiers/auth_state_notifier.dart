@@ -92,4 +92,8 @@ class AuthenticationStateNotifier extends StateNotifier<User?> {
   Future<bool> sendPasswordResetEmail(String email) async {
     return await _authentication.sendPasswordResetEmail(email);
   }
+
+  Future<User?> getCurrentUser() async {
+    return await _authentication.getCurrentUser();
+  }
 }

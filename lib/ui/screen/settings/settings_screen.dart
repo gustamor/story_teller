@@ -18,7 +18,6 @@ class SettingsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    TextEditingController controller = TextEditingController();
   
     void onItemTapped(int index, BuildContext context, WidgetRef ref) {
       debugPrint("index of menu is : $index");

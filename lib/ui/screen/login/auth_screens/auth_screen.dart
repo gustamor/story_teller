@@ -1,13 +1,18 @@
-// ignore_for_file: duplicate_import
+// ignore_for_file: duplicate_import, unused_import
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:openai_dart/openai_dart.dart' as openai;
+import 'package:permission_handler/permission_handler.dart';
 import 'package:story_teller/constants.dart';
+import 'package:story_teller/data/repositories/openai/dalle_image.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
+import 'package:story_teller/ui/core/providers/image_process_provider.dart';
 import 'package:story_teller/ui/core/providers/registration_form_provider.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
 import 'package:story_teller/domain/services/abstract_auth_services.dart';
@@ -41,7 +46,6 @@ class AuthScreen extends ConsumerWidget {
 
   /// Validates a [String? password] with a regular expression. Produces a bool
   bool validatePassword(String password) {
-    
     RegExp regex =
         RegExp(r'^(?=.*\d).{8,}$'); // Al menos ocho carácteres y un número
     return regex.hasMatch(password);
@@ -62,7 +66,7 @@ class AuthScreen extends ConsumerWidget {
 
   /// A GlobalKey for the form state
   final GlobalKey<FormState> _authFormkey = GlobalKey<FormState>();
-
+ 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     FlutterNativeSplash.remove();
@@ -77,6 +81,13 @@ class AuthScreen extends ConsumerWidget {
       top: true,
       bottom: true,
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            ref
+                .read(imageProcessOrchestratorProvider.notifier)
+                .processAndStoreImage("Una nave espacial futurista, 'Orion', viajando a través del espacio oscuro con estrellas y nebulosas coloridas en el fondo. En la cabina, una mujer astronauta, de mediana edad, con cabello corto y traje espacial, contempla pensativa el universo a través de una gran ventana.");
+          },
+        ),
         body: Material(
           child: SingleChildScrollView(
             child: LayoutBuilder(builder: (context, constraints) {
@@ -161,9 +172,7 @@ class AuthScreen extends ConsumerWidget {
                         PasswordForgottenScreen.route,
                       ),
                       child: Padding(
-                        padding:  EdgeInsets.only(
-                        right: 36.w, top: 6.h
-                      ),
+                        padding: EdgeInsets.only(right: 36.w, top: 6.h),
                         child: const Align(
                           alignment: Alignment.bottomRight,
                           child: Text(
@@ -194,7 +203,6 @@ class AuthScreen extends ConsumerWidget {
                               return state;
                             },
                           );
-
                           final isVerified = await ref
                               .read(authenticationStateProvider.notifier)
                               .checkIfUserIsVerified();
