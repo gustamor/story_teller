@@ -4,7 +4,6 @@ import 'package:story_teller/domain/notifiers/auth_state_notifier.dart';
 import 'package:story_teller/data/services/auth_services_impl.dart';
 import 'package:story_teller/di/firebase_providers.dart';
 
-
 /// Provider for listening to changes in the authentication state.
 ///
 /// It uses [firebaseAuthProvider] to observe changes in the user's authentication state

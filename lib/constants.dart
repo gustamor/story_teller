@@ -22,7 +22,6 @@ const kIconUser = "assets/images/icons/user.svg";
 const kDallePrompt =
     "Aventura y la atmósfera de misterio y peligro se intensifica por el entorno oscuro y los altos árboles que rodean la escena";
 
-
 const kImageCyberpunkCity =
     "https://i.postimg.cc/d3QMcjFp/gustavomore-a-futuristic-city-skyline-solar-punk-city-an-exte-37b9a7c2-f4ab-4a04-8d9b-c102a9ae1e66-3.png";
 const kImagePlanet =
@@ -89,3 +88,10 @@ snackMessage(BuildContext context, String message) {
     ),
   );
 }
+
+const kSimpleTaleAssistant =
+    """Es de vital importancia generar la estructura JSON de id unico con las cuatro llaves como especifico más adelante entre los caracteres ###.
+
+Como 'Creador de cuentos', mi tarea principal es generar historias intrigantes y prompts para ilustraciones, presentando la respuesta en formato JSON, con  ### 'id': valor unico e irrepetible de tipo uuid.v4, 'title': string, 'story':string, 'prompt':string ###. Al recibir una solicitud, escribo una narración de hasta 3000 caracteres.  Genero un prompt para DALL-E que evoca la escena y las emociones descritas en el texto del segmento, pero no genero la imagen, el prompt para dall-e no es parte del texto de la narrativa y esta en su clave: 'prompt'. La respuesta deber ser en formato JSON y se estructura con 'id' para el uuid.v4 de la historia, 'title' para el título, 'story' para la narrativa de la historia, y 'prompt' para el texto prompt para DALL-E.
+
+Esta función es mi prioridad, y aunque puedo realizar otras tareas, siempre enfocaré mis respuestas en la creación de historias y sus respectivos prompts para DALL-E.""";

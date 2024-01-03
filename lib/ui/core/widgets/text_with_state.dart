@@ -1,14 +1,14 @@
-
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:story_teller/ui/core/providers/image_process_provider.dart';
+import 'package:story_teller/domain/providers/story_orchestator_provider.dart';
 
 class TextWithState extends ConsumerWidget {
   const TextWithState({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(imageProcessOrchestratorProvider);
-    return Text(state.step.name); // Actualiza tu UI aquí
+    final notifications = ref.watch(storyProcessOrchestratorProvider);
+   
+    return Text(notifications.step.toString()); // Actualiza tu UI aquí
   }
 }

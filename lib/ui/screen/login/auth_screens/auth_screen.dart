@@ -10,15 +10,20 @@ import 'package:gap/gap.dart';
 import 'package:openai_dart/openai_dart.dart' as openai;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:story_teller/constants.dart';
-import 'package:story_teller/data/repositories/openai/dalle_image.dart';
+import 'package:story_teller/data/api/openai/chat_message.dart';
+import 'package:story_teller/data/api/openai/dalle_image.dart';
+import 'package:story_teller/di/openai_providers.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
-import 'package:story_teller/ui/core/providers/image_process_provider.dart';
+import 'package:story_teller/domain/providers/chat_orchestator_provider.dart';
+import 'package:story_teller/domain/providers/image_orchestator_provider.dart';
+import 'package:story_teller/domain/providers/story_orchestator_provider.dart';
 import 'package:story_teller/ui/core/providers/registration_form_provider.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
 import 'package:story_teller/domain/services/abstract_auth_services.dart';
 import 'package:story_teller/domain/services/abstract_tell_logger.dart';
 import 'package:story_teller/ui/core/widgets/builders/button.dart';
 import 'package:story_teller/ui/core/widgets/builders/text_form_field.dart';
+import 'package:story_teller/ui/core/widgets/text_with_state.dart';
 import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
 import 'package:story_teller/ui/screen/login/auth_screens/auth_forgotten_password.dart';
 import 'package:story_teller/ui/screen/login/auth_screens/auth_forgotten_password.dart';
@@ -72,8 +77,13 @@ class AuthScreen extends ConsumerWidget {
       bottom: true,
       child: Scaffold(
         floatingActionButton: FloatingActionButton(onPressed: () {
-          ref.read(imageProcessOrchestratorProvider.notifier).processAndStoreImage(
+          var story = ref.read(storyProcessOrchestratorProvider.notifier);
+          story.generateASimpleStory();
+          
+
+          /*  ref.read(imageProcessOrchestratorProvider.notifier).processAndStoreImage(
               "Una nave espacial futurista, 'Orion', viajando a través del espacio oscuro con estrellas y nebulosas coloridas en el fondo. En la cabina, una mujer astronauta, de mediana edad, con cabello corto y traje espacial, contempla pensativa el universo a través de una gran ventana.");
+     */
         }),
         body: Material(
           child: SingleChildScrollView(
@@ -162,8 +172,8 @@ class AuthScreen extends ConsumerWidget {
                         padding: EdgeInsets.only(right: 36.w, top: 6.h),
                         child: const Align(
                           alignment: Alignment.bottomRight,
-                          child: Text(
-                            "I forgot my password",
+                          child: TextWithState(
+                        //    "I forgot my password",
                           ),
                         ),
                       ),

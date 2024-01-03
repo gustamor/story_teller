@@ -7,10 +7,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:openai_dart/openai_dart.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:story_teller/data/repositories/image_downloader_repository.dart';
-import 'package:story_teller/data/repositories/openai/dalle_image.dart';
+import 'package:story_teller/data/api/openai/dalle_image.dart';
 import 'package:story_teller/data/services/fire_storage.dart';
 import 'package:story_teller/data/services/random_names.dart';
 import 'package:story_teller/di/firebase_providers.dart';
+import 'package:story_teller/di/openai_providers.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
 
 class ImagesService {
@@ -20,7 +21,8 @@ class ImagesService {
     return directory.path;
   }
 
-  Future<String?> generateImage(DalleImage dalle, String dallePrompt) async {
+  Future<String?> generateImage(Ref ref, String dallePrompt) async {
+    final DalleImage dalle = ref.watch(dalleProvider);
     try {
       String? link = await dalle.generateImageLink(
         prompt: dallePrompt,
@@ -28,7 +30,7 @@ class ImagesService {
       );
       return link;
     } catch (e) {
-      throw Exception("");
+      throw Exception(e);
     }
   }
 
@@ -64,7 +66,7 @@ class ImagesService {
 
   Future<String?> savingImageUrlToFirestore(String storageLink) async {
     try {
-      // await ref.saveImageLink(storageLink);
+      
     } catch (e) {}
     return null;
   }

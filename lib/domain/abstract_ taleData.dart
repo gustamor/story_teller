@@ -1,9 +1,9 @@
 
 
 abstract class AbstractTaleData {
-  String get storyId;
+  String get id;
   String get title;
-  String get text;
+  String get story;
   String? get prompt;
 
   factory AbstractTaleData.fromMap(Map<String, dynamic> map) {
