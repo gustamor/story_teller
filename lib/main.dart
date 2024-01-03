@@ -1,11 +1,13 @@
-// ignore_for_file: unused_local_variable
+// ignore_for_file: unused_local_variable, unused_import
 
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,6 +17,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:story_teller/data/bbdd/isar/models/tale.dart';
+import 'package:story_teller/data/bbdd/isar/models/user.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
 import 'package:story_teller/data/services/riverpod_logger_impl.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
@@ -32,25 +36,25 @@ import 'package:story_teller/ui/screen/settings/settings_screen.dart';
 import 'package:story_teller/ui/screen/tale_generator/tale.dart';
 import 'package:story_teller/ui/screen/tale_generator/tale_generator.dart';
 
-void initIsarDB() async {
-  final dir = await getApplicationDocumentsDirectory();
-  final isar = await Isar.open(
-    [],
-    directory: dir.path,
-  );
-}
-
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  initIsarDB();
-  await dotenv.load(fileName: ".env");
   configureDio();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+ /* FlutterError.onError = (errorDetails) {
+      FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+    };
+    // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+    PlatformDispatcher.instance.onError = (error, stack) {
+      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+      return true;
+    };
+ */
   await FirebaseAppCheck.instance.activate(
     webProvider: ReCaptchaV3Provider('recaptcha-v3-site-key'),
     androidProvider: AndroidProvider.debug,
     appleProvider: AppleProvider.appAttest,
   );
+  await dotenv.load(fileName: ".env");
 
   SystemChrome.setEnabledSystemUIMode(
     SystemUiMode.manual,

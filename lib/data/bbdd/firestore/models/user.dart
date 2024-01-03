@@ -1,4 +1,3 @@
-
 class User {
   final String? email;
   final String? photo;
@@ -9,6 +8,8 @@ class User {
   final String? gender;
   final int? age;
   final String? uuid;
+  final bool isPremium = true;
+  final int? tokens;
 
   User({
     this.email,
@@ -20,6 +21,7 @@ class User {
     this.gender,
     this.age,
     this.uuid,
+    this.tokens,
   });
 
   User copyWith({
@@ -32,6 +34,7 @@ class User {
     String? gender,
     int? age,
     String? uuid,
+    int? tokens,
   }) {
     return User(
       email: email ?? this.email,
@@ -43,6 +46,7 @@ class User {
       gender: gender ?? this.gender,
       age: age ?? this.age,
       uuid: uuid ?? this.uuid,
+      tokens: tokens ?? this.tokens,
     );
   }
 
@@ -57,6 +61,7 @@ class User {
       gender: firestoreData['gender'] as String?,
       age: firestoreData['age'] as int?,
       uuid: firestoreData['uuid'] as String?,
+      tokens: firestoreData['tokens'] as int?,
     );
   }
 
@@ -71,40 +76,43 @@ class User {
       'gender': gender,
       'age': age,
       'uuid': uuid,
+      'tokens': tokens,
     };
   }
 
   @override
   String toString() {
-    return 'User(email: $email, photo: $photo, userName: $userName, name: $name, surnames: $surnames, country: $country, gender: $gender, age: $age, uuid: $uuid)';
+    return 'User(email: $email, photo: $photo, userName: $userName, name: $name, surnames: $surnames, country: $country, gender: $gender, age: $age, uuid: $uuid, tokens: $tokens)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is User &&
-      other.email == email &&
-      other.photo == photo &&
-      other.userName == userName &&
-      other.name == name &&
-      other.surnames == surnames &&
-      other.country == country &&
-      other.gender == gender &&
-      other.age == age &&
-      other.uuid == uuid;
+        other.email == email &&
+        other.photo == photo &&
+        other.userName == userName &&
+        other.name == name &&
+        other.surnames == surnames &&
+        other.country == country &&
+        other.gender == gender &&
+        other.age == age &&
+        other.uuid == uuid &&
+        other.tokens == tokens;
   }
 
   @override
   int get hashCode {
     return email.hashCode ^
-      photo.hashCode ^
-      userName.hashCode ^
-      name.hashCode ^
-      surnames.hashCode ^
-      country.hashCode ^
-      gender.hashCode ^
-      age.hashCode ^
-      uuid.hashCode;
+        photo.hashCode ^
+        userName.hashCode ^
+        name.hashCode ^
+        surnames.hashCode ^
+        country.hashCode ^
+        gender.hashCode ^
+        age.hashCode ^
+        uuid.hashCode ^
+        tokens.hashCode;
   }
 }

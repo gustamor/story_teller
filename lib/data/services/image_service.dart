@@ -30,7 +30,7 @@ class ImagesService {
       );
       return link;
     } catch (e) {
-      throw Exception(e);
+      throw Exception("image_servie $e");
     }
   }
 
@@ -60,7 +60,7 @@ class ImagesService {
       final downloadLink = await reference.getDownloadURL();
       return downloadLink;
     } catch (e) {
-      throw Exception("Error when store image");
+      throw Exception(e);
     }
   }
 
