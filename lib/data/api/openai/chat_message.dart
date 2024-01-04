@@ -41,18 +41,18 @@ class ChatMessages {
               ),
             ),
           ],
-          temperature: 0.1,
+          temperature: 0,
         ),
       );
       ChatCompletionMessage message = res.choices.first.message;
-
+      log.i(message.content);
       final taleData = TaleData.fromMap(
         json.decode(
           message.content.toString(),
         ),
       );
-      log.i(
-        "Tale: ${taleData.id}, ${taleData.title}, ${taleData.story}, ${taleData.prompt},",
+      log.d(
+        taleData,
       );
       return taleData;
     } catch (e) {

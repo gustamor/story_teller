@@ -2,6 +2,9 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:openai_dart/openai_dart.dart';
+import 'package:story_teller/data/bbdd/firestore/actions/add_user.dart';
+import 'package:story_teller/data/bbdd/firestore/actions/update_imageurl.dart';
+import 'package:story_teller/data/bbdd/firestore/actions/upload_tale.dart';
 import 'package:story_teller/data/bbdd/isar/actions/add_tale_provider.dart';
 import 'package:story_teller/data/bbdd/isar/actions/update_tale_with_image_provider.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
@@ -23,7 +26,7 @@ class StoryProcessControllerNotifier extends StateNotifier<ProcessState> {
         );
   final TellLogger log = LogImpl();
 
-  Future<void> generateASimpleStory() async {
+  Future<void> generateASimpleStory(String prompt) async {
     try {
       final chatOrchestator =
           ref.watch(chatProcessOrchestratorProvider.notifier);
@@ -33,9 +36,9 @@ class StoryProcessControllerNotifier extends StateNotifier<ProcessState> {
       state = StoryProcessState(
         step: StoryProcessStep.generatingStory,
       );
-      final taleData = await chatOrchestator.processAndStoreSimpleStory();
+      final taleData = await chatOrchestator.processAndStoreSimpleStory(prompt);
       ref.read(addTaleProvider(taleData));
-
+      ref.read(uploadTaleProvider(taleData));
       if (chatOrchestator.state.step == ChatProcessStep.completed) {
         state = StoryProcessState(
           step: StoryProcessStep.storyCompleted,
@@ -62,6 +65,7 @@ class StoryProcessControllerNotifier extends StateNotifier<ProcessState> {
         );
       } else if (imageOrchestator.state.step == ImageProcessStep.completed) {
         ref.read(upateTaleWithImageProvider([taleData.id, imageUrl ?? ""]));
+        ref.read(upateStoryWithImageUrl([taleData.id, imageUrl ?? ""]));
         state = StoryProcessState(
           step: StoryProcessStep.imageCompleted,
         );

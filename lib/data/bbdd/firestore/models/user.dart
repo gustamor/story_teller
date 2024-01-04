@@ -1,15 +1,17 @@
+import 'package:firestore_ref/firestore_ref.dart';
+
 class User {
   final String? email;
-  final String? photo;
-  final String? userName;
+  String? photo;
+  String? userName;
   final String? name;
-  final String? surnames;
-  final String? country;
-  final String? gender;
-  final int? age;
-  final String? uuid;
-  final bool isPremium = true;
-  final int? tokens;
+  String? surnames;
+  String? country;
+  String? gender;
+  int? age;
+  final String? id;
+  bool? isPremium;
+  int? tokens;
 
   User({
     this.email,
@@ -20,7 +22,8 @@ class User {
     this.country,
     this.gender,
     this.age,
-    this.uuid,
+    this.id,
+    this.isPremium,
     this.tokens,
   });
 
@@ -34,6 +37,7 @@ class User {
     String? gender,
     int? age,
     String? uuid,
+    bool? isPremium,
     int? tokens,
   }) {
     return User(
@@ -45,23 +49,28 @@ class User {
       country: country ?? this.country,
       gender: gender ?? this.gender,
       age: age ?? this.age,
-      uuid: uuid ?? this.uuid,
+      id: uuid ?? this.id,
       tokens: tokens ?? this.tokens,
     );
   }
 
-  factory User.fromFirestore(Map<String, dynamic> firestoreData) {
+  factory User.fromFirestore(
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+    SnapshotOptions? options,
+  ) {
+        final firestoreData = snapshot.data();
+
     return User(
-      email: firestoreData['email'] as String?,
-      photo: firestoreData['photo'] as String?,
-      userName: firestoreData['user_name'] as String?,
-      name: firestoreData['name'] as String?,
-      surnames: firestoreData['surnames'] as String?,
-      country: firestoreData['country'] as String?,
-      gender: firestoreData['gender'] as String?,
-      age: firestoreData['age'] as int?,
-      uuid: firestoreData['uuid'] as String?,
-      tokens: firestoreData['tokens'] as int?,
+      email: firestoreData?['email'] as String?,
+      photo: firestoreData?['photo'] as String?,
+      userName: firestoreData?['user_name'] as String?,
+      name: firestoreData?['name'] as String?,
+      surnames: firestoreData?['surnames'] as String?,
+      country: firestoreData?['country'] as String?,
+      gender: firestoreData?['gender'] as String?,
+      age: firestoreData?['age'] as int?,
+      id: firestoreData?['uuid'] as String?,
+      tokens: firestoreData?['tokens'] as int?,
     );
   }
 
@@ -75,14 +84,41 @@ class User {
       'country': country,
       'gender': gender,
       'age': age,
-      'uuid': uuid,
+      'uuid': id,
       'tokens': tokens,
     };
   }
-
+factory User.fromMap(Map<String, dynamic> map) {
+  return User(
+    email: map['email'] as String?,
+    photo: map['photo'] as String?,
+    userName: map['user_name'] as String?,
+    name: map['name'] as String?,
+    surnames: map['surnames'] as String?,
+    country: map['country'] as String?,
+    gender: map['gender'] as String?,
+    age: map['age'] as int?,
+    id: map['uuid'] as String?,
+    tokens: map['tokens'] as int?,
+  );
+}
+Map<String, dynamic> toMap() {
+  return {
+    'email': email,
+    'photo': photo,
+    'user_name': userName,
+    'name': name,
+    'surnames': surnames,
+    'country': country,
+    'gender': gender,
+    'age': age,
+    'uuid': id,
+    'tokens': tokens,
+  };
+}
   @override
   String toString() {
-    return 'User(email: $email, photo: $photo, userName: $userName, name: $name, surnames: $surnames, country: $country, gender: $gender, age: $age, uuid: $uuid, tokens: $tokens)';
+    return 'User(email: $email, photo: $photo, userName: $userName, name: $name, surnames: $surnames, country: $country, gender: $gender, age: $age, uuid: $id, tokens: $tokens)';
   }
 
   @override
@@ -98,7 +134,7 @@ class User {
         other.country == country &&
         other.gender == gender &&
         other.age == age &&
-        other.uuid == uuid &&
+        other.id == id &&
         other.tokens == tokens;
   }
 
@@ -112,7 +148,7 @@ class User {
         country.hashCode ^
         gender.hashCode ^
         age.hashCode ^
-        uuid.hashCode ^
+        id.hashCode ^
         tokens.hashCode;
   }
 }

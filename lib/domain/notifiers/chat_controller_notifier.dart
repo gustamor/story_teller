@@ -17,7 +17,7 @@ class ChatProcessControllerNotifier extends StateNotifier<ChatProcessState> {
         );
   final TellLogger log = LogImpl();
 
-  Future<TaleData> processAndStoreSimpleStory() async {
+  Future<TaleData> processAndStoreSimpleStory(prompt) async {
     final chatService = ref.watch(chatServiceProvider);
     try {
       state = ChatProcessState(
@@ -27,7 +27,7 @@ class ChatProcessControllerNotifier extends StateNotifier<ChatProcessState> {
         log.d("Image Process State: ${state.step}");
       }
 
-      TaleData taleData = await chatService.generateTale(prompt: "Crea un cuento");
+      TaleData taleData = await chatService.generateTale(prompt: prompt);
 
       state = ChatProcessState(
         step: ChatProcessStep.completed,

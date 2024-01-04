@@ -1,5 +1,6 @@
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:story_teller/domain/abstract_simple_story.dart';
+
 class Story implements AbstractSimpleStory {
   @override
   final String? uuid;
@@ -8,15 +9,25 @@ class Story implements AbstractSimpleStory {
   @override
   final String? text;
   @override
-  final String? imageUrl;
+  String? imageUrl;
   @override
-  final String? user;
+  String? user;
   @override
-  final DateTime? date;
+  DateTime? date;
   @override
-  final DocumentReference? speech;
+  DocumentReference? speech;
 
-  Story({this.uuid, this.title, this.text, this.imageUrl, this.user, this.date, this.speech});
+  final String? prompt;
+
+  Story(
+      {this.uuid,
+      this.title,
+      this.text,
+      this.imageUrl,
+      this.user,
+      this.date,
+      this.speech,
+      this.prompt});
 
   @override
   Story copyWith({
@@ -27,6 +38,7 @@ class Story implements AbstractSimpleStory {
     String? user,
     DateTime? date,
     DocumentReference? speech,
+    String? prompt,
   }) {
     return Story(
       uuid: uuid ?? this.uuid,
@@ -36,19 +48,26 @@ class Story implements AbstractSimpleStory {
       user: user ?? this.user,
       date: date ?? this.date,
       speech: speech ?? this.speech,
+      prompt: prompt ?? this.prompt,
     );
   }
 
-  factory Story.fromFirestore(Map<String, dynamic> firestoreData) {
+  factory Story.fromFirestore(
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+    SnapshotOptions? options,
+  ) {
+    final firestoreData = snapshot.data();
     return Story(
-      uuid: firestoreData['uuid'] as String?,
-      title: firestoreData['title'] as String?,
-      text: firestoreData['text'] as String?,
-      imageUrl: firestoreData['imageUrl'] as String?,
-      user: firestoreData['user'] as String?,
-      date: firestoreData.containsKey('date') ? (firestoreData['date'] as Timestamp?)?.toDate() : null,
-      speech: firestoreData['speech'] as DocumentReference?,
-    );
+        uuid: firestoreData?['uuid'] as String?,
+        title: firestoreData?['title'] as String?,
+        text: firestoreData?['text'] as String?,
+        imageUrl: firestoreData?['imageUrl'] as String?,
+        user: firestoreData?['user'] as String?,
+        date: firestoreData!.containsKey('date')
+            ? (firestoreData['date'] as Timestamp?)?.toDate()
+            : null,
+        speech: firestoreData['speech'] as DocumentReference?,
+        prompt: firestoreData['prompt'] as String?);
   }
 
   @override
@@ -61,13 +80,28 @@ class Story implements AbstractSimpleStory {
     if (user != null) map['user'] = user;
     if (date != null) map['date'] = Timestamp.fromDate(date!);
     if (speech != null) map['speech'] = speech;
+    if (prompt != null) map['prompt'] = prompt;
 
     return map;
   }
 
+  factory Story.fromMap(Map<String, dynamic> map) {
+    return Story(
+      uuid: map['id'] as String?,
+      title: map['title'] as String?,
+      text: map['story'] as String?,
+      imageUrl: map['imageUrl'] as String?,
+      user: map['user'] as String?,
+      prompt: map['prompt'] as String?,
+
+      date: map['date'] != null ? DateTime.parse(map['date'] as String) : null,
+      speech: map['speech']
+          as DocumentReference?, // Assuming DocumentReference can be directly assigned
+    );
+  }
   @override
   String toString() {
-    return 'Story(uuid: $uuid, title: $title, text: $text, imageUrl: $imageUrl, user: $user, date: $date, speech: $speech)';
+    return 'Story(uuid: $uuid, title: $title, text: $text, prompt: $prompt, imageUrl: $imageUrl, user: $user, date: $date, speech: $speech)';
   }
 
   @override
@@ -81,6 +115,7 @@ class Story implements AbstractSimpleStory {
         other.imageUrl == imageUrl &&
         other.user == user &&
         other.date == date &&
+        other.prompt == prompt &&
         other.speech == speech;
   }
 
@@ -92,6 +127,7 @@ class Story implements AbstractSimpleStory {
         imageUrl.hashCode ^
         user.hashCode ^
         date.hashCode ^
+        prompt.hashCode ^
         speech.hashCode;
   }
 }

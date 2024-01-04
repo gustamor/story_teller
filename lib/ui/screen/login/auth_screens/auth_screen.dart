@@ -12,6 +12,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:story_teller/constants.dart';
 import 'package:story_teller/data/api/openai/chat_message.dart';
 import 'package:story_teller/data/api/openai/dalle_image.dart';
+import 'package:story_teller/data/bbdd/firestore/actions/add_user.dart';
 import 'package:story_teller/di/openai_providers.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
 import 'package:story_teller/domain/providers/chat_orchestator_provider.dart';
@@ -77,8 +78,11 @@ class AuthScreen extends ConsumerWidget {
       bottom: true,
       child: Scaffold(
         floatingActionButton: FloatingActionButton(onPressed: () {
+       //       ref.read(addUserProvider.future);
+
+         
           var story = ref.read(storyProcessOrchestratorProvider.notifier);
-          story.generateASimpleStory();
+          story.generateASimpleStory("Crea una historia sobre naves espaciales del género space opera");
           
 
           /*  ref.read(imageProcessOrchestratorProvider.notifier).processAndStoreImage(
