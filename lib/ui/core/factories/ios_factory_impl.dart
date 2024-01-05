@@ -27,6 +27,7 @@ class IOSFactory implements WidgetFactory {
     TextStyle? iosTextStyle,
     double? padding = 8.0,
     Color? bgColor,
+    Color? foregroundColor,
     required String text,
     Color? androidBackgroundColor,
     double? androidPadding,
@@ -36,6 +37,7 @@ class IOSFactory implements WidgetFactory {
     return IosAiButton(
       clickFunction: clickFunction,
       backgroundColor: iosBackgroundColor ?? bgColor,
+      foregroundColor: foregroundColor,
       isFixedSize: isFixedSize,
       text: text,
       textStyle: iosTextStyle ?? textStyle,
@@ -135,8 +137,7 @@ class IOSFactory implements WidgetFactory {
     Color? androidFillColor,
     Color? iosFillColor,
     void Function(String)? onFieldSubmitFunction,
-           void Function(PointerDownEvent)? onTapOutSide,
-
+    void Function(PointerDownEvent)? onTapOutSide,
   }) {
     return IosTextFormField(
       onChangedFunction: onChangedFunction,

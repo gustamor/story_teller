@@ -50,7 +50,6 @@ class AndroidTextFormField extends StatelessWidget implements AITextFormField {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    // TextEditingController controller = TextEditingController();
 
     return TextFormField(
       onChanged: (query) => onChangedFunction,

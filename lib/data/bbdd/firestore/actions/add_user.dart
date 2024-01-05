@@ -1,3 +1,5 @@
+// ignore_for_file: library_prefixes
+
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:story_teller/constants.dart';

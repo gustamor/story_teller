@@ -18,6 +18,7 @@ abstract class WidgetFactory {
       TextStyle? iosTextStyle,
       double? padding,
       Color? bgColor,
+      Color? foregroundColor,
       Color? iosBackgroundColor,
       Color? androidBackgroundColor,
       double? iosPadding,

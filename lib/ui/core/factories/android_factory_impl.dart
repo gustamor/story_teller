@@ -25,6 +25,8 @@ class AndroidFactory implements WidgetFactory {
     TextStyle? iosTextStyle,
     double? padding = 0.0,
     Color? bgColor,
+    Color? foregroundColor,
+
     Color? androidBackgroundColor,
     double? androidPadding,
     double? iosPadding,
@@ -33,6 +35,7 @@ class AndroidFactory implements WidgetFactory {
     return AndroidAiButton(
       clickFunction: clickFunction,
       backgroundColor: androidBackgroundColor ?? bgColor,
+      foregroundColor: foregroundColor,
       isFixedSize: isFixedSize ?? false,
       text: text,
       textStyle: androidTextStyle ?? textStyle,

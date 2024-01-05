@@ -1,6 +1,8 @@
-// ignore_for_file: unused_import, prefer_const_constructors
+// ignore_for_file: unused_import, prefer_const_constructors, unused_local_variable, unnecessary_import
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -10,6 +12,7 @@ import 'package:gap/gap.dart';
 import 'package:story_teller/constants.dart';
 import 'package:story_teller/domain/providers/story_orchestator_provider.dart';
 import 'package:story_teller/ui/core/providers/genres_list_provider.dart';
+import 'package:story_teller/ui/core/providers/prompt_provider.dart';
 import 'package:story_teller/ui/core/widgets/builders/button.dart';
 import 'package:story_teller/ui/core/widgets/builders/navigation_app_bar.dart';
 import 'package:story_teller/ui/core/widgets/builders/text_form_field.dart';
@@ -59,13 +62,17 @@ class TaleGeneratorScreen extends ConsumerWidget {
                               style: TextStyle(fontSize: 11.sp),
                             ),
                           ),
+                          Gap(6.h),
                           NiceTextFormField(
                             onFieldSubmitFunction: (text) {
                               final prompt = tr('write_a_story_about') + text;
-                              var story = ref.read(
+                              ref
+                                  .read(promptProvider.notifier)
+                                  .update((state) => state = text);
+                              /*  var story = ref.read(
                                   storyProcessOrchestratorProvider.notifier);
                               story.generateASimpleStory(prompt ??
-                                  "Crea una historia al azar que no se parezca a otras");
+                                  "Crea una historia al azar que no se parezca a otras"); */
                             },
                             controller: controller,
                             maxLines: 4,
@@ -86,22 +93,29 @@ class TaleGeneratorScreen extends ConsumerWidget {
                             child: NiceButton(
                               clickFunction: () => {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
+                                  SnackBar(
                                     content: Center(
-                                      child: Text(
-                                        "Generate",
-                                      ),
+                                      child: Text(ref.read(promptProvider)),
                                     ),
                                   ),
-                                )
+                                ),
+                                Navigator.pushReplacementNamed(
+                                    context, TaleScreen.route),
                               },
                               isFixedSize: false,
                               height: 110.h,
                               width: 140.w,
                               text: 'Generate',
                               iosPadding: 30,
+                              foregroundColor: Theme.of(context)
+                                  .buttonTheme
+                                  .colorScheme!
+                                  .onBackground,
                               iosBackgroundColor: const Color(0xff2b72a9),
-                              androidBackgroundColor: Color(0xffFF8A00),
+                              androidBackgroundColor: Theme.of(context)
+                                  .buttonTheme
+                                  .colorScheme!
+                                  .background,
                               textStyle: TextStyle(fontSize: 21.sp),
                             ),
                           ),
@@ -126,15 +140,28 @@ class TaleGeneratorScreen extends ConsumerWidget {
                                         clickFunction: () {
                                           final prompt =
                                               tr('write_a_story_of_genre') +
-                                                  item;
-                                          var story = ref.read(
+                                                  tr(item);
+                                                  ref
+                                  .read(promptProvider.notifier)
+                                  .update((state) => state = prompt);
+                                         /*  var story = ref.read(
                                               storyProcessOrchestratorProvider
                                                   .notifier);
-                                          story.generateASimpleStory(prompt);
+                                          story.generateASimpleStory(prompt); */
+                                          Navigator.pushReplacementNamed(
+                                              context, TaleScreen.route);
                                         },
                                         text: tr(item),
-                                        textStyle: AndroidStyle.cardCaption,
                                         height: 30.h,
+                                        borderSide: 0.5.r,
+                                        foregroundColor: Theme.of(context)
+                                            .buttonTheme
+                                            .colorScheme!
+                                            .onBackground,
+                                        backgroundColor: Theme.of(context)
+                                            .buttonTheme
+                                            .colorScheme!
+                                            .background,
                                         isFixedSize: false,
                                       ))
                                   .toList(),

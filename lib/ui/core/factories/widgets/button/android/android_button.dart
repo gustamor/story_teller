@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:story_teller/constants.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
 import 'package:story_teller/ui/themes/styles/text_styles.dart';
 
@@ -15,6 +16,7 @@ class AndroidAiButton extends StatelessWidget {
   final TextStyle? textStyle;
   final double? padding;
   final Color? backgroundColor;
+  final Color? foregroundColor;
 
   const AndroidAiButton({
     super.key,
@@ -27,6 +29,7 @@ class AndroidAiButton extends StatelessWidget {
     this.clickFunction,
     this.isFixedSize,
     this.borderSide,
+    this.foregroundColor,
   });
 
   @override
@@ -35,21 +38,25 @@ class AndroidAiButton extends StatelessWidget {
       padding: EdgeInsets.all(padding!),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
+          elevation: 3.r,
+          foregroundColor: foregroundColor ?? Theme.of(context).buttonTheme.colorScheme!.onBackground,
           backgroundColor: backgroundColor ??
-              Theme.of(context).buttonTheme.colorScheme!.primary,
+              Theme.of(context).buttonTheme.colorScheme!.background,
           fixedSize: (isFixedSize!) ? Size(width!.w, height!.h) : null,
           shape: RoundedRectangleBorder(
+          
             side: (borderSide != null)
-                ? BorderSide(color: Theme.of(context).unselectedWidgetColor, width: borderSide ?? 0)
+                ? BorderSide(
+                    color: Theme.of(context).unselectedWidgetColor,
+                    width: borderSide ?? 0)
                 : BorderSide.none,
             borderRadius:
                 BorderRadius.circular((isFixedSize!) ? height! * 0.5 : 24),
           ),
         ),
         onPressed: clickFunction!,
-        child: Text(
+        child: buttonText(
           text,
-          style: textStyle ?? AndroidStyle.cardCaption,
         ),
       ),
     );

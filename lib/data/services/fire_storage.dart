@@ -15,15 +15,15 @@ class StorageService {
   }
 
   Future<void> getDownloadUrl(Reference ref) async {
-    final islandRef = ref;
+    final isRef = ref;
     final name = ref.name;
     final appDocDir = await getExternalStorageDirectory();
     final filePath = appDocDir!.absolute;
     final fileName = "${filePath.path}/$name";
     final file = File(fileName);
 
-    final downloadTask = islandRef.writeToFile(file);
-    downloadTask.snapshotEvents.listen((taskSnapshot) {
+    final downloadTask = isRef.writeToFile(file);
+    /* downloadTask.snapshotEvents.listen((taskSnapshot) {
       switch (taskSnapshot.state) {
         case TaskState.running:
           // TODO: Handle this case.
@@ -41,6 +41,6 @@ class StorageService {
           // TODO: Handle this case.
           break;
       }
-    });
+    }); */
   }
 }

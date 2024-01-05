@@ -16,8 +16,7 @@ import 'package:story_teller/ui/screen/login/auth_screens/auth_screen.dart';
 import 'package:story_teller/ui/screen/settings/settings_screen.dart';
 import 'package:uuid/uuid.dart';
 
-const kUuid =  Uuid();
-
+const kUuid = Uuid();
 
 const kIconBackArrow = "assets/images/icons/backarrow.svg";
 const kIconShare = "assets/images/icons/share.svg";
@@ -26,6 +25,9 @@ const kIconStarUnfilled = "assets/images/icons/star_unfilled.svg";
 const kIconStarFilled = "assets/images/icons/star_filled.svg";
 const kIconClose = "assets/images/icons/close.svg";
 const kIconUser = "assets/images/icons/user.svg";
+const kMinFontSlider = 0.75;
+const kMaxFontSlider = 2.1;
+const kFontConversor = kMaxFontSlider + kMinFontSlider;
 
 const kImageCyberpunkCity =
     "https://i.postimg.cc/d3QMcjFp/gustavomore-a-futuristic-city-skyline-solar-punk-city-an-exte-37b9a7c2-f4ab-4a04-8d9b-c102a9ae1e66-3.png";
@@ -75,11 +77,12 @@ class BottomItems {
     ),
   ];
 }
+
 class Collections {
   static const String kStories = "stories";
-    static const String kUsers = "users";
-
+  static const String kUsers = "users";
 }
+
 final List<String> kBottomItemRoutes = [
   GeneratedContentScreen.route,
   AssistantsScreen.route,
@@ -98,26 +101,141 @@ snackMessage(BuildContext context, String message) {
   );
 }
 
+AutoSizeText buttonText(String text) {
+  const fontScale = 1.0;
+  double maxFont0 = ((15 / fontScale) > 11) ? (15 / fontScale) : 12;
+  int maxFont = maxFont0.toInt();
+  double fontSize = maxFont.sp;
 
-  AutoSizeText headerText(String text, {required double fontScale}) {
-    double maxFont0 = ((48 / fontScale) > 11) ? (48 / fontScale) : 12;
-    int maxFont = maxFont0.toInt();
-    double fontSize = maxFont.sp;
+  double fontHeight = (15 / fontScale).h;
+  double fontHeightFactor = fontHeight / fontSize;
+  return AutoSizeText(text,
+      style: GoogleFonts.poiretOne(
+        textStyle: TextStyle(
+          fontSize: fontSize,
+          height: fontHeightFactor.h,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      minFontSize: 10,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis);
+}
 
-    double fontHeight = (40 / fontScale).h;
-    double fontHeightFactor = fontHeight / fontSize;
-    return AutoSizeText(text,
-        style: GoogleFonts.poiretOne(
-          textStyle: TextStyle(
+//función lineal de conversión, dados los valores minimos y maximos del slider de settings
+double fontConversion(double fontscale) {
+  return -1 * fontscale + kFontConversor;
+}
+
+Text storyTitleText(String text, {required double fontScale}) {
+  fontScale = fontConversion(fontScale);
+  double fontSize = (36 / fontScale).sp;
+  double fontHeight = (70 / (fontScale * 1.5)).h;
+  double fontHeightFactor = fontHeight / fontSize;
+  return Text(text,
+      textAlign: TextAlign.left,
+      style: GoogleFonts.ubuntu(
+        textStyle: TextStyle(
             fontSize: fontSize,
             height: fontHeightFactor.h,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        minFontSize: 18,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis);
-  }
+            fontStyle: FontStyle.normal,
+            fontWeight: FontWeight.w900),
+      ));
+}
+
+Text storyAuthorNameText(String text, {required double fontScale}) {
+  fontScale = fontConversion(fontScale);
+  double fontSize = (18 / fontScale).sp;
+  double fontHeight = (36 / (fontScale * 1.5)).h;
+  double fontHeightFactor = fontHeight / fontSize;
+  return Text(text,
+      textAlign: TextAlign.left,
+      style: GoogleFonts.ubuntu(
+        textStyle: TextStyle(
+            fontSize: fontSize,
+            fontStyle: FontStyle.italic,
+            height: fontHeightFactor.h,
+            fontWeight: FontWeight.w600),
+      ));
+}
+
+Text storyBodyText(String text, {required double fontScale}) {
+  fontScale = fontConversion(fontScale);
+  double fontSize = (24 / fontScale).sp;
+  double fontHeight = (47 / (fontScale * 1.5)).h;
+  double fontHeightFactor = fontHeight / fontSize;
+  return Text(text,
+      textAlign: TextAlign.justify,
+      style: GoogleFonts.ubuntu(
+        textStyle: TextStyle(
+            fontSize: fontSize,
+            height: fontHeightFactor.h,
+            fontWeight: FontWeight.w400),
+      ));
+}
+
+Text storyPromptText(String text, {required double fontScale}) {
+  fontScale = fontConversion(fontScale);
+  double fontSize = (16 / fontScale).sp;
+  double fontHeight = (31 / (fontScale * 1.5)).h;
+  double fontHeightFactor = fontHeight / fontSize;
+  return Text(text,
+      textAlign: TextAlign.justify,
+      style: GoogleFonts.ubuntu(
+        textStyle: TextStyle(
+            fontSize: fontSize,
+            height: fontHeightFactor.h,
+            fontWeight: FontWeight.w600),
+      ));
+}
+
+
+Text storyAuthorText(String text, {required double fontScale}) {
+  fontScale = fontConversion(fontScale);
+  double fontSize = (14 / fontScale).sp;
+  double fontHeight = (28 / (fontScale * 1.5)).h;
+  double fontHeightFactor = fontHeight / fontSize;
+  return Text(text,
+      textAlign: TextAlign.justify,
+      style: GoogleFonts.ubuntu(
+        textStyle: TextStyle(
+            fontSize: fontSize,
+            height: fontHeightFactor.h,
+            fontStyle: FontStyle.italic,
+            fontWeight: FontWeight.w600),
+      ));
+}
+
+Text historyTitleText(String text, {required double fontScale}) {
+  fontScale = fontConversion(fontScale);
+  double fontSize = (19 / fontScale).sp;
+  double fontHeight = (33 / (fontScale * 1.5)).h;
+  double fontHeightFactor = fontHeight / fontSize;
+  return Text(text,
+      textAlign: TextAlign.left,
+      style: GoogleFonts.ubuntu(
+        textStyle: TextStyle(
+            fontSize: fontSize,
+            height: fontHeightFactor.h,
+            fontStyle: FontStyle.normal,
+            fontWeight: FontWeight.w800),
+      ));
+}
+Text historyBodyText(String text, {required double fontScale}) {
+  fontScale = fontConversion(fontScale);
+  double fontSize = (17 / fontScale).sp;
+  double fontHeight = (34/ (fontScale * 1.5)).h;
+  double fontHeightFactor = fontHeight / fontSize;
+  return Text(text,
+      textAlign: TextAlign.justify,
+      style: GoogleFonts.ubuntu(
+        textStyle: TextStyle(
+            fontSize: fontSize,
+            height: fontHeightFactor.h,
+            fontStyle: FontStyle.normal,
+            fontWeight: FontWeight.w600),
+      ));
+}
 
 /* const kSimpleTaleAssistant =
     """ Como 'Creador de cuentos', mi tarea principal es generar historias variadas e intrigantes y prompts para ilustraciones, presentando la respuesta en formato JSON con la claves title, story y prompt, como sigue 'title': string, 'story':string, 'prompt':string  
@@ -126,10 +244,9 @@ Al recibir una solicitud, escribo una narración de hasta 3000 caracteres.  Gene
 
 Esta función es mi prioridad, y aunque puedo realizar otras tareas, siempre enfocaré mis respuestas en la creación de historias y sus respectivos prompts para DALL-E.""";
  */
- const kSimpleTaleAssistant =
+const kSimpleTaleAssistant =
     """Es de vital importancia generar la estructura JSON con las tres llaves como especifico más adelante entre los caracteres ###.
 
 Como 'Creador de cuentos', mi tarea principal es generar historias variadas e intrigantes y prompts para ilustraciones, presentando la respuesta en formato JSON, con  ### 'title': string, 'story':string, 'prompt':string ###. Al recibir una solicitud, escribo una narración de hasta 3000 caracteres.  Genero un prompt breve para DALL-E que evoca la escena y las emociones descritas en el texto de la historia, el prompt para dall-e no es parte del texto de la narrativa y esta en su clave: 'prompt'. La respuesta deber ser en formato JSON y se estructura con 'title' para el título, 'story' para la narrativa de la historia, y 'prompt' para el texto de prompt breve para DALL-E.
 
 Esta función es mi prioridad, y aunque puedo realizar otras tareas, siempre enfocaré mis respuestas en la creación de historias y sus respectivos prompts para DALL-E.""";
- 

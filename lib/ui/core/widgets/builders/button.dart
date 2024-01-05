@@ -5,10 +5,11 @@ import 'package:story_teller/data/services/logger_impl.dart';
 import 'package:story_teller/domain/widgets/ai_button.dart';
 import 'package:story_teller/ui/core/factories/specific_platform_factory.dart';
 
-class NiceButton extends StatelessWidget implements AiButton { 
+class NiceButton extends StatelessWidget implements AiButton {
   final VoidCallback clickFunction;
   final bool? isFixedSize;
   final Color? backgroundColor;
+  final Color? foregroundColor;
   final double? padding;
   final double? height;
   final double? width;
@@ -29,11 +30,12 @@ class NiceButton extends StatelessWidget implements AiButton {
     this.iosPadding,
     this.iosBackgroundColor,
     this.backgroundColor,
+    this.foregroundColor,
     this.padding = 0.0,
     this.height,
     this.width,
     required this.clickFunction,
-    this.isFixedSize, 
+    this.isFixedSize,
     this.borderSide,
   });
 
@@ -41,7 +43,6 @@ class NiceButton extends StatelessWidget implements AiButton {
 
   @override
   Widget build(BuildContext context) {
-
     return ui.createButton(
       clickFunction: clickFunction,
       isFixedSize: isFixedSize,
@@ -52,6 +53,7 @@ class NiceButton extends StatelessWidget implements AiButton {
       text: text,
       textStyle: textStyle,
       bgColor: backgroundColor,
+      foregroundColor: foregroundColor,
       androidBackgroundColor: androidBackgroundColor,
       iosBackgroundColor: iosBackgroundColor,
     );

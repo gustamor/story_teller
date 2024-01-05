@@ -1,8 +1,6 @@
 // ignore_for_file: unused_local_variable, unused_import
 
 import 'dart:io';
-import 'dart:ui';
-
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
@@ -42,7 +40,6 @@ void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   configureDio();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
 
 
 

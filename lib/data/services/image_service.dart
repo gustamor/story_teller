@@ -64,10 +64,4 @@ class ImagesService {
     }
   }
 
-  Future<String?> savingImageUrlToFirestore(String storageLink) async {
-    try {
-      
-    } catch (e) {}
-    return null;
-  }
 }

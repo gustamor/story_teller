@@ -2,15 +2,17 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/constants.dart';
+import 'package:story_teller/ui/core/providers/font_scale_provider.dart';
+import 'package:story_teller/ui/core/providers/prompt_provider.dart';
 import 'package:story_teller/ui/core/widgets/builders/navigation_app_bar.dart';
 import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
-import 'package:story_teller/ui/themes/styles/text_styles.dart';
 
-class TaleScreen extends StatelessWidget {
+class TaleScreen extends ConsumerWidget {
   static const route = "/tale";
 
   const TaleScreen({super.key});
@@ -20,11 +22,11 @@ class TaleScreen extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     FlutterNativeSplash.remove();
 
     double width = MediaQuery.of(context).size.width;
-
+    var prompt = ref.watch(promptProvider);
     return SafeArea(
       child: Scaffold(
         appBar: NiceAppBar(
@@ -84,16 +86,18 @@ class TaleScreen extends StatelessWidget {
                               padding: EdgeInsets.only(top: 16.h),
                               child: Column(
                                 children: [
-                                  const Text(
+                                  storyTitleText(
                                     "El planeta solitario sin ojos que lo vean",
-                                    style: AndroidStyle.cardCaption,
+                                    fontScale:
+                                        ref.watch(fontScaleNotifierProvider),
                                   ),
                                   Gap(12.h),
                                   Container(
                                     alignment: Alignment.centerLeft,
-                                    child: const Text(
+                                    child: storyAuthorNameText(
                                       "Por Emma Moreno Li",
-                                      style: AndroidStyle.cardDescription,
+                                      fontScale:
+                                          ref.watch(fontScaleNotifierProvider),
                                     ),
                                   ),
                                 ],
@@ -105,17 +109,17 @@ class TaleScreen extends StatelessWidget {
                       Gap(16.h),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 12.w),
-                        child: const Text(
-                          "escribe un guión de cine de película de ciencia ficción sobre el crépusculo de los tiempos",
-                          style: AndroidStyle.cardDescription,
+                        child: storyPromptText(
+                          prompt,
+                          fontScale: ref.watch(fontScaleNotifierProvider),
                         ),
                       ),
-                      Gap(8.h),
+                      Gap(32.h),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.w),
-                        child: Text(
-                          "Había una vez, en el rincón más remoto del universo, un pequeño planeta solitario que flotaba en la inmensidad del espacio. Este misterioso mundo, llamado Veridion, permanecía oculto entre las estrellas, sin que nadie hubiera tenido la fortuna de descubrirlo. Su existencia era un secreto bien guardado, conocido solo por el cosmos mismo.",
-                          style: TextStyle(fontSize: 15.sp),
+                        child: storyBodyText(
+                          "Había una vez, en el rincón más remoto del universo, un pequeño planeta solitario que flotaba en la inmensidad del espacio. Este misterioso mundo, llamado Veridion, permanecía oculto entre las estrellas, sin que nadie hubiera tenido la fortuna de descubrirlo. Su existencia era un secreto bien guardado, conocido solo por el cosmos mismo. Había una vez, en el rincón más remoto del universo, un pequeño planeta solitario que flotaba en la inmensidad del espacio. Este misterioso mundo, llamado Veridion, permanecía oculto entre las estrellas, sin que nadie hubiera tenido la fortuna de descubrirlo. Su existencia era un secreto bien guardado, conocido solo por el cosmos mismo. Había una vez, en el rincón más remoto del universo, un pequeño planeta solitario que flotaba en la inmensidad del espacio. Este misterioso mundo, llamado Veridion, permanecía oculto entre las estrellas, sin que nadie hubiera tenido la fortuna de descubrirlo. Su existencia era un secreto bien guardado, conocido solo por el cosmos mismo.",
+                          fontScale: ref.watch(fontScaleNotifierProvider),
                         ),
                       ),
                       Gap(
@@ -130,7 +134,7 @@ class TaleScreen extends StatelessWidget {
                               kIconShare,
                               width: 24.w,
                               height: 24.h,
-                               color: Theme.of(context).cardColor.onColor,
+                              color: Theme.of(context).cardColor.onColor,
                             ),
                           ),
                           Padding(
