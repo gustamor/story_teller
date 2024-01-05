@@ -5,25 +5,78 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_driver/driver_extension.dart';
+import 'package:flutter_driver/flutter_driver.dart' as flutterDriver;
 import 'package:flutter_test/flutter_test.dart';
-import 'package:story_teller/main.dart';
+import 'package:story_teller/ui/screen/login/auth_screens/auth_screen.dart';
+import 'package:flutter_test/flutter_test.dart' as test;
 
-void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget( AiApp());
+void main() async {
+  enableFlutterDriverExtension();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  test.group('Prueba de Integración', () {
+     flutterDriver.FlutterDriver? driver;
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    setUpAll(() async {
+      driver = await flutterDriver.FlutterDriver.connect(
+        // dartVmServiceUrl is a URL used for connecting to the Dart VM service,
+        // which is a debugging and profiling service provided by the Dart runtime.
+        dartVmServiceUrl: "ws://127.0.0.1:58557/lTla2qH-HXs=/ws",
+        printCommunication: true, // Print communication logs for debugging.
+      );
+    /*  // Configurar el emulador de Firestore
+      FirebaseFirestore.instance.settings = const Settings(
+        host: 'localhost:8080',
+        sslEnabled: false,
+        persistenceEnabled: false,
+      );*/
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+      // Configurar el emulador de Auth
+      await FirebaseAuth.instance.useAuthEmulator('127.0.0.1', 9099);
+    });
+
+    tearDownAll(() async {
+      await driver?.close();
+    });
+
+    test.test('login with Firebase Auth', () async {
+      // Identificadores de los widgets
+      final emailFieldFinder = find.byKey(const Key('emailField'));
+      final passwordFieldFinder = find.byKey(const Key('passwordField'));
+      final loginButtonFinder = find.byKey(const Key('loginButton'));
+      final createAccountButtonFinder =
+          find.byKey(const Key('createAccountButton'));
+
+      // Ingresar credenciales de prueba
+      await driver?.tap(emailFieldFinder as flutterDriver.SerializableFinder);
+      await driver?.enterText('pepe@aa.com');
+ 
+
+      await driver?.tap(passwordFieldFinder as flutterDriver.SerializableFinder);
+      await driver?.enterText('abdefgh1');
+
+      // Iniciar sesión
+      await driver?.tap(loginButtonFinder as flutterDriver.SerializableFinder);
+
+      // Verificar que la pantalla cambió a CreateAccount
+      await driver?.waitFor(
+          createAccountButtonFinder as flutterDriver.SerializableFinder);
+    });
+    // Test for a valid email address
+    test.test('Valid email', () {
+      // Arrange: Create a validator function for email validation
+      final emailFieldFinder = find.byKey(const Key('emailField'));
+
+      final result = AuthScreen().validateEmail('pepe@aa.com');
+
+      // Act: Invoke the validator with a valid email
+
+      // Assert: Ensure the result is null, indicating a valid email
+      expect(result, false);
+    });
   });
 }

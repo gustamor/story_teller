@@ -1,11 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/constants.dart';
 import 'package:story_teller/ui/core/providers/bottom_bar_index.dart';
+import 'package:story_teller/ui/core/providers/font_scale_provider.dart';
 import 'package:story_teller/ui/core/providers/theme_mode_provider.dart';
 import 'package:story_teller/ui/core/widgets/builders/button.dart';
 import 'package:story_teller/ui/core/widgets/builders/navigation_app_bar.dart';
@@ -18,12 +20,13 @@ class SettingsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-  
     void onItemTapped(int index, BuildContext context, WidgetRef ref) {
       debugPrint("index of menu is : $index");
       ref.read(indexProvider.notifier).value = index;
       Navigator.pushNamed(context, kBottomItemRoutes[index]);
     }
+
+    var _value = ref.watch(fontScaleNotifierProvider);
 
     final Size screenSize = MediaQuery.of(context).size;
     final themeMode = ref.watch(themeModeProvider);
@@ -100,7 +103,40 @@ class SettingsScreen extends ConsumerWidget {
                   height: 1,
                 ),
               ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(16.0.w, 0.h, 24.w, 0),
+                child: const Divider(
+                  thickness: 1,
+                  height: 1,
+                ),
+              ),
               Gap(
+                kSettingsElementSeparator.h,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 16.0),
+                child: Text(
+                  'Notifications:',
+                  style: TextStyle(
+                    fontSize: 13.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 100.h,
+              ),
+               Gap(
+                kSettingsElementSeparator.h,
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(16.0.w, 0.h, 24.w, 0),
+                child: const Divider(
+                  thickness: 1,
+                  height: 1,
+                ),
+              ),
+                Gap(
                 kSettingsElementSeparator.h,
               ),
               Container(
@@ -125,7 +161,12 @@ class SettingsScreen extends ConsumerWidget {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            _value = 1.0;
+                            ref
+                                .read(fontScaleNotifierProvider.notifier)
+                                .saveFontScale(_value);
+                          },
                           child: Padding(
                             padding: EdgeInsets.only(right: 16.w),
                             child: SvgPicture.asset(
@@ -140,18 +181,22 @@ class SettingsScreen extends ConsumerWidget {
                       ],
                     ),
                     Gap(10.w),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 54.0),
+                    GestureDetector(
+                      onTap: () {},
                       child: SfSlider(
-                        min: 0.75,
+                        min: 1,
                         max: 2.1,
-                        value: 0.5,
+                        value: _value,
                         interval: 0.5,
                         showTicks: false,
                         showLabels: false,
                         enableTooltip: false,
                         minorTicksPerInterval: 0,
-                        onChanged: (dynamic value) {},
+                        onChanged: (dynamic value) {
+                          ref
+                              .read(fontScaleNotifierProvider.notifier)
+                              .saveFontScale(value.toDouble());
+                        },
                       ),
                     ),
                     Padding(
@@ -169,32 +214,12 @@ class SettingsScreen extends ConsumerWidget {
                       child: Text(
                         "Érase una vez...",
                         style: TextStyle(
-                          fontSize: (16 / 0.7).sp,
+                          fontSize: (16 / (1.0 / _value)).sp,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
                     Gap(kSettingsElementSeparator.h),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(16.0.w, 0.h, 24.w, 0),
-                      child: const Divider(
-                        thickness: 1,
-                        height: 1,
-                      ),
-                    ),
-                    Gap(
-                      kSettingsElementSeparator.h,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16.0),
-                      child: Text(
-                        'Notifications:',
-                        style: TextStyle(
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
