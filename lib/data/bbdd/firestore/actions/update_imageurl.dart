@@ -1,8 +1,7 @@
-//image = ["uuid", "imageurl"];
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:story_teller/constants.dart';
-import 'package:story_teller/data/bbdd/firestore/actions/get_tales.dart';
 import 'package:story_teller/di/firebase_providers.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
 

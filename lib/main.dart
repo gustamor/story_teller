@@ -6,8 +6,10 @@ import 'dart:ui';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -40,6 +42,10 @@ void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   configureDio();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+
+
+
  /* FlutterError.onError = (errorDetails) {
       FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
     };
@@ -175,7 +181,7 @@ class AiApp extends ConsumerWidget {
                   fontFamily: GoogleFonts.roboto().fontFamily,
                 ),
                 themeMode: currentMode,
-                initialRoute: AuthScreen.route,
+                initialRoute: TaleGeneratorScreen.route,
                 routes: {
                   AuthScreen.route: (context) => AuthScreen(),
                   AuthName.route: (context) => const AuthName(),

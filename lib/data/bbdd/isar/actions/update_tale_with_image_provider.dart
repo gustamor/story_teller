@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:story_teller/data/bbdd/isar/actions/get_tale_provider.dart';
-import 'package:story_teller/data/bbdd/isar/isar_provider.dart';
+import 'package:story_teller/di/isar_provider.dart';
 import 'package:story_teller/data/bbdd/isar/models/tale.dart';
 
 //image = ["uuid", "imageurl"];

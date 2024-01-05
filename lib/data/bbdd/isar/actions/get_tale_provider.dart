@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
-import 'package:story_teller/data/bbdd/isar/isar_provider.dart';
+import 'package:story_teller/di/isar_provider.dart';
 import 'package:story_teller/data/bbdd/isar/models/tale.dart';
 
 final getTaleProvider =

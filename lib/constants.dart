@@ -1,11 +1,14 @@
 // ignore_for_file: unused_import
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_context_menu/flutter_context_menu.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
 import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
 import 'package:story_teller/ui/screen/history/generated_content_screen.dart';
@@ -94,6 +97,27 @@ snackMessage(BuildContext context, String message) {
     ),
   );
 }
+
+
+  AutoSizeText headerText(String text, {required double fontScale}) {
+    double maxFont0 = ((48 / fontScale) > 11) ? (48 / fontScale) : 12;
+    int maxFont = maxFont0.toInt();
+    double fontSize = maxFont.sp;
+
+    double fontHeight = (40 / fontScale).h;
+    double fontHeightFactor = fontHeight / fontSize;
+    return AutoSizeText(text,
+        style: GoogleFonts.poiretOne(
+          textStyle: TextStyle(
+            fontSize: fontSize,
+            height: fontHeightFactor.h,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        minFontSize: 18,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis);
+  }
 
 /* const kSimpleTaleAssistant =
     """ Como 'Creador de cuentos', mi tarea principal es generar historias variadas e intrigantes y prompts para ilustraciones, presentando la respuesta en formato JSON con la claves title, story y prompt, como sigue 'title': string, 'story':string, 'prompt':string  

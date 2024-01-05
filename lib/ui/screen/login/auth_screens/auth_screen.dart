@@ -77,19 +77,7 @@ class AuthScreen extends ConsumerWidget {
       top: true,
       bottom: true,
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(onPressed: () {
-       //       ref.read(addUserProvider.future);
-
-         
-          var story = ref.read(storyProcessOrchestratorProvider.notifier);
-          story.generateASimpleStory("Crea una historia sobre naves espaciales del género space opera");
-          
-
-          /*  ref.read(imageProcessOrchestratorProvider.notifier).processAndStoreImage(
-              "Una nave espacial futurista, 'Orion', viajando a través del espacio oscuro con estrellas y nebulosas coloridas en el fondo. En la cabina, una mujer astronauta, de mediana edad, con cabello corto y traje espacial, contempla pensativa el universo a través de una gran ventana.");
-     */
-        }),
-        body: Material(
+          body: Material(
           child: SingleChildScrollView(
             child: LayoutBuilder(builder: (context, constraints) {
               return Form(
@@ -112,6 +100,7 @@ class AuthScreen extends ConsumerWidget {
                         horizontal: 32.w,
                       ),
                       child: NiceTextFormField(
+                        key: const Key("emailField"),
                         onFieldSubmitFunction: (_) {
                           //    focusEmailNode.requestFocus();
                         },
@@ -141,6 +130,8 @@ class AuthScreen extends ConsumerWidget {
                         horizontal: 32.w,
                       ),
                       child: NiceTextFormField(
+                     key: const Key("passwordField"),
+
                         onFieldSubmitFunction: (_) {
                           //    focusPasswordNode.requestFocus();
                         },
@@ -183,6 +174,8 @@ class AuthScreen extends ConsumerWidget {
                       ),
                     ),
                     NiceButton(
+                                              key: const Key("createAccountButton"),
+
                       clickFunction: () async {
                         if (_authFormkey.currentState!.validate()) {
                           await ref
@@ -235,6 +228,8 @@ class AuthScreen extends ConsumerWidget {
                       style: AndroidStyle.cardDescription,
                     ),
                     NiceButton(
+                     key: const Key("loginButton"),
+
                       clickFunction: () async {
                         if (_authFormkey.currentState!.validate()) {
                           log.d("successful");
