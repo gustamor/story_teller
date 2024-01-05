@@ -54,9 +54,6 @@ class SettingsScreen extends ConsumerWidget {
                 children: <Widget>[
                   NiceButton(
                       text: "Light",
-                      textStyle: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                      ),
                       borderSide: (themeMode == ThemeMode.light) ? 1 : null,
                       backgroundColor:
                           Theme.of(context).scaffoldBackgroundColor,
@@ -68,9 +65,6 @@ class SettingsScreen extends ConsumerWidget {
                   Gap(8.w),
                   NiceButton(
                       text: "Night",
-                      textStyle: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                      ),
                       borderSide: (themeMode == ThemeMode.dark) ? 1 : null,
                       backgroundColor:
                           Theme.of(context).scaffoldBackgroundColor,
@@ -82,9 +76,6 @@ class SettingsScreen extends ConsumerWidget {
                   Gap(8.w),
                   NiceButton(
                       text: "System",
-                      textStyle: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                      ),
                       borderSide: (themeMode == ThemeMode.system) ? 1 : null,
                       backgroundColor:
                           Theme.of(context).scaffoldBackgroundColor,
@@ -126,7 +117,7 @@ class SettingsScreen extends ConsumerWidget {
               SizedBox(
                 height: 100.h,
               ),
-               Gap(
+              Gap(
                 kSettingsElementSeparator.h,
               ),
               Padding(
@@ -136,7 +127,7 @@ class SettingsScreen extends ConsumerWidget {
                   height: 1,
                 ),
               ),
-                Gap(
+              Gap(
                 kSettingsElementSeparator.h,
               ),
               Container(
@@ -184,8 +175,8 @@ class SettingsScreen extends ConsumerWidget {
                     GestureDetector(
                       onTap: () {},
                       child: SfSlider(
-                        min: 1,
-                        max: 2.1,
+                        min: kMinFontSlider,
+                        max: kMaxFontSlider,
                         value: _value,
                         interval: 0.5,
                         showTicks: false,
@@ -212,9 +203,9 @@ class SettingsScreen extends ConsumerWidget {
                     Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Text(
-                        "Érase una vez...",
+                        tr('i_like_this_size'),
                         style: TextStyle(
-                          fontSize: (16 / (1.0 / _value)).sp,
+                          fontSize: (15 / (1.0 / _value)).sp,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
