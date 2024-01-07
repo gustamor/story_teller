@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,10 +7,12 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:story_teller/constants.dart';
+import 'package:story_teller/data/bbdd/isar/actions/local_user/add_user_provider.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
 import 'package:story_teller/ui/core/providers/registration_form_provider.dart';
 import 'package:story_teller/ui/core/widgets/builders/button.dart';
 import 'package:story_teller/ui/core/widgets/builders/text_form_field.dart';
+import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
 import 'package:story_teller/ui/themes/styles/text_styles.dart';
 
 class AuthName extends ConsumerWidget {
@@ -57,7 +61,7 @@ class AuthName extends ConsumerWidget {
                     children: [
                       const Text(
                         "Dinos el nombre por el que quieres te llamemos",
-                        style: AndroidStyle.cardDescription,
+                        style: AndroidStyle.cardCaption,
                       ),
                       SizedBox(
                         height: 16.w,
@@ -73,7 +77,6 @@ class AuthName extends ConsumerWidget {
                           controller: nameController,
                           hintText: tr("name"),
                           filled: true,
-                          borderRadius: 30,
                           borderSide: 3,
                         ),
                       ),
@@ -90,14 +93,23 @@ class AuthName extends ConsumerWidget {
                                 return state;
                               },
                             );
-                         
-                            final user = ref.read(authenticationStateProvider);
-                            if (user?.emailVerified == false) {
+
+                            final authState =
+                                ref.read(authenticationStateProvider);
+
+                            ref
+                                .read(authenticationProvider)
+                                .sendDisplayName(nameController.value.text);
+
+                            if (authState?.emailVerified == false) {
                               snackMessage(context,
                                   "Please, check your email inbox for the verification link and try again");
                               const Center(
                                   child: Text(
                                       "Please, check your email inbox for the verification link"));
+                            } else {
+                                                             Navigator.pushReplacementNamed(context, AssistantsScreen.route);
+
                             }
                           } else {
                             snackMessage(context, "Enter a valid name ");

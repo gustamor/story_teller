@@ -1,5 +1,6 @@
 
 import 'package:expandable/expandable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,11 +14,11 @@ class CardTile extends ConsumerWidget {
       required this.title,
       required this.storyBody,
       this.author,
-      required this.imageUrl});
+       this.imageUrl});
 
   final String title;
   final String storyBody;
-  final String imageUrl;
+  final String? imageUrl;
   final String? author;
 
   buildImg(Color color, double height, BoxFit fit) {
@@ -29,10 +30,10 @@ class CardTile extends ConsumerWidget {
           color: color,
           shape: BoxShape.rectangle,
         ),
-        child: Image.network(
-          imageUrl,
+        child: (imageUrl != null) ? Image.network(
+          imageUrl!,
           fit: fit,
-        ),
+        ) :const SizedBox(),
       ),
     );
   }
@@ -77,7 +78,7 @@ class CardTile extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    buildImg(Colors.black, 256, BoxFit.contain),
+                   (imageUrl != null) ? buildImg(Colors.black, 256, BoxFit.contain):const SizedBox(),
                     Gap(16.h),
                     for (var _ in Iterable.generate(1))
                       Padding(

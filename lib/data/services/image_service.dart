@@ -10,8 +10,8 @@ import 'package:story_teller/data/repositories/image_downloader_repository.dart'
 import 'package:story_teller/data/api/openai/dalle_image.dart';
 import 'package:story_teller/data/services/fire_storage.dart';
 import 'package:story_teller/data/services/random_names.dart';
-import 'package:story_teller/di/firebase_providers.dart';
-import 'package:story_teller/di/openai_providers.dart';
+import 'package:story_teller/data/di/firebase_providers.dart';
+import 'package:story_teller/data/di/openai_providers.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
 
 class ImagesService {
@@ -50,10 +50,9 @@ class ImagesService {
   Future<String?> remoteStoreImage(Ref ref, String fileName) async {
     final storage = StorageService();
     final storageRef = ref.watch(firebaseStorageProvider).ref();
-    final currentUser = await ref.watch(authenticationProvider).getCurrentUser();
-    final userEmail = currentUser!.email;
+    final currentUser = ref.watch(authenticationProvider).getDisplayName();
       try {
-      final reference = storageRef.child("image/$userEmail/$fileName.png");
+      final reference = storageRef.child("image/$currentUser/$fileName.png");
       final path = await _localPath;
       final file = "$path/$fileName.png";
       await storage.uploadImage(File(file), reference);

@@ -13,7 +13,8 @@ import 'package:story_teller/constants.dart';
 import 'package:story_teller/data/api/openai/chat_message.dart';
 import 'package:story_teller/data/api/openai/dalle_image.dart';
 import 'package:story_teller/data/bbdd/firestore/actions/add_user.dart';
-import 'package:story_teller/di/openai_providers.dart';
+import 'package:story_teller/data/bbdd/isar/actions/local_user/add_user_provider.dart';
+import 'package:story_teller/data/di/openai_providers.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
 import 'package:story_teller/domain/providers/chat_orchestator_provider.dart';
 import 'package:story_teller/domain/providers/image_orchestator_provider.dart';
@@ -77,7 +78,7 @@ class AuthScreen extends ConsumerWidget {
       top: true,
       bottom: true,
       child: Scaffold(
-          body: Material(
+        body: Material(
           child: SingleChildScrollView(
             child: LayoutBuilder(builder: (context, constraints) {
               return Form(
@@ -130,8 +131,7 @@ class AuthScreen extends ConsumerWidget {
                         horizontal: 32.w,
                       ),
                       child: NiceTextFormField(
-                     key: const Key("passwordField"),
-
+                        key: const Key("passwordField"),
                         onFieldSubmitFunction: (_) {
                           //    focusPasswordNode.requestFocus();
                         },
@@ -167,15 +167,14 @@ class AuthScreen extends ConsumerWidget {
                         padding: EdgeInsets.only(right: 36.w, top: 6.h),
                         child: const Align(
                           alignment: Alignment.bottomRight,
-                          child: TextWithState(
-                        //    "I forgot my password",
-                          ),
+                          child: Text(
+                                  "I forgot my password",
+                              ),
                         ),
                       ),
                     ),
                     NiceButton(
-                                              key: const Key("createAccountButton"),
-
+                      key: const Key("createAccountButton"),
                       clickFunction: () async {
                         if (_authFormkey.currentState!.validate()) {
                           await ref
@@ -204,7 +203,6 @@ class AuthScreen extends ConsumerWidget {
                               snackMessage(context,
                                   "Created. Please, check your email inbox for the verification link and try again");
                             }
-
                             await ref
                                 .read(authenticationStateProvider.notifier)
                                 .sendEmailVerification();
@@ -228,7 +226,7 @@ class AuthScreen extends ConsumerWidget {
                       style: AndroidStyle.cardDescription,
                     ),
                     NiceButton(
-                     key: const Key("loginButton"),
+                      key: const Key("loginButton"),
 
                       clickFunction: () async {
                         if (_authFormkey.currentState!.validate()) {
@@ -248,9 +246,6 @@ class AuthScreen extends ConsumerWidget {
                                 authenticationStateProvider.notifier,
                               )
                               .isUserLogged();
-                          if (context.mounted) {
-                            snackMessage(context, "Logged");
-                          }
 
                           if (isLogged) {
                             if (context.mounted) {

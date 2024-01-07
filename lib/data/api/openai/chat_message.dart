@@ -11,19 +11,19 @@ import 'package:story_teller/constants.dart';
 import 'package:story_teller/data/api/model/tale_data.dart';
 import 'package:story_teller/data/bbdd/firestore/models/simple_story.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
-import 'package:story_teller/di/openai_providers.dart';
+import 'package:story_teller/data/di/openai_providers.dart';
 import 'package:story_teller/domain/services/abstract_tell_logger.dart';
 
 /// Implements a [TellLogger] instance
 final TellLogger log = LogImpl();
 
-class ChatMessages {
+class GptChatMessages {
   Ref ref;
-  ChatMessages(
+  GptChatMessages(
     this.ref,
   );
 
-  Future<TaleData> generateStory({required String prompt}) async {
+  Future<String> getGptChatResponse({required String prompt}) async {
     final client = ref.watch(openAiProvider);
     try {
       final res = await client.createChatCompletion(
@@ -45,16 +45,8 @@ class ChatMessages {
         ),
       );
       ChatCompletionMessage message = res.choices.first.message;
-      log.i(message.content);
-      final taleData = TaleData.fromMap(
-        json.decode(
-          message.content.toString(),
-        ),
-      );
-      log.d(
-        taleData,
-      );
-      return taleData;
+      log.d(message.content);
+      return message.content.toString();
     } catch (e) {
       throw Exception(e);
     }

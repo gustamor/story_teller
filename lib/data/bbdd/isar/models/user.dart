@@ -1,4 +1,3 @@
-
 import 'package:isar/isar.dart';
 
 part 'user.g.dart';
@@ -18,5 +17,5 @@ class LocalUser {
   late String? country;
   late String? gender;
   late int? age;
-
+  late String? authId;
 }

@@ -5,10 +5,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:story_teller/constants.dart';
 import 'package:story_teller/data/bbdd/firestore/actions/get_tales.dart';
 import 'package:story_teller/data/bbdd/firestore/models/simple_story.dart';
-import 'package:story_teller/di/firebase_providers.dart';
+import 'package:story_teller/data/di/firebase_providers.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
 
-final getTaleProvider = FutureProvider.family<Story, String>((ref, id) async {
+final getFirebaseTaleProvider = FutureProvider.family<Story, String>((ref, id) async {
   final db = ref.read(firebaseFirestoreProvider);
   final currentUser = await ref.read(authenticationProvider).getCurrentUser();
   try {

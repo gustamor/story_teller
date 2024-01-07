@@ -160,4 +160,36 @@ class AuthenticationServiceImpl implements AuthenticationService {
     }
   }
 
+  @override
+  String? getUserEmail() {
+    try {
+      return _auth.currentUser!.email;
+    } on FirebaseAuthException catch (e) {
+      throw AuthException(_getFirebaseAuthErrorMessage(e));
+    } catch (e) {
+      throw AuthException('An unknown error occurred.');
+    }
+  }
+
+  @override
+  Future<void> sendDisplayName(String name) async {
+    try {
+      await _auth.currentUser!.updateDisplayName(name);
+    } on FirebaseAuthException catch (e) {
+      throw AuthException(_getFirebaseAuthErrorMessage(e));
+    } catch (e) {
+      throw AuthException('An unknown error occurred.');
+    }
+  }
+  
+  @override
+  String? getDisplayName() {
+    try {
+      return _auth.currentUser!.displayName;
+    } on FirebaseAuthException catch (e) {
+      throw AuthException(_getFirebaseAuthErrorMessage(e));
+    } catch (e) {
+      throw AuthException('An unknown error occurred.');
+    }
+  }
 }

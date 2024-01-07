@@ -8,6 +8,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:story_teller/constants.dart';
+import 'package:story_teller/data/di/isar_provider.dart';
 import 'package:story_teller/domain/notifiers/auth_state_notifier.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
 import 'package:story_teller/ui/core/providers/menus_providers.dart';
@@ -61,10 +62,12 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
 
   @override
   Widget build(BuildContext context) {
+     final user = ref.read(authenticationProvider).getDisplayName();
+           double width = MediaQuery.of(context).size.width;
+
     final double kLeftPaddingHomeNameText = 4.w;
     final double kTopPaddingHomeWhatCanText = 32.w;
     FlutterNativeSplash.remove();
-
     final contextMenu = ref.watch(contextMenuProvider);
     return SafeArea(
       child: Scaffold(
@@ -87,7 +90,7 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
                       top: kTopPaddingHomeWhatCanText,
                     ),
                     child: Text(
-                      "Hola User",
+                      "Hola $user"  , 
                       style: TextStyle(
                         fontSize: 28.sp,
                       ),
@@ -110,30 +113,21 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     NiceClickableCard(
                       clickFunction: () => Navigator.pushNamed(
                           context, TaleGeneratorScreen.route),
                       height: 104.h,
-                      width: 112.w,
+                      width: 300.w,
                       caption: tr("story"),
                       description: tr("story_description"),
                       decorImage: kImageCyberpunkCity,
                       fit: BoxFit.cover,
                       borderRadius: 32.0,
                     ),
-                    NiceClickableCard(
-                      height: 104.h,
-                      width: 112.w,
-                      caption: tr("script"),
-                      description: tr("script_description"),
-                      decorImage: kImagePlanet,
-                      fit: BoxFit.cover,
-                      borderRadius: 32.0,
-                    ),
-                  ],
+                  ]
                 ),
               ),
             ],

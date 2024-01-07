@@ -21,8 +21,8 @@ class StorageService {
     final filePath = appDocDir!.absolute;
     final fileName = "${filePath.path}/$name";
     final file = File(fileName);
-
-    final downloadTask = isRef.writeToFile(file);
+    isRef.writeToFile(file);
+//    final downloadTask = isRef.writeToFile(file);
     /* downloadTask.snapshotEvents.listen((taskSnapshot) {
       switch (taskSnapshot.state) {
         case TaskState.running:

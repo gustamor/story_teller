@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:story_teller/data/providers/shared_preferences.dart';
+import 'package:story_teller/data/di/shared_preferences.dart';
 
 final fontScaleNotifierProvider =
     StateNotifierProvider<FontScaleStateNotifier, double>((ref) {

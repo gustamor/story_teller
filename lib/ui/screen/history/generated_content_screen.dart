@@ -11,6 +11,7 @@ import 'package:gap/gap.dart';
 import 'package:story_teller/constants.dart';
 import 'package:story_teller/data/bbdd/firestore/actions/get_tales.dart';
 import 'package:story_teller/data/bbdd/firestore/models/simple_story.dart';
+import 'package:story_teller/domain/providers/auth_providers.dart';
 import 'package:story_teller/ui/core/providers/bottom_bar_index.dart';
 import 'package:story_teller/ui/core/providers/font_scale_provider.dart';
 import 'package:story_teller/ui/core/widgets/builders/navigation_app_bar.dart';
@@ -104,36 +105,43 @@ class GeneratedContentScreen extends ConsumerWidget {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
                             return SizedBox(
-                                width: double.infinity,
-                                child:
-                                    CircularProgressIndicator()); // Mostrar un indicador de carga
+                              width: double.infinity,
+                              child: CupertinoActivityIndicator(),
+                            );
                           } else if (snapshot.hasError) {
                             return Text('Error: ${snapshot.error}');
                           } else if (snapshot.hasData) {
-                            // Aquí construyes tu lista basada en los datos
                             return ListView.builder(
                               itemCount: snapshot.data!.length,
                               itemBuilder: (context, index) {
                                 final item = snapshot.data![index];
+                             //   if (item.imageUrl == null) return null;
                                 Widget card;
-                                if (index < 0) {
+
+                                if (index < 1) {
                                   card = CardExpanded(
                                       title: item.title!,
                                       storyBody: item.text!,
                                       imageUrl: item.imageUrl!,
-                                      author: item.user);
+                                      author: ref
+                                          .read(authenticationProvider)
+                                          .getDisplayName());
                                 } else {
                                   card = CardTile(
-                                      title: item.title!,
-                                      storyBody: item.text!,
-                                      imageUrl: item.imageUrl!,
-                                      author: item.user);
+                                    title: item.title ?? "title null",
+                                    storyBody: item.text ?? "story body null",
+                                    imageUrl: item.imageUrl,
+                                    author: ref
+                                            .read(authenticationProvider)
+                                            .getDisplayName() ??
+                                        "name null",
+                                  );
                                 }
                                 return card;
                               },
                             );
                           } else {
-                            return Text('No hay datos disponibles');
+                            return Text('There is no data available');
                           }
                         }),
                   ),

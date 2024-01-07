@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:openai_dart/openai_dart.dart';
-import 'package:story_teller/di/openai_providers.dart';
+import 'package:story_teller/data/di/openai_providers.dart';
 
 class DalleImage {
   Ref ref;

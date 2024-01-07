@@ -19,6 +19,7 @@ import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:story_teller/data/bbdd/isar/models/tale.dart';
 import 'package:story_teller/data/bbdd/isar/models/user.dart';
+import 'package:story_teller/data/di/isar_provider.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
 import 'package:story_teller/data/services/riverpod_logger_impl.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
@@ -41,9 +42,7 @@ void main() async {
   configureDio();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-
-
- /* FlutterError.onError = (errorDetails) {
+  /* FlutterError.onError = (errorDetails) {
       FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
     };
     // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
@@ -122,7 +121,7 @@ class AiApp extends ConsumerWidget {
   }
 
   authChecker(WidgetRef ref) {
-    final logged = ref.watch(authStateChangesProvider);
+    final logged =  ref.watch(authStateChangesProvider);
     logged.when(
       data: (user) {
         if (user != null && user.emailVerified) {
@@ -153,7 +152,6 @@ class AiApp extends ConsumerWidget {
 
     authChecker(ref);
     setDeviceOrientation();
-
     return ValueListenableBuilder<ThemeMode>(
         valueListenable: themeNotifier,
         builder: (_, ThemeMode cm, __) {
@@ -178,7 +176,7 @@ class AiApp extends ConsumerWidget {
                   fontFamily: GoogleFonts.roboto().fontFamily,
                 ),
                 themeMode: currentMode,
-                initialRoute: TaleGeneratorScreen.route,
+                initialRoute: AuthScreen.route,
                 routes: {
                   AuthScreen.route: (context) => AuthScreen(),
                   AuthName.route: (context) => const AuthName(),

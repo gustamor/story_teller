@@ -5,10 +5,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:story_teller/constants.dart';
 
 import 'package:story_teller/data/bbdd/firestore/models/user.dart' as fbUser;
-import 'package:story_teller/di/firebase_providers.dart';
+import 'package:story_teller/data/di/firebase_providers.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
 
-final addUserProvider = FutureProvider<void>((ref) async {
+final addFirestoreUserProvider = FutureProvider<void>((ref) async {
   final db = ref.read(firebaseFirestoreProvider);
   final user = await ref.read(authenticationProvider).getCurrentUser();
   final newUser = fbUser.User(

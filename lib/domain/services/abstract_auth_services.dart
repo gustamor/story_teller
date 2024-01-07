@@ -43,4 +43,10 @@ abstract class AuthenticationService {
   ///
   /// Returns `true` on successful email dispatch, otherwise throws an [AuthException].
   Future<bool> sendPasswordResetEmail(String email);
+
+  String? getUserEmail();
+
+  Future<void> sendDisplayName(String name);
+
+  String? getDisplayName();
 }

@@ -22,48 +22,53 @@ const LocalUserSchema = CollectionSchema(
       name: r'age',
       type: IsarType.long,
     ),
-    r'country': PropertySchema(
+    r'authId': PropertySchema(
       id: 1,
+      name: r'authId',
+      type: IsarType.string,
+    ),
+    r'country': PropertySchema(
+      id: 2,
       name: r'country',
       type: IsarType.string,
     ),
     r'email': PropertySchema(
-      id: 2,
+      id: 3,
       name: r'email',
       type: IsarType.string,
     ),
     r'gender': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'gender',
       type: IsarType.string,
     ),
     r'isPremium': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'isPremium',
       type: IsarType.bool,
     ),
     r'name': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'name',
       type: IsarType.string,
     ),
     r'photo': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'photo',
       type: IsarType.string,
     ),
     r'surnames': PropertySchema(
-      id: 7,
+      id: 8,
       name: r'surnames',
       type: IsarType.string,
     ),
     r'tokens': PropertySchema(
-      id: 8,
+      id: 9,
       name: r'tokens',
       type: IsarType.long,
     ),
     r'userName': PropertySchema(
-      id: 9,
+      id: 10,
       name: r'userName',
       type: IsarType.string,
     )
@@ -88,6 +93,12 @@ int _localUserEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
+  {
+    final value = object.authId;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   {
     final value = object.country;
     if (value != null) {
@@ -140,15 +151,16 @@ void _localUserSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeLong(offsets[0], object.age);
-  writer.writeString(offsets[1], object.country);
-  writer.writeString(offsets[2], object.email);
-  writer.writeString(offsets[3], object.gender);
-  writer.writeBool(offsets[4], object.isPremium);
-  writer.writeString(offsets[5], object.name);
-  writer.writeString(offsets[6], object.photo);
-  writer.writeString(offsets[7], object.surnames);
-  writer.writeLong(offsets[8], object.tokens);
-  writer.writeString(offsets[9], object.userName);
+  writer.writeString(offsets[1], object.authId);
+  writer.writeString(offsets[2], object.country);
+  writer.writeString(offsets[3], object.email);
+  writer.writeString(offsets[4], object.gender);
+  writer.writeBool(offsets[5], object.isPremium);
+  writer.writeString(offsets[6], object.name);
+  writer.writeString(offsets[7], object.photo);
+  writer.writeString(offsets[8], object.surnames);
+  writer.writeLong(offsets[9], object.tokens);
+  writer.writeString(offsets[10], object.userName);
 }
 
 LocalUser _localUserDeserialize(
@@ -159,16 +171,17 @@ LocalUser _localUserDeserialize(
 ) {
   final object = LocalUser();
   object.age = reader.readLongOrNull(offsets[0]);
-  object.country = reader.readStringOrNull(offsets[1]);
-  object.email = reader.readStringOrNull(offsets[2]);
-  object.gender = reader.readStringOrNull(offsets[3]);
+  object.authId = reader.readStringOrNull(offsets[1]);
+  object.country = reader.readStringOrNull(offsets[2]);
+  object.email = reader.readStringOrNull(offsets[3]);
+  object.gender = reader.readStringOrNull(offsets[4]);
   object.id = id;
-  object.isPremium = reader.readBool(offsets[4]);
-  object.name = reader.readStringOrNull(offsets[5]);
-  object.photo = reader.readStringOrNull(offsets[6]);
-  object.surnames = reader.readStringOrNull(offsets[7]);
-  object.tokens = reader.readLong(offsets[8]);
-  object.userName = reader.readStringOrNull(offsets[9]);
+  object.isPremium = reader.readBool(offsets[5]);
+  object.name = reader.readStringOrNull(offsets[6]);
+  object.photo = reader.readStringOrNull(offsets[7]);
+  object.surnames = reader.readStringOrNull(offsets[8]);
+  object.tokens = reader.readLong(offsets[9]);
+  object.userName = reader.readStringOrNull(offsets[10]);
   return object;
 }
 
@@ -188,16 +201,18 @@ P _localUserDeserializeProp<P>(
     case 3:
       return (reader.readStringOrNull(offset)) as P;
     case 4:
-      return (reader.readBool(offset)) as P;
-    case 5:
       return (reader.readStringOrNull(offset)) as P;
+    case 5:
+      return (reader.readBool(offset)) as P;
     case 6:
       return (reader.readStringOrNull(offset)) as P;
     case 7:
       return (reader.readStringOrNull(offset)) as P;
     case 8:
-      return (reader.readLong(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 9:
+      return (reader.readLong(offset)) as P;
+    case 10:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -360,6 +375,152 @@ extension LocalUserQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QAfterFilterCondition> authIdIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'authId',
+      ));
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QAfterFilterCondition> authIdIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'authId',
+      ));
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QAfterFilterCondition> authIdEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'authId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QAfterFilterCondition> authIdGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'authId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QAfterFilterCondition> authIdLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'authId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QAfterFilterCondition> authIdBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'authId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QAfterFilterCondition> authIdStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'authId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QAfterFilterCondition> authIdEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'authId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QAfterFilterCondition> authIdContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'authId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QAfterFilterCondition> authIdMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'authId',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QAfterFilterCondition> authIdIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'authId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QAfterFilterCondition> authIdIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'authId',
+        value: '',
       ));
     });
   }
@@ -1543,6 +1704,18 @@ extension LocalUserQuerySortBy on QueryBuilder<LocalUser, LocalUser, QSortBy> {
     });
   }
 
+  QueryBuilder<LocalUser, LocalUser, QAfterSortBy> sortByAuthId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'authId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QAfterSortBy> sortByAuthIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'authId', Sort.desc);
+    });
+  }
+
   QueryBuilder<LocalUser, LocalUser, QAfterSortBy> sortByCountry() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'country', Sort.asc);
@@ -1663,6 +1836,18 @@ extension LocalUserQuerySortThenBy
   QueryBuilder<LocalUser, LocalUser, QAfterSortBy> thenByAgeDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'age', Sort.desc);
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QAfterSortBy> thenByAuthId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'authId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QAfterSortBy> thenByAuthIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'authId', Sort.desc);
     });
   }
 
@@ -1795,6 +1980,13 @@ extension LocalUserQueryWhereDistinct
     });
   }
 
+  QueryBuilder<LocalUser, LocalUser, QDistinct> distinctByAuthId(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'authId', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<LocalUser, LocalUser, QDistinct> distinctByCountry(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1868,6 +2060,12 @@ extension LocalUserQueryProperty
   QueryBuilder<LocalUser, int?, QQueryOperations> ageProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'age');
+    });
+  }
+
+  QueryBuilder<LocalUser, String?, QQueryOperations> authIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'authId');
     });
   }
 

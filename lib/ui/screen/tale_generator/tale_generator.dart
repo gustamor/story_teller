@@ -29,6 +29,7 @@ class TaleGeneratorScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final genresList = ref.read(genresListProvider);
+    String prompt;
 
     FlutterNativeSplash.remove();
     final TextEditingController controller = TextEditingController();
@@ -65,14 +66,9 @@ class TaleGeneratorScreen extends ConsumerWidget {
                           Gap(6.h),
                           NiceTextFormField(
                             onFieldSubmitFunction: (text) {
-                              final prompt = tr('write_a_story_about') + text;
                               ref
                                   .read(promptProvider.notifier)
                                   .update((state) => state = text);
-                              /*  var story = ref.read(
-                                  storyProcessOrchestratorProvider.notifier);
-                              story.generateASimpleStory(prompt ??
-                                  "Crea una historia al azar que no se parezca a otras"); */
                             },
                             controller: controller,
                             maxLines: 4,
@@ -91,16 +87,16 @@ class TaleGeneratorScreen extends ConsumerWidget {
                           ),
                           Center(
                             child: NiceButton(
-                              clickFunction: () => {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Center(
-                                      child: Text(ref.read(promptProvider)),
-                                    ),
-                                  ),
-                                ),
-                                Navigator.pushReplacementNamed(
-                                    context, TaleScreen.route),
+                              clickFunction: () {
+                             
+                                prompt =
+                                    tr('write_a_story_about') + controller.text;
+
+                                final story = ref.read(
+                                    storyProcessOrchestratorProvider.notifier);
+                                story.generateASimpleStory(prompt);
+                                Navigator.pushNamed(
+                                    context, TaleScreen.route);
                               },
                               isFixedSize: false,
                               height: 110.h,
@@ -141,13 +137,14 @@ class TaleGeneratorScreen extends ConsumerWidget {
                                           final prompt =
                                               tr('write_a_story_of_genre') +
                                                   tr(item);
-                                                  ref
-                                  .read(promptProvider.notifier)
-                                  .update((state) => state = prompt);
-                                         /*  var story = ref.read(
+                                          ref
+                                              .read(promptProvider.notifier)
+                                              .update(
+                                                  (state) => state = prompt);
+                                          var story = ref.read(
                                               storyProcessOrchestratorProvider
                                                   .notifier);
-                                          story.generateASimpleStory(prompt); */
+                                          story.generateASimpleStory(prompt);
                                           Navigator.pushReplacementNamed(
                                               context, TaleScreen.route);
                                         },

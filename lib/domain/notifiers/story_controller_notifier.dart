@@ -5,8 +5,8 @@ import 'package:openai_dart/openai_dart.dart';
 import 'package:story_teller/data/bbdd/firestore/actions/add_user.dart';
 import 'package:story_teller/data/bbdd/firestore/actions/update_imageurl.dart';
 import 'package:story_teller/data/bbdd/firestore/actions/upload_tale.dart';
-import 'package:story_teller/data/bbdd/isar/actions/add_tale_provider.dart';
-import 'package:story_teller/data/bbdd/isar/actions/update_tale_with_image_provider.dart';
+import 'package:story_teller/data/bbdd/isar/actions/tale/add_tale_provider.dart';
+import 'package:story_teller/data/bbdd/isar/actions/tale/update_tale_with_image_provider.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
 import 'package:story_teller/domain/chat_process_state.dart';
 import 'package:story_teller/domain/image_process_state.dart';
@@ -14,6 +14,7 @@ import 'package:story_teller/domain/providers/chat_orchestator_provider.dart';
 import 'package:story_teller/domain/providers/image_orchestator_provider.dart';
 import 'package:story_teller/domain/services/abstract_tell_logger.dart';
 import 'package:story_teller/domain/story_process_state.dart';
+import 'package:story_teller/ui/core/providers/current_tale_id_provider.dart';
 
 class StoryProcessControllerNotifier extends StateNotifier<ProcessState> {
   final Ref ref;
@@ -28,6 +29,9 @@ class StoryProcessControllerNotifier extends StateNotifier<ProcessState> {
 
   Future<void> generateASimpleStory(String prompt) async {
     try {
+      state = StoryProcessState(
+        step: StoryProcessStep.starting,
+      );
       final chatOrchestator =
           ref.watch(chatProcessOrchestratorProvider.notifier);
       final imageOrchestator =
@@ -37,8 +41,18 @@ class StoryProcessControllerNotifier extends StateNotifier<ProcessState> {
         step: StoryProcessStep.generatingStory,
       );
       final taleData = await chatOrchestator.processAndStoreSimpleStory(prompt);
-      ref.read(addTaleProvider(taleData));
-      ref.read(uploadTaleProvider(taleData));
+      ref.read(
+        addTaleProvider(
+          taleData!,
+        ),
+      );
+      ref.read(
+        uploadTaleProvider(
+          taleData,
+        ),
+      );
+      ref.read(taleToShowProvider.notifier).update((state) => state = taleData.id);
+
       if (chatOrchestator.state.step == ChatProcessStep.completed) {
         state = StoryProcessState(
           step: StoryProcessStep.storyCompleted,
@@ -64,8 +78,9 @@ class StoryProcessControllerNotifier extends StateNotifier<ProcessState> {
           step: StoryProcessStep.savingImage,
         );
       } else if (imageOrchestator.state.step == ImageProcessStep.completed) {
+                ref.read(upateStoryWithImageUrl([taleData.id, imageUrl ?? ""]));
+
         ref.read(upateTaleWithImageProvider([taleData.id, imageUrl ?? ""]));
-        ref.read(upateStoryWithImageUrl([taleData.id, imageUrl ?? ""]));
         state = StoryProcessState(
           step: StoryProcessStep.imageCompleted,
         );

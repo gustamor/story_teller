@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:story_teller/constants.dart';
 import 'package:story_teller/data/api/model/tale_data.dart';
 import 'package:story_teller/data/bbdd/firestore/models/simple_story.dart';
-import 'package:story_teller/di/firebase_providers.dart';
+import 'package:story_teller/data/di/firebase_providers.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
 
 final uploadTaleProvider =

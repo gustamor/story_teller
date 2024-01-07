@@ -56,7 +56,7 @@ class CardExpanded extends StatelessWidget {
     }
 
     buildCollapsed2() {
-      return buildImg(Colors.lightGreenAccent, 100, BoxFit.cover);
+      return buildImg(Theme.of(context).scaffoldBackgroundColor, 100, BoxFit.cover);
     }
 
     buildCollapsed3() {
@@ -147,7 +147,7 @@ class CardExpanded extends StatelessWidget {
                           ExpandableController.of(context, required: true)!;
                       return TextButton(
                         child: Text(
-                          controller.expanded ? "CERRAR" : "EXPANDE",
+                          controller.expanded ? "CIERRA" : "ABRE",
                           style: Theme.of(context)
                               .textTheme
                               .labelLarge!

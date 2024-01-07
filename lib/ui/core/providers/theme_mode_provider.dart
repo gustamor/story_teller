@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:story_teller/data/services/shared_preferences_service.dart';
 import 'package:story_teller/domain/providers/theme_mode_provider.dart';
-import 'package:story_teller/data/providers/shared_preferences.dart';
+import 'package:story_teller/data/di/shared_preferences.dart';
 
 final themeModeProvider =
     StateNotifierProvider<ThemeModeProvider, ThemeMode>((ref) {
