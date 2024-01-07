@@ -3,19 +3,32 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-/// Provider for the instance of [FirebaseAuth].
+/// Provides an instance of [FirebaseAuth].
 ///
-/// This provider is used to access the FirebaseAuth instance in the application.
-final firebaseAuthProvider = Provider<FirebaseAuth>((ref) {
+/// This provider offers access to the FirebaseAuth service throughout the application.
+/// It's used to authenticate users and manage their sessions.
+final firebaseAuthProvider = Provider<FirebaseAuth>((
+  ref,
+) {
   return FirebaseAuth.instance;
 });
 
-final firebaseStorageProvider = Provider<FirebaseStorage>((ref) {
+/// Provides an instance of [FirebaseStorage].
+///
+/// This provider facilitates access to Firebase Storage, enabling the application
+/// to store and retrieve user-generated content like images, videos, or other files.
+final firebaseStorageProvider = Provider<FirebaseStorage>((
+  ref,
+) {
   return FirebaseStorage.instance;
 });
 
-final firebaseFirestoreProvider = Provider<FirebaseFirestore>((ref) {
+/// Provides an instance of [FirebaseFirestore].
+///
+/// This provider is used for accessing Firestore, a cloud-hosted NoSQL database,
+/// to store and synchronize data for client- and server-side development.
+final firebaseFirestoreProvider = Provider<FirebaseFirestore>((
+  ref,
+) {
   return FirebaseFirestore.instance;
 });
-
-

@@ -1,4 +1,4 @@
-
+import 'package:story_teller/data/bbdd/firestore/models/simple_story.dart';
 
 abstract class AbstractTaleData {
   String get id;
@@ -14,4 +14,6 @@ abstract class AbstractTaleData {
 
   @override
   String toString();
+  
+  Story toStory(String userId);
 }

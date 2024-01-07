@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:story_teller/data/api/model/tale_data.dart';
-import 'package:story_teller/data/di/openai_providers.dart';
+import 'package:story_teller/data/di/openai_provider.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
 import 'package:story_teller/data/services/taledata_provider.dart';
 import 'package:story_teller/domain/chat_process_state.dart';

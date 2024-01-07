@@ -14,7 +14,7 @@ import 'package:story_teller/data/api/openai/chat_message.dart';
 import 'package:story_teller/data/api/openai/dalle_image.dart';
 import 'package:story_teller/data/bbdd/firestore/actions/add_user.dart';
 import 'package:story_teller/data/bbdd/isar/actions/local_user/add_user_provider.dart';
-import 'package:story_teller/data/di/openai_providers.dart';
+import 'package:story_teller/data/di/openai_provider.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
 import 'package:story_teller/domain/providers/chat_orchestator_provider.dart';
 import 'package:story_teller/domain/providers/image_orchestator_provider.dart';
