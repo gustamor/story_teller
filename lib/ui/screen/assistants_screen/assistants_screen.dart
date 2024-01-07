@@ -63,7 +63,6 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
   @override
   Widget build(BuildContext context) {
      final user = ref.read(authenticationProvider).getDisplayName();
-           double width = MediaQuery.of(context).size.width;
 
     final double kLeftPaddingHomeNameText = 4.w;
     final double kTopPaddingHomeWhatCanText = 32.w;

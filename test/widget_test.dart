@@ -12,7 +12,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_driver/driver_extension.dart';
-import 'package:flutter_driver/flutter_driver.dart' as flutterDriver;
+import 'package:flutter_driver/flutter_driver.dart' as flutte_driver;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:story_teller/ui/screen/login/auth_screens/auth_screen.dart';
 import 'package:flutter_test/flutter_test.dart' as test;
@@ -21,10 +21,10 @@ void main() async {
   enableFlutterDriverExtension();
 
   test.group('Prueba de Integración', () {
-     flutterDriver.FlutterDriver? driver;
+     flutte_driver.FlutterDriver? driver;
 
     setUpAll(() async {
-      driver = await flutterDriver.FlutterDriver.connect(
+      driver = await flutte_driver.FlutterDriver.connect(
         // dartVmServiceUrl is a URL used for connecting to the Dart VM service,
         // which is a debugging and profiling service provided by the Dart runtime.
         dartVmServiceUrl: "ws://127.0.0.1:58557/lTla2qH-HXs=/ws",
@@ -54,19 +54,19 @@ void main() async {
           find.byKey(const Key('createAccountButton'));
 
       // Ingresar credenciales de prueba
-      await driver?.tap(emailFieldFinder as flutterDriver.SerializableFinder);
+      await driver?.tap(emailFieldFinder as flutte_driver.SerializableFinder);
       await driver?.enterText('pepe@aa.com');
  
 
-      await driver?.tap(passwordFieldFinder as flutterDriver.SerializableFinder);
+      await driver?.tap(passwordFieldFinder as flutte_driver.SerializableFinder);
       await driver?.enterText('abdefgh1');
 
       // Iniciar sesión
-      await driver?.tap(loginButtonFinder as flutterDriver.SerializableFinder);
+      await driver?.tap(loginButtonFinder as flutte_driver.SerializableFinder);
 
       // Verificar que la pantalla cambió a CreateAccount
       await driver?.waitFor(
-          createAccountButtonFinder as flutterDriver.SerializableFinder);
+          createAccountButtonFinder as flutte_driver.SerializableFinder);
     });
     // Test for a valid email address
     test.test('Valid email', () {

@@ -49,7 +49,7 @@ class User {
       country: country ?? this.country,
       gender: gender ?? this.gender,
       age: age ?? this.age,
-      id: uuid ?? this.id,
+      id: uuid ?? id,
       tokens: tokens ?? this.tokens,
     );
   }

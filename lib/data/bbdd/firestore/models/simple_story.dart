@@ -124,6 +124,7 @@ class Story implements AbstractSimpleStory {
 
   /// Returns a string representation of the story, including all its fields.
   /// Useful for debugging and logging purposes.
+  @override
   String toString() {
     return 'Story(uuid: $uuid, title: $title, text: $text, imageUrl: $imageUrl, user: $user, date: $date, speech: $speech, prompt: $prompt)';
   }

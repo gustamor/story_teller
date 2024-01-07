@@ -168,8 +168,8 @@ class AuthScreen extends ConsumerWidget {
                         child: const Align(
                           alignment: Alignment.bottomRight,
                           child: Text(
-                                  "I forgot my password",
-                              ),
+                            "I forgot my password",
+                          ),
                         ),
                       ),
                     ),
@@ -247,15 +247,15 @@ class AuthScreen extends ConsumerWidget {
                               )
                               .isUserLogged();
 
-                          if (isLogged) {
-                            if (context.mounted) {
+                          if (context.mounted) {
+                            if (isLogged) {
                               Navigator.pushReplacementNamed(
                                   context, AssistantsScreen.route);
+                            } else {
+                              //     snackMessage(context, "Enter a valid name");
+                              log.d("UnSuccessfull");
                             }
                           }
-                        } else {
-                          //     snackMessage(context, "Enter a valid name");
-                          log.d("UnSuccessfull");
                         }
                         //  passwordController.clear();
                         //  emailController.clear();

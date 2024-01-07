@@ -88,10 +88,9 @@ class TaleGeneratorScreen extends ConsumerWidget {
                           Center(
                             child: NiceButton(
                               clickFunction: () {
-                             
+                           
                                 prompt =
                                     tr('write_a_story_about') + controller.text;
-
                                 final story = ref.read(
                                     storyProcessOrchestratorProvider.notifier);
                                 story.generateASimpleStory(prompt);

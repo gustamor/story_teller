@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -26,7 +25,7 @@ class SettingsScreen extends ConsumerWidget {
       Navigator.pushNamed(context, kBottomItemRoutes[index]);
     }
 
-    var _value = ref.watch(fontScaleNotifierProvider);
+    var value = ref.watch(fontScaleNotifierProvider);
 
     final Size screenSize = MediaQuery.of(context).size;
     final themeMode = ref.watch(themeModeProvider);
@@ -153,10 +152,10 @@ class SettingsScreen extends ConsumerWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            _value = 1.0;
+                            value = 1.0;
                             ref
                                 .read(fontScaleNotifierProvider.notifier)
-                                .saveFontScale(_value);
+                                .saveFontScale(value);
                           },
                           child: Padding(
                             padding: EdgeInsets.only(right: 16.w),
@@ -177,7 +176,7 @@ class SettingsScreen extends ConsumerWidget {
                       child: SfSlider(
                         min: kMinFontSlider,
                         max: kMaxFontSlider,
-                        value: _value,
+                        value: value,
                         interval: 0.5,
                         showTicks: false,
                         showLabels: false,
@@ -205,7 +204,7 @@ class SettingsScreen extends ConsumerWidget {
                       child: Text(
                         tr('i_like_this_size'),
                         style: TextStyle(
-                          fontSize: (15 / (1.0 / _value)).sp,
+                          fontSize: (15 / (1.0 / value)).sp,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
