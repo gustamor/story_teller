@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_driver/driver_extension.dart';
 import 'package:flutter_driver/flutter_driver.dart' as flutte_driver;
 import 'package:flutter_test/flutter_test.dart';
-import 'package:story_teller/ui/screen/login/auth_screens/auth_screen.dart';
+import 'package:story_teller/src/ui/screen/login/auth_screens/auth_screen.dart';
 import 'package:flutter_test/flutter_test.dart' as test;
 
 void main() async {
