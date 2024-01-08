@@ -84,7 +84,7 @@ class CardTile extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                   (imageUrl != null) ? buildImg(Colors.black, 256, BoxFit.contain):const SizedBox(),
+                   (imageUrl != null) ? buildImg(Colors.black, 256, BoxFit.cover):const SizedBox(),
                     Gap(16.h),
                     for (var _ in Iterable.generate(1))
                       Padding(

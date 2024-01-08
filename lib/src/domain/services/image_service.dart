@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:openai_dart/openai_dart.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:story_teller/src/core/params.dart';
 import 'package:story_teller/src/data/services/dalle_response_provider.dart';
 import 'package:story_teller/src/data/services/image_downloader.dart';
 import 'package:story_teller/src/data/sources/api/openai/dalle_image_request.dart';
@@ -27,7 +28,10 @@ class ImagesService {
     try {
       String? link = await dalle.generateImageLink(
         prompt: dallePrompt,
-        model: ImageModels.dallE2,
+        model: Params.dalleModel.model,
+        quality: Params.dalleModel.quality,
+        size: Params.dalleModel.size,
+        style: Params.dalleModel.style
       );
       return link;
     } catch (e) {
@@ -52,7 +56,7 @@ class ImagesService {
     final storage = FireStorageService();
     final storageRef = ref.watch(firebaseStorageProvider).ref();
     final currentUser = ref.watch(authenticationProvider).getDisplayName();
-      try {
+    try {
       final reference = storageRef.child("image/$currentUser/$fileName.png");
       final path = await _localPath;
       final file = "$path/$fileName.png";
@@ -63,5 +67,4 @@ class ImagesService {
       throw Exception(e);
     }
   }
-
 }

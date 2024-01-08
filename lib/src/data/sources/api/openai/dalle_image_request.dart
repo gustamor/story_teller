@@ -29,8 +29,9 @@ class DalleImageRequest {
   Future<String?> generateImageLink({
       required String prompt,
       required ImageModels? model,
-      ImageSize? size,
-      ImageStyle? style}) async {
+      required ImageQuality? quality,
+      required ImageSize? size,
+     required ImageStyle? style}) async {
     final client = ref.watch(openAiProvider);
     try {
       final ImagesResponse res = await client.createImage(

@@ -133,7 +133,7 @@ Widget showOnCompleted(BuildContext context, WidgetRef ref, Tale? story) {
                   height: 250.h,
                   child:  (story!.imageUrl != null) ? Image.network(
                     story.imageUrl!,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fill,
                     loadingBuilder: (context, child, loadingProgress) {
                       if (loadingProgress == null) return child;
 

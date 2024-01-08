@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,4 +32,13 @@ final firebaseFirestoreProvider = Provider<FirebaseFirestore>((
   ref,
 ) {
   return FirebaseFirestore.instance;
+});
+
+/// Provides an instance of [FirebaseFirestore].
+///
+/// Facilitates accessing and synchronizing data with the cloud-hosted NoSQL Firestore database for both client- and server-side development.
+final firebaseRemoteConfigProvider = Provider<FirebaseRemoteConfig>((
+  ref,
+) {
+  return FirebaseRemoteConfig.instance;
 });

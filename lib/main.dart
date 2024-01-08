@@ -1,5 +1,6 @@
 // ignore_for_file: unused_local_variable, unused_import
 
+import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -17,9 +18,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:story_teller/src/core/params.dart';
+import 'package:story_teller/src/data/services/remote_config_service_provider.dart';
 import 'package:story_teller/src/data/sources/bbdd/isar/models/tale.dart';
 import 'package:story_teller/src/data/sources/bbdd/isar/models/user.dart';
 import 'package:story_teller/src/data/di/isar_provider.dart';
+import 'package:story_teller/src/domain/models/dalle_model.dart';
 import 'package:story_teller/src/domain/providers/auth_providers.dart';
 import 'package:story_teller/src/data/services/riverpod_logger_impl.dart';
 import 'package:story_teller/src/data/services/logger_impl.dart';
@@ -97,8 +101,22 @@ class MyHttpOverrides extends HttpOverrides {
 void configureDio() {
   // Set default configs
   final dio = Dio();
-  dio.options.connectTimeout = const Duration(seconds: 10);
-  dio.options.receiveTimeout = const Duration(seconds: 10);
+  dio.options.connectTimeout = const Duration(seconds: 20);
+  dio.options.receiveTimeout = const Duration(seconds: 20);
+}
+
+initRemoteConfig(WidgetRef ref) async {
+  try {
+    final remoteConfig = await ref.watch(remoteConfigProvider.future);
+    Params.gptModel = await remoteConfig.getStringValue("gtp_model");
+    final dalleRemote = await remoteConfig.getStringValue("dalle");
+    Params.dalleModel = DalleModel.fromMap(
+      json.decode(
+        dalleRemote,
+      ),
+    );
+    // ignore: empty_cdalleModelatches
+  } catch (e) {}
 }
 
 /// Implements a [TellLogger] instance
@@ -121,7 +139,7 @@ class AiApp extends ConsumerWidget {
   }
 
   authChecker(WidgetRef ref) {
-    final logged =  ref.watch(authStateChangesProvider);
+    final logged = ref.watch(authStateChangesProvider);
     logged.when(
       data: (user) {
         if (user != null && user.emailVerified) {
@@ -147,6 +165,7 @@ class AiApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    initRemoteConfig(ref);
     const FlexScheme usedScheme = FlexScheme.redWine;
     final currentMode = ref.watch(themeModeProvider);
 

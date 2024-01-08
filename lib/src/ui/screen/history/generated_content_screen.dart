@@ -115,7 +115,6 @@ class GeneratedContentScreen extends ConsumerWidget {
                               itemCount: snapshot.data!.length,
                               itemBuilder: (context, index) {
                                 final item = snapshot.data![index];
-                             //   if (item.imageUrl == null) return null;
                                 Widget card;
 
                                 if (index < 1) {

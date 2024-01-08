@@ -81,7 +81,7 @@ class StoryProcessControllerNotifier extends StateNotifier<ProcessState> {
       } else if (imageOrchestator.state.step == ImageProcessStep.completed) {
             ref.read(upateTaleWithImageProvider([taleData.id, imageUrl!]));
              Future.delayed(const Duration(seconds: 1));
-                ref.read(upateStoryWithImageUrl([taleData.id, imageUrl ?? ""]));
+                ref.read(upateStoryWithImageUrl([taleData.id, imageUrl]));
 
      
 

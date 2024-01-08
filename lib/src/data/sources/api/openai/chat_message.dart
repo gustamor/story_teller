@@ -8,6 +8,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:openai_dart/openai_dart.dart';
 import 'package:story_teller/src/core/constants.dart';
+import 'package:story_teller/src/core/params.dart';
 import 'package:story_teller/src/data/sources/api/model/tale_data.dart';
 import 'package:story_teller/src/data/sources/bbdd/firestore/models/simple_story.dart';
 import 'package:story_teller/src/data/services/logger_impl.dart';
@@ -42,7 +43,7 @@ class GptChatMessages {
     try {
       final res = await client.createChatCompletion(
         request: CreateChatCompletionRequest(
-          model: const ChatCompletionModel.modelId('gpt-3.5-turbo'),
+          model:  ChatCompletionModel.modelId(Params.gptModel),
           messages: [
             const ChatCompletionMessage.system(content: kSimpleTaleAssistant),
             ChatCompletionMessage.user(
