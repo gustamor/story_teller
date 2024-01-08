@@ -1,5 +1,4 @@
 import 'package:story_teller/src/domain/abstract/asbtract_process_state.dart';
-import 'package:story_teller/src/domain/chat_process_state.dart';
 
 enum ImageProcessStep {
   generatingImage,

@@ -39,6 +39,9 @@ class CardTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+   final fontScale =  ref.read(
+                          fontScaleNotifierProvider,
+                        );
     return ExpandableNotifier(
         child: Padding(
       padding: const EdgeInsets.all(10),
@@ -57,7 +60,7 @@ class CardTile extends ConsumerWidget {
             ),
             ScrollOnExpand(
               scrollOnExpand: true,
-              scrollOnCollapse: false,
+              scrollOnCollapse: true,
               child: ExpandablePanel(
                 theme: const ExpandableThemeData(
                   headerAlignment: ExpandablePanelHeaderAlignment.center,
@@ -65,11 +68,15 @@ class CardTile extends ConsumerWidget {
                 ),
                 header: Padding(
                   padding: const EdgeInsets.all(10),
-                  child: historyTitleText(
-                    title,
-                   fontScale: ref.read(
-                          fontScaleNotifierProvider,
-                        ),
+                  child: SizedBox(
+                    height: 50.h,
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: historyTitleText(
+                        title,
+                       fontScale:fontScale
+                      ),
+                    ),
                   ),
                 ),
                 collapsed: const SizedBox(),
@@ -86,17 +93,13 @@ class CardTile extends ConsumerWidget {
                           ),
                           child: historyBodyText(
                             storyBody,
-                           fontScale: ref.read(
-                          fontScaleNotifierProvider,
-                        ),
-                          )),
+                           fontScale: fontScale
+                          ),),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: storyAuthorText(
                         author!,
-                        fontScale: ref.read(
-                          fontScaleNotifierProvider,
-                        ),
+                        fontScale: fontScale,
                       ),
                     ),
                   ],

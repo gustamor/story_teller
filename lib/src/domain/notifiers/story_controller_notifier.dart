@@ -72,16 +72,19 @@ class StoryProcessControllerNotifier extends StateNotifier<ProcessState> {
         step: StoryProcessStep.generatingImage,
       );
       String? imageUrl =
-          await imageOrchestator.processAndStoreImage(taleData.prompt!);
+          await imageOrchestator.processAndStoreImage(taleData.prompt);
 
       if (imageOrchestator.state.step == ImageProcessStep.uploadingToStorage) {
         state = StoryProcessState(
           step: StoryProcessStep.savingImage,
         );
       } else if (imageOrchestator.state.step == ImageProcessStep.completed) {
+            ref.read(upateTaleWithImageProvider([taleData.id, imageUrl!]));
+             Future.delayed(const Duration(seconds: 1));
                 ref.read(upateStoryWithImageUrl([taleData.id, imageUrl ?? ""]));
 
-        ref.read(upateTaleWithImageProvider([taleData.id, imageUrl ?? ""]));
+     
+
         state = StoryProcessState(
           step: StoryProcessStep.imageCompleted,
         );

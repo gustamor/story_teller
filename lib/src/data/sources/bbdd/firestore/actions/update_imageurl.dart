@@ -1,5 +1,5 @@
-
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:story_teller/src/core/constants.dart';
 import 'package:story_teller/src/data/di/firebase_providers.dart';
@@ -33,22 +33,51 @@ final upateStoryWithImageUrl =
   try {
     // Define reference to the specific story document in Firestore.
     final docRef = db
-        .collection(Collections.kUsers)
-        .doc(currentUser!.uid)
-        .collection(Collections.kStories)
-        .doc(image[0]);
+        .collection(
+          Collections.kUsers,
+        )
+        .doc(
+          currentUser!.uid,
+        )
+        .collection(
+          Collections.kStories,
+        )
+        .doc(
+          image[0],
+        );
 
     // Run a transaction to update the story's image URL.
     db.runTransaction((transaction) async {
       // Update the document within the transaction.
-      transaction.update(docRef, {"imageUrl": image[1]});
+      transaction.update(
+        docRef,
+        {
+          "imageUrl": image[1],
+        },
+      );
     }).then(
-      (value) => print("DocumentSnapshot successfully updated!"),
-      onError: (e) => print("Error updating document $e"),
+      (value) {
+        if (kDebugMode) {
+          print(
+            "DocumentSnapshot successfully updated!",
+          );
+        }
+      },
+      onError: (e) {
+        if (kDebugMode) {
+          print(
+            "Error updating document $e",
+          );
+        }
+      },
     );
   } on FirebaseException catch (e) {
     // Handle and throw Firebase specific exceptions.
-    print("Error updating story from Firebase: $e");
+    if (kDebugMode) {
+      print(
+        "Error updating story from Firebase: $e",
+      );
+    }
     throw Exception(e);
   } catch (e) {
     // Handle any other exceptions.

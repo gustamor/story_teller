@@ -1,11 +1,11 @@
 // ignore_for_file: unused_import
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -60,13 +60,13 @@ class TaleScreen extends ConsumerWidget {
               case StoryProcessStep.generatingImage:
               case StoryProcessStep.savingImage:
                 return onLoading(context, "Generando la imagen", Colors.orange);
-
               case StoryProcessStep.imageCompleted:
                 final taleId = ref.watch(taleToShowProvider.notifier).state;
                 var story = ref.watch(getTaleProvider(taleId));
                 return story.when(
-                  data: (item) {
-                    return showOnCompleted(context, ref, item);
+                  data: (tale) {
+                    
+                    return showOnCompleted(context, ref, tale);
                   },
                   loading: () => const CircularProgressIndicator(),
                   error: (e, st) => Text('Error: $e'),
@@ -131,10 +131,8 @@ Widget showOnCompleted(BuildContext context, WidgetRef ref, Tale? story) {
                 SizedBox(
                   width: double.infinity,
                   height: 250.h,
-                  child: Image.network(
-                    //'https://i.postimg.cc/d3QMcjFp/gustavomore-a-futuristic-city-skyline-solar-punk-city-an-exte-37b9a7c2-f4ab-4a04-8d9b-c102a9ae1e66-3.png',
-                    story!.imageUrl ??
-                        'https://i.postimg.cc/d3QMcjFp/gustavomore-a-futuristic-city-skyline-solar-punk-city-an-exte-37b9a7c2-f4ab-4a04-8d9b-c102a9ae1e66-3.png',
+                  child:  (story!.imageUrl != null) ? Image.network(
+                    story.imageUrl!,
                     fit: BoxFit.cover,
                     loadingBuilder: (context, child, loadingProgress) {
                       if (loadingProgress == null) return child;
@@ -143,7 +141,7 @@ Widget showOnCompleted(BuildContext context, WidgetRef ref, Tale? story) {
                     },
                     errorBuilder: (context, error, stackTrace) =>
                         const Text('Some errors occurred!'),
-                  ),
+                  ): const SizedBox()
                 ),
                 Gap(12.h),
                 Row(
@@ -159,43 +157,58 @@ Widget showOnCompleted(BuildContext context, WidgetRef ref, Tale? story) {
                         ),
                       ),
                     ),
-                    Gap(12.w),
-                    Flexible(
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 16.h),
-                        child: Column(
-                          children: [
-                            storyTitleText(
-                              story.title!,
-                              fontScale: ref.watch(fontScaleNotifierProvider),
-                            ),
-                            Gap(12.h),
-                            Container(
-                              alignment: Alignment.centerLeft,
-                              child: storyAuthorNameText(
-                                "Por $displayName",
-                                fontScale: ref.watch(fontScaleNotifierProvider),
-                              ),
-                            ),
-                          ],
-                        ),
+                    Gap(8.w),
+                    Padding(
+                      padding: EdgeInsets.only(top: 16.h, left: 8.w),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          storyTitleText(
+                            story.title!,
+                            fontScale: ref.watch(fontScaleNotifierProvider),
+                          ),
+                          Gap(12.h),
+                          storyAuthorNameText(
+                            "$displayName",
+                            fontScale: ref.watch(fontScaleNotifierProvider),
+                          ),
+                          Gap(12.h),
+                          storyAuthorNameText(
+                            DateFormat('dd MMMM, yyyy').format(story.date!),
+                            fontScale: ref.watch(fontScaleNotifierProvider),
+                          ),
+                        ],
                       ),
                     )
                   ],
                 ),
-                Gap(16.h),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.w),
-                  child: storyPromptText(
-                    prompt,
-                    fontScale: ref.watch(fontScaleNotifierProvider),
+                Gap(32.h),
+                DottedBorder(
+                  dashPattern: const [6, 3],
+                  borderType: BorderType.RRect,
+                  radius: Radius.circular(8.r),
+                  padding: const EdgeInsets.all(0),
+                  color: const Color.fromRGBO(128, 67, 54, 1),
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(12)),
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        left: 16.w,
+                        right: 16.w,
+                        top: 8.h,
+                        bottom: 8.h,
+                      ),
+                      child: storyPromptText(
+                        prompt,
+                        fontScale: ref.watch(fontScaleNotifierProvider),
+                      ),
+                    ),
                   ),
                 ),
                 Gap(32.h),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8.w),
                   child: storyBodyText(
-                    //"Había una vez, en el rincón más remoto del universo, un pequeño planeta solitario que flotaba en la inmensidad del espacio. Este misterioso mundo, llamado Veridion, permanecía oculto entre las estrellas, sin que nadie hubiera tenido la fortuna de descubrirlo. Su existencia era un secreto bien guardado, conocido solo por el cosmos mismo. Había una vez, en el rincón más remoto del universo, un pequeño planeta solitario que flotaba en la inmensidad del espacio. Este misterioso mundo, llamado Veridion, permanecía oculto entre las estrellas, sin que nadie hubiera tenido la fortuna de descubrirlo. Su existencia era un secreto bien guardado, conocido solo por el cosmos mismo. Había una vez, en el rincón más remoto del universo, un pequeño planeta solitario que flotaba en la inmensidad del espacio. Este misterioso mundo, llamado Veridion, permanecía oculto entre las estrellas, sin que nadie hubiera tenido la fortuna de descubrirlo. Su existencia era un secreto bien guardado, conocido solo por el cosmos mismo.",
                     story.story!,
                     fontScale: ref.watch(fontScaleNotifierProvider),
                   ),

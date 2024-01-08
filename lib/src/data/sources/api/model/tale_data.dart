@@ -2,7 +2,7 @@
 
 import 'package:story_teller/src/core/constants.dart';
 import 'package:story_teller/src/data/sources/bbdd/firestore/models/simple_story.dart';
-import 'package:story_teller/src/domain/abstract/abstract_%20taleData.dart';
+import 'package:story_teller/src/domain/abstract/abstract_tale_data.dart';
 import 'package:uuid/uuid.dart';
 
 /// Represents the data structure of a tale.

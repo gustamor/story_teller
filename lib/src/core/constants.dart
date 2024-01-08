@@ -25,7 +25,7 @@ const kIconStarUnfilled = "assets/images/icons/star_unfilled.svg";
 const kIconStarFilled = "assets/images/icons/star_filled.svg";
 const kIconClose = "assets/images/icons/close.svg";
 const kIconUser = "assets/images/icons/user.svg";
-const kMinFontSlider = 0.75;
+const kMinFontSlider = 1;
 const kMaxFontSlider = 2.1;
 const kFontConversor = kMaxFontSlider + kMinFontSlider;
 
@@ -134,7 +134,7 @@ Text storyTitleText(String text, {required double fontScale}) {
   double fontHeightFactor = fontHeight / fontSize;
   return Text(text,
       textAlign: TextAlign.left,
-      style: GoogleFonts.ubuntu(
+      style: GoogleFonts.playfairDisplay(
         textStyle: TextStyle(
             fontSize: fontSize,
             height: fontHeightFactor.h,
@@ -145,12 +145,12 @@ Text storyTitleText(String text, {required double fontScale}) {
 
 Text storyAuthorNameText(String text, {required double fontScale}) {
   fontScale = fontConversion(fontScale);
-  double fontSize = (18 / fontScale).sp;
+  double fontSize = (24 / fontScale).sp;
   double fontHeight = (36 / (fontScale * 1.5)).h;
   double fontHeightFactor = fontHeight / fontSize;
   return Text(text,
       textAlign: TextAlign.left,
-      style: GoogleFonts.ubuntu(
+      style: GoogleFonts.alegreyaSans(
         textStyle: TextStyle(
             fontSize: fontSize,
             fontStyle: FontStyle.italic,
@@ -166,7 +166,7 @@ Text storyBodyText(String text, {required double fontScale}) {
   double fontHeightFactor = fontHeight / fontSize;
   return Text(text,
       textAlign: TextAlign.justify,
-      style: GoogleFonts.ubuntu(
+      style: GoogleFonts.playfairDisplay(
         textStyle: TextStyle(
             fontSize: fontSize,
             height: fontHeightFactor.h,
@@ -176,28 +176,28 @@ Text storyBodyText(String text, {required double fontScale}) {
 
 Text storyPromptText(String text, {required double fontScale}) {
   fontScale = fontConversion(fontScale);
-  double fontSize = (16 / fontScale).sp;
-  double fontHeight = (31 / (fontScale * 1.5)).h;
+  double fontSize = (21 / fontScale).sp;
+  double fontHeight = (42 / (fontScale * 1.5)).h;
   double fontHeightFactor = fontHeight / fontSize;
   return Text(text,
       textAlign: TextAlign.justify,
-      style: GoogleFonts.ubuntu(
+      style: GoogleFonts.firaSans(
         textStyle: TextStyle(
             fontSize: fontSize,
             height: fontHeightFactor.h,
-            fontWeight: FontWeight.w600),
+            fontStyle: FontStyle.italic,
+            fontWeight: FontWeight.w200),
       ));
 }
 
-
 Text storyAuthorText(String text, {required double fontScale}) {
   fontScale = fontConversion(fontScale);
-  double fontSize = (14 / fontScale).sp;
-  double fontHeight = (28 / (fontScale * 1.5)).h;
+  double fontSize = (28 / fontScale).sp;
+  double fontHeight = (48 / (fontScale * 1.5)).h;
   double fontHeightFactor = fontHeight / fontSize;
   return Text(text,
       textAlign: TextAlign.justify,
-      style: GoogleFonts.ubuntu(
+      style: GoogleFonts.playfairDisplay(
         textStyle: TextStyle(
             fontSize: fontSize,
             height: fontHeightFactor.h,
@@ -208,12 +208,12 @@ Text storyAuthorText(String text, {required double fontScale}) {
 
 Text historyTitleText(String text, {required double fontScale}) {
   fontScale = fontConversion(fontScale);
-  double fontSize = (19 / fontScale).sp;
-  double fontHeight = (33 / (fontScale * 1.5)).h;
+  double fontSize = (38 / fontScale).sp;
+  double fontHeight = (60 / (fontScale * 1.5)).h;
   double fontHeightFactor = fontHeight / fontSize;
   return Text(text,
       textAlign: TextAlign.left,
-      style: GoogleFonts.ubuntu(
+      style: GoogleFonts.playfairDisplay(
         textStyle: TextStyle(
             fontSize: fontSize,
             height: fontHeightFactor.h,
@@ -221,19 +221,19 @@ Text historyTitleText(String text, {required double fontScale}) {
             fontWeight: FontWeight.w800),
       ));
 }
+
 Text historyBodyText(String text, {required double fontScale}) {
   fontScale = fontConversion(fontScale);
-  double fontSize = (17 / fontScale).sp;
-  double fontHeight = (34/ (fontScale * 1.5)).h;
+  double fontSize = (30 / fontScale).sp;
+  double fontHeight = (60 / (fontScale * 1.5)).h;
   double fontHeightFactor = fontHeight / fontSize;
   return Text(text,
       textAlign: TextAlign.justify,
-      style: GoogleFonts.ubuntu(
+      style: GoogleFonts.alegreyaSans(
         textStyle: TextStyle(
             fontSize: fontSize,
             height: fontHeightFactor.h,
-            fontStyle: FontStyle.normal,
-            fontWeight: FontWeight.w600),
+            fontWeight: FontWeight.w500),
       ));
 }
 

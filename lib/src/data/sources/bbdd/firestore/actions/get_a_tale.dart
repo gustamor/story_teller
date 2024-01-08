@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:story_teller/src/core/constants.dart';
 import 'package:story_teller/src/data/sources/bbdd/firestore/actions/get_tales.dart';
@@ -52,7 +53,9 @@ final getFirebaseTaleProvider = FutureProvider.family<Story, String>((ref, id) a
     return story!;
   } on FirebaseException catch (e) {
     // Handle and throw Firebase specific exceptions.
-    print("Error fetching story from Firebase: $e");
+    if (kDebugMode) {
+      print("Error fetching story from Firebase: $e");
+    }
     throw Exception(e);
   } catch (e) {
     // Handle any other exceptions.
