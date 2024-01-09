@@ -3,7 +3,7 @@ import 'package:story_teller/src/data/di/shared_preferences.dart';
 
 final fontScaleNotifierProvider =
     StateNotifierProvider<FontScaleStateNotifier, double>((ref) {
-  return FontScaleStateNotifier(ref)..loadFontScale();
+  return FontScaleStateNotifier(ref);
 });
 
 class FontScaleStateNotifier extends StateNotifier<double> {

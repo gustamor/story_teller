@@ -1,4 +1,3 @@
-
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,7 +12,7 @@ class CardTile extends ConsumerWidget {
       required this.title,
       required this.storyBody,
       this.author,
-       this.imageUrl});
+      this.imageUrl});
 
   final String title;
   final String storyBody;
@@ -29,19 +28,21 @@ class CardTile extends ConsumerWidget {
           color: color,
           shape: BoxShape.rectangle,
         ),
-        child: (imageUrl != null) ? Image.network(
-          imageUrl!,
-          fit: fit,
-        ) :const SizedBox(),
+        child: (imageUrl != null)
+            ? Image.network(
+                imageUrl!,
+                fit: fit,
+              )
+            : const SizedBox(),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-   final fontScale =  ref.read(
-                          fontScaleNotifierProvider,
-                        );
+    var fontScale = ref.watch(fontScaleNotifierProvider);
+    ref.read(fontScaleNotifierProvider.notifier).loadFontScale();
+
     return ExpandableNotifier(
         child: Padding(
       padding: const EdgeInsets.all(10),
@@ -74,7 +75,7 @@ class CardTile extends ConsumerWidget {
                       alignment: Alignment.centerLeft,
                       child: historyTitleText(
                         title,
-                       fontScale:fontScale
+                        fontScale: fontScale,
                       ),
                     ),
                   ),
@@ -84,17 +85,17 @@ class CardTile extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                   (imageUrl != null) ? buildImg(Colors.black, 256, BoxFit.cover):const SizedBox(),
+                    (imageUrl != null)
+                        ? buildImg(Colors.black, 256, BoxFit.cover)
+                        : const SizedBox(),
                     Gap(16.h),
                     for (var _ in Iterable.generate(1))
                       Padding(
-                          padding: const EdgeInsets.only(
-                            bottom: 10,
-                          ),
-                          child: historyBodyText(
-                            storyBody,
-                           fontScale: fontScale
-                          ),),
+                        padding: const EdgeInsets.only(
+                          bottom: 10,
+                        ),
+                        child: historyBodyText(storyBody, fontScale: fontScale),
+                      ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: storyAuthorText(

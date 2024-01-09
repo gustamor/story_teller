@@ -1,12 +1,13 @@
-
-
 // ignore_for_file: prefer_const_constructors
 
 // ignore: use_key_in_widget_constructors
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:story_teller/src/core/constants.dart';
+import 'package:story_teller/src/ui/core/providers/font_scale_provider.dart';
 
-class CardExpanded extends StatelessWidget {
+class CardExpanded extends ConsumerWidget {
   final String title;
   final String storyBody;
   final String? imageUrl;
@@ -20,7 +21,10 @@ class CardExpanded extends StatelessWidget {
       this.imageUrl});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final fontScale = ref.read(
+      fontScaleNotifierProvider,
+    );
     buildImg(Color color, double height, BoxFit fit) {
       return SizedBox(
         height: height,
@@ -47,8 +51,10 @@ class CardExpanded extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(title,
-                      style: TextStyle(color: Theme.of(context).primaryColor)),
+                  historyTitleText(
+                    title,
+                    fontScale: fontScale,
+                  ),
                 ],
               ),
             ),
@@ -56,7 +62,8 @@ class CardExpanded extends StatelessWidget {
     }
 
     buildCollapsed2() {
-      return buildImg(Theme.of(context).scaffoldBackgroundColor, 100, BoxFit.cover);
+      return buildImg(
+          Theme.of(context).scaffoldBackgroundColor, 100, BoxFit.cover);
     }
 
     buildCollapsed3() {
@@ -72,11 +79,13 @@ class CardExpanded extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(title,
-                      style: TextStyle(color: Theme.of(context).primaryColor)),
-                  Text(
+                  historyTitleText(
+                    title,
+                    fontScale: fontScale,
+                  ),
+                  storyAuthorText(
                     author ?? "",
-                    style: Theme.of(context).textTheme.bodySmall,
+                    fontScale: fontScale,
                   ),
                 ],
               ),
@@ -105,10 +114,7 @@ class CardExpanded extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              storyBody,
-              softWrap: true,
-            ),
+            historyBodyText(storyBody, fontScale: fontScale),
           ],
         ),
       );

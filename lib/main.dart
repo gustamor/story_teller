@@ -116,7 +116,9 @@ initRemoteConfig(WidgetRef ref) async {
       ),
     );
     // ignore: empty_cdalleModelatches
-  } catch (e) {}
+  } catch (e) {
+    throw Exception(e);
+  }
 }
 
 /// Implements a [TellLogger] instance
