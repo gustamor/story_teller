@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -44,9 +45,8 @@ class RateUsScreen extends StatelessWidget {
                       height: 250.h,
                       fit: BoxFit.cover,
                     ),
-                    const Text("RATE US", style: AndroidStyle.cardCaption),
-                    const Text(
-                      "Valóranos, valóranos, y blablabla and blablabla,Valóranos, valóranos, y blablabla and blablablaValóranos, valóranos, y blablabla and blablablaValóranos, valóranos, y blablabla and blablabla",
+                     Text(tr("rate_us_mays"), style: AndroidStyle.cardCaption),
+                     Text(tr("your_comments_matter"),
                       style: AndroidStyle.cardDescription,
                     ),
                     Gap(12.h),

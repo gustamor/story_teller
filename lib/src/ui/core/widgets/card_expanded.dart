@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 // ignore: use_key_in_widget_constructors
+import 'package:easy_localization/easy_localization.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -153,7 +154,7 @@ class CardExpanded extends ConsumerWidget {
                           ExpandableController.of(context, required: true)!;
                       return TextButton(
                         child: Text(
-                          controller.expanded ? "CIERRA" : "ABRE",
+                          controller.expanded ? tr("close_mays") : tr("open_mays"),
                           style: Theme.of(context)
                               .textTheme
                               .labelLarge!

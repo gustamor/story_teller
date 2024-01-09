@@ -43,10 +43,10 @@ class SettingsScreen extends ConsumerWidget {
                   margin: EdgeInsets.only(
                     left: 16.w,
                   ),
-                  child: const ListTile(
-                    title: Text("Mode"),
-                    subtitle: Text("Selecciona el aspecto de la pantalla"),
-                    contentPadding: EdgeInsets.all(8),
+                  child:  ListTile(
+                    title: Text(tr("theme_mode")),
+                    subtitle: Text(tr("select_light_mode")),
+                    contentPadding: EdgeInsets.all(8.r),
                   )),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -100,22 +100,8 @@ class SettingsScreen extends ConsumerWidget {
                   height: 1,
                 ),
               ),
-              Gap(
-                kSettingsElementSeparator.h,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 16.0),
-                child: Text(
-                  'Notifications:',
-                  style: TextStyle(
-                    fontSize: 13.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 100.h,
-              ),
+             
+           
               Gap(
                 kSettingsElementSeparator.h,
               ),
@@ -192,7 +178,7 @@ class SettingsScreen extends ConsumerWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 16.0),
                       child: Text(
-                        'Example:',
+                        "${tr("example")}: ",
                         style: TextStyle(
                           fontSize: 13.sp,
                           fontWeight: FontWeight.w500,

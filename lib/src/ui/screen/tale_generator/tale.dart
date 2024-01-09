@@ -140,7 +140,7 @@ Widget showOnCompleted(BuildContext context, WidgetRef ref, Tale? story) {
                       return const CircularProgressIndicator();
                     },
                     errorBuilder: (context, error, stackTrace) =>
-                        const Text('Some errors occurred!'),
+                        const SizedBox(),
                   ): const SizedBox()
                 ),
                 Gap(12.h),
