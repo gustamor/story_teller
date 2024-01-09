@@ -7,6 +7,7 @@ import 'package:flutter_context_menu/flutter_context_menu.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:story_teller/src/core/constants.dart';
 import 'package:story_teller/src/data/di/isar_provider.dart';
 import 'package:story_teller/src/domain/notifiers/auth_state_notifier.dart';
@@ -62,7 +63,7 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
 
   @override
   Widget build(BuildContext context) {
-     final user = ref.read(authenticationProvider).getDisplayName();
+    final user = ref.read(authenticationProvider).getDisplayName();
 
     final double kLeftPaddingHomeNameText = 4.w;
     final double kTopPaddingHomeWhatCanText = 32.w;
@@ -89,7 +90,7 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
                       top: kTopPaddingHomeWhatCanText,
                     ),
                     child: Text(
-                      "Hola $user"  , 
+                      "Hola $user",
                       style: TextStyle(
                         fontSize: 28.sp,
                       ),
@@ -101,7 +102,7 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
                 padding: EdgeInsets.only(
                     left: kLeftPaddingHomeNameText, top: 8.h, right: 92.w),
                 child: Text(
-                  "¿Qué puedo hacer hoy por tí?",
+                  tr("what_can_i_do_today"),
                   style: TextStyle(
                     fontSize: 28.sp,
                   ),
@@ -109,25 +110,31 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
                   textAlign: TextAlign.center,
                 ),
               ),
+              Gap(12.h),
+              Divider(
+                height: kHeightDividerAssistant.h,
+                thickness: kThicknessDividerAssistant.h,
+                indent: kIndentDividerAssistant.w,
+                endIndent: kIndentDividerAssistant.w,
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    NiceClickableCard(
-                      clickFunction: () => Navigator.pushNamed(
-                          context, TaleGeneratorScreen.route),
-                      height: 104.h,
-                      width: 300.w,
-                      caption: tr("story"),
-                      description: tr("story_description"),
-                      decorImage: kImageCyberpunkCity,
-                      fit: BoxFit.cover,
-                      borderRadius: 32.0,
-                    ),
-                  ]
-                ),
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      NiceClickableCard(
+                        clickFunction: () => Navigator.pushNamed(
+                            context, TaleGeneratorScreen.route),
+                        height: 104.h,
+                        width: 300.w,
+                        caption: tr("story"),
+                        description: tr("story_description"),
+                        decorImage: kImageCyberpunkCity,
+                        fit: BoxFit.cover,
+                        borderRadius: 32.0.r,
+                      ),
+                    ]),
               ),
             ],
           ),

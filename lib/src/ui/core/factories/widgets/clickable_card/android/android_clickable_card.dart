@@ -35,9 +35,10 @@ class AndroidAiClickableCard extends StatelessWidget
     return InkWell(
       onTap: clickFunction!,
       child: Card(
-        elevation: 1,
-        child: Padding(
-          padding: const EdgeInsets.only(left:8.0, top: 0.0),
+        elevation: 4,
+        shadowColor: Theme.of(context).shadowColor,
+                child: Padding(
+          padding:  EdgeInsets.only(left:8.0.w, top: 0.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -78,8 +79,8 @@ class AndroidAiClickableCard extends StatelessWidget
               ),
               Container(
                 height: 48.h,
-                width: 154.w,
-                constraints: BoxConstraints(maxWidth: 152.w),
+                width: 256.w,
+                constraints: BoxConstraints(maxWidth: 256.w),
                 padding: EdgeInsets.only(left: 4.w),
                 child: Text(description!, style: AndroidStyle.cardDescription),
               ),

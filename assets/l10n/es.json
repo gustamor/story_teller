@@ -1,5 +1,5 @@
 {
-  "appName":"AI Story Teller",
+  "appName": "AI Story Teller",
   "story": "Cuento",
   "history": "Creados",
   "settings": "Configuración",
@@ -12,10 +12,11 @@
   "name": "Nombre",
   "password": "Contraseña",
   "or": "o",
+  "what_can_i_do_today": "¿Qué puedo hacer hoy por tí?",
   "enter_to_story_teller": "Entra a Story Teller",
   "assistants": "Asistentes",
-  "generate_prompt_story_label":  "Escribe un prompt para generar tu historia",
-  "choose_content_genre":"O genera una historia para ti de alguno de estos géneros:",
+  "generate_prompt_story_label": "Escribe un prompt para generar tu historia",
+  "choose_content_genre": "O genera una historia para ti de alguno de estos géneros:",
   "write_prompt": "Escribe un prompt:",
   "generate_story": "Crea una historia",
   "enter_text": "No puedes dejar este campo vacio",
@@ -55,5 +56,4 @@
   "fable": "Fábula",
   "space_opera": "Space Opera",
   "military_science_fiction": "Ciencia ficción militar"
-
 }

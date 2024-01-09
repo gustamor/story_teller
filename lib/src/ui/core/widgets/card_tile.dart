@@ -97,7 +97,7 @@ class CardTile extends ConsumerWidget {
                         child: historyBodyText(storyBody, fontScale: fontScale),
                       ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding:  EdgeInsets.all(8.0.r),
                       child: storyAuthorText(
                         author!,
                         fontScale: fontScale,

@@ -28,6 +28,9 @@ const kIconUser = "assets/images/icons/user.svg";
 const kMinFontSlider = 1;
 const kMaxFontSlider = 2.1;
 const kFontConversor = kMaxFontSlider + kMinFontSlider;
+const kHeightDividerAssistant = 16.0;
+const kIndentDividerAssistant = 16.0;
+const kThicknessDividerAssistant = 16.0;
 
 const kImageCyberpunkCity =
     "https://i.postimg.cc/d3QMcjFp/gustavomore-a-futuristic-city-skyline-solar-punk-city-an-exte-37b9a7c2-f4ab-4a04-8d9b-c102a9ae1e66-3.png";
