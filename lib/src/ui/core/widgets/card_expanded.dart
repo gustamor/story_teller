@@ -13,19 +13,24 @@ class CardExpanded extends ConsumerWidget {
   final String storyBody;
   final String? imageUrl;
   final String? author;
+  final String? date;
 
-  const CardExpanded(
-      {super.key,
-      required this.title,
-      required this.storyBody,
-      this.author,
-      this.imageUrl});
+  const CardExpanded({
+    super.key,
+    required this.title,
+    required this.storyBody,
+    this.author,
+    this.date,
+    this.imageUrl,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    
     final fontScale = ref.read(
       fontScaleNotifierProvider,
     );
+
     buildImg(Color color, double height, BoxFit fit) {
       return SizedBox(
         height: height,
@@ -64,7 +69,7 @@ class CardExpanded extends ConsumerWidget {
 
     buildCollapsed2() {
       return buildImg(
-          Theme.of(context).scaffoldBackgroundColor, 100, BoxFit.cover);
+          Theme.of(context).scaffoldBackgroundColor, 128, BoxFit.cover);
     }
 
     buildCollapsed3() {
@@ -84,8 +89,12 @@ class CardExpanded extends ConsumerWidget {
                     title,
                     fontScale: fontScale,
                   ),
-                  storyAuthorText(
+                  historyAuthorText(
                     author ?? "",
+                    fontScale: fontScale,
+                  ),
+                  historyAuthorText(
+                    date ?? "",
                     fontScale: fontScale,
                   ),
                 ],
@@ -154,7 +163,9 @@ class CardExpanded extends ConsumerWidget {
                           ExpandableController.of(context, required: true)!;
                       return TextButton(
                         child: Text(
-                          controller.expanded ? tr("close_mays") : tr("open_mays"),
+                          controller.expanded
+                              ? tr("close_mays")
+                              : tr("open_mays"),
                           style: Theme.of(context)
                               .textTheme
                               .labelLarge!

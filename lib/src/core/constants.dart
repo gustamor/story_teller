@@ -30,7 +30,7 @@ const kMaxFontSlider = 2.1;
 const kFontConversor = kMaxFontSlider + kMinFontSlider;
 const kHeightDividerAssistant = 16.0;
 const kIndentDividerAssistant = 16.0;
-const kThicknessDividerAssistant = 16.0;
+const kThicknessDividerAssistant = 1.0;
 
 const kImageCyberpunkCity =
     "https://i.postimg.cc/d3QMcjFp/gustavomore-a-futuristic-city-skyline-solar-punk-city-an-exte-37b9a7c2-f4ab-4a04-8d9b-c102a9ae1e66-3.png";
@@ -209,35 +209,74 @@ Text storyAuthorText(String text, {required double fontScale}) {
       ));
 }
 
-Text historyTitleText(String text, {required double fontScale}) {
+AutoSizeText historyAuthorText(String text, {required double fontScale}) {
   fontScale = fontConversion(fontScale);
-  double fontSize = (38 / fontScale).sp;
-  double fontHeight = (60 / (fontScale * 1.5)).h;
+
+  double maxfontAux = ((22 / fontScale) > 11) ? (22 / fontScale) : 12;
+  int maxFont = maxfontAux.toInt();
+
+  double fontSize = maxFont.sp;
+  double fontHeight = (44 / (fontScale * 1.5)).h;
   double fontHeightFactor = fontHeight / fontSize;
-  return Text(text,
-      textAlign: TextAlign.left,
-      style: GoogleFonts.playfairDisplay(
-        textStyle: TextStyle(
-            fontSize: fontSize,
-            height: fontHeightFactor.h,
-            fontStyle: FontStyle.normal,
-            fontWeight: FontWeight.w800),
-      ));
+  return AutoSizeText(
+    text,
+    textAlign: TextAlign.justify,
+    style: GoogleFonts.playfairDisplay(
+      textStyle: TextStyle(
+          fontSize: fontSize,
+          height: fontHeightFactor.h,
+          fontStyle: FontStyle.italic,
+          fontWeight: FontWeight.w600),
+    ),
+    maxFontSize: maxFont.toDouble(),
+    maxLines: 1,
+    overflow: TextOverflow.ellipsis,
+  );
 }
 
-Text historyBodyText(String text, {required double fontScale}) {
+AutoSizeText historyTitleText(String text, {required double fontScale}) {
   fontScale = fontConversion(fontScale);
-  double fontSize = (30 / fontScale).sp;
+  double maxfontAux = ((38 / fontScale) > 11) ? (38 / fontScale) : 12;
+  int maxFont = maxfontAux.toInt();
+
+  double fontSize = maxFont.sp;
   double fontHeight = (60 / (fontScale * 1.5)).h;
   double fontHeightFactor = fontHeight / fontSize;
-  return Text(text,
-      textAlign: TextAlign.justify,
-      style: GoogleFonts.alegreyaSans(
-        textStyle: TextStyle(
-            fontSize: fontSize,
-            height: fontHeightFactor.h,
-            fontWeight: FontWeight.w500),
-      ));
+  return AutoSizeText(
+    text,
+    textAlign: TextAlign.left,
+    style: GoogleFonts.playfairDisplay(
+      textStyle: TextStyle(
+          fontSize: fontSize,
+          height: fontHeightFactor.h,
+          fontStyle: FontStyle.normal,
+          fontWeight: FontWeight.w800),
+    ),
+    maxFontSize: maxFont.toDouble(),
+    maxLines: 1,
+    overflow: TextOverflow.ellipsis,
+  );
+}
+
+AutoSizeText historyBodyText(String text, {required double fontScale}) {
+  fontScale = fontConversion(fontScale);
+  double maxfontAux = ((30 / fontScale) > 11) ? (30 / fontScale) : 12;
+  int maxFont = maxfontAux.toInt();
+  double fontSize = maxFont.sp;
+
+  double fontHeight = (60 / (fontScale * 1.5)).h;
+  double fontHeightFactor = fontHeight / fontSize;
+  return AutoSizeText(
+    text,
+    textAlign: TextAlign.justify,
+    style: GoogleFonts.alegreyaSans(
+      textStyle: TextStyle(
+          fontSize: fontSize,
+          height: fontHeightFactor.h,
+          fontWeight: FontWeight.w500),
+    ),
+   
+  );
 }
 
 /* const kSimpleTaleAssistant =

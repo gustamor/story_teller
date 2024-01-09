@@ -96,7 +96,7 @@ class GeneratedContentScreen extends ConsumerWidget {
                       tapBodyToExpand: true,
                       tapHeaderToExpand: true,
                       animationDuration: Duration(
-                        milliseconds: 300,
+                        milliseconds: 500,
                       ),
                     ),
                     child: FutureBuilder<List<Story>>(
@@ -117,11 +117,12 @@ class GeneratedContentScreen extends ConsumerWidget {
                                 final item = snapshot.data![index];
                                 Widget card;
 
-                                if (index < 1) {
+                                if (index < 2) {
                                   card = CardExpanded(
                                       title: item.title!,
                                       storyBody: item.text!,
                                       imageUrl: item.imageUrl!,
+                                      date:  DateFormat('dd MMMM, yyyy').format(item.date!),
                                       author: ref
                                           .read(authenticationProvider)
                                           .getDisplayName());
