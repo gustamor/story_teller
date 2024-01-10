@@ -77,7 +77,7 @@ class AndroidTextFormField extends StatelessWidget implements AITextFormField {
           maxHeight: 120,
           maxWidth: width,
         ),
-        filled: filled!,
+        filled: filled ?? true,
         fillColor: fillColor,
         hintText: hintText,
         //  hintStyle:,

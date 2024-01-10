@@ -22,7 +22,7 @@ import 'package:story_teller/src/ui/core/widgets/builders/navigation_app_bar.dar
 import 'package:story_teller/src/ui/core/widgets/builders/navigation_bottom_bar.dart';
 
 import 'package:story_teller/src/ui/screen/history/generated_content_screen.dart';
-import 'package:story_teller/src/ui/screen/settings/settings_screen.dart';
+import 'package:story_teller/src/ui/screen/settings/global/settings_screen.dart';
 import 'package:story_teller/src/ui/screen/tale_generator/tale_generator.dart';
 
 class AssistantsScreen extends ConsumerStatefulWidget {
@@ -90,10 +90,10 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
                       top: kTopPaddingHomeWhatCanText,
                     ),
                     child: Text(
-                      "Hola $user",
-                      style: TextStyle(
-                        fontSize: 28.sp,
-                      ),
+                      'hello_user',
+                      style: TextStyle(fontSize: 28.sp),
+                    ).tr(
+                      namedArgs: {"user": "$user"},
                     ),
                   ),
                 ],
@@ -130,7 +130,7 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
                         width: 300.w,
                         caption: tr("story"),
                         description: tr("story_description"),
-                        decorImage: kImageCyberpunkCity,
+                        decorImage: kWriteStory3,
                         fit: BoxFit.cover,
                         borderRadius: 32.0.r,
                       ),

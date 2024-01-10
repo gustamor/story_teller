@@ -9,7 +9,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:story_teller/src/core/constants.dart';
 import 'package:story_teller/src/domain/providers/auth_providers.dart';
 import 'package:story_teller/src/ui/screen/login/auth_screens/auth_screen.dart';
-import 'package:story_teller/src/ui/screen/settings/settings_screen.dart';
+import 'package:story_teller/src/ui/screen/settings/global/settings_screen.dart';
+import 'package:story_teller/src/ui/screen/settings/user/user_settings_main.dart';
 
 /// Provides a state management for [BuildContext].
 ///
@@ -43,7 +44,7 @@ final contextMenuProvider = Provider<ContextMenu?>((ref) {
       label: tr('user_settings'),
       icon: CupertinoIcons.settings,
       onSelected: () {
-        Navigator.pushReplacementNamed(context, SettingsScreen.route);
+        Navigator.pushNamed(context, UserSettingsMainScreen.route);
       },
     ),
     const MenuDivider(),

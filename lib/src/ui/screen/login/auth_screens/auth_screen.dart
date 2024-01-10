@@ -1,6 +1,7 @@
 // ignore_for_file: duplicate_import, unused_import
 
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -13,7 +14,7 @@ import 'package:story_teller/src/core/constants.dart';
 import 'package:story_teller/src/data/sources/api/openai/chat_message.dart';
 import 'package:story_teller/src/data/sources/api/openai/dalle_image_request.dart';
 import 'package:story_teller/src/data/sources/bbdd/firestore/actions/add_user.dart';
-import 'package:story_teller/src/data/sources/bbdd/isar/actions/local_user/add_user_provider.dart';
+import 'package:story_teller/src/data/sources/bbdd/isar/actions/local_user/add_user.dart';
 import 'package:story_teller/src/data/di/openai_provider.dart';
 import 'package:story_teller/src/domain/providers/auth_providers.dart';
 import 'package:story_teller/src/domain/providers/chat_orchestator_provider.dart';
@@ -70,8 +71,6 @@ class AuthScreen extends ConsumerWidget {
     double height = MediaQuery.of(context).size.height;
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
-    final focusPasswordNode = FocusNode();
-    final focusEmailNode = FocusNode();
 
     /// Starts a safe area
     return SafeArea(
@@ -109,7 +108,6 @@ class AuthScreen extends ConsumerWidget {
                           //  focusEmailNode.unfocus();
                         },
                         controller: emailController,
-                        focusNode: focusEmailNode,
                         validator: (String? email) {
                           if (!validateEmail(email!)) {
                             log.e("Enter email");
@@ -146,7 +144,6 @@ class AuthScreen extends ConsumerWidget {
                           return null;
                         },
                         controller: passwordController,
-                        focusNode: focusPasswordNode,
                         hintText: "Enter Password",
                         keyboardType: TextInputType.visiblePassword,
                         filled: true,
@@ -165,10 +162,10 @@ class AuthScreen extends ConsumerWidget {
                       ),
                       child: Padding(
                         padding: EdgeInsets.only(right: 36.w, top: 6.h),
-                        child: const Align(
+                        child: Align(
                           alignment: Alignment.bottomRight,
                           child: Text(
-                            "I forgot my password",
+                            tr('forgot_my_password'),
                           ),
                         ),
                       ),
@@ -200,8 +197,8 @@ class AuthScreen extends ConsumerWidget {
                               .checkIfUserIsVerified();
                           if (!isVerified) {
                             if (context.mounted) {
-                              snackMessage(context,
-                                  "Created. Please, check your email inbox for the verification link and try again");
+                              snackMessage(
+                                  context, tr('account_created_and_verify'));
                             }
                             await ref
                                 .read(authenticationStateProvider.notifier)
@@ -215,7 +212,7 @@ class AuthScreen extends ConsumerWidget {
                           // log.d("Create account with $email and $password");
                         }
                       }, //
-                      text: "Create account",
+                      text: tr('create_account'),
                       textStyle: AndroidStyle.cardCaption,
                       height: 64,
                       width: 220,
@@ -227,11 +224,9 @@ class AuthScreen extends ConsumerWidget {
                     ),
                     NiceButton(
                       key: const Key("loginButton"),
-
                       clickFunction: () async {
                         if (_authFormkey.currentState!.validate()) {
                           log.d("successful");
-
                           await ref
                               .read(
                                 authenticationStateProvider.notifier,
@@ -240,19 +235,27 @@ class AuthScreen extends ConsumerWidget {
                                 emailController.value.text,
                                 passwordController.value.text,
                               );
-
                           isLogged = await ref
                               .read(
                                 authenticationStateProvider.notifier,
                               )
                               .isUserLogged();
-
                           if (context.mounted) {
                             if (isLogged) {
-                              Navigator.pushReplacementNamed(
-                                  context, AssistantsScreen.route);
+                              if (ref
+                                      .read(authenticationProvider)
+                                      .getDisplayName() ==
+                                  null) {
+                                Navigator.pushReplacementNamed(
+                                    context, AssistantsScreen.route);
+                              } else {
+                                if (context.mounted) {
+                                  Navigator.pushNamed(context, AuthName.route);
+                                }
+                              }
                             } else {
-                              //     snackMessage(context, "Enter a valid name");
+                              snackMessage(
+                                  context, tr('enter_valid_credentials'));
                               log.d("UnSuccessfull");
                             }
                           }
@@ -260,7 +263,6 @@ class AuthScreen extends ConsumerWidget {
                         //  passwordController.clear();
                         //  emailController.clear();
                       },
-                      //navigateTo(context, AssistantsScreen.route),
                       text: "Log in",
                       textStyle: AndroidStyle.cardCaption,
                       height: 64,

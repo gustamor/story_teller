@@ -80,8 +80,8 @@ class IosClickableCard extends StatelessWidget implements AiClickableCard {
               ),
               Container(
                 height: 48.h,
-                width: 154.w,
-                constraints: BoxConstraints(maxWidth: 152.w),
+                width: 254.w,
+                constraints: BoxConstraints(maxWidth: 252.w),
                 padding: EdgeInsets.only(left: 4.w),
                 child: Text(description!, style: AndroidStyle.cardDescription),
               ),

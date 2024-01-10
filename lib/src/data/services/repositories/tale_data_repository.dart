@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:story_teller/src/data/sources/api/model/tale_data.dart';
-import 'package:story_teller/src/data/services/gpt_chat_messages_provider.dart';
+import 'package:story_teller/src/data/di/gpt_chat_messages_provider.dart';
 import 'package:story_teller/src/data/services/logger_impl.dart';
 import 'package:story_teller/src/domain/services/abstract_tell_logger.dart';
 

@@ -13,7 +13,7 @@ import 'package:story_teller/src/domain/providers/auth_providers.dart';
 import 'package:story_teller/src/ui/screen/assistants_screen/assistants_screen.dart';
 import 'package:story_teller/src/ui/screen/history/generated_content_screen.dart';
 import 'package:story_teller/src/ui/screen/login/auth_screens/auth_screen.dart';
-import 'package:story_teller/src/ui/screen/settings/settings_screen.dart';
+import 'package:story_teller/src/ui/screen/settings/global/settings_screen.dart';
 import 'package:uuid/uuid.dart';
 
 const kUuid = Uuid();
@@ -25,6 +25,7 @@ const kIconStarUnfilled = "assets/images/icons/star_unfilled.svg";
 const kIconStarFilled = "assets/images/icons/star_filled.svg";
 const kIconClose = "assets/images/icons/close.svg";
 const kIconUser = "assets/images/icons/user.svg";
+
 const kMinFontSlider = 1;
 const kMaxFontSlider = 2.1;
 const kFontConversor = kMaxFontSlider + kMinFontSlider;
@@ -32,6 +33,16 @@ const kHeightDividerAssistant = 16.0;
 const kIndentDividerAssistant = 16.0;
 const kThicknessDividerAssistant = 1.0;
 
+const kSplashLogo = "assets/images/splash_logo.png";
+
+const kWriteStory3 =
+    "https://i.postimg.cc/y8TQdh73/DALL-E-2024-01-10-17-21-03-A-dreamy-15-year-old-girl-beautiful-smart-and-kind-lost-in-imaginat.png";
+const kWriteStory2 =
+    "https://i.postimg.cc/4dQrTCnq/DALL-E-2024-01-10-17-18-54-The-elf-princess-is-poised-for-adventure-her-spirit-of-action-illumina.png";
+const kWriteStory1 =
+    "https://i.postimg.cc/9FWT8XFj/DALL-E-2024-01-10-15-10-54-A-15-year-old-elf-princess-part-of-a-magical-and-fantastical-world-dr.png";
+const kWriteStory =
+    "https://i.postimg.cc/zB6twb15/DALL-E-2024-01-10-15-08-32-A-solemn-mystical-elf-princess-about-15-years-old-in-a-fantasy-world.png";
 const kImageCyberpunkCity =
     "https://i.postimg.cc/d3QMcjFp/gustavomore-a-futuristic-city-skyline-solar-punk-city-an-exte-37b9a7c2-f4ab-4a04-8d9b-c102a9ae1e66-3.png";
 const kImagePlanet =
@@ -40,6 +51,8 @@ const kImageBookPage =
     "https://i.postimg.cc/Bv2mxG0k/gustavomore-picture-in-blacklines-no-colors-white-backgroun-1ca69053-7105-4eef-880b-0bcf6e6a7d24-2.png";
 const kImageFace =
     "https://i.postimg.cc/Dy0G84LM/gustavomore-extremely-detailed-close-up-documentary-photograp-194f4935-1958-4588-80ad-2074a57102fb-1.png";
+const kImageMain =
+    "https://i.postimg.cc/Wbj7xFP9/DALL-E-2024-01-10-16-50-26-An-elf-princess-in-a-mystical-library-surrounded-by-ancient-books-and.png";
 
 /// Defines sizes [kSettingsElementSeparator]
 const double kSettingsElementSeparator = 16;
@@ -133,7 +146,7 @@ double fontConversion(double fontscale) {
 Text storyTitleText(String text, {required double fontScale}) {
   fontScale = fontConversion(fontScale);
   double fontSize = (36 / fontScale).sp;
-  double fontHeight = (70 / (fontScale * 1.5)).h;
+  double fontHeight = (72 / (fontScale * 1.5)).h;
   double fontHeightFactor = fontHeight / fontSize;
   return Text(text,
       textAlign: TextAlign.left,
@@ -212,7 +225,7 @@ Text storyAuthorText(String text, {required double fontScale}) {
 AutoSizeText historyAuthorText(String text, {required double fontScale}) {
   fontScale = fontConversion(fontScale);
 
-  double maxfontAux = ((22 / fontScale) > 11) ? (22 / fontScale) : 12;
+  double maxfontAux = ((2 / fontScale) > 11) ? (22 / fontScale) : 12;
   int maxFont = maxfontAux.toInt();
 
   double fontSize = maxFont.sp;
@@ -236,7 +249,7 @@ AutoSizeText historyAuthorText(String text, {required double fontScale}) {
 
 AutoSizeText historyTitleText(String text, {required double fontScale}) {
   fontScale = fontConversion(fontScale);
-  double maxfontAux = ((38 / fontScale) > 11) ? (38 / fontScale) : 12;
+  double maxfontAux = ((38 / fontScale) > 11) ? (38 / fontScale) : 17;
   int maxFont = maxfontAux.toInt();
 
   double fontSize = maxFont.sp;
@@ -260,7 +273,7 @@ AutoSizeText historyTitleText(String text, {required double fontScale}) {
 
 AutoSizeText historyBodyText(String text, {required double fontScale}) {
   fontScale = fontConversion(fontScale);
-  double maxfontAux = ((30 / fontScale) > 11) ? (30 / fontScale) : 12;
+  double maxfontAux = ((40 / fontScale) > 11) ? (40 / fontScale) : 16;
   int maxFont = maxfontAux.toInt();
   double fontSize = maxFont.sp;
 
@@ -275,7 +288,91 @@ AutoSizeText historyBodyText(String text, {required double fontScale}) {
           height: fontHeightFactor.h,
           fontWeight: FontWeight.w500),
     ),
-   
+  );
+}
+
+AutoSizeText settingTitleText(String text, {required double fontScale}) {
+  fontScale = fontConversion(fontScale);
+  double maxfontAux = ((68 / fontScale) > 11) ? (68 / fontScale) : 30;
+  int maxFont = maxfontAux.toInt();
+
+  double fontSize = maxFont.sp;
+  double fontHeight = (130 / (fontScale * 1.5)).h;
+  double fontHeightFactor = fontHeight / fontSize;
+  return AutoSizeText(
+    text,
+    textAlign: TextAlign.left,
+    style: GoogleFonts.playfairDisplay(
+      textStyle: TextStyle(
+          fontSize: fontSize,
+          height: fontHeightFactor.h,
+          fontWeight: FontWeight.w800),
+    ),
+    maxFontSize: maxFont.toDouble(),
+    maxLines: 2,
+    overflow: TextOverflow.ellipsis,
+  );
+}
+
+Text settingsTitleText(String text) {
+  return Text(text,
+      textAlign: TextAlign.left,
+      style: GoogleFonts.volkhov(
+        textStyle: TextStyle(
+            fontSize: 21.sp,
+            fontStyle: FontStyle.normal,
+            fontWeight: FontWeight.w700),
+      ));
+}
+
+Text settingsFieldCaptionText(String text) {
+  return Text(text,
+      textAlign: TextAlign.left,
+      style: GoogleFonts.volkhov(
+        textStyle: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.w100),
+      ));
+}
+
+AutoSizeText cardTitleText(String text, {required double fontScale}) {
+  fontScale = fontConversion(fontScale);
+  double maxfontAux = ((68 / fontScale) > 11) ? (68 / fontScale) : 30;
+  int maxFont = maxfontAux.toInt();
+
+  double fontSize = maxFont.sp;
+  double fontHeight = (130 / (fontScale * 1.5)).h;
+  double fontHeightFactor = fontHeight / fontSize;
+  return AutoSizeText(
+    text,
+    textAlign: TextAlign.left,
+    style: GoogleFonts.playfairDisplay(
+      textStyle: TextStyle(
+          fontSize: fontSize,
+          height: fontHeightFactor.h,
+          fontWeight: FontWeight.w800),
+    ),
+    maxFontSize: maxFont.toDouble(),
+    maxLines: 2,
+    overflow: TextOverflow.ellipsis,
+  );
+}
+
+AutoSizeText cardBodyText(String text, {required double fontScale}) {
+  fontScale = fontConversion(fontScale);
+  double maxfontAux = ((40 / fontScale) > 11) ? (40 / fontScale) : 16;
+  int maxFont = maxfontAux.toInt();
+  double fontSize = maxFont.sp;
+
+  double fontHeight = (60 / (fontScale * 1.5)).h;
+  double fontHeightFactor = fontHeight / fontSize;
+  return AutoSizeText(
+    text,
+    textAlign: TextAlign.justify,
+    style: GoogleFonts.alegreyaSans(
+      textStyle: TextStyle(
+          fontSize: fontSize,
+          height: fontHeightFactor.h,
+          fontWeight: FontWeight.w500),
+    ),
   );
 }
 

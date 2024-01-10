@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:openai_dart/openai_dart.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:story_teller/src/core/params.dart';
-import 'package:story_teller/src/data/services/dalle_response_provider.dart';
+import 'package:story_teller/src/data/di/dalle_response_provider.dart';
 import 'package:story_teller/src/data/services/image_downloader.dart';
 import 'package:story_teller/src/data/sources/api/openai/dalle_image_request.dart';
 import 'package:story_teller/src/data/services/fire_storage_service.dart';

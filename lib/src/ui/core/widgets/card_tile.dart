@@ -4,42 +4,60 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/src/core/constants.dart';
+import 'package:story_teller/src/ui/core/providers/current_tale_id_provider.dart';
 import 'package:story_teller/src/ui/core/providers/font_scale_provider.dart';
+import 'package:story_teller/src/ui/screen/tale_generator/tale_from_history.dart';
 
-class CardTile extends ConsumerWidget {
+
+
+class CardTile extends ConsumerStatefulWidget {
   const CardTile(
       {super.key,
       required this.title,
       required this.storyBody,
       this.author,
+      required this.uuid,
       this.imageUrl});
 
   final String title;
+  final String uuid;
   final String storyBody;
   final String? imageUrl;
   final String? author;
+    @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _CardTileState();
+}
 
+class _CardTileState extends ConsumerState<CardTile> {
+  
   buildImg(Color color, double height, BoxFit fit) {
-    return SizedBox(
-      height: height,
-      width: double.infinity,
-      child: Container(
-        decoration: BoxDecoration(
-          color: color,
-          shape: BoxShape.rectangle,
+    return InkWell(
+      onTap: () {
+        ref.watch(taleToShowProvider.notifier).update((state) => state = widget.uuid);
+
+        Navigator.pushNamed(context, TaleFromHistoryScreen.route);
+      },
+      child: SizedBox(
+        height: height,
+        width: double.infinity,
+        child: Container(
+          decoration: BoxDecoration(
+            color: color,
+            shape: BoxShape.rectangle,
+          ),
+          child: (widget.imageUrl != null)
+              ? Image.network(
+                  widget.imageUrl!,
+                  fit: fit,
+                )
+              : const SizedBox(),
         ),
-        child: (imageUrl != null)
-            ? Image.network(
-                imageUrl!,
-                fit: fit,
-              )
-            : const SizedBox(),
       ),
     );
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     var fontScale = ref.watch(fontScaleNotifierProvider);
     ref.read(fontScaleNotifierProvider.notifier).loadFontScale();
 
@@ -74,7 +92,7 @@ class CardTile extends ConsumerWidget {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: historyTitleText(
-                        title,
+                        widget.title,
                         fontScale: fontScale,
                       ),
                     ),
@@ -85,7 +103,7 @@ class CardTile extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    (imageUrl != null)
+                    (widget.imageUrl != null)
                         ? buildImg(Colors.black, 256, BoxFit.cover)
                         : const SizedBox(),
                     Gap(16.h),
@@ -94,12 +112,12 @@ class CardTile extends ConsumerWidget {
                         padding: const EdgeInsets.only(
                           bottom: 10,
                         ),
-                        child: historyBodyText(storyBody, fontScale: fontScale),
+                        child: historyBodyText(widget.storyBody, fontScale: fontScale),
                       ),
                     Padding(
-                      padding:  EdgeInsets.all(8.0.r),
+                      padding: EdgeInsets.all(8.0.r),
                       child: storyAuthorText(
-                        author!,
+                        widget.author!,
                         fontScale: fontScale,
                       ),
                     ),

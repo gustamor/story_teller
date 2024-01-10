@@ -18,16 +18,22 @@ import 'package:story_teller/src/ui/core/widgets/builders/navigation_app_bar.dar
 import 'package:story_teller/src/ui/core/widgets/builders/text_form_field.dart';
 
 import 'package:story_teller/src/ui/screen/assistants_screen/assistants_screen.dart';
-import 'package:story_teller/src/ui/screen/tale_generator/tale.dart';
+import 'package:story_teller/src/ui/screen/tale_generator/tale_on_generated.dart';
 import 'package:story_teller/src/ui/themes/styles/text_styles.dart';
 
-class TaleGeneratorScreen extends ConsumerWidget {
+class TaleGeneratorScreen extends ConsumerStatefulWidget {
   static const route = "/generator_tale";
 
   const TaleGeneratorScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _TaleGeneratorScreenState();
+}
+
+class _TaleGeneratorScreenState extends ConsumerState<TaleGeneratorScreen> {
+  @override
+  Widget build(BuildContext context) {
     final genresList = ref.read(genresListProvider);
     String prompt;
 
@@ -88,14 +94,12 @@ class TaleGeneratorScreen extends ConsumerWidget {
                           Center(
                             child: NiceButton(
                               clickFunction: () {
-                           
                                 prompt =
                                     tr('write_a_story_about') + controller.text;
                                 final story = ref.read(
                                     storyProcessOrchestratorProvider.notifier);
                                 story.generateASimpleStory(prompt);
-                                Navigator.pushNamed(
-                                    context, TaleScreen.route);
+                                Navigator.pushNamed(context, TaleOnGeneratedScreen.route);
                               },
                               isFixedSize: false,
                               height: 110.h,
@@ -145,7 +149,7 @@ class TaleGeneratorScreen extends ConsumerWidget {
                                                   .notifier);
                                           story.generateASimpleStory(prompt);
                                           Navigator.pushReplacementNamed(
-                                              context, TaleScreen.route);
+                                              context, TaleOnGeneratedScreen.route);
                                         },
                                         text: tr(item),
                                         height: 30.h,
@@ -172,3 +176,4 @@ class TaleGeneratorScreen extends ConsumerWidget {
             )));
   }
 }
+

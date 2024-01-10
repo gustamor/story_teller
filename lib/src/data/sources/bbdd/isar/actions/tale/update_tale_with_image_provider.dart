@@ -12,7 +12,6 @@ final upateTaleWithImageProvider =
 
     tale!.imageUrl = image[1];
     await isar.writeTxn(() async {
-          Future.delayed(const Duration(seconds: 1));
 
       await isar.tales.put(tale);
     });

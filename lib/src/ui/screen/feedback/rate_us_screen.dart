@@ -41,7 +41,7 @@ class RateUsScreen extends StatelessWidget {
                       30.h,
                     ),
                     Image.network(
-                      kImageCyberpunkCity,
+                      kImageMain,
                       height: 250.h,
                       fit: BoxFit.cover,
                     ),

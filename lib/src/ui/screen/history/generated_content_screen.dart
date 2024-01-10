@@ -19,7 +19,7 @@ import 'package:story_teller/src/ui/core/widgets/builders/navigation_bottom_bar.
 import 'package:story_teller/src/ui/core/widgets/card_expanded.dart';
 import 'package:story_teller/src/ui/core/widgets/card_tile.dart';
 import 'package:story_teller/src/ui/screen/assistants_screen/assistants_screen.dart';
-import 'package:story_teller/src/ui/screen/settings/settings_screen.dart';
+import 'package:story_teller/src/ui/screen/settings/global/settings_screen.dart';
 
 class GeneratedContentScreen extends ConsumerWidget {
   static const String route = "/generated_content";
@@ -77,7 +77,7 @@ class GeneratedContentScreen extends ConsumerWidget {
     return SafeArea(
       child: Scaffold(
         appBar: NiceAppBar(
-          title: tr('library'),
+          title: tr('your_tales'),
           // leftIcon: kIconBackArrow,
           // leftTapFunction: () => Navigator.pushNamed(context, AuthName.route,),
         ),
@@ -117,17 +117,20 @@ class GeneratedContentScreen extends ConsumerWidget {
                                 final item = snapshot.data![index];
                                 Widget card;
 
-                                if (index < 2) {
+                                if (index < 100) {
                                   card = CardExpanded(
+                                      uuid: item.uuid!,
                                       title: item.title!,
                                       storyBody: item.text!,
                                       imageUrl: item.imageUrl!,
-                                      date:  DateFormat('dd MMMM, yyyy').format(item.date!),
+                                      date: DateFormat('dd MMMM, yyyy')
+                                          .format(item.date!),
                                       author: ref
                                           .read(authenticationProvider)
                                           .getDisplayName());
                                 } else {
                                   card = CardTile(
+                                    uuid: item.uuid!,
                                     title: item.title ?? "title null",
                                     storyBody: item.text ?? "story body null",
                                     imageUrl: item.imageUrl,

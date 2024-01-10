@@ -6,9 +6,12 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:story_teller/src/core/constants.dart';
+import 'package:story_teller/src/ui/core/providers/current_tale_id_provider.dart';
 import 'package:story_teller/src/ui/core/providers/font_scale_provider.dart';
+import 'package:story_teller/src/ui/screen/tale_generator/tale_from_history.dart';
 
 class CardExpanded extends ConsumerWidget {
+  final String uuid;
   final String title;
   final String storyBody;
   final String? imageUrl;
@@ -22,11 +25,11 @@ class CardExpanded extends ConsumerWidget {
     this.author,
     this.date,
     this.imageUrl,
+    required this.uuid,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    
     final fontScale = ref.read(
       fontScaleNotifierProvider,
     );
@@ -35,14 +38,23 @@ class CardExpanded extends ConsumerWidget {
       return SizedBox(
         height: height,
         width: double.infinity,
-        child: Container(
-          decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.rectangle,
-          ),
-          child: Image.network(
-            imageUrl ?? "",
-            fit: fit,
+        child: InkWell(
+          onTap: () {
+            ref
+                .watch(taleToShowProvider.notifier)
+                .update((state) => state = uuid);
+
+            Navigator.pushNamed(context, TaleFromHistoryScreen.route);
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              color: color,
+              shape: BoxShape.rectangle,
+            ),
+            child: Image.network(
+              imageUrl ?? "",
+              fit: fit,
+            ),
           ),
         ),
       );
@@ -89,14 +101,22 @@ class CardExpanded extends ConsumerWidget {
                     title,
                     fontScale: fontScale,
                   ),
-                  historyAuthorText(
-                    author ?? "",
-                    fontScale: fontScale,
-                  ),
-                  historyAuthorText(
-                    date ?? "",
-                    fontScale: fontScale,
-                  ),
+                  Row(
+                    children: [
+                      historyAuthorText(
+                        author ?? "",
+                        fontScale: fontScale,
+                      ),
+                      historyAuthorText(
+                        ", ",
+                        fontScale: fontScale,
+                      ),
+                      historyAuthorText(
+                        date ?? "",
+                        fontScale: fontScale,
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),

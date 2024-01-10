@@ -1,7 +1,7 @@
 // ignore_for_file: unused_import
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:story_teller/src/data/services/tale_data_repository_provider.dart';
+import 'package:story_teller/src/data/di/tale_data_repository_provider.dart';
 import 'package:story_teller/src/data/sources/api/model/tale_data.dart';
 import 'package:story_teller/src/data/sources/api/openai/chat_message.dart';
 import 'package:story_teller/src/data/di/openai_provider.dart';

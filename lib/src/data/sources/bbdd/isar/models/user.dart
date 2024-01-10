@@ -16,6 +16,6 @@ class LocalUser {
   late String? photo;
   late String? country;
   late String? gender;
-  late int? age;
+  late DateTime? birthDate;
   late String? authId;
 }

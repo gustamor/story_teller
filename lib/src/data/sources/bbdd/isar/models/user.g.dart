@@ -17,15 +17,15 @@ const LocalUserSchema = CollectionSchema(
   name: r'LocalUser',
   id: -4571928749043988981,
   properties: {
-    r'age': PropertySchema(
-      id: 0,
-      name: r'age',
-      type: IsarType.long,
-    ),
     r'authId': PropertySchema(
-      id: 1,
+      id: 0,
       name: r'authId',
       type: IsarType.string,
+    ),
+    r'birthDate': PropertySchema(
+      id: 1,
+      name: r'birthDate',
+      type: IsarType.dateTime,
     ),
     r'country': PropertySchema(
       id: 2,
@@ -150,8 +150,8 @@ void _localUserSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeLong(offsets[0], object.age);
-  writer.writeString(offsets[1], object.authId);
+  writer.writeString(offsets[0], object.authId);
+  writer.writeDateTime(offsets[1], object.birthDate);
   writer.writeString(offsets[2], object.country);
   writer.writeString(offsets[3], object.email);
   writer.writeString(offsets[4], object.gender);
@@ -170,8 +170,8 @@ LocalUser _localUserDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = LocalUser();
-  object.age = reader.readLongOrNull(offsets[0]);
-  object.authId = reader.readStringOrNull(offsets[1]);
+  object.authId = reader.readStringOrNull(offsets[0]);
+  object.birthDate = reader.readDateTimeOrNull(offsets[1]);
   object.country = reader.readStringOrNull(offsets[2]);
   object.email = reader.readStringOrNull(offsets[3]);
   object.gender = reader.readStringOrNull(offsets[4]);
@@ -193,9 +193,9 @@ P _localUserDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readLongOrNull(offset)) as P;
-    case 1:
       return (reader.readStringOrNull(offset)) as P;
+    case 1:
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 2:
       return (reader.readStringOrNull(offset)) as P;
     case 3:
@@ -310,75 +310,6 @@ extension LocalUserQueryWhere
 
 extension LocalUserQueryFilter
     on QueryBuilder<LocalUser, LocalUser, QFilterCondition> {
-  QueryBuilder<LocalUser, LocalUser, QAfterFilterCondition> ageIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'age',
-      ));
-    });
-  }
-
-  QueryBuilder<LocalUser, LocalUser, QAfterFilterCondition> ageIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'age',
-      ));
-    });
-  }
-
-  QueryBuilder<LocalUser, LocalUser, QAfterFilterCondition> ageEqualTo(
-      int? value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'age',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<LocalUser, LocalUser, QAfterFilterCondition> ageGreaterThan(
-    int? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'age',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<LocalUser, LocalUser, QAfterFilterCondition> ageLessThan(
-    int? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'age',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<LocalUser, LocalUser, QAfterFilterCondition> ageBetween(
-    int? lower,
-    int? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'age',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
   QueryBuilder<LocalUser, LocalUser, QAfterFilterCondition> authIdIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -521,6 +452,77 @@ extension LocalUserQueryFilter
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'authId',
         value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QAfterFilterCondition> birthDateIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'birthDate',
+      ));
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QAfterFilterCondition>
+      birthDateIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'birthDate',
+      ));
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QAfterFilterCondition> birthDateEqualTo(
+      DateTime? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'birthDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QAfterFilterCondition>
+      birthDateGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'birthDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QAfterFilterCondition> birthDateLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'birthDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QAfterFilterCondition> birthDateBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'birthDate',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
       ));
     });
   }
@@ -1692,18 +1694,6 @@ extension LocalUserQueryLinks
     on QueryBuilder<LocalUser, LocalUser, QFilterCondition> {}
 
 extension LocalUserQuerySortBy on QueryBuilder<LocalUser, LocalUser, QSortBy> {
-  QueryBuilder<LocalUser, LocalUser, QAfterSortBy> sortByAge() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'age', Sort.asc);
-    });
-  }
-
-  QueryBuilder<LocalUser, LocalUser, QAfterSortBy> sortByAgeDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'age', Sort.desc);
-    });
-  }
-
   QueryBuilder<LocalUser, LocalUser, QAfterSortBy> sortByAuthId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'authId', Sort.asc);
@@ -1713,6 +1703,18 @@ extension LocalUserQuerySortBy on QueryBuilder<LocalUser, LocalUser, QSortBy> {
   QueryBuilder<LocalUser, LocalUser, QAfterSortBy> sortByAuthIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'authId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QAfterSortBy> sortByBirthDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'birthDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QAfterSortBy> sortByBirthDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'birthDate', Sort.desc);
     });
   }
 
@@ -1827,18 +1829,6 @@ extension LocalUserQuerySortBy on QueryBuilder<LocalUser, LocalUser, QSortBy> {
 
 extension LocalUserQuerySortThenBy
     on QueryBuilder<LocalUser, LocalUser, QSortThenBy> {
-  QueryBuilder<LocalUser, LocalUser, QAfterSortBy> thenByAge() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'age', Sort.asc);
-    });
-  }
-
-  QueryBuilder<LocalUser, LocalUser, QAfterSortBy> thenByAgeDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'age', Sort.desc);
-    });
-  }
-
   QueryBuilder<LocalUser, LocalUser, QAfterSortBy> thenByAuthId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'authId', Sort.asc);
@@ -1848,6 +1838,18 @@ extension LocalUserQuerySortThenBy
   QueryBuilder<LocalUser, LocalUser, QAfterSortBy> thenByAuthIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'authId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QAfterSortBy> thenByBirthDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'birthDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QAfterSortBy> thenByBirthDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'birthDate', Sort.desc);
     });
   }
 
@@ -1974,16 +1976,16 @@ extension LocalUserQuerySortThenBy
 
 extension LocalUserQueryWhereDistinct
     on QueryBuilder<LocalUser, LocalUser, QDistinct> {
-  QueryBuilder<LocalUser, LocalUser, QDistinct> distinctByAge() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'age');
-    });
-  }
-
   QueryBuilder<LocalUser, LocalUser, QDistinct> distinctByAuthId(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'authId', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<LocalUser, LocalUser, QDistinct> distinctByBirthDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'birthDate');
     });
   }
 
@@ -2057,15 +2059,15 @@ extension LocalUserQueryProperty
     });
   }
 
-  QueryBuilder<LocalUser, int?, QQueryOperations> ageProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'age');
-    });
-  }
-
   QueryBuilder<LocalUser, String?, QQueryOperations> authIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'authId');
+    });
+  }
+
+  QueryBuilder<LocalUser, DateTime?, QQueryOperations> birthDateProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'birthDate');
     });
   }
 

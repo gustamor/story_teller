@@ -7,7 +7,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:story_teller/src/core/constants.dart';
-import 'package:story_teller/src/data/sources/bbdd/isar/actions/local_user/add_user_provider.dart';
+import 'package:story_teller/src/data/sources/bbdd/isar/actions/local_user/add_user.dart';
 import 'package:story_teller/src/domain/providers/auth_providers.dart';
 import 'package:story_teller/src/ui/core/providers/registration_form_provider.dart';
 import 'package:story_teller/src/ui/core/widgets/builders/button.dart';

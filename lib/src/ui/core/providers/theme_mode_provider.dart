@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:story_teller/src/data/services/shared_preferences_service.dart';
 import 'package:story_teller/src/domain/providers/theme_mode_provider.dart';
 import 'package:story_teller/src/data/di/shared_preferences.dart';
+
 /// A provider for managing the theme mode of the application.
 ///
 /// This provider uses [SharedPreferencesService] to persist the theme mode

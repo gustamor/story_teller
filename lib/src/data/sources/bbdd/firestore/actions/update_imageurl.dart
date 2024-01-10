@@ -22,7 +22,7 @@ import 'package:story_teller/src/domain/providers/auth_providers.dart';
 ///             second element is the new image URL.
 ///
 /// Throws an [Exception] if there's an error during the Firestore operation.
-final upateStoryWithImageUrl =
+final updateStoryWithImageUrl =
     FutureProvider.family<void, List<String>>((ref, image) async {
   // Access Firestore database reference.
   final db = ref.read(firebaseFirestoreProvider);

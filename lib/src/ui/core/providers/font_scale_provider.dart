@@ -9,7 +9,7 @@ final fontScaleNotifierProvider =
 class FontScaleStateNotifier extends StateNotifier<double> {
   final Ref ref;
 
-  FontScaleStateNotifier(this.ref) : super(0.0);
+  FontScaleStateNotifier(this.ref) : super(1.0);
 
   Future<void> saveFontScale(double newFontScale) async {
     await ref
