@@ -120,21 +120,22 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      NiceClickableCard(
-                        clickFunction: () => Navigator.pushNamed(
-                            context, TaleGeneratorScreen.route),
-                        height: 104.h,
-                        width: 300.w,
-                        caption: tr("story"),
-                        description: tr("story_description"),
-                        decorImage: kWriteStory3,
-                        fit: BoxFit.cover,
-                        borderRadius: 32.0.r,
-                      ),
-                    ]),
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    NiceClickableCard(
+                      clickFunction: () => Navigator.pushNamed(
+                          context, TaleGeneratorScreen.route),
+                      height: 104.h,
+                      width: 300.w,
+                      caption: tr("story"),
+                      description: tr("story_description"),
+                      decorImage: kWriteStory3,
+                      fit: BoxFit.cover,
+                      borderRadius: 32.0.r,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

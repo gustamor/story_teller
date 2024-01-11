@@ -40,151 +40,122 @@ class GeneratedContentScreen extends ConsumerWidget {
     Navigator.pushNamed(context, routes[index]);
   }
 
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     FlutterNativeSplash.remove();
 
-    final materialItems = [
-      BottomNavigationBarItem(
-        icon: const Icon(Icons.star),
-        label: tr("history"),
-      ),
-      BottomNavigationBarItem(
-        icon: const Icon(Icons.book),
-        label: tr('assistants'),
-      ),
-      BottomNavigationBarItem(
-        icon: const Icon(Icons.settings),
-        label: tr('settings'),
-      ),
-    ];
-    final cupertinoItems = <BottomNavigationBarItem>[
-      BottomNavigationBarItem(
-        icon: const Icon(CupertinoIcons.star_fill),
-        label: tr('history'),
-      ),
-      BottomNavigationBarItem(
-        icon: const Icon(CupertinoIcons.book),
-        label: tr('assistans'),
-      ),
-      BottomNavigationBarItem(
-        icon: const Icon(CupertinoIcons.settings),
-        label: tr('settings'),
-      ),
-    ];
-
     final stories = ref.watch(getTalesProvider.future);
     final talesLength = ref.watch(talesLengthProvider);
 
-    return Scaffold(
-      body: CustomScrollView(
-        slivers: <Widget>[
-        SliverAppBar(
-          pinned: true,
-          floating: false,
-          expandedHeight: 160.0,
-          flexibleSpace: FlexibleSpaceBar(
-            title: Text(tr('your_tales')),
-            background: Image.network(klibraryImage, fit: BoxFit.cover),
+    return SafeArea(
+      child: Scaffold(
+        body: CustomScrollView(slivers: <Widget>[
+          SliverAppBar(
+            pinned: true,
+            floating: false,
+            expandedHeight: 160.0,
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text(tr('your_tales')),
+              background: Image.network(klibraryImage, fit: BoxFit.cover),
+            ),
           ),
-        ),
-        SliverToBoxAdapter(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: settingTitleText("Tales", fontScale: 1.0),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Divider(
-                  endIndent: kIndentDividerAssistant,
-                  thickness: kThicknessDividerAssistant,
-                  indent: kThicknessDividerAssistant,
+          SliverToBoxAdapter(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: settingTitleText("Tales", fontScale: 1.0),
                 ),
-              ),
-              Gap(12.h),
-            ],
-          ),
-        ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              return ExpandableTheme(
-                data: const ExpandableThemeData(
-                  iconColor: Colors.red,
-                  useInkWell: true,
-                  headerAlignment: ExpandablePanelHeaderAlignment.center,
-                  tapBodyToCollapse: false,
-                  tapBodyToExpand: true,
-                  tapHeaderToExpand: true,
-                  animationDuration: Duration(
-                    milliseconds: 500,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Divider(
+                    endIndent: kIndentDividerAssistant,
+                    thickness: kThicknessDividerAssistant,
+                    indent: kThicknessDividerAssistant,
                   ),
                 ),
-                child: FutureBuilder<List<Story>>(
-                  future: stories,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return SizedBox(
-                        width: double.infinity,
-                        child: CupertinoActivityIndicator(),
-                      );
-                    } else if (snapshot.hasError) {
-                      return Text('Error: ${snapshot.error}');
-                    } else if (snapshot.hasData) {
-                      final item = snapshot.data![index];
-                      Widget card;
-                      if (index < 50) {
-                        card = Expanded(
-                          child: CardExpanded(
-                              uuid: item.uuid!,
-                              title: item.title!,
-                              storyBody: item.text!,
-                              imageUrl: item.imageUrl!,
-                              date: DateFormat('dd MMMM, yyyy')
-                                  .format(item.date!),
-                              author: ref
-                                  .read(authenticationProvider)
-                                  .getDisplayName()),
-                        );
-                      } else {
-                        card = CardTile(
-                          uuid: item.uuid!,
-                          title: item.title ?? "title null",
-                          storyBody: item.text ?? "story body null",
-                          imageUrl: item.imageUrl,
-                          author: ref
-                                  .read(
-                                    authenticationProvider,
-                                  )
-                                  .getDisplayName() ??
-                              "name null",
-                        );
-                      }
-                      return card;
-                    } else {
-                      return Text('There is no data available');
-                    }
-                  },
-                ),
-              );
-            },
-            childCount: talesLength,
+                Gap(12.h),
+              ],
+            ),
           ),
-        )
-      ]),
-      bottomNavigationBar: NiceBottomBar(
-        index: ref.watch(indexProvider),
-        onTapFunction: (index) => onItemTapped(
-          index,
-          context,
-          ref,
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return ExpandableTheme(
+                  data: const ExpandableThemeData(
+                    iconColor: Colors.red,
+                    useInkWell: true,
+                    headerAlignment: ExpandablePanelHeaderAlignment.center,
+                    tapBodyToCollapse: false,
+                    tapBodyToExpand: true,
+                    tapHeaderToExpand: true,
+                    animationDuration: Duration(
+                      milliseconds: 500,
+                    ),
+                  ),
+                  child: FutureBuilder<List<Story>>(
+                    future: stories,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return SizedBox(
+                          width: double.infinity,
+                          child: CupertinoActivityIndicator(),
+                        );
+                      } else if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      } else if (snapshot.hasData) {
+                        final item = snapshot.data![index];
+                        Widget card;
+                        if (index < 50) {
+                          card = Expanded(
+                            child: CardExpanded(
+                                uuid: item.uuid!,
+                                title: item.title!,
+                                storyBody: item.text!,
+                                imageUrl: item.imageUrl!,
+                                date: DateFormat('dd MMMM, yyyy')
+                                    .format(item.date!),
+                                author: ref
+                                    .read(authenticationProvider)
+                                    .getDisplayName()),
+                          );
+                        } else {
+                          card = CardTile(
+                            uuid: item.uuid!,
+                            title: item.title ?? "title null",
+                            storyBody: item.text ?? "story body null",
+                            imageUrl: item.imageUrl,
+                            author: ref
+                                    .read(
+                                      authenticationProvider,
+                                    )
+                                    .getDisplayName() ??
+                                "name null",
+                          );
+                        }
+                        return card;
+                      } else {
+                        return Text('There is no data available');
+                      }
+                    },
+                  ),
+                );
+              },
+              childCount: talesLength,
+            ),
+          )
+        ]),
+        bottomNavigationBar: NiceBottomBar(
+          index: ref.watch(indexProvider),
+          onTapFunction: (index) => onItemTapped(
+            index,
+            context,
+            ref,
+          ),
+          materialItems: BottomItems.materialItems,
+          cupertinoItems: BottomItems.cupertinoItems,
         ),
-        materialItems: materialItems,
-        cupertinoItems: cupertinoItems,
       ),
     );
   }
