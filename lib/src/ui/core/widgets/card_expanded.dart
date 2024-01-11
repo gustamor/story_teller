@@ -40,11 +40,14 @@ class CardExpanded extends ConsumerWidget {
         width: double.infinity,
         child: InkWell(
           onTap: () {
-            ref
-                .watch(taleToShowProvider.notifier)
-                .update((state) => state = uuid);
+            ref.watch(taleToShowProvider.notifier).update(
+                  (state) => state = uuid,
+                );
 
-            Navigator.pushNamed(context, TaleFromHistoryScreen.route);
+            Navigator.pushNamed(
+              context,
+              TaleFromHistoryScreen.route,
+            );
           },
           child: Container(
             decoration: BoxDecoration(
@@ -65,7 +68,9 @@ class CardExpanded extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(
+                10,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -81,7 +86,10 @@ class CardExpanded extends ConsumerWidget {
 
     buildCollapsed2() {
       return buildImg(
-          Theme.of(context).scaffoldBackgroundColor, 128, BoxFit.cover);
+        Theme.of(context).scaffoldBackgroundColor,
+        128,
+        BoxFit.cover,
+      );
     }
 
     buildCollapsed3() {
@@ -130,8 +138,12 @@ class CardExpanded extends ConsumerWidget {
           Row(
             children: <Widget>[
               Expanded(
-                  child: buildImg(
-                      Theme.of(context).cardColor, 256, BoxFit.contain)),
+                child: buildImg(
+                  Theme.of(context).cardColor,
+                  256,
+                  BoxFit.contain,
+                ),
+              ),
             ],
           ),
         ],
@@ -144,65 +156,75 @@ class CardExpanded extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            historyBodyText(storyBody, fontScale: fontScale),
+            historyBodyText(
+              storyBody,
+              fontScale: fontScale,
+            ),
           ],
         ),
       );
     }
 
     return ExpandableNotifier(
-        child: Padding(
-      padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-      child: ScrollOnExpand(
-        child: Card(
-          clipBehavior: Clip.antiAlias,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Expandable(
-                collapsed: buildCollapsed1(),
-                expanded: buildExpanded1(),
-              ),
-              Expandable(
-                collapsed: buildCollapsed2(),
-                expanded: buildExpanded2(),
-              ),
-              Expandable(
-                collapsed: buildCollapsed3(),
-                expanded: buildExpanded3(),
-              ),
-              const Divider(
-                height: 1,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Builder(
-                    builder: (context) {
-                      var controller =
-                          ExpandableController.of(context, required: true)!;
-                      return TextButton(
-                        child: Text(
-                          controller.expanded
-                              ? tr("close_mays")
-                              : tr("open_mays"),
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelLarge!
-                              .copyWith(color: Colors.deepPurple),
-                        ),
-                        onPressed: () {
-                          controller.toggle();
-                        },
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ],
+      child: Padding(
+        padding: const EdgeInsets.only(
+          left: 10,
+          right: 10,
+          bottom: 10,
+        ),
+        child: ScrollOnExpand(
+          child: Card(
+            clipBehavior: Clip.antiAlias,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Expandable(
+                  collapsed: buildCollapsed1(),
+                  expanded: buildExpanded1(),
+                ),
+                Expandable(
+                  collapsed: buildCollapsed2(),
+                  expanded: buildExpanded2(),
+                ),
+                Expandable(
+                  collapsed: buildCollapsed3(),
+                  expanded: buildExpanded3(),
+                ),
+                const Divider(
+                  height: 1,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Builder(
+                      builder: (context) {
+                        var controller = ExpandableController.of(
+                          context,
+                          required: true,
+                        )!;
+                        return TextButton(
+                          child: Text(
+                            controller.expanded
+                                ? tr("close_mays")
+                                : tr("open_mays"),
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge!
+                                .copyWith(color: Colors.deepPurple),
+                          ),
+                          onPressed: () {
+                            controller.toggle();
+                          },
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
-    ));
+    );
   }
 }

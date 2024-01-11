@@ -35,6 +35,8 @@ const kThicknessDividerAssistant = 1.0;
 
 const kSplashLogo = "assets/images/splash_logo.png";
 
+const klibraryImage =
+    "https://i.postimg.cc/Kz5z9rgb/DALL-E-2024-01-10-19-43-38-An-elf-princess-in-a-mystical-library-pondering-over-a-scroll-with-an.png";
 const kWriteStory3 =
     "https://i.postimg.cc/y8TQdh73/DALL-E-2024-01-10-17-21-03-A-dreamy-15-year-old-girl-beautiful-smart-and-kind-lost-in-imaginat.png";
 const kWriteStory2 =

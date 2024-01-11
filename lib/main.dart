@@ -207,7 +207,7 @@ class AiApp extends ConsumerWidget {
               fontFamily: GoogleFonts.roboto().fontFamily,
             ),
             themeMode: currentMode,
-            initialRoute: AuthName.route,
+            initialRoute: initialRoute,
             routes: {
               AuthScreen.route: (context) => AuthScreen(),
               AuthName.route: (context) => const AuthName(),

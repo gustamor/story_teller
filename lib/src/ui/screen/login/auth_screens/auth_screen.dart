@@ -244,7 +244,7 @@ class AuthScreen extends ConsumerWidget {
                             if (isLogged) {
                               if (ref
                                       .read(authenticationProvider)
-                                      .getDisplayName() ==
+                                      .getDisplayName() !=
                                   null) {
                                 Navigator.pushReplacementNamed(
                                     context, AssistantsScreen.route);

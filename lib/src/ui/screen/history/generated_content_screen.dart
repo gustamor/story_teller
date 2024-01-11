@@ -14,6 +14,7 @@ import 'package:story_teller/src/data/sources/bbdd/firestore/models/simple_story
 import 'package:story_teller/src/domain/providers/auth_providers.dart';
 import 'package:story_teller/src/ui/core/providers/bottom_bar_index.dart';
 import 'package:story_teller/src/ui/core/providers/font_scale_provider.dart';
+import 'package:story_teller/src/ui/core/providers/history_lenght_provider.dart';
 import 'package:story_teller/src/ui/core/widgets/builders/navigation_app_bar.dart';
 import 'package:story_teller/src/ui/core/widgets/builders/navigation_bottom_bar.dart';
 import 'package:story_teller/src/ui/core/widgets/card_expanded.dart';
@@ -38,6 +39,7 @@ class GeneratedContentScreen extends ConsumerWidget {
     ref.read(indexProvider.notifier).value = index;
     Navigator.pushNamed(context, routes[index]);
   }
+
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -73,92 +75,116 @@ class GeneratedContentScreen extends ConsumerWidget {
     ];
 
     final stories = ref.watch(getTalesProvider.future);
+    final talesLength = ref.watch(talesLengthProvider);
 
-    return SafeArea(
-      child: Scaffold(
-        appBar: NiceAppBar(
-          title: tr('your_tales'),
-          // leftIcon: kIconBackArrow,
-          // leftTapFunction: () => Navigator.pushNamed(context, AuthName.route,),
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: <Widget>[
+        SliverAppBar(
+          pinned: true,
+          floating: false,
+          expandedHeight: 160.0,
+          flexibleSpace: FlexibleSpaceBar(
+            title: Text(tr('your_tales')),
+            background: Image.network(klibraryImage, fit: BoxFit.cover),
+          ),
         ),
-        body: SizedBox(
-          height: double.infinity,
+        SliverToBoxAdapter(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: ExpandableNotifier(
-                  child: ExpandableTheme(
-                    data: const ExpandableThemeData(
-                      iconColor: Colors.red,
-                      useInkWell: true,
-                      headerAlignment: ExpandablePanelHeaderAlignment.center,
-                      tapBodyToCollapse: false,
-                      tapBodyToExpand: true,
-                      tapHeaderToExpand: true,
-                      animationDuration: Duration(
-                        milliseconds: 500,
-                      ),
-                    ),
-                    child: FutureBuilder<List<Story>>(
-                        future: stories,
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return SizedBox(
-                              width: double.infinity,
-                              child: CupertinoActivityIndicator(),
-                            );
-                          } else if (snapshot.hasError) {
-                            return Text('Error: ${snapshot.error}');
-                          } else if (snapshot.hasData) {
-                            return ListView.builder(
-                              itemCount: snapshot.data!.length,
-                              itemBuilder: (context, index) {
-                                final item = snapshot.data![index];
-                                Widget card;
-
-                                if (index < 100) {
-                                  card = CardExpanded(
-                                      uuid: item.uuid!,
-                                      title: item.title!,
-                                      storyBody: item.text!,
-                                      imageUrl: item.imageUrl!,
-                                      date: DateFormat('dd MMMM, yyyy')
-                                          .format(item.date!),
-                                      author: ref
-                                          .read(authenticationProvider)
-                                          .getDisplayName());
-                                } else {
-                                  card = CardTile(
-                                    uuid: item.uuid!,
-                                    title: item.title ?? "title null",
-                                    storyBody: item.text ?? "story body null",
-                                    imageUrl: item.imageUrl,
-                                    author: ref
-                                            .read(authenticationProvider)
-                                            .getDisplayName() ??
-                                        "name null",
-                                  );
-                                }
-                                return card;
-                              },
-                            );
-                          } else {
-                            return Text('There is no data available');
-                          }
-                        }),
-                  ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: settingTitleText("Tales", fontScale: 1.0),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Divider(
+                  endIndent: kIndentDividerAssistant,
+                  thickness: kThicknessDividerAssistant,
+                  indent: kThicknessDividerAssistant,
                 ),
-              )
+              ),
+              Gap(12.h),
             ],
           ),
         ),
-        bottomNavigationBar: NiceBottomBar(
-          index: ref.watch(indexProvider),
-          onTapFunction: (index) => onItemTapped(index, context, ref),
-          materialItems: materialItems,
-          cupertinoItems: cupertinoItems,
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+              return ExpandableTheme(
+                data: const ExpandableThemeData(
+                  iconColor: Colors.red,
+                  useInkWell: true,
+                  headerAlignment: ExpandablePanelHeaderAlignment.center,
+                  tapBodyToCollapse: false,
+                  tapBodyToExpand: true,
+                  tapHeaderToExpand: true,
+                  animationDuration: Duration(
+                    milliseconds: 500,
+                  ),
+                ),
+                child: FutureBuilder<List<Story>>(
+                  future: stories,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return SizedBox(
+                        width: double.infinity,
+                        child: CupertinoActivityIndicator(),
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else if (snapshot.hasData) {
+                      final item = snapshot.data![index];
+                      Widget card;
+                      if (index < 50) {
+                        card = Expanded(
+                          child: CardExpanded(
+                              uuid: item.uuid!,
+                              title: item.title!,
+                              storyBody: item.text!,
+                              imageUrl: item.imageUrl!,
+                              date: DateFormat('dd MMMM, yyyy')
+                                  .format(item.date!),
+                              author: ref
+                                  .read(authenticationProvider)
+                                  .getDisplayName()),
+                        );
+                      } else {
+                        card = CardTile(
+                          uuid: item.uuid!,
+                          title: item.title ?? "title null",
+                          storyBody: item.text ?? "story body null",
+                          imageUrl: item.imageUrl,
+                          author: ref
+                                  .read(
+                                    authenticationProvider,
+                                  )
+                                  .getDisplayName() ??
+                              "name null",
+                        );
+                      }
+                      return card;
+                    } else {
+                      return Text('There is no data available');
+                    }
+                  },
+                ),
+              );
+            },
+            childCount: talesLength,
+          ),
+        )
+      ]),
+      bottomNavigationBar: NiceBottomBar(
+        index: ref.watch(indexProvider),
+        onTapFunction: (index) => onItemTapped(
+          index,
+          context,
+          ref,
         ),
+        materialItems: materialItems,
+        cupertinoItems: cupertinoItems,
       ),
     );
   }
