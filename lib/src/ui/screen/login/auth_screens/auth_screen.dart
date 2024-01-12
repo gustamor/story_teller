@@ -13,7 +13,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:story_teller/src/core/constants.dart';
 import 'package:story_teller/src/data/sources/api/openai/chat_message.dart';
 import 'package:story_teller/src/data/sources/api/openai/dalle_image_request.dart';
-import 'package:story_teller/src/data/sources/bbdd/firestore/actions/add_user.dart';
+import 'package:story_teller/src/data/sources/bbdd/firestore/actions/user/add_firestore_user.dart';
 import 'package:story_teller/src/data/sources/bbdd/isar/actions/local_user/add_user.dart';
 import 'package:story_teller/src/data/di/openai_provider.dart';
 import 'package:story_teller/src/domain/providers/auth_providers.dart';

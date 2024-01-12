@@ -2,9 +2,9 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:openai_dart/openai_dart.dart';
-import 'package:story_teller/src/data/sources/bbdd/firestore/actions/add_user.dart';
-import 'package:story_teller/src/data/sources/bbdd/firestore/actions/update_imageurl.dart';
-import 'package:story_teller/src/data/sources/bbdd/firestore/actions/upload_tale.dart';
+import 'package:story_teller/src/data/sources/bbdd/firestore/actions/tale/update_imageurl.dart';
+import 'package:story_teller/src/data/sources/bbdd/firestore/actions/tale/upload_tale.dart';
+import 'package:story_teller/src/data/sources/bbdd/firestore/actions/user/add_firestore_user.dart';
 import 'package:story_teller/src/data/sources/bbdd/isar/actions/tale/add_tale_provider.dart';
 import 'package:story_teller/src/data/sources/bbdd/isar/actions/tale/update_tale_with_image_provider.dart';
 import 'package:story_teller/src/data/services/logger_impl.dart';

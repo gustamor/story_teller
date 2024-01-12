@@ -12,11 +12,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/src/core/constants.dart';
-import 'package:story_teller/src/data/sources/bbdd/firestore/actions/get_a_tale.dart';
 import 'package:story_teller/src/data/sources/bbdd/firestore/models/simple_story.dart';
 import 'package:story_teller/src/data/sources/bbdd/isar/actions/tales/get_tale_provider.dart';
 import 'package:story_teller/src/data/sources/bbdd/isar/models/tale.dart';
-
 import 'package:story_teller/src/domain/providers/auth_providers.dart';
 import 'package:story_teller/src/domain/providers/story_orchestator_provider.dart';
 import 'package:story_teller/src/domain/story_process_state.dart';

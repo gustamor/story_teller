@@ -10,6 +10,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/src/core/constants.dart';
 import 'package:story_teller/src/data/di/isar_provider.dart';
+import 'package:story_teller/src/data/sources/bbdd/firestore/actions/user/add_firestore_user.dart';
+import 'package:story_teller/src/data/sources/bbdd/firestore/actions/user/fetch_firestore_user.dart';
+import 'package:story_teller/src/data/sources/bbdd/firestore/models/user.dart';
 import 'package:story_teller/src/domain/notifiers/auth_state_notifier.dart';
 import 'package:story_teller/src/domain/providers/auth_providers.dart';
 import 'package:story_teller/src/ui/core/providers/menus_providers.dart';
@@ -60,10 +63,17 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
           );
     });
   }
+  @override
+  void didUpdateWidget(covariant AssistantsScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+  }
 
   @override
   Widget build(BuildContext context) {
     final user = ref.read(authenticationProvider).getDisplayName();
+       
+ createUserInBackendIfNeeded(ref);
 
     final double kLeftPaddingHomeNameText = 4.w;
     final double kTopPaddingHomeWhatCanText = 32.w;
@@ -149,4 +159,14 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
       ),
     );
   }
+}
+
+createUserInBackendIfNeeded(WidgetRef ref) {
+  final userAsyncValue = ref.read(userProvider);
+  userAsyncValue.when(
+      data: (data) {},
+      error: (_, __) {
+        ref.watch(addFirestoreUserProvider);
+      },
+      loading: () {});
 }

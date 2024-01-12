@@ -9,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/src/core/constants.dart';
-import 'package:story_teller/src/data/sources/bbdd/firestore/actions/get_tales.dart';
+import 'package:story_teller/src/data/sources/bbdd/firestore/actions/tale/get_tales.dart';
 import 'package:story_teller/src/data/sources/bbdd/firestore/models/simple_story.dart';
 import 'package:story_teller/src/domain/providers/auth_providers.dart';
 import 'package:story_teller/src/ui/core/providers/bottom_bar_index.dart';
