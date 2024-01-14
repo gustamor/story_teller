@@ -8,7 +8,7 @@ class User {
   String? surnames;
   String? country;
   String? gender;
-  DateTime? birthDate;
+  Timestamp? birthDate;
   final String? id;
   bool? isPremium;
   int? tokens;
@@ -35,7 +35,7 @@ class User {
     String? surnames,
     String? country,
     String? gender,
-    DateTime? birthDate,
+    Timestamp? birthDate,
     String? id,
     bool? isPremium,
     int? tokens,
@@ -68,7 +68,7 @@ class User {
       surnames: firestoreData?['surnames'] as String?,
       country: firestoreData?['country'] as String?,
       gender: firestoreData?['gender'] as String?,
-      birthDate: firestoreData?['birthDate'] as DateTime?,
+      birthDate: firestoreData?['birthDate'] as Timestamp?,
       id: firestoreData?['id'] as String?,
       tokens: firestoreData?['tokens'] as int?,
     );
@@ -98,7 +98,7 @@ class User {
       surnames: map['surnames'] as String?,
       country: map['country'] as String?,
       gender: map['gender'] as String?,
-      birthDate: map['birthDate'] as DateTime?,
+      birthDate: map['birthDate'] as Timestamp?,
       id: map['id'] as String?,
       tokens: map['tokens'] as int?,
     );

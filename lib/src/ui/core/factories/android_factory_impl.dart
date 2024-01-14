@@ -133,6 +133,7 @@ class AndroidFactory implements WidgetFactory {
     Color? fillColor,
     Color? androidFillColor,
     Color? iosFillColor,
+    bool? readOnly,
     void Function(String)? onFieldSubmitFunction,
     void Function(PointerDownEvent)? onTapOutSide,
   }) {
@@ -152,6 +153,7 @@ class AndroidFactory implements WidgetFactory {
       prefixIcon: prefixIcon,
       suffixIcon: suffixIcon,
       obscureText: obscureText,
+      readOnly: readOnly,
       obscuringCharacter: obscuringCharacter,
       filled: filled,
       fillColor: androidFillColor ?? fillColor,

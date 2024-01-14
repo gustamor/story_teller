@@ -7,8 +7,12 @@ import 'package:gap/gap.dart';
 import 'package:story_teller/src/core/constants.dart';
 import 'package:story_teller/src/data/services/logger_impl.dart';
 import 'package:story_teller/src/data/sources/bbdd/firestore/actions/user/fetch_firestore_user.dart';
+import 'package:story_teller/src/data/sources/bbdd/firestore/actions/user/update_firestore_user_birthdate.dart';
+import 'package:story_teller/src/data/sources/bbdd/firestore/actions/user/update_firestore_user_surname.dart';
+import 'package:story_teller/src/data/sources/bbdd/firestore/actions/user/update_firebase_user_name.dart';
 import 'package:story_teller/src/data/sources/bbdd/firestore/models/user.dart';
 import 'package:story_teller/src/domain/services/abstract_tell_logger.dart';
+import 'package:story_teller/src/ui/core/providers/date_picker_provider.dart';
 import 'package:story_teller/src/ui/core/providers/font_scale_provider.dart';
 import 'package:story_teller/src/ui/core/widgets/builders/button.dart';
 import 'package:story_teller/src/ui/core/widgets/builders/navigation_app_bar.dart';
@@ -26,29 +30,39 @@ class UserSettingsProfileScreen extends ConsumerStatefulWidget {
 class _UserSettingsProfileScreenState
     extends ConsumerState<UserSettingsProfileScreen> {
   late double fontScale;
-
+  late TextEditingController nameController;
+  late TextEditingController surnamesController;
+  late TextEditingController emailController;
+  late TextEditingController birthDateController;
   TellLogger log = LogImpl();
   @override
   void initState() {
     super.initState();
+    nameController = TextEditingController();
+    surnamesController = TextEditingController();
+    emailController = TextEditingController();
+    birthDateController = TextEditingController();
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    fontScale = ref.watch(fontScaleNotifierProvider);
-    ref.read(fontScaleNotifierProvider.notifier).loadFontScale();
+  void dispose() {
+    nameController.dispose();
+    surnamesController.dispose();
+    emailController.dispose();
+    birthDateController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController nameController = TextEditingController();
-    final TextEditingController surnamesController = TextEditingController();
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController birthDateController = TextEditingController();
-    final userAsyncValue = ref.read(userProvider);
+    fontScale = ref.watch(fontScaleNotifierProvider);
+    final userAsyncValue = ref.watch(userProvider);
+    final datePicker = ref.watch(datePickerProvider);
+
+    final birthDate = ref.watch(datePickerState);
     User? currentUser;
-    userAsyncValue.when(
+
+    return userAsyncValue.when(
       data: (data) {
         currentUser = data;
 
@@ -100,13 +114,19 @@ class _UserSettingsProfileScreenState
                                 ),
                               ),
                               Gap(8.h),
-                              _userProfileTextField(currentUser?.name ?? "  ",
-                                  nameController, TextInputType.name),
+                              _userProfileTextField(
+                                  tag: currentUser?.name ?? "  ",
+                                  controller: nameController,
+                                  inputType: TextInputType.name,
+                                  readOnly: false),
                               Gap(32.h),
                               settingsFieldCaptionText(tr('surnames')),
                               Gap(8.h),
-                              _userProfileTextField("Moreno Fernadaz",
-                                  surnamesController, TextInputType.name),
+                              _userProfileTextField(
+                                  tag: currentUser?.surnames ?? " ",
+                                  controller: surnamesController,
+                                  inputType: TextInputType.name,
+                                  readOnly: false),
                               Gap(32.h),
                               settingsFieldCaptionText(
                                 tr(
@@ -114,22 +134,61 @@ class _UserSettingsProfileScreenState
                                 ),
                               ),
                               Gap(8.h),
-                              _userProfileTextField("assa@adasds.com",
-                                  emailController, TextInputType.emailAddress),
+                              _userProfileTextField(
+                                  tag: currentUser?.email ?? " ",
+                                  controller: emailController,
+                                  inputType: TextInputType.emailAddress,
+                                  readOnly: false),
                               Gap(32.h),
                               settingsFieldCaptionText(
                                 tr(
                                   'birth_date',
                                 ),
                               ),
-                              _userProfileTextField("12 ago 1998",
-                                  birthDateController, TextInputType.datetime),
+                              InkWell(
+                                onTap: () async {
+                                  datePicker.showDatePicker(context, ref);
+                                  log.d("AAA$birthDate");
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 8.0, horizontal: 12.0),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.grey),
+                                    borderRadius: BorderRadius.circular(4.0),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Text(
+                                        birthDate.toString().split(' ')[
+                                            0], // Formatea la fecha como prefieras
+                                        style: const TextStyle(fontSize: 16),
+                                      ),
+                                      const Icon(Icons.calendar_today,
+                                          size: 16),
+                                    ],
+                                  ),
+                                ),
+                              ),
                               Gap(16.h),
                               Align(
                                 alignment: Alignment.bottomRight,
                                 child: NiceButton(
-                                  text: "Apply",
-                                  clickFunction: () {},
+                                  text: tr(
+                                    'apply',
+                                  ),
+                                  clickFunction: () {
+                                    ref.read(updateNameFirestoreUserProvider(
+                                        nameController.text));
+                                    ref.read(
+                                        updateSurnamesFirestoreUserProvider(
+                                            surnamesController.text));
+                                    ref.read(
+                                        updateBirthDateFirestoreUserProvider(
+                                            birthDate));
+                                  },
                                 ),
                               ),
                             ],
@@ -145,20 +204,23 @@ class _UserSettingsProfileScreenState
         );
       },
       error: (error, stackTrace) {
+          log.d(error.toString());
         log.d(stackTrace.toString());
-        return  Container(color:Colors.red);
+        return Container(color: Colors.red);
       },
       loading: () {
-        return  Container(color:Colors.green);
+        return Container();
       },
     );
-       log.d("e");
-        return  Container(color:Colors.blue);
   }
 }
 
 Widget _userProfileTextField(
-    String tag, TextEditingController controller, TextInputType inputType) {
+    {required String tag,
+    required TextEditingController controller,
+    required TextInputType? inputType,
+    required bool readOnly}) {
+  controller.text = tag;
   return NiceTextFormField(
     onTapOutSide: (fn) {},
     onChangedFunction: () {},
@@ -166,6 +228,7 @@ Widget _userProfileTextField(
     hintText: tag,
     maxLines: 1,
     filled: true,
+    readOnly: readOnly,
     contentPadding: 4.r,
     borderRadius: 6.r,
     obscureText: false,

@@ -20,6 +20,7 @@ class IosTextFormField extends StatelessWidget implements AITextFormField {
   final String? Function(String?)? validator;
   final TextEditingController? controller;
   final FocusNode? focusNode;
+  final bool? readOnly;
   final void Function(String)? onFieldSubmitFunction;
   final void Function(PointerDownEvent)? onTapOutSide;
 
@@ -42,17 +43,18 @@ class IosTextFormField extends StatelessWidget implements AITextFormField {
     this.controller,
     this.focusNode,
     this.onFieldSubmitFunction,
-    this.onTapOutSide,
+    this.onTapOutSide, this.readOnly,
   });
   @override
   Widget build(BuildContext context) {
     return CupertinoTextField(
       onChanged: (query) => onChangedFunction,
       onSubmitted: onFieldSubmitFunction ?? (value) {},
-      onTapOutside: onTapOutSide ,
+      onTapOutside: onTapOutSide,
       focusNode: focusNode!,
       controller: controller,
       maxLines: maxLines ?? 1,
+      readOnly: readOnly ?? false,
       scrollPhysics: const ScrollPhysics(),
       enableSuggestions: true,
       showCursor: true,

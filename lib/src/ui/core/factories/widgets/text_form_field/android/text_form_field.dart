@@ -22,6 +22,7 @@ class AndroidTextFormField extends StatelessWidget implements AITextFormField {
   final TextEditingController? controller;
   final Color? fillColor;
   final FocusNode? focusNode;
+  final bool? readOnly;
   final void Function(String)? onFieldSubmitFunction;
   final void Function(PointerDownEvent)? onTapOutSide;
 
@@ -45,6 +46,7 @@ class AndroidTextFormField extends StatelessWidget implements AITextFormField {
     this.focusNode,
     this.onFieldSubmitFunction,
     this.onTapOutSide,
+    this.readOnly,
   });
 
   @override
@@ -66,6 +68,7 @@ class AndroidTextFormField extends StatelessWidget implements AITextFormField {
       keyboardAppearance: Brightness.dark,
       autofocus: false,
       autocorrect: true,
+      readOnly: readOnly ?? false,
       maxLines: maxLines ?? 1,
       obscureText: obscureText ?? false,
       obscuringCharacter: obscuringCharacter ?? "*",

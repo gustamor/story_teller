@@ -80,6 +80,7 @@ abstract class WidgetFactory {
     Color? fillColor,
     Color? androidFillColor,
     Color? iosFillColor,
+    bool? readOnly,
     String? Function(String?)? validator,
     TextEditingController? controller,
     FocusNode? focusNode,

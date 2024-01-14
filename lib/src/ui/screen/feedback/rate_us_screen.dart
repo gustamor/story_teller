@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -17,21 +18,18 @@ class RateUsScreen extends StatelessWidget {
       child: Scaffold(
         appBar: null,
         body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.r),
+          padding: EdgeInsets.symmetric(horizontal: 12.r),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Align(
                 alignment: Alignment.centerRight,
                 child: InkWell(
-                  onTap: () => Navigator.pop(context),
-                  child: SvgPicture.asset(
-                    kIconClose,
-                    color: Colors.white,
-                    height: 16.h,
-                    width:16.w,
-                  ),
-                ),
+                    onTap: () => Navigator.pop(context),
+                    child: Padding(
+                      padding: EdgeInsets.all(8.r),
+                      child: const Icon(CupertinoIcons.clear),
+                    )),
               ),
               Expanded(
                 child: Column(
@@ -45,19 +43,19 @@ class RateUsScreen extends StatelessWidget {
                       height: 250.h,
                       fit: BoxFit.cover,
                     ),
-                     Text(tr("rate_us_mays"), style: AndroidStyle.cardCaption),
-                     Text(tr("your_comments_matter"),
+                    Text(tr("rate_us_mays"), style: AndroidStyle.cardCaption),
+                    Text(
+                      tr("your_comments_matter"),
                       style: AndroidStyle.cardDescription,
                     ),
                     Gap(12.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: List.generate(5, (index) {
-
                         return Expanded(
                           child: SvgPicture.asset(
                             kIconStarFilled,
-                            color: (index < 4) ? Colors.yellow: Colors.grey,
+                            color: (index < 4) ? Colors.yellow : Colors.grey,
                             height: 42.h,
                             width: 42.w,
                           ),
@@ -72,7 +70,7 @@ class RateUsScreen extends StatelessWidget {
                             horizontal: 42.w,
                           ),
                           child: NiceButton(
-                              text: "Share", clickFunction: () => {}),
+                              text: tr("share"), clickFunction: () => {}),
                         )),
                       ],
                     ),

@@ -136,6 +136,7 @@ class IOSFactory implements WidgetFactory {
     FocusNode? focusNode,
     Color? androidFillColor,
     Color? iosFillColor,
+    bool? readOnly,
     void Function(String)? onFieldSubmitFunction,
     void Function(PointerDownEvent)? onTapOutSide,
   }) {
@@ -152,6 +153,7 @@ class IOSFactory implements WidgetFactory {
       contentPadding: contentPadding,
       borderRadius: borderRadius,
       borderSide: borderSide,
+      readOnly: readOnly,
       prefixIcon: prefixIcon,
       suffixIcon: suffixIcon,
       obscureText: obscureText,

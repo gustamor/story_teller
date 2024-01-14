@@ -3,8 +3,9 @@
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:story_teller/src/core/constants.dart';
-
-import 'package:story_teller/src/data/sources/bbdd/firestore/models/user.dart' as firebaseUser;
+import 'package:story_teller/src/data/sources/bbdd/firestore/actions/user/fetch_firestore_user.dart';
+import 'package:story_teller/src/data/sources/bbdd/firestore/models/user.dart'
+    as firebaseUser;
 import 'package:story_teller/src/data/di/firebase_providers.dart';
 import 'package:story_teller/src/domain/providers/auth_providers.dart';
 
@@ -26,33 +27,37 @@ final addFirestoreUserProvider = FutureProvider<void>((ref) async {
   // Retrieve current authenticated user.
   final user = await ref.read(authenticationProvider).getCurrentUser();
 
-  // Construct a new user object with relevant details.
-
-
-  final newUser = firebaseUser.User(
-    id: user!.uid,
-    userName: user.displayName  ?? "",
-    email: user.email,
-    photo: user.photoURL ?? "",
-    tokens: 0,
-    name: "",
-    surnames: "",
-    birthDate: null,
-    isPremium: null,
-  );
-
   try {
-    // Define the Firestore collection with a custom converter for the User object.
-    final collectionRef = db.collection(Collections.kUsers).withConverter(
-      fromFirestore: firebaseUser.User.fromFirestore,
-      toFirestore: (firebaseUser.User user, _) => user.toFirestore(),
-    );
+    //Check if user exists
+    final currentUser = ref.watch(userProvider);
+    if (currentUser.value!.email == null) {
+      // Construct a new user object with relevant details.
+      final newUser = firebaseUser.User(
+        id: user!.uid,
+        userName: user.displayName ?? "",
+        email: user.email,
+        photo: user.photoURL ?? "",
+        tokens: 0,
+        name: "",
+        surnames: "",
+        birthDate: null,
+        isPremium: null,
+      );
 
-    // Reference to the user's document in the collection.
-    final docRef = collectionRef.doc(newUser.id);
+      // Define the Firestore collection with a custom converter for the User object.
+      final collectionRef = db.collection(Collections.kUsers).withConverter(
+            fromFirestore: firebaseUser.User.fromFirestore,
+            toFirestore: (firebaseUser.User user, _) => user.toFirestore(),
+          );
 
-    // Set the user data in Firestore, merging with existing data.
-    docRef.set(newUser, SetOptions(merge: true));
+      // Reference to the user's document in the collection.
+      final docRef = collectionRef.doc(newUser.id);
+
+      // Set the user data in Firestore, merging with existing data.
+      docRef.set(newUser, SetOptions(merge: true));
+    } else {
+      print("");
+    }
   } on FirebaseException catch (e) {
     // Handle and throw Firebase specific exceptions.
     throw Exception(e);

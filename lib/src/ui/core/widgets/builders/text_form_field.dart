@@ -17,34 +17,37 @@ class NiceTextFormField extends StatelessWidget {
   final Color? fillColor;
   final Color? androidFillColor;
   final Color? iosFillColor;
+  final bool? readOnly;
   final String? Function(String?)? validator;
   final TextEditingController? controller;
   final FocusNode? focusNode;
   final void Function(String)? onFieldSubmitFunction;
   final void Function(PointerDownEvent)? onTapOutSide;
 
-  NiceTextFormField(
-      {super.key,
-      this.onChangedFunction,
-      this.keyboardType,
-      this.hintText,
-      this.contentPadding,
-      this.borderRadius,
-      this.borderSide,
-      this.prefixIcon,
-      this.suffixIcon,
-      this.obscureText,
-      this.obscuringCharacter,
-      this.filled,
-      this.fillColor,
-      this.androidFillColor,
-      this.iosFillColor,
-      this.maxLines,
-      this.validator,
-      this.controller,
-      this.focusNode,
-      this.onFieldSubmitFunction,
-      this.onTapOutSide});
+  NiceTextFormField({
+    super.key,
+    this.onChangedFunction,
+    this.keyboardType,
+    this.hintText,
+    this.contentPadding,
+    this.borderRadius,
+    this.borderSide,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.obscureText,
+    this.obscuringCharacter,
+    this.filled,
+    this.fillColor,
+    this.androidFillColor,
+    this.iosFillColor,
+    this.maxLines,
+    this.validator,
+    this.controller,
+    this.focusNode,
+    this.onFieldSubmitFunction,
+    this.onTapOutSide,
+    this.readOnly,
+  });
 
   final ui = selectSpecificPlatformWidgetFactory();
 
@@ -66,6 +69,7 @@ class NiceTextFormField extends StatelessWidget {
       prefixIcon: prefixIcon,
       suffixIcon: suffixIcon,
       obscureText: obscureText,
+      readOnly: readOnly,
       obscuringCharacter: obscuringCharacter,
       filled: filled,
       fillColor: fillColor,

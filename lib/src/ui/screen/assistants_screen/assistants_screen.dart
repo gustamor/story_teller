@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_context_menu/flutter_context_menu.dart';
@@ -15,6 +16,7 @@ import 'package:story_teller/src/data/sources/bbdd/firestore/actions/user/fetch_
 import 'package:story_teller/src/data/sources/bbdd/firestore/models/user.dart';
 import 'package:story_teller/src/domain/notifiers/auth_state_notifier.dart';
 import 'package:story_teller/src/domain/providers/auth_providers.dart';
+import 'package:story_teller/src/ui/core/date_picker.dart';
 import 'package:story_teller/src/ui/core/providers/menus_providers.dart';
 import 'package:story_teller/src/data/services/logger_impl.dart';
 import 'package:story_teller/src/domain/services/abstract_tell_logger.dart';
@@ -23,7 +25,6 @@ import 'package:story_teller/src/ui/core/providers/bottom_bar_index.dart';
 import 'package:story_teller/src/ui/core/widgets/builders/clickable_card.dart';
 import 'package:story_teller/src/ui/core/widgets/builders/navigation_app_bar.dart';
 import 'package:story_teller/src/ui/core/widgets/builders/navigation_bottom_bar.dart';
-
 import 'package:story_teller/src/ui/screen/history/generated_content_screen.dart';
 import 'package:story_teller/src/ui/screen/settings/global/settings_screen.dart';
 import 'package:story_teller/src/ui/screen/tale_generator/tale_generator.dart';
@@ -52,6 +53,7 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
   @override
   void initState() {
     super.initState();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       double height = MediaQuery.of(context).size.height;
       double width = MediaQuery.of(context).size.width;
@@ -63,31 +65,31 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
           );
     });
   }
+
   @override
   void didUpdateWidget(covariant AssistantsScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
-
   }
 
   @override
   Widget build(BuildContext context) {
     final user = ref.read(authenticationProvider).getDisplayName();
-       
- createUserInBackendIfNeeded(ref);
-
+    createUserInBackendIfNeeded(ref);
     final double kLeftPaddingHomeNameText = 4.w;
     final double kTopPaddingHomeWhatCanText = 32.w;
     FlutterNativeSplash.remove();
     final contextMenu = ref.watch(contextMenuProvider);
+
+
     return SafeArea(
       child: Scaffold(
         appBar: NiceAppBar(
-          title: tr('assistants'),
-          rightIcon: kIconUser,
-          rightTapFunction: () {
-            showContextMenu(context, contextMenu: contextMenu!);
-          },
-        ),
+            title: tr('assistants'),
+            rightIcon: kIconUser,
+            rightTapFunction: () {
+              showContextMenu(context, contextMenu: contextMenu!);
+            }),
+        
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -162,11 +164,5 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
 }
 
 createUserInBackendIfNeeded(WidgetRef ref) {
-  final userAsyncValue = ref.read(userProvider);
-  userAsyncValue.when(
-      data: (data) {},
-      error: (_, __) {
-        ref.watch(addFirestoreUserProvider);
-      },
-      loading: () {});
+  ref.watch(addFirestoreUserProvider);
 }
