@@ -19,8 +19,7 @@ class NiceDatePickerDialog {
               SizedBox(
                 height: 200,
                 child: CupertinoDatePicker(
-        
-                  minimumDate: DateTime(1910, 1, 1),
+                          minimumDate: DateTime(1910, 1, 1),
                   initialDateTime:  DateTime(2023, 12, 30),
                   maximumDate: DateTime(2023, 12, 31),
                   minimumYear: 1910,
