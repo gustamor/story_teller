@@ -2,7 +2,6 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:story_teller/src/data/sources/bbdd/isar/actions/tale/update_tale_with_image_provider.dart';
 import 'package:story_teller/src/domain/services/image_service.dart';
 import 'package:story_teller/src/data/services/logger_impl.dart';
 import 'package:story_teller/src/domain/image_process_state.dart';

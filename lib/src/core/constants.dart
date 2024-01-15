@@ -33,7 +33,7 @@ const kHeightDividerAssistant = 16.0;
 const kIndentDividerAssistant = 16.0;
 const kThicknessDividerAssistant = 1.0;
 
-const kSplashLogo = "assets/images/splash_logo.png";
+const kSplashLogo = "assets/images/splash.png";
 
 const klibraryImage =
     "https://i.postimg.cc/Kz5z9rgb/DALL-E-2024-01-10-19-43-38-An-elf-princess-in-a-mystical-library-pondering-over-a-scroll-with-an.png";

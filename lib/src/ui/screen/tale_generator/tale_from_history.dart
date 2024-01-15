@@ -6,10 +6,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/src/core/constants.dart';
-import 'package:story_teller/src/data/sources/bbdd/isar/actions/tale/get_tale_provider.dart';
-import 'package:story_teller/src/data/sources/bbdd/isar/models/tale.dart';
+import 'package:story_teller/src/data/sources/bbdd/firestore/actions/tale/get_a_tale.dart';
+import 'package:story_teller/src/data/sources/bbdd/firestore/models/simple_story.dart';
+
 import 'package:story_teller/src/domain/providers/auth_providers.dart';
 import 'package:story_teller/src/ui/core/providers/current_tale_id_provider.dart';
+import 'package:story_teller/src/ui/core/providers/fetch_user_name_and_surname.dart';
 import 'package:story_teller/src/ui/core/providers/font_scale_provider.dart';
 import 'package:story_teller/src/ui/core/widgets/builders/navigation_app_bar.dart';
 
@@ -30,7 +32,6 @@ class _TaleFromHistoryScreenState extends ConsumerState<TaleFromHistoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    FlutterNativeSplash.remove();
 
     String title = "";
     return SafeArea(
@@ -43,13 +44,13 @@ class _TaleFromHistoryScreenState extends ConsumerState<TaleFromHistoryScreen> {
         body: Builder(
           builder: (context) {
             final taleId = ref.watch(taleToShowProvider.notifier).state;
-            var story = ref.watch(getTaleProvider(taleId));
+            var story = ref.watch(getFirebaseTaleProvider(taleId));
             return story.when(
               data: (tale) {
-                title = tale!.title!;
+                title = tale.title ?? "";
                 return showOnCompleted(context, ref, tale);
               },
-              loading: () => const CircularProgressIndicator(),
+              loading: () => const Center(child:  CircularProgressIndicator()),
               error: (e, st) => Text('Error: $e'),
             );
           },
@@ -59,9 +60,13 @@ class _TaleFromHistoryScreenState extends ConsumerState<TaleFromHistoryScreen> {
   }
 }
 
-Widget showOnCompleted(BuildContext context, WidgetRef ref, Tale? story) {
+Widget showOnCompleted(BuildContext context, WidgetRef ref, Story story) {
   double width = MediaQuery.of(context).size.width;
-  var displayName = ref.watch(authenticationProvider).getDisplayName();
+    String? userNameTag;
+
+  final asyncUserNameTag = ref.watch(fetchUserNameAndSurnameFromIdProvider);
+    asyncUserNameTag.whenData((value) => userNameTag = value);
+    
   return SizedBox(
     height: double.infinity,
     width: double.infinity,
@@ -79,9 +84,9 @@ Widget showOnCompleted(BuildContext context, WidgetRef ref, Tale? story) {
                   SizedBox(
                     width: double.infinity,
                     height: 250.h,
-                    child: (story!.imageUrl != null)
+                    child: (story.imageUrl != null)
                         ? Image.network(
-                            story.imageUrl!,
+                            story.imageUrl ?? kImageBookPage,
                             fit: BoxFit.fill,
                             loadingBuilder: (context, child, loadingProgress) {
                               if (loadingProgress == null) return child;
@@ -121,13 +126,13 @@ Widget showOnCompleted(BuildContext context, WidgetRef ref, Tale? story) {
                                 constraints:
                                     BoxConstraints(maxWidth:210.w),
                                 child: storyTitleText(
-                                  story.title!,
+                                  story.title ?? "",
                                   fontScale: ref.watch(fontScaleNotifierProvider),
                                 ),
                               ),
                               Gap(8.h),
                               storyAuthorNameText(
-                                "$displayName",
+                                "$userNameTag",
                                 fontScale: ref.watch(fontScaleNotifierProvider),
                               ),
                               Gap(12.h),
@@ -145,7 +150,7 @@ Widget showOnCompleted(BuildContext context, WidgetRef ref, Tale? story) {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8.w),
                     child: storyBodyText(
-                      story.story!,
+                      story.text ?? "",
                       fontScale: ref.watch(fontScaleNotifierProvider),
                     ),
                   ),

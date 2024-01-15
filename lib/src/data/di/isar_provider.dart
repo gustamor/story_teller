@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+/* import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
@@ -43,3 +43,4 @@ final isarProvider = FutureProvider<Isar>((
     rethrow; // Re-throwing the exception after logging or handling
   }
 });
+ */

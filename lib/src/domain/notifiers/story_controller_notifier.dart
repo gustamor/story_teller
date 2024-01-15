@@ -5,8 +5,7 @@ import 'package:openai_dart/openai_dart.dart';
 import 'package:story_teller/src/data/sources/bbdd/firestore/actions/tale/update_imageurl.dart';
 import 'package:story_teller/src/data/sources/bbdd/firestore/actions/tale/upload_tale.dart';
 import 'package:story_teller/src/data/sources/bbdd/firestore/actions/user/add_firestore_user.dart';
-import 'package:story_teller/src/data/sources/bbdd/isar/actions/tale/add_tale_provider.dart';
-import 'package:story_teller/src/data/sources/bbdd/isar/actions/tale/update_tale_with_image_provider.dart';
+
 import 'package:story_teller/src/data/services/logger_impl.dart';
 import 'package:story_teller/src/domain/abstract/asbtract_process_state.dart';
 import 'package:story_teller/src/domain/chat_process_state.dart';
@@ -42,14 +41,10 @@ class StoryProcessControllerNotifier extends StateNotifier<ProcessState> {
         step: StoryProcessStep.generatingStory,
       );
       final taleData = await chatOrchestator.processAndStoreSimpleStory(prompt);
-      ref.read(
-        addTaleProvider(
-          taleData!,
-        ),
-      );
+     
       ref.read(
         uploadTaleProvider(
-          taleData,
+          taleData!,
         ),
       );
       ref.read(taleToShowProvider.notifier).update((state) => state = taleData.id);
@@ -79,9 +74,8 @@ class StoryProcessControllerNotifier extends StateNotifier<ProcessState> {
           step: StoryProcessStep.savingImage,
         );
       } else if (imageOrchestator.state.step == ImageProcessStep.completed) {
-            ref.read(upateTaleWithImageProvider([taleData.id, imageUrl!]));
-           await  Future.delayed(const Duration(seconds: 2));
-                ref.read(updateStoryWithImageUrl([taleData.id, imageUrl])); //FB
+      
+                ref.read(updateStoryWithImageUrl([taleData.id, imageUrl!])); //FB
 
      
 

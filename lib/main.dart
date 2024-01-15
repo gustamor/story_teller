@@ -16,12 +16,10 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:story_teller/src/core/params.dart';
 import 'package:story_teller/src/data/di/remote_config_service_provider.dart';
-import 'package:story_teller/src/data/sources/bbdd/isar/models/tale.dart';
-import 'package:story_teller/src/data/sources/bbdd/isar/models/user.dart';
+
 import 'package:story_teller/src/data/di/isar_provider.dart';
 import 'package:story_teller/src/domain/models/dalle_model.dart';
 import 'package:story_teller/src/domain/providers/auth_providers.dart';
