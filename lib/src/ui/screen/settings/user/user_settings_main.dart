@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/src/core/constants.dart';
+import 'package:story_teller/src/ui/core/providers/fetch_user_name_and_surname.dart';
 import 'package:story_teller/src/ui/core/providers/font_scale_provider.dart';
 import 'package:story_teller/src/ui/core/widgets/builders/navigation_app_bar.dart';
 import 'package:story_teller/src/ui/screen/feedback/rate_us_screen.dart';
@@ -17,7 +18,12 @@ class UserSettingsMainScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var fontScale = ref.watch(fontScaleNotifierProvider);
-    ref.read(fontScaleNotifierProvider.notifier).loadFontScale();
+    ref.watch(fontScaleNotifierProvider.notifier).loadFontScale();
+    String? userNameTag;
+
+    final asyncUserNameTag = ref.watch(fetchUserNameAndSurnameFromIdProvider);
+
+    asyncUserNameTag.whenData((value) => userNameTag = value);
     return SafeArea(
       child: Scaffold(
         appBar: NiceAppBar(
@@ -59,7 +65,7 @@ class UserSettingsMainScreen extends ConsumerWidget {
                         ),
                         child: Flexible(
                           child: settingTitleText(
-                            "Gustavo Moreno",
+                            userNameTag ?? "",
                             fontScale: fontScale,
                           ),
                         ),
@@ -103,7 +109,6 @@ class UserSettingsMainScreen extends ConsumerWidget {
                 ),
               ),
               Gap(16.h),
-            
               InkWell(
                 onTap: () {},
                 child: ListTile(

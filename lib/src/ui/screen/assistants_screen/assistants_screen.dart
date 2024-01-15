@@ -17,6 +17,7 @@ import 'package:story_teller/src/data/sources/bbdd/firestore/models/user.dart';
 import 'package:story_teller/src/domain/notifiers/auth_state_notifier.dart';
 import 'package:story_teller/src/domain/providers/auth_providers.dart';
 import 'package:story_teller/src/ui/core/date_picker.dart';
+import 'package:story_teller/src/ui/core/providers/fetch_user_name.dart';
 import 'package:story_teller/src/ui/core/providers/menus_providers.dart';
 import 'package:story_teller/src/data/services/logger_impl.dart';
 import 'package:story_teller/src/domain/services/abstract_tell_logger.dart';
@@ -73,13 +74,15 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final user = ref.read(authenticationProvider).getDisplayName();
+    final user = ref.watch(authenticationProvider).getDisplayName();
+    String? userName;
+    final asyncUserNameTag = ref.watch(fetchUserNameProvider);
+    asyncUserNameTag.whenData((name) => userName = name);
     createUserInBackendIfNeeded(ref);
     final double kLeftPaddingHomeNameText = 4.w;
     final double kTopPaddingHomeWhatCanText = 32.w;
     FlutterNativeSplash.remove();
     final contextMenu = ref.watch(contextMenuProvider);
-
 
     return SafeArea(
       child: Scaffold(
@@ -89,7 +92,6 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
             rightTapFunction: () {
               showContextMenu(context, contextMenu: contextMenu!);
             }),
-        
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -105,7 +107,7 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
                       'hello_user',
                       style: TextStyle(fontSize: 28.sp),
                     ).tr(
-                      namedArgs: {"user": "$user"},
+                      namedArgs: {"user": userName ?? ""},
                     ),
                   ),
                 ],

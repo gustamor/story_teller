@@ -116,7 +116,7 @@ class CardExpanded extends ConsumerWidget {
                         fontScale: fontScale,
                       ),
                       historyAuthorText(
-                        ", ",
+                        ",  ",
                         fontScale: fontScale,
                       ),
                       historyAuthorText(

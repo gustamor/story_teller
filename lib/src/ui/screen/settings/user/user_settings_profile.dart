@@ -11,8 +11,10 @@ import 'package:story_teller/src/data/sources/bbdd/firestore/actions/user/update
 import 'package:story_teller/src/data/sources/bbdd/firestore/actions/user/update_firestore_user_surname.dart';
 import 'package:story_teller/src/data/sources/bbdd/firestore/actions/user/update_firebase_user_name.dart';
 import 'package:story_teller/src/data/sources/bbdd/firestore/models/user.dart';
+import 'package:story_teller/src/domain/providers/auth_providers.dart';
 import 'package:story_teller/src/domain/services/abstract_tell_logger.dart';
 import 'package:story_teller/src/ui/core/providers/date_picker_provider.dart';
+import 'package:story_teller/src/ui/core/providers/fetch_user_name_and_surname.dart';
 import 'package:story_teller/src/ui/core/providers/font_scale_provider.dart';
 import 'package:story_teller/src/ui/core/widgets/builders/button.dart';
 import 'package:story_teller/src/ui/core/widgets/builders/navigation_app_bar.dart';
@@ -61,6 +63,10 @@ class _UserSettingsProfileScreenState
 
     final birthDate = ref.watch(datePickerState);
     User? currentUser;
+    String? userNameTag;
+
+    final asyncUserNameTag = ref.watch(fetchUserNameAndSurnameFromIdProvider);
+    asyncUserNameTag.whenData((value) => userNameTag = value);
 
     return userAsyncValue.when(
       data: (data) {
@@ -98,7 +104,7 @@ class _UserSettingsProfileScreenState
                       ),
                     ),
                     Gap(12.h),
-                    settingTitleText("Gustavo Moreno", fontScale: fontScale),
+                    settingTitleText(userNameTag ?? "", fontScale: fontScale),
                     SizedBox(
                       width: double.infinity,
                       child: Padding(
@@ -204,7 +210,7 @@ class _UserSettingsProfileScreenState
         );
       },
       error: (error, stackTrace) {
-          log.d(error.toString());
+        log.d(error.toString());
         log.d(stackTrace.toString());
         return Container(color: Colors.red);
       },

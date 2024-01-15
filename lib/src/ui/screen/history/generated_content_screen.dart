@@ -10,9 +10,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/src/core/constants.dart';
 import 'package:story_teller/src/data/sources/bbdd/firestore/actions/tale/get_tales.dart';
+import 'package:story_teller/src/data/sources/bbdd/firestore/actions/user/fetch_firestore_user.dart';
 import 'package:story_teller/src/data/sources/bbdd/firestore/models/simple_story.dart';
 import 'package:story_teller/src/domain/providers/auth_providers.dart';
 import 'package:story_teller/src/ui/core/providers/bottom_bar_index.dart';
+import 'package:story_teller/src/ui/core/providers/fetch_user_name_and_surname.dart';
 import 'package:story_teller/src/ui/core/providers/font_scale_provider.dart';
 import 'package:story_teller/src/ui/core/providers/history_lenght_provider.dart';
 import 'package:story_teller/src/ui/core/widgets/builders/navigation_app_bar.dart';
@@ -43,10 +45,12 @@ class GeneratedContentScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     FlutterNativeSplash.remove();
+    String? userNameTag;
 
     final asyncStories = ref.watch(getTalesProvider);
     //final talesLength = ref.watch(talesLengthProvider);
-
+    final asyncUserNameTag = ref.watch(fetchUserNameAndSurnameFromIdProvider);
+    asyncUserNameTag.whenData((value) => userNameTag = value);
     return asyncStories.when(
       data: (stories) {
         return SafeArea(
@@ -109,9 +113,7 @@ class GeneratedContentScreen extends ConsumerWidget {
                                   imageUrl: item.imageUrl!,
                                   date: DateFormat('dd MMMM, yyyy')
                                       .format(item.date!),
-                                  author: ref
-                                      .read(authenticationProvider)
-                                      .getDisplayName()),
+                                  author: userNameTag ?? ""),
                             );
                           } else {
                             card = CardTile(
@@ -119,12 +121,7 @@ class GeneratedContentScreen extends ConsumerWidget {
                               title: item.title ?? "title null",
                               storyBody: item.text ?? "story body null",
                               imageUrl: item.imageUrl,
-                              author: ref
-                                      .read(
-                                        authenticationProvider,
-                                      )
-                                      .getDisplayName() ??
-                                  "name null",
+                              author: userNameTag ?? "",
                             );
                           }
                           return card;
