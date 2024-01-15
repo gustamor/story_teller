@@ -1,8 +1,6 @@
 // ignore_for_file: unused_import
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_context_menu/flutter_context_menu.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -10,7 +8,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/src/core/constants.dart';
-import 'package:story_teller/src/data/di/isar_provider.dart';
 import 'package:story_teller/src/data/sources/bbdd/firestore/actions/user/add_firestore_user.dart';
 import 'package:story_teller/src/data/sources/bbdd/firestore/actions/user/fetch_firestore_user.dart';
 import 'package:story_teller/src/data/sources/bbdd/firestore/models/user.dart';

@@ -20,7 +20,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:story_teller/src/core/params.dart';
 import 'package:story_teller/src/data/di/remote_config_service_provider.dart';
 
-import 'package:story_teller/src/data/di/isar_provider.dart';
 import 'package:story_teller/src/domain/models/dalle_model.dart';
 import 'package:story_teller/src/domain/providers/auth_providers.dart';
 import 'package:story_teller/src/data/services/riverpod_logger_impl.dart';

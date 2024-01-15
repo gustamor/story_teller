@@ -11,7 +11,6 @@ import 'package:story_teller/src/data/sources/bbdd/firestore/actions/user/update
 import 'package:story_teller/src/data/sources/bbdd/firestore/actions/user/update_firestore_user_surname.dart';
 import 'package:story_teller/src/data/sources/bbdd/firestore/actions/user/update_firebase_user_name.dart';
 import 'package:story_teller/src/data/sources/bbdd/firestore/models/user.dart';
-import 'package:story_teller/src/domain/providers/auth_providers.dart';
 import 'package:story_teller/src/domain/services/abstract_tell_logger.dart';
 import 'package:story_teller/src/ui/core/providers/date_picker_provider.dart';
 import 'package:story_teller/src/ui/core/providers/fetch_user_name_and_surname.dart';
