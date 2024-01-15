@@ -71,6 +71,7 @@ dev_dependencies:
   isar_generator: ^3.1.0+1
   build_runner: ^2.4.7
 
+
 analyzer:
   plugins:
     - flutter_lints

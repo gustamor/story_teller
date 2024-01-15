@@ -9,13 +9,14 @@
 <uses-permission android:name="android.permission.READ_MEDIA_AUDIO"/>
   
     <application
-        android:label="story_teller"
+        android:label="AI Story Teller"
         android:requestLegacyExternalStorage="true"
         android:name="${applicationName}"
         android:enableOnBackInvokedCallback="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
+            android:icon="@mipmap/ic_launcher"
             android:enableOnBackInvokedCallback="true"
             android:exported="true"
             android:launchMode="singleTop"
