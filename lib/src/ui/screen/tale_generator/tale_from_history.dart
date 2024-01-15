@@ -1,5 +1,6 @@
 // ignore_for_file: unused_import
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,6 @@ class _TaleFromHistoryScreenState extends ConsumerState<TaleFromHistoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     String title = "";
     return SafeArea(
       child: Scaffold(
@@ -52,7 +52,7 @@ class _TaleFromHistoryScreenState extends ConsumerState<TaleFromHistoryScreen> {
                 title = tale.title ?? "";
                 return showOnCompleted(context, ref, tale);
               },
-              loading: () => const Center(child:  CircularProgressIndicator()),
+              loading: () => const Center(child: CupertinoActivityIndicator()),
               error: (e, st) => Text('Error: $e'),
             );
           },
@@ -64,11 +64,11 @@ class _TaleFromHistoryScreenState extends ConsumerState<TaleFromHistoryScreen> {
 
 Widget showOnCompleted(BuildContext context, WidgetRef ref, Story story) {
   double width = MediaQuery.of(context).size.width;
-    String? userNameTag;
+  String? userNameTag;
 
   final asyncUserNameTag = ref.watch(fetchUserNameAndSurnameFromIdProvider);
-    asyncUserNameTag.whenData((value) => userNameTag = value);
-    
+  asyncUserNameTag.whenData((value) => userNameTag = value);
+
   return SizedBox(
     height: double.infinity,
     width: double.infinity,
@@ -87,16 +87,13 @@ Widget showOnCompleted(BuildContext context, WidgetRef ref, Story story) {
                     width: double.infinity,
                     height: 250.h,
                     child: (story.imageUrl != null)
-                        ? Image.network(
-                            story.imageUrl ?? kImageBookPage,
+                        ? CachedNetworkImage(
+                            imageUrl: story.imageUrl ?? "",
                             fit: BoxFit.fill,
-                            loadingBuilder: (context, child, loadingProgress) {
-                              if (loadingProgress == null) return child;
-
-                              return const CircularProgressIndicator();
-                            },
-                            errorBuilder: (context, error, stackTrace) =>
-                                const SizedBox(),
+                            placeholder: (context, url) =>
+                                const CupertinoActivityIndicator(),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
                           )
                         : const SizedBox(),
                   ),
@@ -125,11 +122,11 @@ Widget showOnCompleted(BuildContext context, WidgetRef ref, Story story) {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                constraints:
-                                    BoxConstraints(maxWidth:210.w),
+                                constraints: BoxConstraints(maxWidth: 210.w),
                                 child: storyTitleText(
                                   story.title ?? "",
-                                  fontScale: ref.watch(fontScaleNotifierProvider),
+                                  fontScale:
+                                      ref.watch(fontScaleNotifierProvider),
                                 ),
                               ),
                               Gap(8.h),

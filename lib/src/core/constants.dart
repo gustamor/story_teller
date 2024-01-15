@@ -35,26 +35,16 @@ const kThicknessDividerAssistant = 1.0;
 
 const kSplashLogo = "assets/images/splash.png";
 
-const klibraryImage =
-    "https://i.postimg.cc/Kz5z9rgb/DALL-E-2024-01-10-19-43-38-An-elf-princess-in-a-mystical-library-pondering-over-a-scroll-with-an.png";
-const kWriteStory3 =
-    "https://i.postimg.cc/y8TQdh73/DALL-E-2024-01-10-17-21-03-A-dreamy-15-year-old-girl-beautiful-smart-and-kind-lost-in-imaginat.png";
-const kWriteStory2 =
-    "https://i.postimg.cc/4dQrTCnq/DALL-E-2024-01-10-17-18-54-The-elf-princess-is-poised-for-adventure-her-spirit-of-action-illumina.png";
-const kWriteStory1 =
-    "https://i.postimg.cc/9FWT8XFj/DALL-E-2024-01-10-15-10-54-A-15-year-old-elf-princess-part-of-a-magical-and-fantastical-world-dr.png";
-const kWriteStory =
-    "https://i.postimg.cc/zB6twb15/DALL-E-2024-01-10-15-08-32-A-solemn-mystical-elf-princess-about-15-years-old-in-a-fantasy-world.png";
-const kImageCyberpunkCity =
-    "https://i.postimg.cc/d3QMcjFp/gustavomore-a-futuristic-city-skyline-solar-punk-city-an-exte-37b9a7c2-f4ab-4a04-8d9b-c102a9ae1e66-3.png";
-const kImagePlanet =
-    "https://i.postimg.cc/RVZK6xhn/gustavomore-httpss-mj-runa-UKbn81m-Ipo-httpss-mj-run-EAIfn64a-Lm8-209683bf-662b-49e3-b12f-e46de98790a7-3.png";
-const kImageBookPage =
-    "https://i.postimg.cc/Bv2mxG0k/gustavomore-picture-in-blacklines-no-colors-white-backgroun-1ca69053-7105-4eef-880b-0bcf6e6a7d24-2.png";
-const kImageFace =
-    "https://i.postimg.cc/Dy0G84LM/gustavomore-extremely-detailed-close-up-documentary-photograp-194f4935-1958-4588-80ad-2074a57102fb-1.png";
-const kImageMain =
-    "https://i.postimg.cc/Wbj7xFP9/DALL-E-2024-01-10-16-50-26-An-elf-princess-in-a-mystical-library-surrounded-by-ancient-books-and.png";
+
+const kWriteStory3 = "assets/images/generatestory.webp";
+
+
+const kImageCyberpunkCity = "assets/images/citynight.webp";
+const kImageCrew = "assets/images/crew2.webp";
+
+
+const kImageReview = "assets/images/review.webp";
+const kImageBooks = "assets/images/books.webp";
 
 /// Defines sizes [kSettingsElementSeparator]
 const double kSettingsElementSeparator = 16;
@@ -145,20 +135,23 @@ double fontConversion(double fontscale) {
   return -1 * fontscale + kFontConversor;
 }
 
-Text storyTitleText(String text, {required double fontScale}) {
+SizedBox storyTitleText(String text, {required double fontScale}) {
   fontScale = fontConversion(fontScale);
   double fontSize = (36 / fontScale).sp;
   double fontHeight = (72 / (fontScale * 1.5)).h;
   double fontHeightFactor = fontHeight / fontSize;
-  return Text(text,
-      textAlign: TextAlign.left,
-      style: GoogleFonts.playfairDisplay(
-        textStyle: TextStyle(
-            fontSize: fontSize,
-            height: fontHeightFactor.h,
-            fontStyle: FontStyle.normal,
-            fontWeight: FontWeight.w900),
-      ));
+  return SizedBox(
+    width: 250.w,
+    child: Text(text,
+        textAlign: TextAlign.left,
+        style: GoogleFonts.playfairDisplay(
+          textStyle: TextStyle(
+              fontSize: fontSize,
+              height: fontHeightFactor.h,
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w900),
+        )),
+  );
 }
 
 Text storyAuthorNameText(String text, {required double fontScale}) {

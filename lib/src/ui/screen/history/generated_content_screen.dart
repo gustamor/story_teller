@@ -59,31 +59,34 @@ class GeneratedContentScreen extends ConsumerWidget {
               SliverAppBar(
                 pinned: true,
                 floating: false,
-                expandedHeight: 160.0,
+                expandedHeight: 212.h,
+                shadowColor: Theme.of(context).appBarTheme.shadowColor,
                 flexibleSpace: FlexibleSpaceBar(
-                  title: Text(tr('your_tales')),
-                  background: Image.network(klibraryImage, fit: BoxFit.cover),
+                  title: Text(
+                    tr('your_tales'),
+                    style: TextStyle(
+                      fontSize: 20,
+                 
+                      shadows: const <Shadow>[
+                        Shadow(
+                          offset: Offset(1.0, 1.0),
+                          blurRadius: 3.0,
+                          color: Color.fromARGB(255, 0, 0, 0),
+                        ),
+                        Shadow(
+                          offset: Offset(-1.0, -1.0),
+                          blurRadius: 3.0,
+                          color: Color.fromARGB(255, 0, 0, 0),
+                        ),
+                      ],
+                    ),
+                  ),
+                  background: Image.asset(kImageBooks, fit: BoxFit.cover),
                 ),
               ),
               SliverToBoxAdapter(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: settingTitleText("Tales", fontScale: 1.0),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Divider(
-                        endIndent: kIndentDividerAssistant,
-                        thickness: kThicknessDividerAssistant,
-                        indent: kThicknessDividerAssistant,
-                      ),
-                    ),
+                child:                   
                     Gap(12.h),
-                  ],
-                ),
               ),
               SliverList(
                 delegate: SliverChildBuilderDelegate(
@@ -118,8 +121,8 @@ class GeneratedContentScreen extends ConsumerWidget {
                           } else {
                             card = CardTile(
                               uuid: item.uuid!,
-                              title: item.title ?? "title null",
-                              storyBody: item.text ?? "story body null",
+                              title: item.title ?? " ",
+                              storyBody: item.text ?? " ",
                               imageUrl: item.imageUrl,
                               author: userNameTag ?? "",
                             );

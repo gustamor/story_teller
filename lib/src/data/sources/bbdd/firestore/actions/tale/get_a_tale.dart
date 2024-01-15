@@ -25,7 +25,7 @@ import 'package:story_teller/src/domain/providers/auth_providers.dart';
 ///   [id] - The unique ID of the story to be fetched.
 ///
 /// Returns the [Story] object corresponding to the provided ID.
-final getFirebaseTaleProvider = FutureProvider.family<Story, String>((ref, id) async {
+final getFirebaseTaleProvider = StreamProvider.family<Story, String>((ref, id) async* {
   // Access Firestore database reference.
   final db = ref.read(firebaseFirestoreProvider);
 
@@ -49,7 +49,7 @@ final getFirebaseTaleProvider = FutureProvider.family<Story, String>((ref, id) a
 
     // Extract and return the story data.
     final story = docSnap.data();
-    return story!;
+    yield story!;
   } on FirebaseException catch (e) {
     // Handle and throw Firebase specific exceptions.
     if (kDebugMode) {

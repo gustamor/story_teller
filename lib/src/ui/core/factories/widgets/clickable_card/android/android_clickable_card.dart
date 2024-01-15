@@ -58,7 +58,7 @@ class AndroidAiClickableCard extends StatelessWidget
                         child: Center(
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(16.r),
-                            child: Image.network(
+                            child: Image.asset(
                               decorImage!,
                               width: 100.w,
                               height: 100.h,

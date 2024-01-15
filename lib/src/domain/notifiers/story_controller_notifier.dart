@@ -41,7 +41,7 @@ class StoryProcessControllerNotifier extends StateNotifier<ProcessState> {
         step: StoryProcessStep.generatingStory,
       );
       final taleData = await chatOrchestator.processAndStoreSimpleStory(prompt);
-     
+      
       ref.read(
         uploadTaleProvider(
           taleData!,
@@ -74,8 +74,9 @@ class StoryProcessControllerNotifier extends StateNotifier<ProcessState> {
           step: StoryProcessStep.savingImage,
         );
       } else if (imageOrchestator.state.step == ImageProcessStep.completed) {
-      
+           await  Future.delayed(const Duration(seconds: 2));
                 ref.read(updateStoryWithImageUrl([taleData.id, imageUrl!])); //FB
+           await  Future.delayed(const Duration(seconds: 2));
 
      
 

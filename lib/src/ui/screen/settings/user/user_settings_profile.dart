@@ -91,11 +91,11 @@ class _UserSettingsProfileScreenState
                         width: 100.0, // Ancho del avatar
                         height: 100.0, // Altura del avatar
                         decoration: const BoxDecoration(
-                          color: CupertinoColors
-                              .systemGrey, // Color de fondo, puedes ajustarlo
+                     
                           image: DecorationImage(
-                            image: NetworkImage(
-                              kImageFace,
+                            
+                            image: AssetImage(
+                              kSplashLogo,
                             ), // URL de tu imagen
                             fit: BoxFit.cover,
                           ),

@@ -58,8 +58,8 @@ class AuthName extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        "Dinos el nombre por el que quieres te llamemos",
+                      Text(
+                        tr('tell_the_name_you'),
                         style: AndroidStyle.cardCaption,
                       ),
                       SizedBox(
@@ -101,14 +101,13 @@ class AuthName extends ConsumerWidget {
                                 .sendDisplayName(nameController.value.text);
 
                             if (authState?.emailVerified == false) {
-                              snackMessage(context,
-                                  "Please, check your email inbox for the verification link and try again");
-                              const Center(
-                                  child: Text(
-                                      "Please, check your email inbox for the verification link"));
+                              snackMessage(
+                                  context, tr('check_email_for_verificacion'));
+                              Center(
+                                  child: Text(tr('check_email_twice_message')));
                             } else {
-                                                             Navigator.pushReplacementNamed(context, AssistantsScreen.route);
-
+                              Navigator.pushReplacementNamed(
+                                  context, AssistantsScreen.route);
                             }
                           } else {
                             snackMessage(context, "Enter a valid name ");

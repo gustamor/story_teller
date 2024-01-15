@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
@@ -46,7 +47,6 @@ class _TaleScreenState extends ConsumerState<TaleOnGeneratedScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final notifications = ref.watch(storyProcessOrchestratorProvider);
     String title = "";
     return SafeArea(
@@ -65,10 +65,10 @@ class _TaleScreenState extends ConsumerState<TaleOnGeneratedScreen> {
               case StoryProcessStep.generatingStory:
                 return onLoading(context, tr("creating_history"), Colors.grey);
               case StoryProcessStep.storyCompleted:
-                return onLoading(context, "Historia completa", Colors.amber);
+                return onLoading(context,tr("story_completed"), Colors.orange);
               case StoryProcessStep.generatingImage:
               case StoryProcessStep.savingImage:
-                return onLoading(context, "Generando la imagen", Colors.green);
+                return onLoading(context, tr('generating_image'), Colors.green);
               case StoryProcessStep.imageCompleted:
                 final taleId = ref.watch(taleToShowProvider.notifier).state;
                 var story = ref.watch(getFirebaseTaleProvider(taleId));
@@ -77,14 +77,14 @@ class _TaleScreenState extends ConsumerState<TaleOnGeneratedScreen> {
                     title = tale.title!;
                     return showOnCompleted(context, ref, tale);
                   },
-                  loading: () => const CircularProgressIndicator(),
+                  loading: () => const CupertinoActivityIndicator(),
                   error: (e, st) => Text('Error: $e'),
                 );
 
               case StoryProcessStep.error:
-                              Navigator.pop(context);
+                Navigator.pop(context);
 
-                return onLoading(context, "Hubo algún error", Colors.red);
+                return onLoading(context, tr('error_happend'), Colors.red);
 
               default:
                 return const SizedBox();
@@ -103,17 +103,28 @@ Widget onLoading(BuildContext? context, String text, Color color) {
       child: Center(
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          CupertinoActivityIndicator(
-            color: color,
-            radius: 16.r,
-          ),
-          Gap(8.h),
+          Center(
+              child: Image.asset(
+            kSplashLogo,
+            fit: BoxFit.cover,
+          )),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CupertinoActivityIndicator(
+                color: color,
+                radius: 16.r,
+              ),
+               Gap(8.h),
           Text(
             text,
             style: TextStyle(color: color),
           ),
+            ],
+          ),
+         
         ],
       )));
 }
@@ -121,11 +132,11 @@ Widget onLoading(BuildContext? context, String text, Color color) {
 Widget showOnCompleted(BuildContext context, WidgetRef ref, Story story) {
   double width = MediaQuery.of(context).size.width;
   var prompt = ref.watch(promptProvider);
- String? userNameTag;
+  String? userNameTag;
 
   final asyncUserNameTag = ref.watch(fetchUserNameAndSurnameFromIdProvider);
-    asyncUserNameTag.whenData((value) => userNameTag = value);
-      return SizedBox(
+  asyncUserNameTag.whenData((value) => userNameTag = value);
+  return SizedBox(
     height: double.infinity,
     width: double.infinity,
     child: SingleChildScrollView(
@@ -146,16 +157,13 @@ Widget showOnCompleted(BuildContext context, WidgetRef ref, Story story) {
                     width: double.infinity,
                     height: 250.h,
                     child: (story.imageUrl != null)
-                        ? Image.network(
-                            story.imageUrl!,
+                        ? CachedNetworkImage(
+                            imageUrl: story.imageUrl ?? "",
                             fit: BoxFit.fill,
-                            loadingBuilder: (context, child, loadingProgress) {
-                              if (loadingProgress == null) return child;
-
-                              return const CircularProgressIndicator();
-                            },
-                            errorBuilder: (context, error, stackTrace) =>
-                                const SizedBox(),
+                            placeholder: (context, url) =>
+                                const CupertinoActivityIndicator(),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
                           )
                         : const SizedBox(),
                   ),

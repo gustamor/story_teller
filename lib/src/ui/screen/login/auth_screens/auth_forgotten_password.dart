@@ -1,5 +1,6 @@
 // ignore_for_file: unnecessary_import
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -50,8 +51,8 @@ class PasswordForgottenScreen extends ConsumerWidget {
                       SizedBox(
                         height: 128.h,
                       ),
-                      const Text(
-                        "Introduce el email con el que te registraste",
+                       Text(
+                       tr('your_email'),
                         style: AndroidStyle.cardDescription,
                       ),
                       const Gap(16),
@@ -67,12 +68,12 @@ class PasswordForgottenScreen extends ConsumerWidget {
                           validator: (String? email) {
                             if (validateEmail(email!)) {
                               // log.e("Enter email");
-                              return "Please enter valid email";
+                              return tr('enter_valid_email');
                             }
                             return null;
                             //return null;
                           },
-                          hintText: "Enter Email",
+                          hintText: tr('enter_email'),
                           keyboardType: TextInputType.emailAddress,
                           filled: true,
                           borderRadius: 32,
@@ -93,7 +94,7 @@ class PasswordForgottenScreen extends ConsumerWidget {
                           }
                         },
                         //navigateTo(context, AssistantsScreen.route),
-                        text: "Reset",
+                        text: tr('change_password'),
                         textStyle: AndroidStyle.cardCaption,
                         height: 64,
                         width: 220,

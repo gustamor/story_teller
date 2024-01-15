@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
 // ignore: use_key_in_widget_constructors
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:expandable/expandable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:story_teller/src/core/constants.dart';
@@ -54,10 +56,14 @@ class CardExpanded extends ConsumerWidget {
               color: color,
               shape: BoxShape.rectangle,
             ),
-            child: Image.network(
-              imageUrl ?? "",
-              fit: fit,
-            ),
+            child: CachedNetworkImage(
+                            imageUrl: imageUrl ?? "",
+                            fit: BoxFit.fill,
+                            placeholder: (context, url) =>
+                                const CupertinoActivityIndicator(),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
+                          )
           ),
         ),
       );

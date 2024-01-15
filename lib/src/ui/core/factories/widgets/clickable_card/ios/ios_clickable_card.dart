@@ -56,7 +56,7 @@ class IosClickableCard extends StatelessWidget implements AiClickableCard {
                       child: Center(
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(160.r),
-                          child: Image.network(
+                          child: Image.asset(
                             decorImage!,
                             width: 80.w,
                             height: 80.h,
