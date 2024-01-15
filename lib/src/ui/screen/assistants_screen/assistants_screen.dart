@@ -74,7 +74,6 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final user = ref.watch(authenticationProvider).getDisplayName();
     String? userName;
     final asyncUserNameTag = ref.watch(fetchUserNameProvider);
     asyncUserNameTag.whenData((name) => userName = name);
