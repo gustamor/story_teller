@@ -57,7 +57,7 @@ class CardExpanded extends ConsumerWidget {
               shape: BoxShape.rectangle,
             ),
             child: CachedNetworkImage(
-                            imageUrl: imageUrl ?? "",
+                            imageUrl: imageUrl ?? klibraryImage,
                             fit: BoxFit.fill,
                             placeholder: (context, url) =>
                                 const CupertinoActivityIndicator(),
