@@ -1,9 +1,10 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
+import 'package:story_teller/src/domain/abstract/widgets/ai_clickable_card.dart';
 import 'package:story_teller/src/ui/core/factories/specific_platform_factory.dart';
 
-class NiceClickableCard extends StatelessWidget {
+class NiceClickableCard extends StatelessWidget implements AiClickableCard {
   final double? height;
   final double? width;
   final String? caption;
@@ -23,7 +24,7 @@ class NiceClickableCard extends StatelessWidget {
   final String? decorImage;
   final double? borderRadius;
   final BoxFit? fit;
-  final VoidCallback? clickFunction;
+  final VoidCallback clickFunction;
   final Widget? child;
 
   NiceClickableCard({
@@ -48,7 +49,7 @@ class NiceClickableCard extends StatelessWidget {
     this.borderRadius = 16.0,
     this.fit = BoxFit.fill,
     this.child,
-    this.clickFunction,
+    required this.clickFunction,
   });
 
   final ui = selectSpecificPlatformWidgetFactory();
@@ -67,7 +68,7 @@ class NiceClickableCard extends StatelessWidget {
         iosBackgroundColor: iosBackgroundColor,
         androidElevation: androidElevation,
         borderRadius: borderRadius,
-        clickFunction: clickFunction ?? () {},
+        clickFunction: clickFunction,
     );
   }
 }

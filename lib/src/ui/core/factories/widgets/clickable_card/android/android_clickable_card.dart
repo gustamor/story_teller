@@ -13,7 +13,7 @@ class AndroidAiClickableCard extends StatelessWidget
   final String? decorImage;
   final String? caption;
   final String? description;
-  final VoidCallback? clickFunction;
+  final VoidCallback clickFunction;
   final BoxFit? fit;
   final double? borderRadius;
 
@@ -28,12 +28,12 @@ class AndroidAiClickableCard extends StatelessWidget
       this.fit,
       this.borderRadius = 16.0,
       this.description,
-      this.clickFunction});
+      required this.clickFunction});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: clickFunction!,
+      onTap: clickFunction,
       child: Card(
         elevation: 4,
         color: Theme.of(context).cardTheme.color,

@@ -13,7 +13,7 @@ import 'package:story_teller/src/domain/abstract/widgets/ai_navigation_bar.dart'
 class IOSFactory implements WidgetFactory {
   @override
   Widget createButton({
-    VoidCallback? clickFunction,
+    required VoidCallback clickFunction,
     bool? isFixedSize,
     double? height,
     double? width,
@@ -50,7 +50,7 @@ class IOSFactory implements WidgetFactory {
 
   @override
   Widget createClickableCard({
-    VoidCallback? clickFunction,
+    required VoidCallback clickFunction,
     double? height,
     double? width,
     String? caption,
@@ -78,6 +78,7 @@ class IOSFactory implements WidgetFactory {
       caption: caption,
       description: description,
       decorImage: decorImage,
+      clickFunction: clickFunction,
       fit: fit,
       borderRadius: borderRadius,
     );

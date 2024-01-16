@@ -64,7 +64,6 @@ class _TaleScreenState extends ConsumerState<TaleOnGeneratedScreen> {
         body: Builder(
           builder: (context) {
             final step = notifications.step;
-
             switch (step) {
               case StoryProcessStep.starting:
               case StoryProcessStep.generatingStory:
@@ -88,7 +87,6 @@ class _TaleScreenState extends ConsumerState<TaleOnGeneratedScreen> {
 
               case StoryProcessStep.error:
                 Navigator.pop(context);
-
                 return onLoading(context, tr('error_happend'), Colors.red);
 
               default:
@@ -103,11 +101,11 @@ class _TaleScreenState extends ConsumerState<TaleOnGeneratedScreen> {
 
 Widget onLoading(BuildContext? context, String text, Color color) {
   return SizedBox(
-      height: double.infinity,
-      width: double.infinity,
-      child: SingleChildScrollView(
-        child: Center(
-            child: Column(
+    height: double.infinity,
+    width: double.infinity,
+    child: SingleChildScrollView(
+      child: Center(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -131,15 +129,18 @@ Widget onLoading(BuildContext? context, String text, Color color) {
               ],
             ),
           ],
-        )),
-      ));
+        ),
+      ),
+    ),
+  );
 }
 
 Widget showOnCompleted(BuildContext context, WidgetRef ref, Story story) {
+  
   final fontScale = ref.watch(fontScaleNotifierProvider);
-
   double width = MediaQuery.of(context).size.width;
-  var prompt = ref.watch(promptProvider);
+
+  String prompt = story.prompt ?? "";
   String? userNameTag;
 
   final asyncUserNameTag = ref.watch(fetchUserNameAndSurnameFromIdProvider);

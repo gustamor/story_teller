@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 abstract class WidgetFactory {
   Widget createButton(
-      {VoidCallback clickFunction,
+      {
+      required VoidCallback clickFunction,
       bool? isFixedSize,
       double? height,
       double? width,
@@ -25,7 +26,7 @@ abstract class WidgetFactory {
       double? androidPadding});
 
   Widget createClickableCard({
-    VoidCallback clickFunction,
+   required VoidCallback clickFunction,
     double? height,
     double? width,
     String? caption,

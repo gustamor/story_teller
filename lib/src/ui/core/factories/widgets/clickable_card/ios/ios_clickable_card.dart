@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:story_teller/src/domain/abstract/widgets/ai_clickable_card.dart';
 import 'package:story_teller/src/ui/themes/styles/text_styles.dart';
 
@@ -31,14 +32,14 @@ class IosClickableCard extends StatelessWidget implements AiClickableCard {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: clickFunction,
       child: Card(
-        elevation: 1,
-        shadowColor: const Color(0x00000000),
-        color: const Color(0xFF000000),
+        elevation: 4,
+         color: Theme.of(context).cardTheme.color,
+        shadowColor: Theme.of(context).cardTheme.shadowColor,
         child: Padding(
-          padding: const EdgeInsets.only(left:8.0, top: 0.0),
+          padding:  EdgeInsets.only(left:1.w, top: 0.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -49,18 +50,20 @@ class IosClickableCard extends StatelessWidget implements AiClickableCard {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Container(
-                      height: height,
-                      width: 76.w,
-                      color: const Color(0xFF000000),
-                      child: Center(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(160.r),
-                          child: Image.asset(
-                            decorImage!,
-                            width: 80.w,
-                            height: 80.h,
-                            fit: BoxFit.cover,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        height: height,
+                        width: 120.w,
+                        child: Center(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(32.r),
+                            child: Image.asset(
+                              decorImage!,
+                              width: 120.w,
+                              height: 120.h,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),
@@ -68,22 +71,25 @@ class IosClickableCard extends StatelessWidget implements AiClickableCard {
                   ],
                 ),
               ),
+               Gap(
+                 12.h,
+              ),
               Container(
                 padding: EdgeInsets.only(left: 4.w),
                 child: Text(
                   caption!,
-                  style: AndroidStyle.cardCaption,
+                  style: IosStyle.cardCaption,
                 ),
               ),
-              SizedBox(
-                height: 2.h,
+              Gap(
+                 6.h,
               ),
               Container(
                 height: 48.h,
                 width: 254.w,
                 constraints: BoxConstraints(maxWidth: 252.w),
                 padding: EdgeInsets.only(left: 4.w),
-                child: Text(description!, style: AndroidStyle.cardDescription),
+                child: Text(description!, style: IosStyle.cardDescription),
               ),
             ],
           ),

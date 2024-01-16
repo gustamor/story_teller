@@ -23,33 +23,53 @@ class IosNavigationAppBar extends StatelessWidget implements AiNavigationBar {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      color: Theme.of(context).appBarTheme.backgroundColor,
+      //  height: 35.h,
       width: double.infinity,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            InkWell(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            flex: 1,
+            child: InkWell(
               onTap: leftTapFunction!,
-              child: Row(
-                children: [
-                  SvgPicture.asset(
-                    leftIcon!,
-                    width: 16.w,
-                    height: 16.h,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  Gap(6.w),
-                  Text(
-                    title!,
-                    style: const TextStyle(fontSize: 21),
-                  ),
-                ],
+              child: (leftIcon != null)
+                  ? SvgPicture.asset(
+                      leftIcon!,
+                      width: 16.w,
+                      height: 16.h,
+                      color: Theme.of(context).appBarTheme.foregroundColor,
+                    )
+                  : const SizedBox(),
+            ),
+          ),
+          Expanded(
+            flex: 7,
+            child: Align(
+              alignment: Alignment.center,
+              child: Text(
+                title!,
+                style:  TextStyle(fontSize: 15.sp),
               ),
             ),
-          ],
-        ),
+          ),
+          (rightIcon != null)
+              ? Expanded(flex: 1, child: InkWell(
+                onTap: rightTapFunction,
+                child: SvgPicture.asset(
+                          rightIcon!,
+                          width: 16.w,
+                          height: 16.h,
+                          color: Theme.of(context).appBarTheme.foregroundColor,
+                        ),
+              ))
+              : const Expanded(
+                  flex: 1,
+                  child: SizedBox(),
+                ),
+        ],
       ),
     );
   }
