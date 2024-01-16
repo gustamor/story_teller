@@ -108,16 +108,14 @@ class GeneratedContentScreen extends ConsumerWidget {
                           final item = stories[index];
                           Widget card;
                           if (index < 50) {
-                            card = Expanded(
-                              child: CardExpanded(
-                                  uuid: item.uuid!,
-                                  title: item.title!,
-                                  storyBody: item.text!,
-                                  imageUrl: item.imageUrl!,
-                                  date: DateFormat('dd MMMM, yyyy')
-                                      .format(item.date!),
-                                  author: userNameTag ?? ""),
-                            );
+                            card = CardExpanded(
+                                uuid: item.uuid!,
+                                title: item.title!,
+                                storyBody: item.text!,
+                                imageUrl: item.imageUrl!,
+                                date: DateFormat('dd MMMM, yyyy')
+                                    .format(item.date!),
+                                author: userNameTag ?? "");
                           } else {
                             card = CardTile(
                               uuid: item.uuid!,

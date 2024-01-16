@@ -46,6 +46,11 @@ class _TaleScreenState extends ConsumerState<TaleOnGeneratedScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final notifications = ref.watch(storyProcessOrchestratorProvider);
     String title = "";
@@ -65,7 +70,7 @@ class _TaleScreenState extends ConsumerState<TaleOnGeneratedScreen> {
               case StoryProcessStep.generatingStory:
                 return onLoading(context, tr("creating_history"), Colors.grey);
               case StoryProcessStep.storyCompleted:
-                return onLoading(context,tr("story_completed"), Colors.orange);
+                return onLoading(context, tr("story_completed"), Colors.orange);
               case StoryProcessStep.generatingImage:
               case StoryProcessStep.savingImage:
                 return onLoading(context, tr('generating_image'), Colors.green);
@@ -100,36 +105,39 @@ Widget onLoading(BuildContext? context, String text, Color color) {
   return SizedBox(
       height: double.infinity,
       width: double.infinity,
-      child: Center(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Center(
-              child: Image.asset(
-            kSplashLogo,
-            fit: BoxFit.cover,
-          )),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CupertinoActivityIndicator(
-                color: color,
-                radius: 16.r,
-              ),
-               Gap(8.h),
-          Text(
-            text,
-            style: TextStyle(color: color),
-          ),
-            ],
-          ),
-         
-        ],
-      )));
+      child: SingleChildScrollView(
+        child: Center(
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Center(
+                child: Image.asset(
+              kSplashLogo,
+              fit: BoxFit.cover,
+            )),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CupertinoActivityIndicator(
+                  color: color,
+                  radius: 16.r,
+                ),
+                Gap(8.h),
+                Text(
+                  text,
+                  style: TextStyle(color: color),
+                ),
+              ],
+            ),
+          ],
+        )),
+      ));
 }
 
 Widget showOnCompleted(BuildContext context, WidgetRef ref, Story story) {
+  final fontScale = ref.watch(fontScaleNotifierProvider);
+
   double width = MediaQuery.of(context).size.width;
   var prompt = ref.watch(promptProvider);
   String? userNameTag;
@@ -189,17 +197,17 @@ Widget showOnCompleted(BuildContext context, WidgetRef ref, Story story) {
                           children: [
                             storyTitleText(
                               story.title ?? "",
-                              fontScale: ref.watch(fontScaleNotifierProvider),
+                              fontScale: fontScale,
                             ),
                             Gap(12.h),
                             storyAuthorNameText(
                               "$userNameTag",
-                              fontScale: ref.watch(fontScaleNotifierProvider),
+                              fontScale: fontScale,
                             ),
                             Gap(12.h),
                             storyAuthorNameText(
                               DateFormat('dd MMMM, yyyy').format(story.date!),
-                              fontScale: ref.watch(fontScaleNotifierProvider),
+                              fontScale: fontScale,
                             ),
                           ],
                         ),

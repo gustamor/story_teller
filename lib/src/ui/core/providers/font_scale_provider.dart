@@ -9,18 +9,18 @@ final fontScaleNotifierProvider =
 class FontScaleStateNotifier extends StateNotifier<double> {
   final Ref ref;
 
-  FontScaleStateNotifier(this.ref) : super(1.0);
+  FontScaleStateNotifier(this.ref) : super(1.3);
 
   Future<void> saveFontScale(double newFontScale) async {
     await ref
-        .read(sharedPreferencesProvider)
+        .watch(sharedPreferencesProvider)
         .setDouble('fontScale', newFontScale);
     state = newFontScale;
   }
 
   Future<void> loadFontScale() async {
     final fontScale =
-        await ref.read(sharedPreferencesProvider).getDouble('fontScale');
+        await ref.watch(sharedPreferencesProvider).getDouble('fontScale');
     state = fontScale;
   }
 }

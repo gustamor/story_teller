@@ -28,6 +28,8 @@ class TaleFromHistoryScreen extends ConsumerStatefulWidget {
       _TaleFromHistoryScreenState();
 }
 
+
+
 class _TaleFromHistoryScreenState extends ConsumerState<TaleFromHistoryScreen> {
   void navigateTo(BuildContext context, String route) async {
     Navigator.pushReplacementNamed(context, route);

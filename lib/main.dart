@@ -26,6 +26,7 @@ import 'package:story_teller/src/data/services/riverpod_logger_impl.dart';
 import 'package:story_teller/src/data/services/logger_impl.dart';
 import 'package:story_teller/src/domain/services/abstract_tell_logger.dart';
 import 'package:story_teller/firebase_options.dart';
+import 'package:story_teller/src/ui/core/providers/font_scale_provider.dart';
 import 'package:story_teller/src/ui/core/providers/theme_mode_provider.dart';
 import 'package:story_teller/src/ui/screen/assistants_screen/assistants_screen.dart';
 import 'package:story_teller/src/ui/screen/feedback/rate_us_screen.dart';
@@ -116,6 +117,7 @@ initRemoteConfig(WidgetRef ref) async {
   try {
     final remoteConfig = await ref.watch(remoteConfigProvider.future);
     Params.gptModel = await remoteConfig.getStringValue("gtp_model");
+    Params.gptPrompt = await remoteConfig.getStringValue("gtp_prompt");
     final dalleRemote = await remoteConfig.getStringValue("dalle");
     Params.dalleModel = DalleModel.fromMap(
       json.decode(
@@ -177,7 +179,6 @@ class AiApp extends ConsumerWidget {
     initRemoteConfig(ref);
     const FlexScheme usedScheme = FlexScheme.redWine;
     final currentMode = ref.watch(themeModeProvider);
-
     authChecker(ref);
     setDeviceOrientation();
     return ValueListenableBuilder<ThemeMode>(

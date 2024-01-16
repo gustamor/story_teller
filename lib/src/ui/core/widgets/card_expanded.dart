@@ -32,7 +32,7 @@ class CardExpanded extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final fontScale = ref.read(
+    final fontScale = ref.watch(
       fontScaleNotifierProvider,
     );
 
