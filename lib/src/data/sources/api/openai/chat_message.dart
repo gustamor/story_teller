@@ -45,7 +45,7 @@ class GptChatMessages {
         request: CreateChatCompletionRequest(
           model:  ChatCompletionModel.modelId(Params.gptModel),
           messages: [
-            const ChatCompletionMessage.system(content: kSimpleTaleAssistant),
+             ChatCompletionMessage.system(content: Params.gptPrompt),
             ChatCompletionMessage.user(
               content: ChatCompletionUserMessageContent.string(prompt),
             ),
