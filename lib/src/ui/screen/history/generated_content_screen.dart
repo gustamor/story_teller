@@ -2,7 +2,6 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:expandable/expandable.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -48,7 +47,6 @@ class GeneratedContentScreen extends ConsumerWidget {
     String? userNameTag;
 
     final asyncStories = ref.watch(getTalesProvider);
-    //final talesLength = ref.watch(talesLengthProvider);
     final asyncUserNameTag = ref.watch(fetchUserNameAndSurnameFromIdProvider);
     asyncUserNameTag.whenData((value) => userNameTag = value);
     return asyncStories.when(
@@ -66,7 +64,6 @@ class GeneratedContentScreen extends ConsumerWidget {
                     tr('your_tales'),
                     style: TextStyle(
                       fontSize: 20,
-                 
                       shadows: const <Shadow>[
                         Shadow(
                           offset: Offset(1.0, 1.0),
@@ -107,15 +104,15 @@ class GeneratedContentScreen extends ConsumerWidget {
                         builder: (context) {
                           final item = stories[index];
                           Widget card;
-                          if (index < 50) {
+                          if (index < kNumberOfExpadedCards) {
                             card = CardExpanded(
-                                uuid: item.uuid!,
-                                title: item.title!,
-                                storyBody: item.text!,
+                                 uuid: item.uuid!,
+                              title: item.title ?? " ",
+                              storyBody: item.text ?? " ",
                                 imageUrl: item.imageUrl!,
                                 date: DateFormat('dd MMMM, yyyy')
                                     .format(item.date!),
-                                author: userNameTag ?? "");
+                                author: userNameTag ?? " ");
                           } else {
                             card = CardTile(
                               uuid: item.uuid!,
