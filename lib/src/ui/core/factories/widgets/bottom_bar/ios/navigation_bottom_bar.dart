@@ -19,6 +19,7 @@ class IosAiBottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoTabBar(
+      onTap: onTapFunction,
       items: cupertinoItems,
       currentIndex: index,
     );

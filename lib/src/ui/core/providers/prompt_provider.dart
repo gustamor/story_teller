@@ -1,5 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final promptProvider = StateProvider<String>((ref) {
-  return "";
-});
+
+final promptProvider = StateProvider<String>((ref) => "");
+

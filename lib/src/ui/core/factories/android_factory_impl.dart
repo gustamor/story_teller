@@ -10,7 +10,7 @@ import 'widgets/bottom_bar/android/navigation_bottom_bar.dart';
 class AndroidFactory implements WidgetFactory {
   @override
   Widget createButton({
-    VoidCallback? clickFunction,
+    required VoidCallback clickFunction,
     bool? isFixedSize,
     double? height,
     double? width,
@@ -48,7 +48,7 @@ class AndroidFactory implements WidgetFactory {
 
   @override
   Widget createClickableCard({
-    VoidCallback? clickFunction,
+    required VoidCallback clickFunction,
     double? height,
     double? width,
     String? caption,

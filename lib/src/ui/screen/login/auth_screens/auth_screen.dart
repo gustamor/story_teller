@@ -116,7 +116,10 @@ class AuthScreen extends ConsumerWidget {
                       filled: true,
                       borderRadius: 32,
                       borderSide: 3,
-                      prefixIcon: const Icon(Icons.person),
+                      prefixIcon: const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Icon(Icons.person),
+                      ),
                     ),
                   ),
                   const Gap(16),
@@ -147,8 +150,14 @@ class AuthScreen extends ConsumerWidget {
                       borderSide: 3,
                       obscuringCharacter: "*",
                       obscureText: true,
-                      prefixIcon: const Icon(Icons.key_rounded),
-                      suffixIcon: const Icon(Icons.remove_red_eye),
+                      prefixIcon: Padding(
+                        padding:  EdgeInsets.symmetric(horizontal: 8.w),
+                        child: const Icon(Icons.key_rounded),
+                      ),
+                      suffixIcon: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.w),
+                        child: const Icon(Icons.remove_red_eye),
+                      ),
                     ),
                   ),
                   InkWell(

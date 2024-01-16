@@ -72,9 +72,7 @@ class _TaleGeneratorScreenState extends ConsumerState<TaleGeneratorScreen> {
                           Gap(6.h),
                           NiceTextFormField(
                             onFieldSubmitFunction: (text) {
-                              ref
-                                  .read(promptProvider.notifier)
-                                  .update((state) => state = text);
+  
                             },
                             controller: controller,
                             maxLines: 4,
@@ -99,7 +97,8 @@ class _TaleGeneratorScreenState extends ConsumerState<TaleGeneratorScreen> {
                                 final story = ref.read(
                                     storyProcessOrchestratorProvider.notifier);
                                 story.generateASimpleStory(prompt);
-                                Navigator.pushNamed(context, TaleOnGeneratedScreen.route);
+                                Navigator.pushNamed(
+                                    context, TaleOnGeneratedScreen.route);
                               },
                               isFixedSize: false,
                               height: 110.h,
@@ -140,16 +139,13 @@ class _TaleGeneratorScreenState extends ConsumerState<TaleGeneratorScreen> {
                                           final prompt =
                                               tr('write_a_story_of_genre') +
                                                   tr(item);
-                                          ref
-                                              .read(promptProvider.notifier)
-                                              .update(
-                                                  (state) => state = prompt);
-                                          var story = ref.read(
+                                           var story = ref.read(
                                               storyProcessOrchestratorProvider
                                                   .notifier);
                                           story.generateASimpleStory(prompt);
                                           Navigator.pushReplacementNamed(
-                                              context, TaleOnGeneratedScreen.route);
+                                              context,
+                                              TaleOnGeneratedScreen.route);
                                         },
                                         text: tr(item),
                                         height: 30.h,
@@ -176,4 +172,3 @@ class _TaleGeneratorScreenState extends ConsumerState<TaleGeneratorScreen> {
             )));
   }
 }
-

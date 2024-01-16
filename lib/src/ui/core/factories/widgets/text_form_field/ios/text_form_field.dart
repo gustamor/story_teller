@@ -51,7 +51,7 @@ class IosTextFormField extends StatelessWidget implements AITextFormField {
       onChanged: (query) => onChangedFunction,
       onSubmitted: onFieldSubmitFunction ?? (value) {},
       onTapOutside: onTapOutSide,
-      focusNode: focusNode!,
+      focusNode: focusNode,
       controller: controller,
       maxLines: maxLines ?? 1,
       readOnly: readOnly ?? false,
@@ -67,13 +67,11 @@ class IosTextFormField extends StatelessWidget implements AITextFormField {
       prefix: prefixIcon,
       suffix: suffixIcon,
       placeholder: hintText!,
-      style: const TextStyle(color: CupertinoColors.placeholderText),
-      placeholderStyle: const TextStyle(color: CupertinoColors.placeholderText),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
           (borderRadius ?? 30).r,
         ),
-        border: Border.all(color: Colors.red),
+        border: Border.all(color: Theme.of(context).disabledColor ),
       ),
     );
   }

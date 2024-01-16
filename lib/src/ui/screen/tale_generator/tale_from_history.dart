@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,6 @@ class TaleFromHistoryScreen extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() =>
       _TaleFromHistoryScreenState();
 }
-
 
 
 class _TaleFromHistoryScreenState extends ConsumerState<TaleFromHistoryScreen> {
@@ -67,9 +67,11 @@ class _TaleFromHistoryScreenState extends ConsumerState<TaleFromHistoryScreen> {
 Widget showOnCompleted(BuildContext context, WidgetRef ref, Story story) {
   double width = MediaQuery.of(context).size.width;
   String? userNameTag;
+  final fontScale = ref.watch(fontScaleNotifierProvider);
 
   final asyncUserNameTag = ref.watch(fetchUserNameAndSurnameFromIdProvider);
   asyncUserNameTag.whenData((value) => userNameTag = value);
+  String prompt = story.prompt ?? "";
 
   return SizedBox(
     height: double.infinity,
@@ -128,18 +130,18 @@ Widget showOnCompleted(BuildContext context, WidgetRef ref, Story story) {
                                 child: storyTitleText(
                                   story.title ?? "",
                                   fontScale:
-                                      ref.watch(fontScaleNotifierProvider),
+                                     fontScale,
                                 ),
                               ),
                               Gap(8.h),
                               storyAuthorNameText(
                                 "$userNameTag",
-                                fontScale: ref.watch(fontScaleNotifierProvider),
+                                fontScale: fontScale ,
                               ),
                               Gap(12.h),
                               storyAuthorNameText(
                                 DateFormat('dd MMMM, yyyy').format(story.date!),
-                                fontScale: ref.watch(fontScaleNotifierProvider),
+                                fontScale: fontScale,
                               ),
                             ],
                           ),
@@ -147,7 +149,33 @@ Widget showOnCompleted(BuildContext context, WidgetRef ref, Story story) {
                       ],
                     ),
                   ),
-                  Gap(40.h),
+                Gap(12.h),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: DottedBorder(
+                      dashPattern: const [6, 3],
+                      borderType: BorderType.RRect,
+                      radius: Radius.circular(8.r),
+                      padding: const EdgeInsets.all(0),
+                      color: const Color.fromRGBO(128, 67, 54, 1),
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.all(Radius.circular(12)),
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            left: 16.w,
+                            right: 16.w,
+                            top: 8.h,
+                            bottom: 8.h,
+                          ),
+                          child: storyPromptText(
+                            prompt,
+                            fontScale: ref.watch(fontScaleNotifierProvider),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                   Gap(16.h),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8.w),
                     child: storyBodyText(
