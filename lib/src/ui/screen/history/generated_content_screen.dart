@@ -104,7 +104,7 @@ class GeneratedContentScreen extends ConsumerWidget {
                         builder: (context) {
                           final item = stories[index];
                           Widget card;
-                          if (index < kNumberOfExpadedCards) {
+                          if (index < kNumberOfExpandedCards) {
                             card = CardExpanded(
                                  uuid: item.uuid!,
                               title: item.title ?? " ",

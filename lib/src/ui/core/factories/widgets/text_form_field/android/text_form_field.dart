@@ -66,7 +66,7 @@ class AndroidTextFormField extends StatelessWidget implements AITextFormField {
       showCursor: true,
       keyboardType: keyboardType,
       keyboardAppearance: Brightness.dark,
-      autofocus: false,
+      autofocus: true,
       autocorrect: true,
       readOnly: readOnly ?? false,
       maxLines: maxLines ?? 1,

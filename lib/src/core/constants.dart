@@ -32,7 +32,7 @@ const kFontConversor = kMaxFontSlider + kMinFontSlider;
 const kHeightDividerAssistant = 16.0;
 const kIndentDividerAssistant = 16.0;
 const kThicknessDividerAssistant = 1.0;
-const kNumberOfExpadedCards = 10;
+const kNumberOfExpandedCards = 10;
 
 const kSplashLogo = "assets/images/splash.png";
 const kWriteStory3 = "assets/images/generatestory.webp";

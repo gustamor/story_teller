@@ -114,6 +114,7 @@ class AuthScreen extends ConsumerWidget {
                       hintText: "Enter Email",
                       keyboardType: TextInputType.emailAddress,
                       filled: true,
+                      
                       borderRadius: 32,
                       borderSide: 3,
                       prefixIcon: const Padding(
@@ -151,7 +152,7 @@ class AuthScreen extends ConsumerWidget {
                       obscuringCharacter: "*",
                       obscureText: true,
                       prefixIcon: Padding(
-                        padding:  EdgeInsets.symmetric(horizontal: 8.w),
+                        padding: EdgeInsets.symmetric(horizontal: 8.w),
                         child: const Icon(Icons.key_rounded),
                       ),
                       suffixIcon: Padding(

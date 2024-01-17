@@ -84,11 +84,9 @@ class _TaleScreenState extends ConsumerState<TaleOnGeneratedScreen> {
                   loading: () => const CupertinoActivityIndicator(),
                   error: (e, st) => Text('Error: $e'),
                 );
-
               case StoryProcessStep.error:
                 Navigator.pop(context);
                 return onLoading(context, tr('error_happend'), Colors.red);
-
               default:
                 return const SizedBox();
             }
@@ -136,10 +134,8 @@ Widget onLoading(BuildContext? context, String text, Color color) {
 }
 
 Widget showOnCompleted(BuildContext context, WidgetRef ref, Story story) {
-  
   final fontScale = ref.watch(fontScaleNotifierProvider);
   double width = MediaQuery.of(context).size.width;
-
   String prompt = story.prompt ?? "";
   String? userNameTag;
 

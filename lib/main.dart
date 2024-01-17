@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'dart:io';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
@@ -19,7 +20,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:story_teller/src/core/params.dart';
 import 'package:story_teller/src/data/di/remote_config_service_provider.dart';
-
 import 'package:story_teller/src/domain/models/dalle_model.dart';
 import 'package:story_teller/src/domain/providers/auth_providers.dart';
 import 'package:story_teller/src/data/services/riverpod_logger_impl.dart';
@@ -47,15 +47,6 @@ void main() async {
   configureDio();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  /* FlutterError.onError = (errorDetails) {
-      FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
-    };
-    // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
-    PlatformDispatcher.instance.onError = (error, stack) {
-      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-      return true;
-    };
- */
   await FirebaseAppCheck.instance.activate(
     webProvider: ReCaptchaV3Provider('recaptcha-v3-site-key'),
     androidProvider: AndroidProvider.debug,
@@ -176,60 +167,65 @@ class AiApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
+
     initRemoteConfig(ref);
     const FlexScheme usedScheme = FlexScheme.redWine;
     final currentMode = ref.watch(themeModeProvider);
     authChecker(ref);
     setDeviceOrientation();
+
+ 
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: themeNotifier,
       builder: (_, ThemeMode cm, __) {
         return ScreenUtilInit(
           minTextAdapt: true,
           child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            localizationsDelegates: context.localizationDelegates,
-            supportedLocales: context.supportedLocales,
-            locale: context.locale,
-            title: 'AI Story Teller',
-            theme: FlexThemeData.light(
-              scheme: usedScheme,
-              appBarElevation: 0.5,
-              visualDensity: VisualDensity.adaptivePlatformDensity,
-              fontFamily: GoogleFonts.roboto().fontFamily,
+              debugShowCheckedModeBanner: false,
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              locale: context.locale,
+              title: 'AI Story Teller',
+              theme: FlexThemeData.light(
+                scheme: usedScheme,
+                appBarElevation: 0.5,
+                visualDensity: VisualDensity.adaptivePlatformDensity,
+                fontFamily: GoogleFonts.roboto().fontFamily,
+              ),
+              darkTheme: FlexThemeData.dark(
+                scheme: usedScheme,
+                appBarElevation: 2,
+                visualDensity: VisualDensity.adaptivePlatformDensity,
+                fontFamily: GoogleFonts.roboto().fontFamily,
+              ),
+              themeMode: currentMode,
+              initialRoute: initialRoute,
+              routes: {
+                AuthScreen.route: (context) => AuthScreen(),
+                AuthName.route: (context) => const AuthName(),
+                AssistantsScreen.route: (context) => const AssistantsScreen(),
+                RateUsScreen.route: (context) => const RateUsScreen(),
+                TaleOnGeneratedScreen.route: (context) =>
+                    const TaleOnGeneratedScreen(),
+                TaleGeneratorScreen.route: (context) =>
+                    const TaleGeneratorScreen(),
+                GeneratedContentScreen.route: (context) =>
+                    GeneratedContentScreen(),
+                SettingsScreen.route: (context) => const SettingsScreen(),
+                CheckIfUserIsVerified.route: (context) =>
+                    const CheckIfUserIsVerified(),
+                PasswordForgottenScreen.route: (context) =>
+                    PasswordForgottenScreen(),
+                UserSettingsMainScreen.route: (context) =>
+                    const UserSettingsMainScreen(),
+                UserSettingsProfileScreen.route: (context) =>
+                    const UserSettingsProfileScreen(),
+                TaleFromHistoryScreen.route: (context) =>
+                    const TaleFromHistoryScreen(),
+              },
             ),
-            darkTheme: FlexThemeData.dark(
-              scheme: usedScheme,
-              appBarElevation: 2,
-              visualDensity: VisualDensity.adaptivePlatformDensity,
-              fontFamily: GoogleFonts.roboto().fontFamily,
-            ),
-            themeMode: currentMode,
-            initialRoute: initialRoute,
-            routes: {
-              AuthScreen.route: (context) => AuthScreen(),
-              AuthName.route: (context) => const AuthName(),
-              AssistantsScreen.route: (context) => const AssistantsScreen(),
-              RateUsScreen.route: (context) => const RateUsScreen(),
-              TaleOnGeneratedScreen.route: (context) =>
-                  const TaleOnGeneratedScreen(),
-              TaleGeneratorScreen.route: (context) =>
-                  const TaleGeneratorScreen(),
-              GeneratedContentScreen.route: (context) =>
-                  GeneratedContentScreen(),
-              SettingsScreen.route: (context) => const SettingsScreen(),
-              CheckIfUserIsVerified.route: (context) =>
-                  const CheckIfUserIsVerified(),
-              PasswordForgottenScreen.route: (context) =>
-                  PasswordForgottenScreen(),
-              UserSettingsMainScreen.route: (context) =>
-                  const UserSettingsMainScreen(),
-              UserSettingsProfileScreen.route: (context) =>
-                  const UserSettingsProfileScreen(),
-              TaleFromHistoryScreen.route: (context) =>
-                  const TaleFromHistoryScreen(),
-            },
-          ),
+
         );
       },
     );

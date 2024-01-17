@@ -39,7 +39,7 @@ class ImageProcessControllerNotifier extends StateNotifier<ImageProcessState> {
       if (kDebugMode) {
         log.d("Image Process State: ${state.step}");
       }
-      String? fileName = await _imgService.downloadImage(link);
+      String? fileName = await _imgService.downloadImageFromDalle(link);
       if (fileName == null) {
         throw Exception(
           "Error al descargar la imagen",
