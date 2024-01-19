@@ -28,7 +28,7 @@ import 'package:story_teller/ui/screen/settings/global/settings_screen.dart';
 import 'package:story_teller/ui/screen/tale_generator/tale_generator.dart';
 
 /// A screen that displays various assistant features to the user.
-///
+///c
 /// This screen is part of the main navigation flow of the app and allows users to interact with different assistant functionalities.
 /// It includes a customizable app bar and an interactive body with options like story generation.
 class AssistantsScreen extends ConsumerStatefulWidget {

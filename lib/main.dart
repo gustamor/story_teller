@@ -17,7 +17,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:story_teller/core/initializers.dart';
 import 'package:story_teller/core/params.dart';
+import 'package:story_teller/data/di/onesignal_provider.dart';
 import 'package:story_teller/data/di/remote_config_service_provider.dart';
 import 'package:story_teller/domain/models/dalle_model.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
@@ -41,11 +43,13 @@ import 'package:story_teller/ui/screen/tale_generator/tale_from_history.dart';
 import 'package:story_teller/ui/screen/tale_generator/tale_on_generated.dart';
 import 'package:story_teller/ui/screen/tale_generator/tale_generator.dart';
 
+final initialize = Init();
+
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  configureDio();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
+  initialize.configureDio();
   await FirebaseAppCheck.instance.activate(
     webProvider: ReCaptchaV3Provider('recaptcha-v3-site-key'),
     androidProvider: AndroidProvider.debug,
@@ -96,48 +100,15 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
-void configureDio() {
-  // Set default configs
-  final dio = Dio();
-  dio.options.connectTimeout = const Duration(seconds: 20);
-  dio.options.receiveTimeout = const Duration(seconds: 20);
-}
-
-initRemoteConfig(WidgetRef ref) async {
-  try {
-    final remoteConfig = await ref.watch(remoteConfigProvider.future);
-    Params.gptModel = await remoteConfig.getStringValue("gtp_model");
-    Params.gptPrompt = await remoteConfig.getStringValue("gtp_prompt");
-    final dalleRemote = await remoteConfig.getStringValue("dalle");
-    Params.dalleModel = DalleModel.fromMap(
-      json.decode(
-        dalleRemote,
-      ),
-    );
-    // ignore: empty_cdalleModelatches
-  } catch (e) {
-    throw Exception(e);
-  }
-}
-
-/// Implements a [TellLogger] instance
-final TellLogger log = LogImpl();
-
 // ignore: must_be_immutable
 class AiApp extends ConsumerWidget {
   late String initialRoute;
 
   AiApp({super.key});
+  final log = Init.logger();
 
   static final ValueNotifier<ThemeMode> themeNotifier =
       ValueNotifier(ThemeMode.dark);
-
-  setDeviceOrientation() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-  }
 
   authChecker(WidgetRef ref) {
     final logged = ref.watch(authStateChangesProvider);
@@ -166,11 +137,12 @@ class AiApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    initRemoteConfig(ref);
+    initialize.remoteConfig(ref);
+    initialize.messaging(ref);
+    initialize.setDeviceOrientation();
     const FlexScheme usedScheme = FlexScheme.redWine;
     final currentMode = ref.watch(themeModeProvider);
     authChecker(ref);
-    setDeviceOrientation();
 
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: themeNotifier,

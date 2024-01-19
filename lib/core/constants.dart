@@ -32,15 +32,14 @@ const kFontConversor = kMaxFontSlider + kMinFontSlider;
 const kHeightDividerAssistant = 16.0;
 const kIndentDividerAssistant = 16.0;
 const kThicknessDividerAssistant = 1.0;
-const kNumberOfExpandedCards = 10;
+const kNumberOfExpandedCards = 5;
 
 const kSplashLogo = "assets/images/splash.png";
 const kWriteStory3 = "assets/images/generatestory.webp";
 const kImageCyberpunkCity = "assets/images/citynight.webp";
-const kImageCrew = "assets/images/crew2.webp";
 const kImageReview = "assets/images/review.webp";
-const kImageBooks = "assets/images/books.webp";
-
+const kImageBooks = "assets/images/books2.webp";
+const kImageElfaLibro = "assets/images/elfalibro.webp";
 const klibraryImage =
     "https://i.postimg.cc/Kz5z9rgb/DALL-E-2024-01-10-19-43-38-An-elf-princess-in-a-mystical-library-pondering-over-a-scroll-with-an.png";
 

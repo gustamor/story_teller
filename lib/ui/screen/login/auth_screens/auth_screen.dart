@@ -84,7 +84,7 @@ class AuthScreen extends ConsumerWidget {
                   if (height > 10)
                     SizedBox(
                       child: Image.asset(
-                        kImageCrew,
+                        kImageElfaLibro,
                         width: double.infinity,
                         height: 272.h,
                         fit: BoxFit.contain,
