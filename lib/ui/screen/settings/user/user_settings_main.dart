@@ -1,3 +1,4 @@
+import 'package:android_intent_plus/android_intent.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,15 +6,31 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/core/constants.dart';
+import 'package:story_teller/core/initializers.dart';
 import 'package:story_teller/ui/core/providers/fetch_user_name_and_surname.dart';
 import 'package:story_teller/ui/core/providers/font_scale_provider.dart';
 import 'package:story_teller/ui/core/widgets/builders/builder_navigation_app_bar.dart';
+import 'package:story_teller/ui/screen/feedback/about_us_screen.dart';
 import 'package:story_teller/ui/screen/feedback/rate_us_screen.dart';
 import 'package:story_teller/ui/screen/settings/user/user_settings_profile.dart';
 
 class UserSettingsMainScreen extends ConsumerWidget {
   static const route = "/user_settings_main";
   const UserSettingsMainScreen({super.key});
+  void goToPrivacy(BuildContext context) async {
+    try {
+      AndroidIntent intent = const AndroidIntent(
+        action: 'action_view',
+        data: kPrivacyLink,
+      );
+      await intent.launch();
+      // ignore: empty_catches
+    } catch (e) {
+      final log = Init.logger();
+
+      log.d(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -21,7 +38,7 @@ class UserSettingsMainScreen extends ConsumerWidget {
     ref.watch(fontScaleNotifierProvider.notifier).loadFontScale();
     String? userNameTag;
 
-    final asyncUserNameTag = ref.watch(fetchUserNameAndSurnameFromIdProvider);
+    final asyncUserNameTag =  ref.watch(fetchUserNameAndSurnameFromIdProvider);
 
     asyncUserNameTag.whenData((value) => userNameTag = value);
     return SafeArea(
@@ -108,7 +125,9 @@ class UserSettingsMainScreen extends ConsumerWidget {
               ),
               Gap(16.h),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  goToPrivacy(context);
+                },
                 child: ListTile(
                   leading: const Icon(CupertinoIcons.shield_fill),
                   title: Text(tr("privacy")),
@@ -128,7 +147,9 @@ class UserSettingsMainScreen extends ConsumerWidget {
               ),
               Gap(16.h),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, AboutUsScreen.route);
+                },
                 child: ListTile(
                   leading: const Icon(CupertinoIcons.group_solid),
                   title: Text(tr("about_us")),

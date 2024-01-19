@@ -1,3 +1,4 @@
+import 'package:android_intent_plus/android_intent.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/core/constants.dart';
+import 'package:story_teller/core/initializers.dart';
 import 'package:story_teller/ui/core/widgets/builders/builder_button.dart';
 import 'package:story_teller/ui/themes/styles/text_styles.dart';
 
@@ -18,6 +20,22 @@ class RateUsScreen extends StatelessWidget {
 
   /// Constructs a [RateUsScreen] widget.
   const RateUsScreen({super.key});
+ 
+
+  void goToRate(BuildContext context) async {
+    try {
+      AndroidIntent intent = const AndroidIntent(
+        action: 'action_view',
+        data: kGPAppLink,
+      );
+      await intent.launch();
+      // ignore: empty_catches
+    } catch (e) {
+      final log = Init.logger();
+
+      log.d(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +54,8 @@ class RateUsScreen extends StatelessWidget {
                 onTap: () => Navigator.pop(context),
                 child: Padding(
                   padding: EdgeInsets.only(top: 8.r),
-                  child: const Icon(CupertinoIcons.clear), // An icon for closing or canceling the action.
+                  child: const Icon(CupertinoIcons
+                      .clear), // An icon for closing or canceling the action.
                 ),
               ),
             ),
@@ -81,7 +100,9 @@ class RateUsScreen extends StatelessWidget {
                           padding: EdgeInsets.symmetric(horizontal: 42.w),
                           child: NiceButton(
                             text: tr("share"),
-                            clickFunction: () => {},
+                            clickFunction: ()  {
+                             goToRate(context);
+                            },
                           ),
                         ),
                       ),

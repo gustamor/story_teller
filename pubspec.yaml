@@ -60,6 +60,9 @@ dependencies:
   file_saver: ^0.2.9
   connectivity_plus: ^5.0.2
   onesignal_flutter: ^5.0.4
+  share_plus: ^7.2.1
+  url_launcher: ^6.2.3
+  android_intent_plus: ^4.0.3
 
 dev_dependencies:
   flutter_test:

@@ -30,6 +30,7 @@ import 'package:story_teller/firebase_options.dart';
 import 'package:story_teller/ui/core/providers/font_scale_provider.dart';
 import 'package:story_teller/ui/core/providers/theme_mode_provider.dart';
 import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
+import 'package:story_teller/ui/screen/feedback/about_us_screen.dart';
 import 'package:story_teller/ui/screen/feedback/rate_us_screen.dart';
 import 'package:story_teller/ui/screen/history/generated_content_screen.dart';
 import 'package:story_teller/ui/screen/login/auth_screens/auth_check_if_verified.dart';
@@ -174,6 +175,7 @@ class AiApp extends ConsumerWidget {
               AuthName.route: (context) => const AuthName(),
               AssistantsScreen.route: (context) => const AssistantsScreen(),
               RateUsScreen.route: (context) => const RateUsScreen(),
+              AboutUsScreen.route: (context) => const AboutUsScreen(),
               TaleOnGeneratedScreen.route: (context) =>
                   const TaleOnGeneratedScreen(),
               TaleGeneratorScreen.route: (context) =>

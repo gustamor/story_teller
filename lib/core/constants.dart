@@ -16,11 +16,16 @@ import 'package:story_teller/ui/screen/login/auth_screens/auth_screen.dart';
 import 'package:story_teller/ui/screen/settings/global/settings_screen.dart';
 import 'package:uuid/uuid.dart';
 
+const kGPAppLink =
+    "https://play.google.com/store/apps/details?id=es.gustavomoreno.storygpt.generator";
+const kPrivacyLink =
+    "https://doc-hosting.flycricket.io/ai-story-teller-privacy-policy/26bfeaf3-3f36-4a5f-ad4b-1b3be07469fb/privacy";
 const kUuid = Uuid();
 
 const kIconBackArrow = "assets/images/icons/backarrow.svg";
 const kIconShare = "assets/images/icons/share.svg";
 const kIconWave = "assets/images/icons/wave.svg";
+
 const kIconStarUnfilled = "assets/images/icons/star_unfilled.svg";
 const kIconStarFilled = "assets/images/icons/star_filled.svg";
 const kIconClose = "assets/images/icons/close.svg";
@@ -38,6 +43,7 @@ const kSplashLogo = "assets/images/splash.png";
 const kWriteStory3 = "assets/images/generatestory.webp";
 const kImageCyberpunkCity = "assets/images/citynight.webp";
 const kImageReview = "assets/images/review.webp";
+const kImageCrew = "assets/images/crew.webp";
 const kImageBooks = "assets/images/books2.webp";
 const kImageElfaLibro = "assets/images/elfalibro.webp";
 const klibraryImage =
@@ -170,7 +176,7 @@ Text storyAuthorNameText(String text, {required double fontScale}) {
 Text storyBodyText(String text, {required double fontScale}) {
   fontScale = fontConversion(fontScale);
   double fontSize = (24 / fontScale).sp;
-  double fontHeight = (47 / (fontScale * 1.5)).h;
+  double fontHeight = (47 / (fontScale * 1.3)).h;
   double fontHeightFactor = fontHeight / fontSize;
   return Text(text,
       textAlign: TextAlign.justify,
@@ -245,7 +251,7 @@ AutoSizeText historyTitleText(String text, {required double fontScale}) {
   int maxFont = maxfontAux.toInt();
 
   double fontSize = maxFont.sp;
-  double fontHeight = (60 / (fontScale * 1.5)).h;
+  double fontHeight = (60 / (fontScale * 1.3)).h;
   double fontHeightFactor = fontHeight / fontSize;
   return AutoSizeText(
     text,

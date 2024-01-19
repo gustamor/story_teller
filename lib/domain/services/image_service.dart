@@ -57,9 +57,12 @@ class ImagesService {
   Future<String?> remoteStoreImage(Ref ref, String fileName) async {
     final storage = FireStorageService();
     final storageRef = ref.watch(firebaseStorageProvider).ref();
-    final currentUser = ref.watch(authenticationProvider).getDisplayName();
+    final currentUser =
+        await ref.watch(authenticationProvider).getCurrentUser(); //Si el User.uid no tendrá accesos a storage
+
     try {
-      final reference = storageRef.child("image/$currentUser/$fileName.png");
+      final reference =
+          storageRef.child("image/${currentUser!.uid}/$fileName.png");
       final path = await _localPath;
       final file = "$path/$fileName.png";
       await storage.uploadImage(File(file), reference);
@@ -73,18 +76,18 @@ class ImagesService {
   }
 
   Future<void> saveFile(Reference ref) async {
-   try {
-    final name = ref.name; 
+    try {
+      final name = ref.name;
 
-    final appDocDir = await getExternalStorageDirectory();
-    final filePath = '${appDocDir!.path}/$name';
-    final file = File(filePath);
+      final appDocDir = await getExternalStorageDirectory();
+      final filePath = '${appDocDir!.path}/$name';
+      final file = File(filePath);
 
-    await ref.writeToFile(file);
+      await ref.writeToFile(file);
 
-    print("Archivo guardado en: $filePath");
-  } catch (e) {
-    print("Error al guardar el archivo: $e");
-  }
+      print("Archivo guardado en: $filePath");
+    } catch (e) {
+      print("Error al guardar el archivo: $e");
+    }
   }
 }

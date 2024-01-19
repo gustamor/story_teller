@@ -26,10 +26,10 @@ import 'package:story_teller/domain/providers/auth_providers.dart';
 final updateStoryWithImageUrl =
     FutureProvider.family<void, List<String>>((ref, image) async {
   // Access Firestore database reference.
-  final db = ref.read(firebaseFirestoreProvider);
+  final db = ref.watch(firebaseFirestoreProvider);
 
   // Retrieve current authenticated user's ID.
-  final currentUser = await ref.read(authenticationProvider).getCurrentUser();
+  final currentUser = await ref.watch(authenticationProvider).getCurrentUser();
 
   try {
     // Reference to the specific story document in Firestore.
