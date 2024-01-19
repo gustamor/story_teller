@@ -329,6 +329,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.2"
+  dartdoc:
+    dependency: "direct main"
+    description:
+      name: dartdoc
+      sha256: d9bab893c9f42615f62bf2d3ff2b89d5905952d1d42cc7890003537249cb472e
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.3.0"
   dbus:
     dependency: transitive
     description:
@@ -991,6 +999,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  markdown:
+    dependency: transitive
+    description:
+      name: markdown
+      sha256: "4e304b422905967f1f7e35a03cd2a3f8f34306b3e1b0cc7a8677d7a306471a0e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.2.0"
   matcher:
     dependency: transitive
     description:

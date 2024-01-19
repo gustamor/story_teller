@@ -1,5 +1,4 @@
 // ignore_for_file: unused_local_variable, unused_import
-
 import 'dart:convert';
 import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -18,29 +17,29 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:story_teller/src/core/params.dart';
-import 'package:story_teller/src/data/di/remote_config_service_provider.dart';
-import 'package:story_teller/src/domain/models/dalle_model.dart';
-import 'package:story_teller/src/domain/providers/auth_providers.dart';
-import 'package:story_teller/src/data/services/riverpod_logger_impl.dart';
-import 'package:story_teller/src/data/services/logger_impl.dart';
-import 'package:story_teller/src/domain/services/abstract_tell_logger.dart';
+import 'package:story_teller/core/params.dart';
+import 'package:story_teller/data/di/remote_config_service_provider.dart';
+import 'package:story_teller/domain/models/dalle_model.dart';
+import 'package:story_teller/domain/providers/auth_providers.dart';
+import 'package:story_teller/data/services/riverpod_logger_impl.dart';
+import 'package:story_teller/data/services/logger_impl.dart';
+import 'package:story_teller/domain/services/abstract_tell_logger.dart';
 import 'package:story_teller/firebase_options.dart';
-import 'package:story_teller/src/ui/core/providers/font_scale_provider.dart';
-import 'package:story_teller/src/ui/core/providers/theme_mode_provider.dart';
-import 'package:story_teller/src/ui/screen/assistants_screen/assistants_screen.dart';
-import 'package:story_teller/src/ui/screen/feedback/rate_us_screen.dart';
-import 'package:story_teller/src/ui/screen/history/generated_content_screen.dart';
-import 'package:story_teller/src/ui/screen/login/auth_screens/auth_check_if_verified.dart';
-import 'package:story_teller/src/ui/screen/login/auth_screens/auth_forgotten_password.dart';
-import 'package:story_teller/src/ui/screen/login/auth_screens/auth_name.dart';
-import 'package:story_teller/src/ui/screen/login/auth_screens/auth_screen.dart';
-import 'package:story_teller/src/ui/screen/settings/global/settings_screen.dart';
-import 'package:story_teller/src/ui/screen/settings/user/user_settings_main.dart';
-import 'package:story_teller/src/ui/screen/settings/user/user_settings_profile.dart';
-import 'package:story_teller/src/ui/screen/tale_generator/tale_from_history.dart';
-import 'package:story_teller/src/ui/screen/tale_generator/tale_on_generated.dart';
-import 'package:story_teller/src/ui/screen/tale_generator/tale_generator.dart';
+import 'package:story_teller/ui/core/providers/font_scale_provider.dart';
+import 'package:story_teller/ui/core/providers/theme_mode_provider.dart';
+import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
+import 'package:story_teller/ui/screen/feedback/rate_us_screen.dart';
+import 'package:story_teller/ui/screen/history/generated_content_screen.dart';
+import 'package:story_teller/ui/screen/login/auth_screens/auth_check_if_verified.dart';
+import 'package:story_teller/ui/screen/login/auth_screens/auth_forgotten_password.dart';
+import 'package:story_teller/ui/screen/login/auth_screens/auth_name.dart';
+import 'package:story_teller/ui/screen/login/auth_screens/auth_screen.dart';
+import 'package:story_teller/ui/screen/settings/global/settings_screen.dart';
+import 'package:story_teller/ui/screen/settings/user/user_settings_main.dart';
+import 'package:story_teller/ui/screen/settings/user/user_settings_profile.dart';
+import 'package:story_teller/ui/screen/tale_generator/tale_from_history.dart';
+import 'package:story_teller/ui/screen/tale_generator/tale_on_generated.dart';
+import 'package:story_teller/ui/screen/tale_generator/tale_generator.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -167,65 +166,61 @@ class AiApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
-
     initRemoteConfig(ref);
     const FlexScheme usedScheme = FlexScheme.redWine;
     final currentMode = ref.watch(themeModeProvider);
     authChecker(ref);
     setDeviceOrientation();
 
- 
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: themeNotifier,
       builder: (_, ThemeMode cm, __) {
         return ScreenUtilInit(
           minTextAdapt: true,
           child: MaterialApp(
-              debugShowCheckedModeBanner: false,
-              localizationsDelegates: context.localizationDelegates,
-              supportedLocales: context.supportedLocales,
-              locale: context.locale,
-              title: 'AI Story Teller',
-              theme: FlexThemeData.light(
-                scheme: usedScheme,
-                appBarElevation: 0.5,
-                visualDensity: VisualDensity.adaptivePlatformDensity,
-                fontFamily: GoogleFonts.roboto().fontFamily,
-              ),
-              darkTheme: FlexThemeData.dark(
-                scheme: usedScheme,
-                appBarElevation: 2,
-                visualDensity: VisualDensity.adaptivePlatformDensity,
-                fontFamily: GoogleFonts.roboto().fontFamily,
-              ),
-              themeMode: currentMode,
-              initialRoute: initialRoute,
-              routes: {
-                AuthScreen.route: (context) => AuthScreen(),
-                AuthName.route: (context) => const AuthName(),
-                AssistantsScreen.route: (context) => const AssistantsScreen(),
-                RateUsScreen.route: (context) => const RateUsScreen(),
-                TaleOnGeneratedScreen.route: (context) =>
-                    const TaleOnGeneratedScreen(),
-                TaleGeneratorScreen.route: (context) =>
-                    const TaleGeneratorScreen(),
-                GeneratedContentScreen.route: (context) =>
-                    GeneratedContentScreen(),
-                SettingsScreen.route: (context) => const SettingsScreen(),
-                CheckIfUserIsVerified.route: (context) =>
-                    const CheckIfUserIsVerified(),
-                PasswordForgottenScreen.route: (context) =>
-                    PasswordForgottenScreen(),
-                UserSettingsMainScreen.route: (context) =>
-                    const UserSettingsMainScreen(),
-                UserSettingsProfileScreen.route: (context) =>
-                    const UserSettingsProfileScreen(),
-                TaleFromHistoryScreen.route: (context) =>
-                    const TaleFromHistoryScreen(),
-              },
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+            title: 'AI Story Teller',
+            theme: FlexThemeData.light(
+              scheme: usedScheme,
+              appBarElevation: 0.5,
+              visualDensity: VisualDensity.adaptivePlatformDensity,
+              fontFamily: GoogleFonts.roboto().fontFamily,
             ),
-
+            darkTheme: FlexThemeData.dark(
+              scheme: usedScheme,
+              appBarElevation: 2,
+              visualDensity: VisualDensity.adaptivePlatformDensity,
+              fontFamily: GoogleFonts.roboto().fontFamily,
+            ),
+            themeMode: currentMode,
+            initialRoute: initialRoute,
+            routes: {
+              AuthScreen.route: (context) => AuthScreen(),
+              AuthName.route: (context) => const AuthName(),
+              AssistantsScreen.route: (context) => const AssistantsScreen(),
+              RateUsScreen.route: (context) => const RateUsScreen(),
+              TaleOnGeneratedScreen.route: (context) =>
+                  const TaleOnGeneratedScreen(),
+              TaleGeneratorScreen.route: (context) =>
+                  const TaleGeneratorScreen(),
+              GeneratedContentScreen.route: (context) =>
+                  GeneratedContentScreen(),
+              SettingsScreen.route: (context) => const SettingsScreen(),
+              CheckIfUserIsVerified.route: (context) =>
+                  const CheckIfUserIsVerified(),
+              PasswordForgottenScreen.route: (context) =>
+                  PasswordForgottenScreen(),
+              UserSettingsMainScreen.route: (context) =>
+                  const UserSettingsMainScreen(),
+              UserSettingsProfileScreen.route: (context) =>
+                  const UserSettingsProfileScreen(),
+              TaleFromHistoryScreen.route: (context) =>
+                  const TaleFromHistoryScreen(),
+            },
+          ),
         );
       },
     );

@@ -1,4 +1,4 @@
-import 'package:story_teller/src/domain/abstract/asbtract_process_state.dart';
+import 'package:story_teller/domain/abstract/abstract_process_state.dart';
 
 enum ChatProcessStep{
   generatingStory,
