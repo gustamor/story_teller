@@ -2,7 +2,9 @@ import 'package:openai_dart/openai_dart.dart';
 import 'package:story_teller/domain/models/dalle_model.dart';
 
 class Params {
-  static String oak = "";
+  static String oakey = "";
+    static String oaorg = "";
+
   static String gptPrompt = "";
   static String gptModel = "gpt-3.5-turbo";
   static DalleModel dalleModel = DalleModel(

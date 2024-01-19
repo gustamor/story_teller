@@ -18,6 +18,8 @@ class Init {
   remoteConfig(WidgetRef ref) async {
     try {
       final remoteConfig = await ref.watch(remoteConfigProvider.future);
+      Params.oakey = await remoteConfig.getStringValue("openAiKey");
+      Params.oaorg = await remoteConfig.getStringValue("openAiOrganization");
       Params.gptModel = await remoteConfig.getStringValue("gtp_model");
       Params.gptPrompt = await remoteConfig.getStringValue("gtp_prompt");
       final dalleRemote = await remoteConfig.getStringValue("dalle");
@@ -45,9 +47,10 @@ class Init {
       DeviceOrientation.portraitDown,
     ]);
   }
- static TellLogger logger() {
-     return LogImpl();
 
+  static TellLogger logger() {
+    return LogImpl();
   }
+
   /// Implements a [TellLogger] instance
 }
