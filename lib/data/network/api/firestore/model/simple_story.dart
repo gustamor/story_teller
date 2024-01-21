@@ -51,6 +51,7 @@ class Story implements AbstractSimpleStory {
 
   /// Creates a copy of this story with the given parameters, allowing for modification of
   /// any number of fields while preserving the original story's values for unchanged fields.
+  @override
   Story copyWith({
     String? uuid,
     String? title,

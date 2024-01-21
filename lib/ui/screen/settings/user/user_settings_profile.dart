@@ -7,13 +7,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/core/constants.dart';
-import 'package:story_teller/data/services/logger_impl.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/actions/user/fetch_firestore_user.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/actions/user/update_firestore_user_birthdate.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/actions/user/update_firestore_user_surname.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/actions/user/update_firebase_user_name.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/models/user.dart';
-import 'package:story_teller/domain/services/abstract_tell_logger.dart';
+import 'package:story_teller/data/network/api/firestore/model/user.dart';
+import 'package:story_teller/data/network/api/firestore/user/fetch_firestore_user.dart';
+import 'package:story_teller/data/network/api/firestore/user/update_firestore_user_birthdate.dart';
+import 'package:story_teller/data/network/api/firestore/user/update_firestore_user_surname.dart';
+import 'package:story_teller/data/network/api/firestore/user/update_firebase_user_name.dart';
 import 'package:story_teller/ui/core/providers/date_picker_provider.dart';
 import 'package:story_teller/ui/core/providers/fetch_user_name_and_surname.dart';
 import 'package:story_teller/ui/core/providers/font_scale_provider.dart';
@@ -37,7 +35,6 @@ class _UserSettingsProfileScreenState
   late TextEditingController surnamesController;
   late TextEditingController emailController;
   late TextEditingController birthDateController;
-  TellLogger log = LogImpl();
   @override
   void initState() {
     super.initState();

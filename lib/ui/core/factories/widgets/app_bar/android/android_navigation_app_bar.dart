@@ -12,22 +12,23 @@ import 'package:story_teller/domain/abstract/widgets/abstract_ai_app_bar.dart';
 /// This class implements the [AbstractAiAppBar] and provides a Material Design-styled
 /// app bar. It supports custom title text, left and right icons, and tap actions for
 /// these icons.
-class AndroidNavigationAppBar extends StatelessWidget implements AbstractAiAppBar {
+class AndroidNavigationAppBar extends StatelessWidget
+    implements AbstractAiAppBar {
   @override
   final String? title;
-  
+
   @override
   final String? leftIcon;
-  
+
   @override
   final String? rightIcon;
-  
+
   @override
   final VoidCallback? leftTapFunction;
-  
+
   @override
   final VoidCallback? rightTapFunction;
-  
+
   @override
   final bool? backgroundOpacity;
 
@@ -63,7 +64,10 @@ class AndroidNavigationAppBar extends StatelessWidget implements AbstractAiAppBa
                       leftIcon!,
                       width: 16.w,
                       height: 16.h,
-                      color: Theme.of(context).appBarTheme.foregroundColor,
+                      colorFilter: ColorFilter.mode(
+                        Theme.of(context).appBarTheme.foregroundColor!,
+                        BlendMode.srcIn,
+                      ),
                     )
                   : const SizedBox(),
             ),
@@ -87,7 +91,10 @@ class AndroidNavigationAppBar extends StatelessWidget implements AbstractAiAppBa
                       rightIcon!,
                       width: 16.w,
                       height: 16.h,
-                      color: Theme.of(context).appBarTheme.foregroundColor,
+                      colorFilter: ColorFilter.mode(
+                        Theme.of(context).appBarTheme.foregroundColor!,
+                        BlendMode.srcIn,
+                      ),
                     ),
                   ))
               : const Expanded(

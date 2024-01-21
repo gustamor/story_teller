@@ -10,6 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/core/constants.dart';
+import 'package:story_teller/core/initializers.dart';
 import 'package:story_teller/domain/providers/story_orchestator_provider.dart';
 import 'package:story_teller/ui/core/providers/genres_list_provider.dart';
 import 'package:story_teller/ui/core/providers/prompt_provider.dart';
@@ -31,9 +32,13 @@ class TaleGeneratorScreen extends ConsumerStatefulWidget {
       _TaleGeneratorScreenState();
 }
 
+final initialize = Init();
+
 class _TaleGeneratorScreenState extends ConsumerState<TaleGeneratorScreen> {
   @override
   Widget build(BuildContext context) {
+    initialize.messaging(ref);
+
     final genresList = ref.read(genresListProvider);
     String prompt;
 
@@ -71,9 +76,7 @@ class _TaleGeneratorScreenState extends ConsumerState<TaleGeneratorScreen> {
                           ),
                           Gap(6.h),
                           NiceTextFormField(
-                            onFieldSubmitFunction: (text) {
-  
-                            },
+                            onFieldSubmitFunction: (text) {},
                             controller: controller,
                             maxLines: 4,
                             borderSide: 2,
@@ -139,7 +142,7 @@ class _TaleGeneratorScreenState extends ConsumerState<TaleGeneratorScreen> {
                                           final prompt =
                                               tr('write_a_story_of_genre') +
                                                   tr(item);
-                                           var story = ref.read(
+                                          var story = ref.read(
                                               storyProcessOrchestratorProvider
                                                   .notifier);
                                           story.generateASimpleStory(prompt);

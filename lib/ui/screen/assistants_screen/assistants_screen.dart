@@ -8,13 +8,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/core/constants.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/actions/user/add_firestore_user.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/actions/user/fetch_firestore_user.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/models/user.dart';
+import 'package:story_teller/data/network/api/firestore/tale/get_tales.dart';
+import 'package:story_teller/data/network/api/firestore/user/add_firestore_user.dart';
+import 'package:story_teller/data/network/api/firestore/user/fetch_firestore_user.dart';
+import 'package:story_teller/data/network/api/firestore/model/user.dart';
 import 'package:story_teller/domain/notifiers/auth_state_notifier.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
 import 'package:story_teller/ui/core/date_picker.dart';
 import 'package:story_teller/ui/core/providers/fetch_user_name.dart';
+import 'package:story_teller/ui/core/providers/font_scale_provider.dart';
 import 'package:story_teller/ui/core/providers/menus_providers.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
 import 'package:story_teller/domain/services/abstract_tell_logger.dart';
@@ -39,7 +41,8 @@ class AssistantsScreen extends ConsumerStatefulWidget {
   const AssistantsScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _AssistantsScreensState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _AssistantsScreensState();
 }
 
 class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
@@ -51,12 +54,11 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
   /// Updates the selected index in the provider and navigates to the corresponding route.
   void onItemTapped(int index, BuildContext context, WidgetRef ref) {
     debugPrint("index of menu is : $index");
-    ref.read(indexProvider.notifier).value = index;
+    if (ref.watch(indexProvider) != index) {
+      ref.watch(indexProvider.notifier).update((state) => state = index);
+    }
     Navigator.pushNamed(context, kBottomItemRoutes[index]);
   }
-
-  /// Implements a [TellLogger] instance for logging purposes.
-  final TellLogger log = LogImpl();
 
   @override
   void initState() {
@@ -65,16 +67,14 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
       double height = MediaQuery.of(context).size.height;
       double width = MediaQuery.of(context).size.width;
       // Updates the context and screen size in the providers.
-      ref.read(buildContextProvider.notifier).update((state) => context);
-      ref.read(screenSizeProvider.notifier).update((state) => state = Size(width, height));
+      ref.watch(buildContextProvider.notifier).update((state) => context);
+      ref
+          .watch(screenSizeProvider.notifier)
+          .update((state) => state = Size(width, height));
+      ref.watch(getTalesProvider);
     });
   }
 
-  @override
-  void didUpdateWidget(covariant AssistantsScreen oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    // Include any additional actions to be performed when the widget updates.
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,17 +82,17 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
     // Watches for the user name and updates the local variable.
     final asyncUserNameTag = ref.watch(fetchUserNameProvider);
     asyncUserNameTag.whenData((name) => userName = name);
-    
+
     // Ensures the user is created in the backend if needed.
     createUserInBackendIfNeeded(ref);
-    
+
     // UI constants for padding and margin.
     final double kLeftPaddingHomeNameText = 4.w;
     final double kTopPaddingHomeWhatCanText = 32.w;
-    
+
     // Removes the native splash screen.
     FlutterNativeSplash.remove();
-    
+
     // Watches the context menu provider.
     final contextMenu = ref.watch(contextMenuProvider);
 
@@ -100,11 +100,11 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: NiceAppBar(
-          title: tr('assistants'),
-          rightIcon: kIconUser,
-          rightTapFunction: () {
-            showContextMenu(context, contextMenu: contextMenu!);
-          }),
+            title: tr('assistants'),
+            rightIcon: kIconUser,
+            rightTapFunction: () {
+              showContextMenu(context, contextMenu: contextMenu!);
+            }),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -127,7 +127,7 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
               // Text widget for additional information or prompts.
               Padding(
                 padding: EdgeInsets.only(
-                  left: kLeftPaddingHomeNameText, top: 8.h, right: 92.w),
+                    left: kLeftPaddingHomeNameText, top: 8.h, right: 92.w),
                 child: Text(
                   tr("what_can_i_do_today"),
                   style: TextStyle(fontSize: 28.sp),
@@ -150,7 +150,8 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     NiceClickableCard(
-                      clickFunction: () => Navigator.pushNamed(context, TaleGeneratorScreen.route),
+                      clickFunction: () => Navigator.pushNamed(
+                          context, TaleGeneratorScreen.route),
                       height: 104.h,
                       width: 300.w,
                       caption: tr("story"),
@@ -167,8 +168,12 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
         ),
         // Bottom navigation bar with interactive items.
         bottomNavigationBar: NiceBottomBar(
-          index: ref.watch(indexProvider),
-          onTapFunction: (index) => onItemTapped(index, context, ref),
+          index: ref.read(indexProvider),
+          onTapFunction: (index) {
+            if (index != ref.read(indexProvider)) {
+              onItemTapped(index, context, ref);
+            }
+          },
           materialItems: BottomItems.materialItems,
           cupertinoItems: BottomItems.cupertinoItems,
         ),

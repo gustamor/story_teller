@@ -17,6 +17,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:story_teller/core/constants.dart';
 import 'package:story_teller/core/initializers.dart';
 import 'package:story_teller/core/params.dart';
 import 'package:story_teller/data/di/onesignal_provider.dart';
@@ -106,7 +107,6 @@ class AiApp extends ConsumerWidget {
   late String initialRoute;
 
   AiApp({super.key});
-  final log = Init.logger();
 
   static final ValueNotifier<ThemeMode> themeNotifier =
       ValueNotifier(ThemeMode.dark);
@@ -139,7 +139,6 @@ class AiApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     initialize.remoteConfig(ref);
-    initialize.messaging(ref);
     initialize.setDeviceOrientation();
     const FlexScheme usedScheme = FlexScheme.redWine;
     final currentMode = ref.watch(themeModeProvider);

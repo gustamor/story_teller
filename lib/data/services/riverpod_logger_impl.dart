@@ -1,11 +1,14 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:story_teller/core/constants.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
 import 'package:story_teller/domain/services/abstract_riverpod_logger.dart';
 import 'package:story_teller/domain/services/abstract_tell_logger.dart';
 /// `LoggerRiverpod` is a class that implements `RiverpodLogger`.
 /// It provides implementations for provider observation methods.
 class LoggerRiverpod implements RiverpodLogger {
-  final TellLogger log = LogImpl();
+
 
   /// `didUpdateProvider` is invoked when a provider is updated.
   ///

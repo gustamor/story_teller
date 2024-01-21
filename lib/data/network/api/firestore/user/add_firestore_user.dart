@@ -3,8 +3,8 @@
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:story_teller/core/constants.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/actions/user/fetch_firestore_user.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/models/user.dart'
+import 'package:story_teller/data/network/api/firestore/user/fetch_firestore_user.dart';
+import 'package:story_teller/data/network/api/firestore/model/user.dart'
     as firebaseUser;
 import 'package:story_teller/data/di/firebase_providers.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';

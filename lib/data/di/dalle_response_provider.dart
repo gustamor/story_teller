@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:story_teller/data/sources/api/openai/dalle_image_request.dart';
+import 'package:story_teller/data/network/api/openai/dalle_image_request.dart';
 
 /// Provides an instance of [DalleImageRequest].
 ///

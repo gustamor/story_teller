@@ -10,13 +10,13 @@ import 'package:path_provider/path_provider.dart';
 import 'package:story_teller/core/params.dart';
 import 'package:story_teller/core/permissions.dart';
 import 'package:story_teller/data/di/dalle_response_provider.dart';
-import 'package:story_teller/data/services/image_downloader.dart';
-import 'package:story_teller/data/sources/api/openai/dalle_image_request.dart';
+import 'package:story_teller/data/services/image_downloader_impl.dart';
+import 'package:story_teller/data/network/api/openai/dalle_image_request.dart';
 import 'package:story_teller/data/services/fire_storage_service.dart';
 import 'package:story_teller/data/services/repositories/random_chars_repository.dart';
 import 'package:story_teller/data/di/firebase_providers.dart';
 import 'package:story_teller/data/di/openai_provider.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/actions/tale/get_a_tale.dart';
+import 'package:story_teller/data/network/api/firestore/tale/get_a_tale.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
 
 class ImagesService {

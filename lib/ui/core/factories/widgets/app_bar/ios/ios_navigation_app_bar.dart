@@ -65,7 +65,10 @@ class IosNavigationAppBar extends StatelessWidget implements AbstractAiAppBar {
                       leftIcon!,
                       width: 16.w,
                       height: 16.h,
-                      color: Theme.of(context).appBarTheme.foregroundColor,
+                      colorFilter: ColorFilter.mode(
+                        Theme.of(context).appBarTheme.foregroundColor!,
+                        BlendMode.srcIn,
+                      ),
                     )
                   : const SizedBox(),
             ),
@@ -91,7 +94,10 @@ class IosNavigationAppBar extends StatelessWidget implements AbstractAiAppBar {
                       rightIcon!,
                       width: 16.w,
                       height: 16.h,
-                      color: Theme.of(context).appBarTheme.foregroundColor,
+                      colorFilter: ColorFilter.mode(
+                        Theme.of(context).appBarTheme.foregroundColor!,
+                        BlendMode.srcIn,
+                      ),
                     )
                   : const SizedBox(),
             ),

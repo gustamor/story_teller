@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:story_teller/core/constants.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/models/simple_story.dart';
 import 'package:story_teller/data/di/firebase_providers.dart';
+import 'package:story_teller/data/network/api/firestore/model/simple_story.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
 
 /// Provides a stream of user-specific stories from Firestore.

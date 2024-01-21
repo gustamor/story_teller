@@ -1,7 +1,11 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:story_teller/core/constants.dart';
+import 'package:story_teller/core/initializers.dart';
 
-import 'package:story_teller/data/sources/api/model/tale_data.dart';
+import 'package:story_teller/data/network/api/openai/model/tale_data.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
 import 'package:story_teller/data/di/taledata_provider.dart';
 import 'package:story_teller/domain/chat_process_state.dart';
@@ -25,7 +29,6 @@ class ChatProcessControllerNotifier extends StateNotifier<ChatProcessState> {
           ),
         );
 
-  final TellLogger log = LogImpl();
 
   /// Processes and stores a simple story based on the given [prompt].
   ///

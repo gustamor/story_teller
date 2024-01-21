@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/actions/tale/get_tales.dart';
+import 'package:story_teller/data/network/api/firestore/tale/get_tales.dart';
 
 
 // Provider adicional para manejar la longitud

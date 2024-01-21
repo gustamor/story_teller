@@ -7,25 +7,41 @@ import 'package:gap/gap.dart';
 import 'package:story_teller/core/constants.dart';
 import 'package:story_teller/ui/core/providers/bottom_bar_index.dart';
 import 'package:story_teller/ui/core/providers/font_scale_provider.dart';
+import 'package:story_teller/ui/core/providers/menus_providers.dart';
 import 'package:story_teller/ui/core/providers/theme_mode_provider.dart';
 import 'package:story_teller/ui/core/widgets/builders/builder_button.dart';
 import 'package:story_teller/ui/core/widgets/builders/builder_navigation_app_bar.dart';
 import 'package:story_teller/ui/core/widgets/builders/builder_navigation_bottom_bar.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
-class SettingsScreen extends ConsumerWidget {
+class SettingsScreen extends ConsumerStatefulWidget {
   static const String route = "/settings";
+
   const SettingsScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    void onItemTapped(int index, BuildContext context, WidgetRef ref) {
-      debugPrint("index of menu is : $index");
-      ref.read(indexProvider.notifier).value = index;
-      Navigator.pushNamed(context, kBottomItemRoutes[index]);
-    }
+  ConsumerState<ConsumerStatefulWidget> createState() => _SettingsScreenState();
+}
 
-    var value = ref.watch(fontScaleNotifierProvider);
+class _SettingsScreenState extends ConsumerState<SettingsScreen> {
+ late double value = 1.3;
+
+  void onItemTapped(int index, BuildContext context) {
+    ref.watch(buildContextProvider.notifier).update((state) => context);
+    Navigator.pushNamed(context, kBottomItemRoutes[index]);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+          ref.read(fontScaleNotifierProvider.notifier).loadFontScale();
+      value = ref.watch(fontScaleNotifierProvider);
 
     final Size screenSize = MediaQuery.of(context).size;
     final themeMode = ref.watch(themeModeProvider);
@@ -43,7 +59,7 @@ class SettingsScreen extends ConsumerWidget {
                   margin: EdgeInsets.only(
                     left: 16.w,
                   ),
-                  child:  ListTile(
+                  child: ListTile(
                     title: Text(tr("theme_mode")),
                     subtitle: Text(tr("select_light_mode")),
                     contentPadding: EdgeInsets.all(8.r),
@@ -100,8 +116,6 @@ class SettingsScreen extends ConsumerWidget {
                   height: 1,
                 ),
               ),
-             
-           
               Gap(
                 kSettingsElementSeparator.h,
               ),
@@ -147,9 +161,13 @@ class SettingsScreen extends ConsumerWidget {
                             padding: EdgeInsets.only(right: 16.w),
                             child: SvgPicture.asset(
                               kIconClose,
-                              color: (ThemeMode.dark == ThemeMode.dark)
-                                  ? Colors.white70
-                                  : Colors.black87,
+                              colorFilter: (ThemeMode.dark == ThemeMode.dark)
+                                  ? const ColorFilter.mode(
+                                      Colors.white70,
+                                      BlendMode.srcIn,
+                                    )
+                                  : const ColorFilter.mode(
+                                      Colors.black87, BlendMode.srcIn),
                               width: 13.w,
                             ),
                           ),
@@ -204,7 +222,11 @@ class SettingsScreen extends ConsumerWidget {
         ),
         bottomNavigationBar: NiceBottomBar(
           index: ref.watch(indexProvider),
-          onTapFunction: (index) => onItemTapped(index, context, ref),
+          onTapFunction: (index) {
+            if (index != ref.read(indexProvider)) {
+              onItemTapped(index, context);
+            }
+          },
           materialItems: BottomItems.materialItems,
           cupertinoItems: BottomItems.cupertinoItems,
         ),

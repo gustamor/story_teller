@@ -2,7 +2,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:story_teller/domain/services/image_service.dart';
+import 'package:story_teller/data/services/image_service.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
 import 'package:story_teller/domain/image_process_state.dart';
 import 'package:story_teller/domain/services/abstract_tell_logger.dart';

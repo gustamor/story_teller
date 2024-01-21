@@ -26,26 +26,5 @@ class FireStorageService implements AbstractFireStorageService {
     await FileSaver.instance.saveFile(name: name, file: file, filePath: filePath.path, ext:"png");
     
   }
-   // isRef.writeToFile(file);
-//    final downloadTask = isRef.writeToFile(file);
-    /* downloadTask.snapshotEvents.listen((taskSnapshot) {
-      switch (taskSnapshot.state) {
-        case TaskState.running:
-          // TODO: Handle this case.
-          break;
-        case TaskState.paused:
-          // TODO: Handle this case.
-          break;
-        case TaskState.success:
-          // TODO: Handle this case.
-          break;
-        case TaskState.canceled:
-          // TODO: Handle this case.
-          break;
-        case TaskState.error:
-          // TODO: Handle this case.
-          break;
-      }
-    }); */
-  }
+}
 

@@ -1,7 +1,7 @@
 // ignore_for_file: unused_import
 
 import 'package:story_teller/core/constants.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/models/simple_story.dart';
+import 'package:story_teller/data/network/api/firestore/model/simple_story.dart';
 import 'package:story_teller/domain/abstract/abstract_tale_data.dart';
 import 'package:uuid/uuid.dart';
 

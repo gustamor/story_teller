@@ -14,8 +14,8 @@ final oneSignalProvider = Provider<void>((ref) {
 
 
   notifications.addForegroundWillDisplayListener((event) {
-    final notification = event.notification;
-    print("AAA${notification.additionalData}");
+   // final notification = event.notification;
+    //print("AAA${notification.additionalData}");
   });
 
 

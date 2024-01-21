@@ -1,6 +1,6 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:story_teller/data/sources/api/openai/chat_message.dart';
+import 'package:story_teller/data/network/api/openai/chat_message.dart';
 
 
 /// Provides an instance of [GptChatMessages].

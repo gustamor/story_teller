@@ -4,11 +4,10 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:story_teller/core/constants.dart';
 import 'package:story_teller/data/di/firebase_providers.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/actions/user/fetch_firestore_user.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/models/user.dart';
+import 'package:story_teller/data/network/api/firestore/user/fetch_firestore_user.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/models/user.dart'
-    as firebaseUser;
+import 'package:story_teller/data/network/api/firestore/model/user.dart'
+    as firebase_user;
 
 /// Updates the name field of the current authenticated user's document in Firestore.
 ///
@@ -43,3 +42,20 @@ final updateNameFirestoreUserProvider =
     }
   },
 );
+
+class FireStoreActions {
+  updateNameFirestoreUser(Ref ref, String userName) async {
+try {
+      // Get a reference to the current user's document.
+      final currentUserDocRef = await ref.watch(
+        fetchCurrentUserProvider.future,
+      );
+
+      // Update the 'name' field of the user's document.
+      await currentUserDocRef.update({'name': userName});
+    } catch (e) {
+      // Handle and propagate exceptions.
+      throw Exception('Error updating user name: $e');
+    }
+  }
+}

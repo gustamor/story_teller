@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:story_teller/ui/core/factories/widgets/button/android/android_button.dart';
 import 'package:story_teller/ui/core/factories/widgets/clickable_card/android/android_clickable_card.dart';
 import 'package:story_teller/ui/core/factories/widgets/text_form_field/android/android_text_form_field.dart';
-import 'package:story_teller/domain/factories/abstract_widgets_factory.dart';
+import 'package:story_teller/domain/abstract/factories/abstract_widgets_factory.dart';
 import 'package:story_teller/ui/core/factories/widgets/app_bar/android/android_navigation_app_bar.dart';
 
 import 'widgets/bottom_bar/android/android_navigation_bottom_bar.dart';

@@ -1,9 +1,11 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, unused_import
 import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:story_teller/core/constants.dart';
+import 'package:story_teller/core/initializers.dart';
 
-import 'package:story_teller/data/sources/api/model/tale_data.dart';
+import 'package:story_teller/data/network/api/openai/model/tale_data.dart';
 import 'package:story_teller/data/di/gpt_chat_messages_provider.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
 import 'package:story_teller/domain/services/abstract_tell_logger.dart';
@@ -22,8 +24,6 @@ class TaleDataRepository {
     required this.ref,
   });
 
-  /// Logger instance for recording events and errors.
-  final TellLogger log = LogImpl();
 
   /// Fetches tale data from a GPT-based chat service using the given [prompt].
   ///
@@ -46,5 +46,4 @@ class TaleDataRepository {
     );
     return taleData;
   }
-
 }

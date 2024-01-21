@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:story_teller/core/initializers.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
 import 'package:story_teller/ui/screen/assistants_screen/assistants_screen.dart';
 import 'package:story_teller/ui/screen/history/generated_content_screen.dart';
@@ -54,6 +55,9 @@ const double kSettingsElementSeparator = 16;
 
 /// Defines sizes [kSettingsRowLeftPadding]
 const double kSettingsRowLeftPadding = 23;
+
+final log = Init.logger();
+
 
 /// Defines the content of the bottom items for Material Bottom Navigation Bar
 class BottomItems {

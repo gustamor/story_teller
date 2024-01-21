@@ -1,4 +1,5 @@
-import 'package:story_teller/data/sources/bbdd/firestore/models/simple_story.dart';
+
+import 'package:story_teller/data/network/api/firestore/model/simple_story.dart';
 
 /// Abstract class defining the interface for Firestore repository operations.
 ///

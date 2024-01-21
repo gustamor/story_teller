@@ -1,5 +1,8 @@
+// ignore_for_file: unused_import
+
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:story_teller/core/constants.dart';
 import 'package:story_teller/data/di/firebase_providers.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
 import 'package:story_teller/domain/services/abstract_remote_config_service.dart';
@@ -12,9 +15,6 @@ import 'package:story_teller/domain/services/abstract_tell_logger.dart';
 /// values and fetch intervals, and activates fetched configurations.
 class RemoteConfigService implements AbstractFirebaseRemoteConfigService {
   final Ref ref;
-
-  /// Logger for recording events and errors.
-  TellLogger log = LogImpl();
 
   /// Constructor for [RemoteConfigService].
   ///

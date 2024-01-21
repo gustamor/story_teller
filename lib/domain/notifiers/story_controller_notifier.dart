@@ -2,9 +2,9 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:openai_dart/openai_dart.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/actions/tale/update_imageurl.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/actions/tale/upload_tale.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/actions/user/add_firestore_user.dart';
+import 'package:story_teller/data/network/api/firestore/tale/update_imageurl.dart';
+import 'package:story_teller/data/network/api/firestore/tale/upload_tale.dart';
+import 'package:story_teller/data/network/api/firestore/user/add_firestore_user.dart';
 
 import 'package:story_teller/data/services/logger_impl.dart';
 import 'package:story_teller/domain/abstract/abstract_process_state.dart';
@@ -33,7 +33,6 @@ class StoryProcessControllerNotifier extends StateNotifier<ProcessState> {
           ),
         );
 
-  final TellLogger log = LogImpl();
 
   /// Generates a simple story based on the given [prompt] and processes its image.
   ///

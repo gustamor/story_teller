@@ -20,7 +20,6 @@ class RateUsScreen extends StatelessWidget {
 
   /// Constructs a [RateUsScreen] widget.
   const RateUsScreen({super.key});
- 
 
   void goToRate(BuildContext context) async {
     try {
@@ -85,7 +84,15 @@ class RateUsScreen extends StatelessWidget {
                       return Expanded(
                         child: SvgPicture.asset(
                           kIconStarFilled,
-                          color: (index < 4) ? Colors.yellow : Colors.grey,
+                          colorFilter: (index < 4)
+                              ? const ColorFilter.mode(
+                                  Colors.yellow,
+                                  BlendMode.srcIn,
+                                )
+                              : const ColorFilter.mode(
+                                  Colors.grey,
+                                  BlendMode.srcIn,
+                                ),
                           height: 42.h,
                           width: 42.w,
                         ),
@@ -100,8 +107,8 @@ class RateUsScreen extends StatelessWidget {
                           padding: EdgeInsets.symmetric(horizontal: 42.w),
                           child: NiceButton(
                             text: tr("share"),
-                            clickFunction: ()  {
-                             goToRate(context);
+                            clickFunction: () {
+                              goToRate(context);
                             },
                           ),
                         ),

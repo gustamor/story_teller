@@ -6,8 +6,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:openai_dart/openai_dart.dart';
 import 'package:story_teller/core/params.dart';
-import 'package:story_teller/data/sources/api/openai/chat_message.dart';
-import 'package:story_teller/data/sources/api/openai/dalle_image_request.dart';
+import 'package:story_teller/data/network/api/openai/chat_message.dart';
+import 'package:story_teller/data/network/api/openai/dalle_image_request.dart';
 import 'package:story_teller/data/di/taledata_provider.dart';
 
 /// Provides an initialized [OpenAIClient].

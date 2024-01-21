@@ -8,9 +8,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/core/constants.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/actions/tale/get_tales.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/actions/user/fetch_firestore_user.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/models/simple_story.dart';
+import 'package:story_teller/data/network/api/firestore/tale/get_tales.dart';
+import 'package:story_teller/data/network/api/firestore/user/fetch_firestore_user.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
 import 'package:story_teller/ui/core/providers/bottom_bar_index.dart';
 import 'package:story_teller/ui/core/providers/fetch_user_name_and_surname.dart';
@@ -46,7 +45,7 @@ class GeneratedContentScreen extends ConsumerWidget {
   /// Updates the selected index in the provider and navigates to the corresponding route.
   void onItemTapped(int index, BuildContext context, WidgetRef ref) {
     debugPrint("index of menu is : $index");
-    ref.read(indexProvider.notifier).value = index;
+    ref.watch(indexProvider.notifier).update((state) => state = index);
     Navigator.pushNamed(context, routes[index]);
   }
 
@@ -93,7 +92,8 @@ class GeneratedContentScreen extends ConsumerWidget {
                       ],
                     ),
                   ),
-                  background: Image.asset(kImageBooks, fit: BoxFit.cover), // Background image for the app bar.
+                  background: Image.asset(kImageBooks,
+                      fit: BoxFit.cover), // Background image for the app bar.
                 ),
               ),
               SliverToBoxAdapter(
@@ -125,7 +125,8 @@ class GeneratedContentScreen extends ConsumerWidget {
                               title: item.title ?? " ",
                               storyBody: item.text ?? " ",
                               imageUrl: item.imageUrl!,
-                              date: DateFormat('dd MMMM, yyyy').format(item.date!),
+                              date: DateFormat('dd MMMM, yyyy')
+                                  .format(item.date!),
                               author: userNameTag ?? " ",
                             );
                           } else {
@@ -142,14 +143,19 @@ class GeneratedContentScreen extends ConsumerWidget {
                       ),
                     );
                   },
-                  childCount: stories.length, // The number of items in the list.
+                  childCount:
+                      stories.length, // The number of items in the list.
                 ),
               ),
             ]),
             // Bottom navigation bar with interactive items.
             bottomNavigationBar: NiceBottomBar(
               index: ref.watch(indexProvider),
-              onTapFunction: (index) => onItemTapped(index, context, ref),
+              onTapFunction: (index) {
+                if (index != ref.read(indexProvider)) {
+                  onItemTapped(index, context, ref);
+                }
+              },
               materialItems: BottomItems.materialItems,
               cupertinoItems: BottomItems.cupertinoItems,
             ),

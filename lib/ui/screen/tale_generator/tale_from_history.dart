@@ -10,8 +10,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/core/constants.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/actions/tale/get_a_tale.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/models/simple_story.dart';
+import 'package:story_teller/data/network/api/firestore/model/simple_story.dart';
+import 'package:story_teller/data/network/api/firestore/tale/get_a_tale.dart';
 
 import 'package:story_teller/domain/providers/auth_providers.dart';
 import 'package:story_teller/ui/core/providers/current_tale_id_provider.dart';

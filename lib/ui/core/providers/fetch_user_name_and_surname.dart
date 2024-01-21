@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/actions/user/fetch_firestore_user.dart';
+import 'package:story_teller/data/network/api/firestore/user/fetch_firestore_user.dart';
 
 final fetchUserNameAndSurnameFromIdProvider =
     StreamProvider<String>((ref) async* {
@@ -16,7 +16,7 @@ final fetchUserNameAndSurnameFromIdProvider =
           email = user.email!;
         },
         error: (e, __) {
-          print("AAA $e");
+        //  print("AAA $e");
         },
         loading: () {});
 

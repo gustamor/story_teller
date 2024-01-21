@@ -2,8 +2,8 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:story_teller/data/di/tale_data_repository_provider.dart';
-import 'package:story_teller/data/sources/api/model/tale_data.dart';
-import 'package:story_teller/data/sources/api/openai/chat_message.dart';
+import 'package:story_teller/data/network/api/openai/model/tale_data.dart';
+import 'package:story_teller/data/network/api/openai/chat_message.dart';
 import 'package:story_teller/data/di/openai_provider.dart';
 import 'package:story_teller/data/services/repositories/tale_data_repository.dart';
 

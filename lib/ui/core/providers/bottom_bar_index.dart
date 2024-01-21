@@ -1,17 +1,19 @@
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final indexProvider = NotifierProvider<IndexNotifier, int>(
-  IndexNotifier.new,
-);
+final indexProvider = StateProvider<int>((ref) {
+  return 1; // default index
+});
 
-class IndexNotifier extends Notifier<int> {
-  IndexNotifier() : super();
+class IndexNotifier {
+ final StateController<int> _controller;
 
-  set value(int index) => state = index;
+  IndexNotifier(this._controller);
 
-  @override
-  int build() {
-    return 1; // default index
+  set value(int index) {
+    if (_controller.state != index) {
+      _controller.state = index;
+    }
   }
+
+  int get value => _controller.state;
 }

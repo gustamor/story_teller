@@ -47,7 +47,7 @@ class Init {
       DeviceOrientation.portraitDown,
     ]);
   }
-
+  
   static TellLogger logger() {
     return LogImpl();
   }

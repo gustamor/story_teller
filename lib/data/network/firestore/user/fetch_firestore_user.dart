@@ -8,15 +8,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:story_teller/core/constants.dart';
 import 'package:story_teller/data/di/firebase_providers.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/models/user.dart'
-    as firebaseUser;
+import 'package:story_teller/data/network/api/firestore/model/user.dart'
+    as firebase_user;
 
 /// Provides a stream of the current Firebase user's data.
 ///
 /// Listens to changes in the user's data within the Firebase database and
 /// emits updates accordingly. In case the user data is not available or if an
 /// error occurs, it emits null.
-final userProvider = StreamProvider<firebaseUser.User?>((ref) async* {
+final userProvider = StreamProvider<firebase_user.User?>((ref) async* {
   final userReference = await ref.watch(fetchCurrentUserProvider.future);
   yield* userReference.snapshots().map((snapshot) => snapshot.data());
 });
@@ -28,7 +28,7 @@ final userProvider = StreamProvider<firebaseUser.User?>((ref) async* {
 /// It ensures the user is authenticated and that the user document exists in
 /// the database, throwing errors if these conditions are not met.
 final fetchCurrentUserProvider =
-    FutureProvider<DocumentReference<firebaseUser.User?>>(
+    FutureProvider<DocumentReference<firebase_user.User?>>(
   (ref) async {
     final db = ref.watch(firebaseFirestoreProvider);
     final user = await ref.watch(authenticationProvider).getCurrentUser();
@@ -40,8 +40,8 @@ final fetchCurrentUserProvider =
 
     try {
       final collectionRef = db.collection(Collections.kUsers).withConverter(
-            fromFirestore: firebaseUser.User.fromFirestore,
-            toFirestore: (firebaseUser.User user, _) => user.toFirestore(),
+            fromFirestore: firebase_user.User.fromFirestore,
+            toFirestore: (firebase_user.User user, _) => user.toFirestore(),
           );
 
       // Query the database for the current user's document.

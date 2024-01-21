@@ -1,8 +1,8 @@
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:story_teller/core/constants.dart';
-import 'package:story_teller/data/sources/api/model/tale_data.dart';
-import 'package:story_teller/data/sources/bbdd/firestore/models/simple_story.dart';
+import 'package:story_teller/data/network/api/firestore/model/simple_story.dart';
+import 'package:story_teller/data/network/api/openai/model/tale_data.dart';
 import 'package:story_teller/data/di/firebase_providers.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
 

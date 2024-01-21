@@ -57,64 +57,64 @@ class DalleModel implements AbstractDalleModel {
   /// Expects a map with keys corresponding to the property names (`model`,
   /// `quality`, `size`, `style`) and values as the respective setting values.
   factory DalleModel.fromMap(Map<String, dynamic> map) {
-    late ImageModels _model;
-    late ImageQuality _quality;
-    late ImageStyle _style;
-    late ImageSize _size;
+    late ImageModels model;
+    late ImageQuality quality;
+    late ImageStyle style;
+    late ImageSize size;
 
     switch (map['model']) {
       case 'dall-e-2':
-        _model = ImageModels.dallE2;
+        model = ImageModels.dallE2;
         break;
       case 'dall-e-3':
-        _model = ImageModels.dallE3;
+        model = ImageModels.dallE3;
         break;
       default:
-        _model = ImageModels.dallE2;
+        model = ImageModels.dallE2;
         break;
     }
 
     switch (map['quality']) {
       case 'standard':
-        _quality = ImageQuality.standard;
+        quality = ImageQuality.standard;
         break;
       case 'dall-e-3':
-        _quality = ImageQuality.hd;
+        quality = ImageQuality.hd;
         break;
       default:
-        _quality = ImageQuality.standard;
+        quality = ImageQuality.standard;
         break;
     }
     switch (map['size']) {
       case '1024x1024':
-        _size = ImageSize.v1024x1024;
+        size = ImageSize.v1024x1024;
         break;
       case '1792x1024':
-        _size = ImageSize.v1792x1024;
+        size = ImageSize.v1792x1024;
         break;
       case '512x512':
-        _size = ImageSize.v512x512;
+        size = ImageSize.v512x512;
         break;
       default:
-        _size = ImageSize.v512x512;
+        size = ImageSize.v512x512;
         break;
     }
     switch (map['style']) {
       case 'natural':
-        _style = ImageStyle.natural;
+        style = ImageStyle.natural;
         break;
       case 'vivid':
-        _style = ImageStyle.vivid;
+        style = ImageStyle.vivid;
       default:
-        _style = ImageStyle.natural;
+        style = ImageStyle.natural;
         break;
     }
 
     return DalleModel(
-      model: _model,
-      quality: _quality,
-      size: _size,
-      style: _style,
+      model: model,
+      quality: quality,
+      size: size,
+      style: style,
     );
   }
 
