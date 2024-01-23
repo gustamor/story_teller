@@ -20,6 +20,7 @@ class Init {
       final remoteConfig = await ref.watch(remoteConfigProvider.future);
       Params.oakey = await remoteConfig.getStringValue("openAiKey");
       Params.oaorg = await remoteConfig.getStringValue("openAiOrganization");
+      Params.jpgQuality = await remoteConfig.getIntValue("jpq_quality");
       Params.gptModel = await remoteConfig.getStringValue("gtp_model");
       Params.gptPrompt = await remoteConfig.getStringValue("gtp_prompt");
       final dalleRemote = await remoteConfig.getStringValue("dalle");

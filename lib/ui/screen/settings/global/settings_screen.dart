@@ -24,7 +24,7 @@ class SettingsScreen extends ConsumerStatefulWidget {
 }
 
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
- late double value = 1.3;
+ late double value;
 
   void onItemTapped(int index, BuildContext context) {
     ref.watch(buildContextProvider.notifier).update((state) => context);
@@ -41,8 +41,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
           ref.read(fontScaleNotifierProvider.notifier).loadFontScale();
-      value = ref.watch(fontScaleNotifierProvider);
-
     final Size screenSize = MediaQuery.of(context).size;
     final themeMode = ref.watch(themeModeProvider);
     return SafeArea(

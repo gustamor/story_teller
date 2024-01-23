@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:file_saver/file_saver.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image/image.dart';
 import 'package:openai_dart/openai_dart.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:story_teller/core/params.dart';
@@ -55,17 +56,26 @@ class ImagesService {
   }
 
   Future<String?> remoteStoreImage(Ref ref, String fileName) async {
-    final storage = FireStorageService();
-    final storageRef = ref.watch(firebaseStorageProvider).ref();
-    final currentUser =
-        await ref.watch(authenticationProvider).getCurrentUser(); //Si el User.uid no tendrá accesos a storage
+    //Si el User.uid no tendrá accesos a storage
 
+    const ext = "jpg";
     try {
+      final storage = FireStorageService();
+      final storageRef = ref.watch(firebaseStorageProvider).ref();
+      final currentUser =
+          await ref.watch(authenticationProvider).getCurrentUser();
       final reference =
-          storageRef.child("image/${currentUser!.uid}/$fileName.png");
+          storageRef.child("image/${currentUser!.uid}/$fileName.$ext");
       final path = await _localPath;
-      final file = "$path/$fileName.png";
-      await storage.uploadImage(File(file), reference);
+      final fileNamePng = "$path/$fileName.png";
+      final fileNameJpg = "$path/$fileName.jpg";
+
+      final imagePng = decodeImage(File(fileNamePng).readAsBytesSync())!;
+
+      File(fileNameJpg).writeAsBytesSync(encodeJpg(imagePng, quality: Params.jpgQuality));
+      final imageJpgFile = File(fileNameJpg);
+
+      await storage.uploadImage(imageJpgFile, reference);
       saveFile(reference);
       final downloadLink = await reference.getDownloadURL();
 
