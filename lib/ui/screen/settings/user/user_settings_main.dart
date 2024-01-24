@@ -115,15 +115,7 @@ class UserSettingsMainScreen extends ConsumerWidget {
                 ),
               ),
               Gap(16.h),
-              InkWell(
-                onTap: () {},
-                child: ListTile(
-                  leading: const Icon(CupertinoIcons.bell_fill),
-                  title: Text(tr("notifications")),
-                  trailing: const Icon(CupertinoIcons.chevron_right),
-                ),
-              ),
-              Gap(16.h),
+              
               InkWell(
                 onTap: () {
                   goToPrivacy(context);

@@ -101,7 +101,7 @@ class _TaleGeneratorScreenState extends ConsumerState<TaleGeneratorScreen> {
                                 final story = ref.read(
                                     storyProcessOrchestratorProvider.notifier);
                                 story.generateASimpleStory(prompt);
-                          //      ref.read(intertitialShowProvider);
+                                ref.read(intertitialShowProvider);
                                 Navigator.pushNamed(
                                     context, TaleOnGeneratedScreen.route);
                               },
