@@ -12,7 +12,7 @@ import 'package:story_teller/domain/chat_process_state.dart';
 import 'package:story_teller/domain/image_process_state.dart';
 import 'package:story_teller/domain/providers/chat_orchestator_provider.dart';
 import 'package:story_teller/domain/providers/image_orchestator_provider.dart';
-import 'package:story_teller/domain/services/abstract_tell_logger.dart';
+import 'package:story_teller/domain/abstract/services/abstract_tell_logger.dart';
 import 'package:story_teller/domain/story_process_state.dart';
 import 'package:story_teller/ui/core/providers/current_tale_id_provider.dart';
 

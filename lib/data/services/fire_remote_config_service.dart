@@ -5,8 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:story_teller/core/constants.dart';
 import 'package:story_teller/data/di/firebase_providers.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
-import 'package:story_teller/domain/services/abstract_remote_config_service.dart';
-import 'package:story_teller/domain/services/abstract_tell_logger.dart';
+import 'package:story_teller/domain/abstract/services/abstract_remote_config_service.dart';
+import 'package:story_teller/domain/abstract/services/abstract_tell_logger.dart';
 
 /// Service for managing and initializing Firebase Remote Config.
 ///
@@ -25,12 +25,13 @@ class RemoteConfigService implements AbstractFirebaseRemoteConfigService {
   RemoteConfigService(this.ref);
 
   @override
+
   /// Asynchronously initializes the Firebase Remote Config.
   ///
   /// Configures the Remote Config settings such as fetch timeout and minimum fetch interval.
-  /// Also sets default values for the Remote Config parameters and fetches and activates 
+  /// Also sets default values for the Remote Config parameters and fetches and activates
   /// the latest remote configurations. Errors during initialization are logged and rethrown.
-  /// 
+  ///
   /// Example:
   /// ```dart
   /// await remoteConfigService.initRemoteConfig();
@@ -48,12 +49,17 @@ class RemoteConfigService implements AbstractFirebaseRemoteConfigService {
         // Example: "welcome_message": "Welcome to our app!"
         // Define other key-value pairs as needed
       });
+            await remoteConfig.fetchAndActivate();
+
+
     } catch (e) {
+   //   print("AAA $e");
       // Error handling code...
     }
   }
-  
+
   @override
+
   /// Retrieves a string value from Firebase Remote Config based on the provided [key].
   ///
   /// Example:
@@ -65,10 +71,11 @@ class RemoteConfigService implements AbstractFirebaseRemoteConfigService {
     final remoteConfig = ref.watch(firebaseRemoteConfigProvider);
     return remoteConfig.getString(key);
   }
-  
+
   @override
+
   /// Retrieves a boolean value from Firebase Remote Config based on the provided [key].
-  /// 
+  ///
   /// Note: This method is not implemented yet and will throw [UnimplementedError] if used.
   /// Example usage (not implemented):
   /// ```dart
@@ -80,6 +87,7 @@ class RemoteConfigService implements AbstractFirebaseRemoteConfigService {
   }
 
   @override
+
   /// Retrieves a numerical value from Firebase Remote Config based on the provided [key].
   ///
   /// Example:

@@ -13,13 +13,14 @@ import 'package:story_teller/data/network/api/firestore/user/add_firestore_user.
 import 'package:story_teller/data/network/api/firestore/user/fetch_firestore_user.dart';
 import 'package:story_teller/data/network/api/firestore/model/user.dart';
 import 'package:story_teller/domain/notifiers/auth_state_notifier.dart';
+import 'package:story_teller/domain/providers/ads_provider.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
 import 'package:story_teller/ui/core/date_picker.dart';
 import 'package:story_teller/ui/core/providers/fetch_user_name.dart';
 import 'package:story_teller/ui/core/providers/font_scale_provider.dart';
 import 'package:story_teller/ui/core/providers/menus_providers.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
-import 'package:story_teller/domain/services/abstract_tell_logger.dart';
+import 'package:story_teller/domain/abstract/services/abstract_tell_logger.dart';
 import 'package:story_teller/ui/core/factories/specific_platform_factory.dart';
 import 'package:story_teller/ui/core/providers/bottom_bar_index.dart';
 import 'package:story_teller/ui/core/widgets/builders/builder_clickable_card.dart';
@@ -66,6 +67,8 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       double height = MediaQuery.of(context).size.height;
       double width = MediaQuery.of(context).size.width;
+      ref.watch(intertitialCreateProvider);
+
       // Updates the context and screen size in the providers.
       ref.watch(buildContextProvider.notifier).update((state) => context);
       ref
@@ -74,7 +77,6 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
       ref.watch(getTalesProvider);
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -150,8 +152,9 @@ class _AssistantsScreensState extends ConsumerState<AssistantsScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     NiceClickableCard(
-                      clickFunction: () => Navigator.pushNamed(
+                       clickFunction: () => Navigator.pushNamed(
                           context, TaleGeneratorScreen.route),
+
                       height: 104.h,
                       width: 300.w,
                       caption: tr("story"),

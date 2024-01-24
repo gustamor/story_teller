@@ -11,6 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:story_teller/core/constants.dart';
 import 'package:story_teller/core/initializers.dart';
+import 'package:story_teller/domain/providers/ads_provider.dart';
 import 'package:story_teller/domain/providers/story_orchestator_provider.dart';
 import 'package:story_teller/ui/core/providers/genres_list_provider.dart';
 import 'package:story_teller/ui/core/providers/prompt_provider.dart';
@@ -100,6 +101,7 @@ class _TaleGeneratorScreenState extends ConsumerState<TaleGeneratorScreen> {
                                 final story = ref.read(
                                     storyProcessOrchestratorProvider.notifier);
                                 story.generateASimpleStory(prompt);
+                          //      ref.read(intertitialShowProvider);
                                 Navigator.pushNamed(
                                     context, TaleOnGeneratedScreen.route);
                               },
@@ -146,6 +148,8 @@ class _TaleGeneratorScreenState extends ConsumerState<TaleGeneratorScreen> {
                                               storyProcessOrchestratorProvider
                                                   .notifier);
                                           story.generateASimpleStory(prompt);
+                                         ref.read(intertitialShowProvider);
+
                                           Navigator.pushReplacementNamed(
                                               context,
                                               TaleOnGeneratedScreen.route);

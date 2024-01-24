@@ -2,7 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
-import 'package:story_teller/domain/services/abstract_auth_services.dart';
+import 'package:story_teller/domain/abstract/services/abstract_auth_services.dart';
 
 /// A custom exception for handling specific authentication errors.
 ///

@@ -12,7 +12,7 @@ import 'package:story_teller/core/params.dart';
 import 'package:story_teller/data/network/api/openai/model/tale_data.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
 import 'package:story_teller/data/di/openai_provider.dart';
-import 'package:story_teller/domain/services/abstract_tell_logger.dart';
+import 'package:story_teller/domain/abstract/services/abstract_tell_logger.dart';
 /// Class responsible for managing chat interactions with the GPT model.
 ///
 /// This class encapsulates the functionality required to communicate with a GPT model,

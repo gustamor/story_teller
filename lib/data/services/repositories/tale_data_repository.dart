@@ -8,7 +8,7 @@ import 'package:story_teller/core/initializers.dart';
 import 'package:story_teller/data/network/api/openai/model/tale_data.dart';
 import 'package:story_teller/data/di/gpt_chat_messages_provider.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
-import 'package:story_teller/domain/services/abstract_tell_logger.dart';
+import 'package:story_teller/domain/abstract/services/abstract_tell_logger.dart';
 
 /// Repository for managing tale data operations.
 ///

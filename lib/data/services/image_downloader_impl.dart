@@ -2,7 +2,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:story_teller/domain/abstract/abstract_image_downloader_sevice.dart';
+import 'package:story_teller/domain/abstract/services/abstract_image_downloader_service.dart';
 
 
 /// Service for downloading images.

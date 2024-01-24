@@ -1,5 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:story_teller/domain/abstract/abstract_shared_preferenes_service.dart';
+import 'package:story_teller/domain/abstract/services/abstract_shared_preferenes_service.dart';
 
 /// Service for managing local preferences using SharedPreferences.
 ///

@@ -24,7 +24,7 @@ import 'package:story_teller/domain/models/dalle_model.dart';
 import 'package:story_teller/domain/providers/auth_providers.dart';
 import 'package:story_teller/data/services/riverpod_logger_impl.dart';
 import 'package:story_teller/data/services/logger_impl.dart';
-import 'package:story_teller/domain/services/abstract_tell_logger.dart';
+import 'package:story_teller/domain/abstract/services/abstract_tell_logger.dart';
 import 'package:story_teller/firebase_options.dart';
 import 'package:story_teller/ui/core/providers/font_scale_provider.dart';
 import 'package:story_teller/ui/core/providers/theme_mode_provider.dart';
@@ -47,8 +47,8 @@ final initialize = Init();
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
+  initialize.admob();
+ await initialize.firebase();
   initialize.configureDio();
 
   await dotenv.load(fileName: ".env");
@@ -86,7 +86,25 @@ void main() async {
     ),
   );
 }
-
+ remoteConfig(WidgetRef ref) async {
+    try {
+      final remoteConfig = await ref.watch(remoteConfigProvider.future);
+      Params.oakey = await remoteConfig.getStringValue("openAiKey");
+      Params.oaorg = await remoteConfig.getStringValue("openAiOrganization");
+   //   Params.jpgQuality = await remoteConfig.getIntValue("jpq_quality");
+      Params.gptModel = await remoteConfig.getStringValue("gtp_model");
+      Params.gptPrompt = await remoteConfig.getStringValue("gtp_prompt");
+      final dalleRemote = await remoteConfig.getStringValue("dalle");
+      Params.dalleModel = DalleModel.fromMap(
+        json.decode(
+          dalleRemote,
+        ),
+      );
+      // ignore: empty_cdalleModelatches
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
@@ -121,9 +139,10 @@ class AiApp extends ConsumerWidget {
           );
         }
       },
-      error: (_, __) => log.d(
-        "auth error",
-      ),
+      error: (_, __) {
+        initialRoute = AuthScreen.route;
+        log.d("auth error");
+      },
       loading: () => log.d(
         "loading",
       ),
@@ -132,7 +151,7 @@ class AiApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    initialize.remoteConfig(ref);
+    remoteConfig(ref);
     initialize.setDeviceOrientation();
     const FlexScheme usedScheme = FlexScheme.redWine;
     final currentMode = ref.watch(themeModeProvider);
