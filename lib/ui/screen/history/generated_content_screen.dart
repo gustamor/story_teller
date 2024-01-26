@@ -51,9 +51,6 @@ class GeneratedContentScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Removes the native splash screen.
-    FlutterNativeSplash.remove();
-
     String? userNameTag;
     // Watches the providers for stories and user name.
     final asyncStories = ref.watch(getTalesProvider);
@@ -97,7 +94,7 @@ class GeneratedContentScreen extends ConsumerWidget {
                 ),
               ),
               SliverToBoxAdapter(
-                child: Gap(12.h), // Provides vertical spacing.
+                child: Gap(12.h),
               ),
               // A SliverList that displays a list of stories as expandable cards.
               SliverList(
@@ -164,7 +161,7 @@ class GeneratedContentScreen extends ConsumerWidget {
       },
       error: (error, stackTrace) {
         // Handles the error state.
-        return SizedBox();
+        return SafeArea(child: Scaffold(body: Center(child: Text("error: $error"))));
       },
       loading: () {
         // Displays a loading indicator while the data is being fetched.

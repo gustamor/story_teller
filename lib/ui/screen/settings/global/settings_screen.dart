@@ -24,8 +24,7 @@ class SettingsScreen extends ConsumerStatefulWidget {
 }
 
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
- late double value;
-
+  double? value;
   void onItemTapped(int index, BuildContext context) {
     ref.watch(buildContextProvider.notifier).update((state) => context);
     Navigator.pushNamed(context, kBottomItemRoutes[index]);
@@ -35,12 +34,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      value = ref.watch(fontScaleNotifierProvider);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-          ref.read(fontScaleNotifierProvider.notifier).loadFontScale();
+    ref.read(fontScaleNotifierProvider.notifier).loadFontScale();
+     value = ref.watch(fontScaleNotifierProvider) ?? 1.3;
     final Size screenSize = MediaQuery.of(context).size;
     final themeMode = ref.watch(themeModeProvider);
     return SafeArea(
@@ -153,7 +154,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             value = 1.0;
                             ref
                                 .read(fontScaleNotifierProvider.notifier)
-                                .saveFontScale(value);
+                                .saveFontScale(value ?? 1.3);
                           },
                           child: Padding(
                             padding: EdgeInsets.only(right: 16.w),
@@ -206,7 +207,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       child: Text(
                         tr('i_like_this_size'),
                         style: TextStyle(
-                          fontSize: (15 / (1.0 / value)).sp,
+                          fontSize: (15 / (1.0 / value!)).sp,
                           fontWeight: FontWeight.w500,
                         ),
                       ),

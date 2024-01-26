@@ -35,13 +35,25 @@ class _UserSettingsProfileScreenState
   late TextEditingController surnamesController;
   late TextEditingController emailController;
   late TextEditingController birthDateController;
+
+  late AsyncValue<User?> userAsyncValue;
+  late AsyncValue<String?> asyncUserNameTag;
+
   @override
   void initState() {
     super.initState();
+
     nameController = TextEditingController();
     surnamesController = TextEditingController();
     emailController = TextEditingController();
     birthDateController = TextEditingController();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    userAsyncValue = ref.watch(userProvider);
+    asyncUserNameTag = ref.watch(fetchUserNameAndSurnameFromIdProvider);
   }
 
   @override
@@ -56,14 +68,13 @@ class _UserSettingsProfileScreenState
   @override
   Widget build(BuildContext context) {
     fontScale = ref.watch(fontScaleNotifierProvider);
-    final userAsyncValue = ref.watch(userProvider);
     final datePicker = ref.watch(datePickerProvider);
 
     final birthDate = ref.watch(datePickerState);
     User? currentUser;
     String? userNameTag;
 
-    final asyncUserNameTag = ref.watch(fetchUserNameAndSurnameFromIdProvider);
+   // final asyncUserNameTag = ref.watch(fetchUserNameAndSurnameFromIdProvider);
     asyncUserNameTag.whenData((value) => userNameTag = value);
 
     return userAsyncValue.when(
@@ -90,9 +101,7 @@ class _UserSettingsProfileScreenState
                         width: 100.0, // Ancho del avatar
                         height: 100.0, // Altura del avatar
                         decoration: const BoxDecoration(
-                     
                           image: DecorationImage(
-                            
                             image: AssetImage(
                               kSplashLogo,
                             ), // URL de tu imagen
