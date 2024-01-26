@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the fetchCurrentUserProvider property from the fetch_firestore_user library, for the Dart programming language.">
+  <title>fetchCurrentUserProvider property - fetch_firestore_user library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">story_teller</a></li>
+    <li><a href="../data_sources_bbdd_firestore_actions_user_fetch_firestore_user/data_sources_bbdd_firestore_actions_user_fetch_firestore_user-library.html">fetch_firestore_user</a></li>
+    <li class="self-crumb">fetchCurrentUserProvider property</li>
+  </ol>
+  <div class="self-name">fetchCurrentUserProvider</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        brightness_4
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        brightness_5
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="data_sources_bbdd_firestore_actions_user_fetch_firestore_user&#47;data_sources_bbdd_firestore_actions_user_fetch_firestore_user-library-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-top-level-property">fetchCurrentUserProvider</span> top-level property 
+ 
+</h1></div>
+
+        <section class="multi-line-signature">
+          
+          <a href="https://pub.dev/documentation/riverpod/2.4.9/riverpod/FutureProvider-class.html">FutureProvider</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/cloud_firestore/4.14.0/cloud_firestore/DocumentReference-class.html">DocumentReference</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../data_sources_bbdd_firestore_models_user/User-class.html">User</a>?</span>&gt;</span></span>&gt;</span>
+          <span class="name ">fetchCurrentUserProvider</span>
+          <div class="features"><span class="feature">final</span></div>
+
+        </section>
+        
+<section class="desc markdown">
+  <p>A provider for fetching the current user's document reference from Firebase.</p>
+<p>This provider accesses the Firebase Firestore instance and queries the 'users'
+collection to find the document corresponding to the current authenticated user.
+It throws an error if the user is not authenticated or if the user document
+cannot be found in the database.</p>
+</section>
+
+        
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">final fetchCurrentUserProvider =
+    FutureProvider&lt;DocumentReference&lt;firebaseUser.User?&gt;&gt;(
+  (ref) async {
+    final db = ref.watch(firebaseFirestoreProvider);
+    final user = await ref.watch(authenticationProvider).getCurrentUser();
+
+    &#47;&#47; Throws an error if the current user is null, indicating the user is not authenticated.
+    if (user == null) {
+      throw Future.error(&quot;Current user is null&quot;);
+    }
+
+    try {
+      final collectionRef = db.collection(Collections.kUsers).withConverter(
+            fromFirestore: firebaseUser.User.fromFirestore,
+            toFirestore: (firebaseUser.User user, _) =&gt; user.toFirestore(),
+          );
+
+      &#47;&#47; Queries the database for the current user&#39;s document.
+      var querySnapshot = await collectionRef
+          .where(&#39;id&#39;, isEqualTo: user.uid)
+          .limit(1)
+          .get();
+
+      &#47;&#47; Returns the user document reference if found, otherwise throws an error.
+      if (querySnapshot.docs.isNotEmpty) {
+        var userDocRef = querySnapshot.docs.first.reference;
+        return userDocRef;
+      } else {
+        throw Future.error(&quot;No user found&quot;);
+      }
+    } catch (e) {
+      throw Future.error(e.toString());
+    }
+  },
+);</code></pre>
+</section>
+
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">story_teller</a></li>
+    <li><a href="../data_sources_bbdd_firestore_actions_user_fetch_firestore_user/data_sources_bbdd_firestore_actions_user_fetch_firestore_user-library.html">fetch_firestore_user</a></li>
+    <li class="self-crumb">fetchCurrentUserProvider property</li>
+</ol>
+
+
+    <h5>fetch_firestore_user library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    story_teller
+      1.0.0+1
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+

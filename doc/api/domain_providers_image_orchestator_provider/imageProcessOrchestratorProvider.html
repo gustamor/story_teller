@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the imageProcessOrchestratorProvider property from the image_orchestator_provider library, for the Dart programming language.">
+  <title>imageProcessOrchestratorProvider property - image_orchestator_provider library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">story_teller</a></li>
+    <li><a href="../domain_providers_image_orchestator_provider/domain_providers_image_orchestator_provider-library.html">image_orchestator_provider</a></li>
+    <li class="self-crumb">imageProcessOrchestratorProvider property</li>
+  </ol>
+  <div class="self-name">imageProcessOrchestratorProvider</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        brightness_4
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        brightness_5
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="domain_providers_image_orchestator_provider&#47;domain_providers_image_orchestator_provider-library-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-top-level-property">imageProcessOrchestratorProvider</span> top-level property 
+ 
+</h1></div>
+
+        <section class="multi-line-signature">
+          
+          <a href="https://pub.dev/documentation/riverpod/2.4.9/riverpod/StateNotifierProvider-class.html">StateNotifierProvider</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../domain_notifiers_image_controller_notifier/ImageProcessControllerNotifier-class.html">ImageProcessControllerNotifier</a></span>, <span class="type-parameter"><a href="../domain_image_process_state/ImageProcessState-class.html">ImageProcessState</a></span>&gt;</span>
+          <span class="name ">imageProcessOrchestratorProvider</span>
+          <div class="features"><span class="feature">final</span></div>
+
+        </section>
+        
+<section class="desc markdown">
+  <p>Provides a state notifier for the image processing flow.</p>
+<p>This provider initializes and manages an instance of <code>ImageProcessControllerNotifier</code>,
+which handles the orchestration of image processing tasks. The state of the image
+processing is maintained in <code>ImageProcessState</code>, allowing for reactive updates to
+the UI or other dependent components as the state changes.</p>
+<p>Within the <code>ImageProcessControllerNotifier</code>, an instance of <a href="../data_services_image_service/ImagesService-class.html">ImagesService</a> is created
+and passed, enabling the controller to perform image-related operations. The <code>ref</code> argument
+is used to interact with other providers or services within the Riverpod framework, ensuring
+a cohesive and integrated state management approach.</p>
+</section>
+
+        
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">final imageProcessOrchestratorProvider =
+    StateNotifierProvider&lt;ImageProcessControllerNotifier, ImageProcessState&gt;(
+        (ref) {
+  final ImagesService imgService = ImagesService();
+  return ImageProcessControllerNotifier(ref, imgService);
+});</code></pre>
+</section>
+
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">story_teller</a></li>
+    <li><a href="../domain_providers_image_orchestator_provider/domain_providers_image_orchestator_provider-library.html">image_orchestator_provider</a></li>
+    <li class="self-crumb">imageProcessOrchestratorProvider property</li>
+</ol>
+
+
+    <h5>image_orchestator_provider library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    story_teller
+      1.0.0+1
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+

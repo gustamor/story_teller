@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the AuthenticationServiceImpl class from the auth_services_impl library, for the Dart programming language.">
+  <title>AuthenticationServiceImpl class - auth_services_impl library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">story_teller</a></li>
+    <li><a href="../data_services_auth_services_impl/data_services_auth_services_impl-library.html">auth_services_impl</a></li>
+    <li class="self-crumb">AuthenticationServiceImpl class</li>
+  </ol>
+  <div class="self-name">AuthenticationServiceImpl</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        brightness_4
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        brightness_5
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="data_services_auth_services_impl&#47;data_services_auth_services_impl-library-sidebar.html"
+      data-below-sidebar="data_services_auth_services_impl&#47;AuthenticationServiceImpl-class-sidebar.html">
+      <div>
+<h1><span class="kind-class">AuthenticationServiceImpl</span> class 
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>Service class for authentication, interacting with <a href="https://pub.dev/documentation/firebase_auth/4.16.0/firebase_auth/FirebaseAuth-class.html">FirebaseAuth</a>.</p>
+<p>Provides methods for signing up, signing in, and signing out on Firebase,
+and handles authentication errors in a customized manner.</p>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+
+        
+  <dt>Implemented types</dt>
+  <dd>
+    <ul class="comma-separated clazz-relationships">
+        <li><a href="../domain_abstract_services_abstract_auth_services/AuthenticationService-class.html">AuthenticationService</a></li>
+    </ul>
+  </dd>
+        
+
+
+
+        
+
+
+      </dl>
+    </section>
+
+    
+  <section class="summary offset-anchor" id="constructors">
+    <h2>Constructors</h2>
+
+    <dl class="constructor-summary-list">
+        <dt id="AuthenticationServiceImpl" class="callable">
+          <span class="name"><a href="../data_services_auth_services_impl/AuthenticationServiceImpl/AuthenticationServiceImpl.html">AuthenticationServiceImpl</a></span><span class="signature">(<span class="parameter" id="-param-_auth"><span class="type-annotation"><a href="https://pub.dev/documentation/firebase_auth/4.16.0/firebase_auth/FirebaseAuth-class.html">FirebaseAuth</a></span> <span class="parameter-name">_auth</span></span>)</span>
+        </dt>
+        <dd>
+          Initializes a new authentication service with an instance of <a href="https://pub.dev/documentation/firebase_auth/4.16.0/firebase_auth/FirebaseAuth-class.html">FirebaseAuth</a>.
+        </dd>
+    </dl>
+  </section>
+
+    <section class="summary offset-anchor inherited" id="instance-properties">
+      <h2>Properties</h2>
+
+      <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> 
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/Type-class.html">Type</a></span> 
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+      </dl>
+    </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="checkIfEmailExists" class="callable">
+  <span class="name"><a href="../data_services_auth_services_impl/AuthenticationServiceImpl/checkIfEmailExists.html">checkIfEmailExists</a></span><span class="signature">(<wbr><span class="parameter" id="checkIfEmailExists-param-email"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">email</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Checks if the provided email exists in the system.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="checkIfUserIsVerified" class="callable">
+  <span class="name"><a href="../data_services_auth_services_impl/AuthenticationServiceImpl/checkIfUserIsVerified.html">checkIfUserIsVerified</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Checks if the current user's email is verified.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="createUserWithEmailAndPassword" class="callable">
+  <span class="name"><a href="../data_services_auth_services_impl/AuthenticationServiceImpl/createUserWithEmailAndPassword.html">createUserWithEmailAndPassword</a></span><span class="signature">(<wbr><span class="parameter" id="createUserWithEmailAndPassword-param-email"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">email</span>, </span><span class="parameter" id="createUserWithEmailAndPassword-param-password"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">password</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/firebase_auth/4.16.0/firebase_auth/User-class.html">User</a>?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Registers a new user with email and password.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getCurrentUser" class="callable">
+  <span class="name"><a href="../data_services_auth_services_impl/AuthenticationServiceImpl/getCurrentUser.html">getCurrentUser</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/firebase_auth/4.16.0/firebase_auth/User-class.html">User</a>?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Retrieves the current authenticated user.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getDisplayName" class="callable">
+  <span class="name"><a href="../data_services_auth_services_impl/AuthenticationServiceImpl/getDisplayName.html">getDisplayName</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Retrieves the display name of the current authenticated user.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getUserEmail" class="callable">
+  <span class="name"><a href="../data_services_auth_services_impl/AuthenticationServiceImpl/getUserEmail.html">getUserEmail</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Retrieves the email of the current authenticated user.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="isUserLogged" class="callable">
+  <span class="name"><a href="../data_services_auth_services_impl/AuthenticationServiceImpl/isUserLogged.html">isUserLogged</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Checks if a user is currently authenticated.
+  
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="sendDisplayName" class="callable">
+  <span class="name"><a href="../data_services_auth_services_impl/AuthenticationServiceImpl/sendDisplayName.html">sendDisplayName</a></span><span class="signature">(<wbr><span class="parameter" id="sendDisplayName-param-name"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Updates the display name of the current authenticated user.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="sendEmailVerification" class="callable">
+  <span class="name"><a href="../data_services_auth_services_impl/AuthenticationServiceImpl/sendEmailVerification.html">sendEmailVerification</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sends an email verification to the current user.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="sendPasswordResetEmail" class="callable">
+  <span class="name"><a href="../data_services_auth_services_impl/AuthenticationServiceImpl/sendPasswordResetEmail.html">sendPasswordResetEmail</a></span><span class="signature">(<wbr><span class="parameter" id="sendPasswordResetEmail-param-email"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">email</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sends a password reset email to the specified email.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="signInWithEmailAndPassword" class="callable">
+  <span class="name"><a href="../data_services_auth_services_impl/AuthenticationServiceImpl/signInWithEmailAndPassword.html">signInWithEmailAndPassword</a></span><span class="signature">(<wbr><span class="parameter" id="signInWithEmailAndPassword-param-email"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">email</span>, </span><span class="parameter" id="signInWithEmailAndPassword-param-password"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">password</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/firebase_auth/4.16.0/firebase_auth/User-class.html">User</a>?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Signs in with an email and password.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="signOut" class="callable">
+  <span class="name"><a href="../data_services_auth_services_impl/AuthenticationServiceImpl/signOut.html">signOut</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Signs out the currently authenticated user.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+    
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">story_teller</a></li>
+    <li><a href="../data_services_auth_services_impl/data_services_auth_services_impl-library.html">auth_services_impl</a></li>
+    <li class="self-crumb">AuthenticationServiceImpl class</li>
+</ol>
+
+
+    <h5>auth_services_impl library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    story_teller
+      1.0.0+1
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the getTalesProvider property from the get_tales library, for the Dart programming language.">
+  <title>getTalesProvider property - get_tales library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">story_teller</a></li>
+    <li><a href="../data_network_api_firestore_tale_get_tales/data_network_api_firestore_tale_get_tales-library.html">get_tales</a></li>
+    <li class="self-crumb">getTalesProvider property</li>
+  </ol>
+  <div class="self-name">getTalesProvider</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        brightness_4
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        brightness_5
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="data_network_api_firestore_tale_get_tales&#47;data_network_api_firestore_tale_get_tales-library-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-top-level-property">getTalesProvider</span> top-level property 
+ 
+</h1></div>
+
+        <section class="multi-line-signature">
+          
+          <a href="https://pub.dev/documentation/riverpod/2.4.9/riverpod/StreamProvider-class.html">StreamProvider</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../data_network_api_firestore_model_simple_story/Story-class.html">Story</a></span>&gt;</span></span>&gt;</span>
+          <span class="name ">getTalesProvider</span>
+          <div class="features"><span class="feature">final</span></div>
+
+        </section>
+        
+<section class="desc markdown">
+  <p>Provides a stream of user-specific stories from Firestore.</p>
+<p>Utilizes <a href="../data_di_firebase_providers/firebaseFirestoreProvider.html">firebaseFirestoreProvider</a> for database interactions and
+<a href="../domain_providers_auth_providers/authenticationProvider.html">authenticationProvider</a> for user authentication. This provider fetches
+story documents from the Firestore database within the user's story
+collection and uses a custom converter to map Firestore data to the
+<a href="../data_network_api_firestore_model_simple_story/Story-class.html">Story</a> model. Each document in the Firestore's stories collection is
+transformed into a <a href="../data_network_api_firestore_model_simple_story/Story-class.html">Story</a> instance.</p>
+<p>An <a href="https://api.flutter.dev/flutter/dart-core/Exception-class.html">Exception</a> is thrown for any errors during Firestore operations.
+This includes <a href="https://pub.dev/documentation/firebase_core_platform_interface/5.0.0/firebase_core_platform_interface/FirebaseException-class.html">FirebaseException</a> for Firestore-specific issues (e.g.,
+network problems, document not found) and generic exceptions for other
+unforeseen errors.</p>
+<p>Returns a stream of <code>List&lt;Story&gt;</code> representing the stories associated
+with the current user.</p>
+</section>
+
+        
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">final getTalesProvider = StreamProvider&lt;List&lt;Story&gt;&gt;((ref) async* {
+  &#47;&#47; Access the Firestore database reference.
+  final db = ref.read(firebaseFirestoreProvider);
+
+  &#47;&#47; Retrieve the ID of the currently authenticated user.
+  final currentUser = await ref.read(authenticationProvider).getCurrentUser();
+
+  try {
+    &#47;&#47; Stream Firestore snapshots, converting each document to a [Story].
+    yield* db
+        .collection(Collections.kUsers)
+        .doc(currentUser!.uid)
+        .collection(Collections.kStories)
+        .withConverter(
+          fromFirestore: Story.fromFirestore,
+          toFirestore: (Story story, _) =&gt; story.toFirestore(),
+        )
+        .snapshots()
+        .map((snapshot) =&gt; snapshot.docs.map((doc) =&gt; doc.data()).toList());
+  } on FirebaseException catch (e) {
+    &#47;&#47; Handle Firebase-specific exceptions.
+    throw Exception(&#39;FirebaseException: $e&#39;);
+  } catch (e) {
+    &#47;&#47; Handle other exceptions.
+    throw Exception(&#39;General Exception: $e&#39;);
+  }
+});</code></pre>
+</section>
+
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">story_teller</a></li>
+    <li><a href="../data_network_api_firestore_tale_get_tales/data_network_api_firestore_tale_get_tales-library.html">get_tales</a></li>
+    <li class="self-crumb">getTalesProvider property</li>
+</ol>
+
+
+    <h5>get_tales library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    story_teller
+      1.0.0+1
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+

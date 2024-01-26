@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the NiceClickableCard class from the builder_clickable_card library, for the Dart programming language.">
+  <title>NiceClickableCard class - builder_clickable_card library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">story_teller</a></li>
+    <li><a href="../ui_core_widgets_builders_builder_clickable_card/ui_core_widgets_builders_builder_clickable_card-library.html">builder_clickable_card</a></li>
+    <li class="self-crumb">NiceClickableCard class</li>
+  </ol>
+  <div class="self-name">NiceClickableCard</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        brightness_4
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        brightness_5
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="ui_core_widgets_builders_builder_clickable_card&#47;ui_core_widgets_builders_builder_clickable_card-library-sidebar.html"
+      data-below-sidebar="ui_core_widgets_builders_builder_clickable_card&#47;NiceClickableCard-class-sidebar.html">
+      <div>
+<h1><span class="kind-class">NiceClickableCard</span> class 
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>A customizable clickable card widget that adapts its appearance based on the platform (Android or iOS).</p>
+<p>This widget can be customized with various properties such as text, colors, dimensions, and padding.
+It uses a platform-specific widget factory to create a clickable card that conforms to the design guidelines of the target platform.</p>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+  <dt>Inheritance</dt>
+  <dd>
+    <ul class="gt-separated dark clazz-relationships">
+      <li><a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a></li>
+        <li><a href="https://api.flutter.dev/flutter/foundation/DiagnosticableTree-class.html">DiagnosticableTree</a></li>
+        <li><a href="https://api.flutter.dev/flutter/widgets/Widget-class.html">Widget</a></li>
+        <li><a href="https://api.flutter.dev/flutter/widgets/StatelessWidget-class.html">StatelessWidget</a></li>
+      <li>NiceClickableCard</li>
+    </ul>
+  </dd>
+
+        
+        
+
+
+
+        
+
+
+      </dl>
+    </section>
+
+    
+  <section class="summary offset-anchor" id="constructors">
+    <h2>Constructors</h2>
+
+    <dl class="constructor-summary-list">
+        <dt id="NiceClickableCard" class="callable">
+          <span class="name"><a href="../ui_core_widgets_builders_builder_clickable_card/NiceClickableCard/NiceClickableCard.html">NiceClickableCard</a></span><span class="signature">(<span class="parameter" id="-param-key">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/foundation/Key-class.html">Key</a>?</span> <span class="parameter-name">key</span>, </span><span class="parameter" id="-param-height"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a>?</span> <span class="parameter-name">height</span>, </span><span class="parameter" id="-param-width"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a>?</span> <span class="parameter-name">width</span>, </span><span class="parameter" id="-param-caption"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">caption</span>, </span><span class="parameter" id="-param-description"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">description</span>, </span><span class="parameter" id="-param-textStyle"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/painting/TextStyle-class.html">TextStyle</a>?</span> <span class="parameter-name">textStyle</span>, </span><span class="parameter" id="-param-bgColor"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/Color-class.html">Color</a>?</span> <span class="parameter-name">bgColor</span> = <span class="default-value">const Color(0x00000000)</span>, </span><span class="parameter" id="-param-androidBackgroundColor"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/Color-class.html">Color</a>?</span> <span class="parameter-name">androidBackgroundColor</span>, </span><span class="parameter" id="-param-iosBackgroundColor"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/Color-class.html">Color</a>?</span> <span class="parameter-name">iosBackgroundColor</span>, </span><span class="parameter" id="-param-surfaceTintColor"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/Color-class.html">Color</a>?</span> <span class="parameter-name">surfaceTintColor</span>, </span><span class="parameter" id="-param-shadowColor"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/Color-class.html">Color</a>?</span> <span class="parameter-name">shadowColor</span>, </span><span class="parameter" id="-param-androidShadowColor"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/Color-class.html">Color</a>?</span> <span class="parameter-name">androidShadowColor</span>, </span><span class="parameter" id="-param-elevation"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a>?</span> <span class="parameter-name">elevation</span>, </span><span class="parameter" id="-param-androidElevation"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a>?</span> <span class="parameter-name">androidElevation</span>, </span><span class="parameter" id="-param-shape"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/painting/ShapeBorder-class.html">ShapeBorder</a>?</span> <span class="parameter-name">shape</span>, </span><span class="parameter" id="-param-margin"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html">EdgeInsetsGeometry</a>?</span> <span class="parameter-name">margin</span>, </span><span class="parameter" id="-param-clipBehavior"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/Clip.html">Clip</a>?</span> <span class="parameter-name">clipBehavior</span>, </span><span class="parameter" id="-param-decorImage"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">decorImage</span>, </span><span class="parameter" id="-param-borderRadius"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a>?</span> <span class="parameter-name">borderRadius</span> = <span class="default-value">16.0</span>, </span><span class="parameter" id="-param-fit"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/painting/BoxFit.html">BoxFit</a>?</span> <span class="parameter-name">fit</span> = <span class="default-value">BoxFit.fill</span>, </span><span class="parameter" id="-param-child"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/Widget-class.html">Widget</a>?</span> <span class="parameter-name">child</span>, </span><span class="parameter" id="-param-clickFunction"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/VoidCallback.html">VoidCallback</a></span> <span class="parameter-name">clickFunction</span>}</span>)</span>
+        </dt>
+        <dd>
+          Constructs a <a href="../ui_core_widgets_builders_builder_clickable_card/NiceClickableCard-class.html">NiceClickableCard</a> with the given properties.
+        </dd>
+    </dl>
+  </section>
+
+    <section class="summary offset-anchor" id="instance-properties">
+      <h2>Properties</h2>
+
+      <dl class="properties">
+        <dt id="androidBackgroundColor" class="property">
+  <span class="name"><a href="../ui_core_widgets_builders_builder_clickable_card/NiceClickableCard/androidBackgroundColor.html">androidBackgroundColor</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-ui/Color-class.html">Color</a>?</span> 
+
+</dt>
+<dd>
+  The background color to use for the card when the platform is Android.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="androidElevation" class="property">
+  <span class="name"><a href="../ui_core_widgets_builders_builder_clickable_card/NiceClickableCard/androidElevation.html">androidElevation</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a>?</span> 
+
+</dt>
+<dd>
+  The elevation shadow depth specific to Android styling.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="androidShadowColor" class="property">
+  <span class="name"><a href="../ui_core_widgets_builders_builder_clickable_card/NiceClickableCard/androidShadowColor.html">androidShadowColor</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-ui/Color-class.html">Color</a>?</span> 
+
+</dt>
+<dd>
+  The color of the shadow cast by the card specific to Android styling.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="bgColor" class="property">
+  <span class="name"><a href="../ui_core_widgets_builders_builder_clickable_card/NiceClickableCard/bgColor.html">bgColor</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-ui/Color-class.html">Color</a>?</span> 
+
+</dt>
+<dd>
+  The background color of the card.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="borderRadius" class="property">
+  <span class="name"><a href="../ui_core_widgets_builders_builder_clickable_card/NiceClickableCard/borderRadius.html">borderRadius</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a>?</span> 
+
+</dt>
+<dd>
+  The border radius of the card.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="caption" class="property">
+  <span class="name"><a href="../ui_core_widgets_builders_builder_clickable_card/NiceClickableCard/caption.html">caption</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a>?</span> 
+
+</dt>
+<dd>
+  The caption text displayed on the card.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="child" class="property">
+  <span class="name"><a href="../ui_core_widgets_builders_builder_clickable_card/NiceClickableCard/child.html">child</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/widgets/Widget-class.html">Widget</a>?</span> 
+
+</dt>
+<dd>
+  An optional widget to display within the card, typically used for content that isn't just text.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="clickFunction" class="property">
+  <span class="name"><a href="../ui_core_widgets_builders_builder_clickable_card/NiceClickableCard/clickFunction.html">clickFunction</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-ui/VoidCallback.html">VoidCallback</a></span> 
+
+</dt>
+<dd>
+  The function to call when the card is pressed.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="clipBehavior" class="property">
+  <span class="name"><a href="../ui_core_widgets_builders_builder_clickable_card/NiceClickableCard/clipBehavior.html">clipBehavior</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-ui/Clip.html">Clip</a>?</span> 
+
+</dt>
+<dd>
+  The behavior when a clip is applied to the card.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="decorImage" class="property">
+  <span class="name"><a href="../ui_core_widgets_builders_builder_clickable_card/NiceClickableCard/decorImage.html">decorImage</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a>?</span> 
+
+</dt>
+<dd>
+  The image to display on the card, typically an asset path.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="description" class="property">
+  <span class="name"><a href="../ui_core_widgets_builders_builder_clickable_card/NiceClickableCard/description.html">description</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a>?</span> 
+
+</dt>
+<dd>
+  The description text displayed beneath the caption.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="elevation" class="property">
+  <span class="name"><a href="../ui_core_widgets_builders_builder_clickable_card/NiceClickableCard/elevation.html">elevation</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a>?</span> 
+
+</dt>
+<dd>
+  The z-coordinate at which to place the card. This controls the size of the shadow below the card.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="fit" class="property">
+  <span class="name"><a href="../ui_core_widgets_builders_builder_clickable_card/NiceClickableCard/fit.html">fit</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/painting/BoxFit.html">BoxFit</a>?</span> 
+
+</dt>
+<dd>
+  Specifies how the image should be inscribed into the available space.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/widgets/Widget/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> 
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="height" class="property">
+  <span class="name"><a href="../ui_core_widgets_builders_builder_clickable_card/NiceClickableCard/height.html">height</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a>?</span> 
+
+</dt>
+<dd>
+  The height of the card.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="iosBackgroundColor" class="property">
+  <span class="name"><a href="../ui_core_widgets_builders_builder_clickable_card/NiceClickableCard/iosBackgroundColor.html">iosBackgroundColor</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-ui/Color-class.html">Color</a>?</span> 
+
+</dt>
+<dd>
+  The background color to use for the card when the platform is iOS.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="key" class="property inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/widgets/Widget/key.html">key</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/foundation/Key-class.html">Key</a>?</span> 
+
+</dt>
+<dd class="inherited">
+  Controls how one widget replaces another widget in the tree.
+  <div class="features"><span class="feature">final</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="margin" class="property">
+  <span class="name"><a href="../ui_core_widgets_builders_builder_clickable_card/NiceClickableCard/margin.html">margin</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html">EdgeInsetsGeometry</a>?</span> 
+
+</dt>
+<dd>
+  Empty space to surround the card.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/Type-class.html">Type</a></span> 
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="shadowColor" class="property">
+  <span class="name"><a href="../ui_core_widgets_builders_builder_clickable_card/NiceClickableCard/shadowColor.html">shadowColor</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-ui/Color-class.html">Color</a>?</span> 
+
+</dt>
+<dd>
+  The color of the shadow cast by the card.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="shape" class="property">
+  <span class="name"><a href="../ui_core_widgets_builders_builder_clickable_card/NiceClickableCard/shape.html">shape</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/painting/ShapeBorder-class.html">ShapeBorder</a>?</span> 
+
+</dt>
+<dd>
+  The shape of the card's material.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="surfaceTintColor" class="property">
+  <span class="name"><a href="../ui_core_widgets_builders_builder_clickable_card/NiceClickableCard/surfaceTintColor.html">surfaceTintColor</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-ui/Color-class.html">Color</a>?</span> 
+
+</dt>
+<dd>
+  The color of the material's surface tint.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="textStyle" class="property">
+  <span class="name"><a href="../ui_core_widgets_builders_builder_clickable_card/NiceClickableCard/textStyle.html">textStyle</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/painting/TextStyle-class.html">TextStyle</a>?</span> 
+
+</dt>
+<dd>
+  The style to use for text within the card.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="ui" class="property">
+  <span class="name"><a href="../ui_core_widgets_builders_builder_clickable_card/NiceClickableCard/ui.html">ui</a></span>
+  <span class="signature">&#8594; <a href="../domain_abstract_factories_abstract_widgets_factory/AbstractWidgetFactory-class.html">AbstractWidgetFactory</a></span> 
+
+</dt>
+<dd>
+  A utility for selecting the appropriate widget factory based on the platform.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="width" class="property">
+  <span class="name"><a href="../ui_core_widgets_builders_builder_clickable_card/NiceClickableCard/width.html">width</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a>?</span> 
+
+</dt>
+<dd>
+  The width of the card.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+      </dl>
+    </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="build" class="callable">
+  <span class="name"><a href="../ui_core_widgets_builders_builder_clickable_card/NiceClickableCard/build.html">build</a></span><span class="signature">(<wbr><span class="parameter" id="build-param-context"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/BuildContext-class.html">BuildContext</a></span> <span class="parameter-name">context</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/widgets/Widget-class.html">Widget</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Builds the visual structure of the clickable card widget.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="createElement" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/widgets/StatelessWidget/createElement.html">createElement</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/widgets/StatelessElement-class.html">StatelessElement</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Creates a <a href="https://api.flutter.dev/flutter/widgets/StatelessElement-class.html">StatelessElement</a> to manage this widget's location in the tree.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="debugDescribeChildren" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/foundation/DiagnosticableTree/debugDescribeChildren.html">debugDescribeChildren</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html">DiagnosticsNode</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns a list of <code>DiagnosticsNode</code> objects describing this node's
+children.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="debugFillProperties" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/widgets/Widget/debugFillProperties.html">debugFillProperties</a></span><span class="signature">(<wbr><span class="parameter" id="debugFillProperties-param-properties"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/foundation/DiagnosticPropertiesBuilder-class.html">DiagnosticPropertiesBuilder</a></span> <span class="parameter-name">properties</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Add additional properties associated with the node.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="toDiagnosticsNode" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html">toDiagnosticsNode</a></span><span class="signature">(<wbr><span class="parameter" id="toDiagnosticsNode-param-name">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">name</span>, </span><span class="parameter" id="toDiagnosticsNode-param-style"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/foundation/DiagnosticsTreeStyle.html">DiagnosticsTreeStyle</a>?</span> <span class="parameter-name">style</span>}</span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/foundation/DiagnosticsNode-class.html">DiagnosticsNode</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns a debug representation of the object that is used by debugging
+tools and by <a href="https://api.flutter.dev/flutter/foundation/DiagnosticsNode/toStringDeep.html">DiagnosticsNode.toStringDeep</a>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/foundation/Diagnosticable/toString.html">toString</a></span><span class="signature">(<wbr><span class="parameter" id="toString-param-minLevel">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html">DiagnosticLevel</a></span> <span class="parameter-name">minLevel</span> = <span class="default-value">DiagnosticLevel.info</span>}</span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="toStringDeep" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringDeep.html">toStringDeep</a></span><span class="signature">(<wbr><span class="parameter" id="toStringDeep-param-prefixLineOne">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">prefixLineOne</span> = <span class="default-value">&#39;&#39;</span>, </span><span class="parameter" id="toStringDeep-param-prefixOtherLines"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">prefixOtherLines</span>, </span><span class="parameter" id="toStringDeep-param-minLevel"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html">DiagnosticLevel</a></span> <span class="parameter-name">minLevel</span> = <span class="default-value">DiagnosticLevel.debug</span>}</span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns a string representation of this node and its descendants.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="toStringShallow" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/foundation/DiagnosticableTree/toStringShallow.html">toStringShallow</a></span><span class="signature">(<wbr><span class="parameter" id="toStringShallow-param-joiner">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">joiner</span> = <span class="default-value">&#39;, &#39;</span>, </span><span class="parameter" id="toStringShallow-param-minLevel"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/foundation/DiagnosticLevel.html">DiagnosticLevel</a></span> <span class="parameter-name">minLevel</span> = <span class="default-value">DiagnosticLevel.debug</span>}</span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns a one-line detailed description of the object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="toStringShort" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/widgets/Widget/toStringShort.html">toStringShort</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A short, textual description of this widget.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/widgets/Widget/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+    
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">story_teller</a></li>
+    <li><a href="../ui_core_widgets_builders_builder_clickable_card/ui_core_widgets_builders_builder_clickable_card-library.html">builder_clickable_card</a></li>
+    <li class="self-crumb">NiceClickableCard class</li>
+</ol>
+
+
+    <h5>builder_clickable_card library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    story_teller
+      1.0.0+1
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+
