@@ -18,5 +18,4 @@ final oneSignalProvider = Provider<void>((ref) {
     //print("AAA${notification.additionalData}");
   });
 
-
 });
