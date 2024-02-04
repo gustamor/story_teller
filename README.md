@@ -90,9 +90,12 @@ Contributions are what make the open-source community such an amazing place to l
 - Open a Pull Request
 
 
-### Mozilla Public License (MPL)
+## Mozilla Public License (MPL)
+
 This project is also licensed under the Mozilla Public License. This license is known for its "weak copyleft" term.
+
 Main features of the Mozilla Public License:
-**Weak Copyleft**: Requires modifications to files under the MPL to be released under the MPL, but does not extend to other files in the same project that are not under the MPL.
-**Promotion** of Collaboration: Encouraging contributors to share improvements to the code, it promotes community development.
-**Compatibility with Other Licenses**: Allows the combination of MPL code with files under other licenses, including proprietary licenses, in a single project.
+
+- **Weak Copyleft**: Requires modifications to files under the MPL to be released under the MPL, but does not extend to other files in the same project that are not under the MPL.
+- **Promotion of Collaboration**: Encouraging contributors to share improvements to the code, it promotes community development.
+- **Compatibility with Other Licenses**: Allows the combination of MPL code with files under other licenses, including proprietary licenses, in a single project.
