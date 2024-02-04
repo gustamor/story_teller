@@ -90,7 +90,7 @@ Contributions are what make the open-source community such an amazing place to l
 - Open a Pull Request
 
 
-### Mozilla Public License (MPL)
+## Mozilla Public License (MPL)
 
 This project is also licensed under the Mozilla Public License. This license is known for its "weak copyleft" term.
 
