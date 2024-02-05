@@ -6,6 +6,7 @@ Template for a Flutter Application with ChatGPT and DALL-E Integration
 Welcome to an innovative Flutter application, designed to captivate both users and tech enthusiasts alike. This app uniquely combines AI-driven storytelling through ChatGPT and artistic image generation via DALL-E. Aimed at bridging the gap between technology and creativity, it's structured into data, domain, and UI layers. The architecture not only demonstrates best practices but also showcases a sophisticated blend of design patterns. The standout feature is the integration of the Abstract Factory and Strategy patterns, optimizing widget creation for both Android and iOS platforms. It's a testament to my commitment to excellence and innovation in app development.
 
 <p>
+<br/>
   <img height="300" src="https://i.postimg.cc/6qnrns3k/captura1.png" />
   <img height="300" src= https://i.postimg.cc/9FMh1WVt/captura4.png" />
   <img height="300" src="https://i.postimg.cc/cLVRJ4Xs/captura5.png" />
