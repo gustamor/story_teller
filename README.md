@@ -84,7 +84,7 @@ Example JSON Structure for GPT Prompts
 {
   "title": "The Adventure Begins",
   "story": "Once upon a time, in a land far away...",
-  "prompt": "Write a story about a forgotten kingdom."
+  "prompt": "Generate a image about a forgotten kingdom."
 }
 ```
 ## Usage
