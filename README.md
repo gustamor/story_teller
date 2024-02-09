@@ -18,11 +18,14 @@ Welcome to an innovative Flutter application, designed to captivate both users a
 
 <br/>
 
-
 ## Built With
 - Flutter
 - Firebase
 - OpenAI APIs (ChatGPT & DALL-E)
+
+## API Documentation
+
+The API documentation generated with Dart Doc is located [here](https://storytellerdocumentation.gustavomoreno.es/api/index.html)
 
 ## Getting Started
 To use this app, developers need to configure Firebase and the OpenAI API. Here's a quick guide on setting up the necessary parameters:
